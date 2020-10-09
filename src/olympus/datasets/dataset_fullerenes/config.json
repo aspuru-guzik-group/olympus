@@ -1,0 +1,15 @@
+{
+	"constraints":    {
+			"parameters":  "none",
+			"measurements": "positive"
+		},
+	"parameters": [
+			{"name": "reaction_time", "low": 3.0,   "high": 31.0},
+			{"name": "sultine",       "low": 1.5,   "high": 6.0},
+			{"name": "temperature",   "low": 100.0, "high": 150.0}
+		],
+	"measurements": [
+		{"name": "product","goal": "maximize"}
+	],
+    "default_goal": "maximize"
+}

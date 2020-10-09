@@ -1,0 +1,86 @@
+{
+  "alkox": {"cite_keys": ["olympus_Hase:2020"],
+            "bibtex": "@Article{olympus_Hase:2020,
+                      Title   = {Olympus: a benchmarking framework for autonomous experimentation},
+                      Author  = {F. Hase and M. Aldeghi, and R.J. Hickman and L.M. Roch, and M. Christensen, and E. Liles, and J.E. Hein, and A. Aspuru-Guzik},
+                      Journal = {arxiv},
+                      Pages   = {???-???},
+                      Year    = {2020}
+                      }"
+        },
+  "fullerenes": {"cite_keys": ["olympus_Walker:2017"],
+                 "bibtex": "@Article{olympus_Walker:2017,
+                          Title   = {Tuning reaction products by constrained optimisation},
+                          Author  = {Walker, B.E. and Bannock, J.H. and Nightingale A.M. and deMello, J.C.},
+                          Journal = {React. Chem. Eng.},
+                          Pages   = {785--798},
+                          Year    = {2017}
+                          }"
+        },
+  "colormix_bob": {"cite_keys": ["olympus_Roch:2018"],
+                  "bibtex": "@Article{olympus_Roch:2018,
+                            Title   = {ChemOS: an orchestration software to democratize autonomous discovery},
+                            Author  = {L.M. Roch and F. Häse and C. Kreisbeck and T. Tamayo-Mendoza and L.P.E. Yunker and J.E. Hein, A. Aspuru-Guzik},
+                            Journal = {chemRxiv preprint},
+                            DOI   = {10.26434/chemrxiv.5953606.v1},
+                            Year    = {2018}
+                            }"
+        },
+  "colormix_n9": {"cite_keys": [],
+                  "bibtex": ""
+        },
+  "hplc_n9": {"cite_keys": ["olympus_Roch:2018"],
+              "bibtex": "@Article{olympus_Roch:2018,
+                        Title   = {ChemOS: an orchestration software to democratize autonomous discovery},
+                        Author  = {L.M. Roch and F. Häse and C. Kreisbeck and T. Tamayo-Mendoza and L.P.E. Yunker and J.E. Hein, A. Aspuru-Guzik},
+                        Journal = {chemRxiv preprint},
+                        DOI   = {10.26434/chemrxiv.5953606.v1},
+                        Year    = {2018}
+                        }"
+        },
+  "photobleaching_pce10": {"cite_keys": ["olympus_Langner:2020"],
+                           "bibtex": "@Article{olympus_Langner:2020,
+                                      Title   = {Beyond Ternary OPV: High-Throughput Experimentation and Self-Driving Laboratories Optimize Multicomponent Systems},
+                                      Author  = {S. Langner and F. Häse and J.D. Perea and T. Stubhan and J. Hauch and L.M. Roch and T. Heumueller and A. Aspuru-Guzik and C.J. Brabec},
+                                      Journal = {Advanced Materials},
+                                      Pages   = {1907801},
+                                      Year    = {2020}
+                                    }"
+        },
+  "photobleaching_wf3": {"cite_keys": ["olympus_Langner:2020"],
+                           "bibtex": "@Article{olympus_Langner:2020,
+                                      Title   = {Beyond Ternary OPV: High-Throughput Experimentation and Self-Driving Laboratories Optimize Multicomponent Systems},
+                                      Author  = {S. Langner and F. Häse and J.D. Perea and T. Stubhan and J. Hauch and L.M. Roch and T. Heumueller and A. Aspuru-Guzik and C.J. Brabec},
+                                      Journal = {Advanced Materials},
+                                      Pages   = {1907801},
+                                      Year    = {2020}
+                                    }"
+        },
+  "nbenzylation": {"cite_keys": ["olympus_Schweidtmann:2018"],
+                  "bibtex": "@Article{olympus_Schweidtmann:2018,
+                            Title   = {Machine learning meets continuous flow chemistry: Automated optimization towards the Pareto front of multiple objectives},
+                            Author  = {A.M. Schweidtmann and A.D. Clayton and N. Holmes and E. Bradford and R.A. Bourne and A.A. Lapkin},
+                            Journal = {Chem. Eng. J},
+                            Pages   = {177--282},
+                            Year    = {2018}
+                          }"
+        },
+  "snar": {"cite_keys": ["olympus_Schweidtmann:2018"],
+           "bibtex": "@Article{olympus_Schweidtmann:2018,
+                      Title   = {Machine learning meets continuous flow chemistry: Automated optimization towards the Pareto front of multiple objectives},
+                      Author  = {A.M. Schweidtmann and A.D. Clayton and N. Holmes and E. Bradford and R.A. Bourne and A.A. Lapkin},
+                      Journal = {Chem. Eng. J},
+                      Pages   = {177--282},
+                      Year    = {2018}
+                    }"
+        },
+  "suzuki": {"cite_keys": ["olympus_Hase:2020"],
+            "bibtex": "@Article{olympus_Hase:2020,
+                      Title   = {Olympus: a benchmarking framework for autonomous experimentation},
+                      Author  = {F. Hase and M. Aldeghi, and R.J. Hickman and L.M. Roch, and M. Christensen, and E. Liles, and J.E. Hein, and A. Aspuru-Guzik},
+                      Journal = {arxiv},
+                      Pages   = {???-???},
+                      Year    = {2020}
+                      }"
+        }
+  }

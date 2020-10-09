@@ -1,0 +1,18 @@
+Color mixing n9 dataset. Blablabla
+Green-likeliness is computed as the
+L2-norm between the normalized RGB value
+recorded from experiment and the normalized
+target RGB value: [0.16, 0.56, 0.28].
+
+=========================================
+                Summary
+-----------------------------------------
+    Number of Samples            102
+    Dimensionality                 3
+    Features:
+        red               continuous
+        green             continuous
+        blue              continuous
+    Targets:
+        green_likeliness  continuous
+=========================================

@@ -1,0 +1,14 @@
+Photobleaching dataset. Blablabla
+
+=========================================
+                Summary
+-----------------------------------------
+    Number of Samples            1000
+    Dimensionality                 13
+    Features:
+        Feat1              continuous
+        Feat2              continuous
+        Feat3             categorical
+    Targets:
+        Yield              continuous
+=========================================

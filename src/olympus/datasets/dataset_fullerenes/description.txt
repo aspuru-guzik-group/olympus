@@ -1,0 +1,25 @@
+This dataset reports the production of o-xylenyl adducts of
+Buckminsterfullerenes. Three process conditions (temperature, reaction time and
+ratio of sultine to C60) are varied to maximize the mole fraction of the desired
+product. Experiments are executed on a three factor fully factorial grid with
+six levels per factor.
+
+================================================================================
+                                    Summary
+--------------------------------------------------------------------------------
+  Number of Samples            246
+  Dimensionality                 3
+  Features:
+    reaction_time   continuous [  3,  31]     reaction time in flow reactor [min]
+    sultine_conc    continuous [  1.5, 6.0]   relative concentration of sultine to C60
+    temperature     continuous [100, 150]     temperature of the reaction [Celsius]
+  Targets:
+    mole fraction of desired product   continuous
+================================================================================
+
+Publication reporting the dataset:
+B.E. Walker, J.H. Bannock, A.M. Nightingale, J.C. deMello. Tuning reaction
+products by constrained optimisation. React. Chem. Eng., (2017), 2, 785-798.
+
+The dataset can be downloaded from:
+https://imperialcollegelondon.app.box.com/v/tuning-reaction-products

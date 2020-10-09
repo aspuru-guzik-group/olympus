@@ -1,0 +1,16 @@
+{
+	"constraints": {
+		"parameters":   "simplex",
+		"measurements": "positive"
+		},
+	"parameters": [
+			{"name": "mat_1", "type": "continuous", "lower": 0.0, "upper": 1.0},
+			{"name": "mat_2", "type": "continuous", "lower": 0.0, "upper": 1.0},
+			{"name": "mat_3", "type": "continuous", "lower": 0.0, "upper": 1.0},
+      {"name": "mat_4", "type": "continuous", "lower": 0.0, "upper": 1.0}
+		],
+    "measurements": [
+			{"name": "degradation", "type": "continuous"}
+		],
+    "default_goal": "minimize"
+}

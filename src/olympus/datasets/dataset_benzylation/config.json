@@ -1,0 +1,16 @@
+{
+	"constraints":    {
+			"parameters":  "none",
+			"measurements": "positive"
+		},
+	"parameters": [
+			{"name": "flow_rate",   "low": 0.2,   "high": 0.4},
+			{"name": "ratio",       "low": 1.0,   "high": 5.0},
+			{"name": "solvent",     "low": 0.5,   "high": 1.0},
+			{"name": "temperature", "low": 110.0, "high": 150.0}
+		],
+	"measurements": [
+		{"name": "impurity", "goal": "minimize"}
+	],
+    "default_goal": "minimize"
+}

@@ -1,0 +1,16 @@
+Color mixing dataset. Blablabla
+
+=========================================
+                Summary
+-----------------------------------------
+    Number of Samples            241
+    Dimensionality                 5
+    Features:
+        Red                continuous
+        Orange             continuous
+        Yellow             continuous
+        Blue               continuous
+        Green              continuous
+    Targets:
+        Green-Likeness     continuous
+=========================================

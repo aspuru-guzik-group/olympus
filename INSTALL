@@ -1,0 +1,14 @@
+
+#### Welcome to Olympus
+
+To install the package, please run
+
+``` 
+	python setup.py install
+```
+
+###### Dependencies 
+
+We use `numpy`, and any more recent version of `numpy` should suffice. You might need additional modules to run specific `Generators` or `Emulators` though.
+
+

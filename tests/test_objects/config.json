@@ -1,0 +1,7 @@
+{
+    "high": 1.0,
+    "is_periodic": false,
+    "low": 0.0,
+    "name": "temperature",
+    "type": "continuous"
+}

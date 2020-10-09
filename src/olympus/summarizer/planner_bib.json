@@ -1,0 +1,253 @@
+{
+  "Gpyopt": {
+            "cite_keys": ["olympus_Gpyopt:2016"],
+            "bibtex": "@Misc{olympus_Gpyopt:2016,
+                      author =   {The GPyOpt authors},
+                      title =    {GPyOpt: A Bayesian Optimization framework in Python},
+                      howpublished = {url{http://github.com/SheffieldML/GPyOpt}},
+                      year = {2016}
+                      }"
+          },
+  "Hyperopt": {
+              "cite_keys": ["olympus_Bergstra:2013","olympus_Bergstra:2012","olympus_Bergstra:2011"],
+              "bibtex": "@Article{olympus_Bergstra:2013,
+                        Title   = {Making a science of model search: Hyperparameter optimization in hundreds of dimensions for vision architectures},
+                        Author  = {Bergstra, J. S. and Yamins, D. and Cox, D. D.},
+                        Year    = {2013},
+                        Publisher = {JMLR}}
+                        @Article{olympus_Bergstra:2012,
+                        Title   = {Random search for hyper-parameter optimization},
+                        Author  = {Bergstra, J. S. and Bengio, Y.},
+                        Journal = {Journal of Machine Learning Research},
+                        Volume  = {13},
+                        Number  = {Feb},
+                        Pages   = {281--305},
+                        Year    = {2012}}
+                        @Inproceedings{olympus_Bergstra:2011,
+                        Title   = {Algorithms for hyper-parameter optimization},
+                        Author  = {Bergstra, J. S. and Bardenet, R. and Bengio, Y. and K{e}gl, B.},
+                        Booktitle = {Advances in neural information processing systems},
+                        Pages   = {2546--2554},
+                        Year    = {2011}
+                        }"
+          },
+  "Phoenics":{
+              "cite_keys": ["olympus_Hase:2018"],
+              "bibtex": "@Article{olympus_Hase:2018,
+                        Title   = {Phoenics: A Bayesian optimizer for chemistry},
+                        Author  = {H\"ase, Florian and Roch, Loic M and Kreisbeck, Christoph and Aspuru-Guzik, Alan},
+                        Journal = {ACS central science},
+                        Volume  = {4},
+                        Number  = {9},
+                        Pages   = {1134--1145},
+                        Year    = {2018},
+                        Publisher = {ACS Publications}
+                      }"
+          },
+  "Deap": {"cite_keys": [],
+           "bibtex": ""
+          },
+  "Cma": {"cite_keys": ["olympus_Hansen:2003", "olympus_Hansen:2001"],
+          "bibtex": "@article{olympus_Hansen:2003,
+                    title={Reducing the time complexity of the derandomized evolution strategy with covariance matrix adaptation (CMA-ES)},
+                    author={Hansen, Nikolaus and M{\"u}ller, Sibylle D and Koumoutsakos, Petros},
+                    journal={Evolutionary computation},
+                    volume={11},
+                    number={1},
+                    pages={1--18},
+                    year={2003},
+                    publisher={MIT Press}}
+                    @article{olympus_Hansen:2001,
+                    title={Completely derandomized self-adaptation in evolution strategies},
+                    author={Hansen, Nikolaus and Ostermeier, Andreas},
+                    journal={Evolutionary computation},
+                    volume={9},
+                    number={2},
+                    pages={159--195},
+                    year={2001},
+                    publisher={MIT Press}
+                  }"
+          },
+    "ParticleSwarms": {"cite_keys": ["olympus_Eberhart:1995", "olympus_Shi:1998"],
+                      "bibtex": "@inproceedings{olympus_Eberhart:1995,
+                                title={A new optimizer using particle swarm theory},
+                                author={Eberhart, Russell and Kennedy, James},
+                                booktitle={MHS'95. Proceedings of the Sixth International Symposium on Micro Machine and Human Science},
+                                pages={39--43},
+                                year={1995},
+                                organization={Ieee}}
+                                @inproceedings{olympus_Shi:1998,
+                                title={A modified particle swarm optimizer},
+                                author={Shi, Yuhui and Eberhart, Russell},
+                                booktitle={1998 IEEE international conference on evolutionary computation proceedings. IEEE world congress on computational intelligence (Cat. No. 98TH8360)},
+                                pages={69--73},
+                                year={1998},
+                                organization={IEEE}
+                                }"
+        },
+    "DifferentialEvolution": {"cite_keys": ["olympus_Storn:1997"],
+                              "bibtex":"@article{olympus_Storn:1997,
+                                        title={Differential evolution--a simple and efficient heuristic for global optimization over continuous spaces},
+                                        author={Storn, Rainer and Price, Kenneth},
+                                        journal={Journal of global optimization},
+                                        volume={11},
+                                        number={4},
+                                        pages={341--359},
+                                        year={1997},
+                                        publisher={Springer}
+                                        }"
+        },
+    "": {"cite_keys": [],
+         "bibtex": ""
+        },
+    "ConjugateGradient": {"cite_keys": ["olympus_Bouwmeester:2015", "olympus_Hestenes:1952"],
+                          "bibtex": "@article{olympus_Bouwmeester:2015,
+                                    title={Nonsymmetric preconditioning for conjugate gradient and steepest descent methods},
+                                    author={Bouwmeester, Henricus and Dougherty, Andrew and Knyazev, Andrew V},
+                                    journal={Procedia Computer Science},
+                                    volume={51},
+                                    pages={276--285},
+                                    year={2015},
+                                    publisher={Elsevier}}
+                                    @article{olympus_Hestenes:1952,
+                                    title={Methods of conjugate gradients for solving linear systems},
+                                    author={Hestenes, Magnus R and Stiefel, Eduard and others},
+                                    journal={Journal of research of the National Bureau of Standards},
+                                    volume={49},
+                                    number={6},
+                                    pages={409--436},
+                                    year={1952}
+                                    }"
+        },
+    "Lbfgs": {"cite_keys": ["olympus_Zhu:1997", "olympus_Byrd:1995", "olympus_Nocedal:2006"],
+              "bibtex": "@article{olympus_Zhu:1997,
+                        title={Algorithm 778: L-BFGS-B: Fortran subroutines for large-scale bound-constrained optimization},
+                        author={Zhu, Ciyou and Byrd, Richard H and Lu, Peihuang and Nocedal, Jorge},
+                        journal={ACM Transactions on Mathematical Software (TOMS)},
+                        volume={23},
+                        number={4},
+                        pages={550--560},
+                        year={1997},
+                        publisher={ACM New York, NY, USA}}
+                        @article{olympus_Byrd:1995,
+                        title={A limited memory algorithm for bound constrained optimization},
+                        author={Byrd, Richard H and Lu, Peihuang and Nocedal, Jorge and Zhu, Ciyou},
+                        journal={SIAM Journal on scientific computing},
+                        volume={16},
+                        number={5},
+                        pages={1190--1208},
+                        year={1995},
+                        publisher={SIAM}}
+                        @article{olympus_Nocedal:2006,
+                        title={Sequential quadratic programming},
+                        author={Nocedal, Jorge and Wright, Stephen J},
+                        journal={Numerical optimization},
+                        pages={529--562},
+                        year={2006},
+                        publisher={Springer}
+                        }"
+        },
+    "Slsqp": {"cite_keys": [],
+             "bibtex": ""
+            },
+    "Grid": {"cite_keys": ["olympus_Box:2005", "olympus_Fisher:1937", "olympus_Anderson:2016"],
+             "bibtex": "@Book{olympus_Box:2005,
+                        Title   = {Statistics for experimenters: design, innovation and discovery},
+                        Author  = {Box, G. E. P. and Hunter, J. S. and Hunter, W. G.},
+                        Volume  = {2},
+                        Year    = {2005},
+                        }
+                        @Book{olympus_Fisher:1937,
+                          Title   = {The design of experiments},
+                          Author  = {Fisher, R. A.},
+                          Year    = {1937},
+                          Publisher = {Oliver and Boyd; Edinburgh; London},
+                        }
+                        @Book{olympus_Anderson:2016,
+                          Title   = {DOE simplified: practical tools for effective experimentation},
+                          Author  = {Anderson, M. J. and Whitcomb, P. J.},
+                          Year    = {2016},
+                          Publisher = {CRC Press},
+                        }"
+            },
+    "LatinHypercube": {"cite_keys": ["olympus_Box:2005", "olympus_Fisher:1937", "olympus_Anderson:2016"],
+             "bibtex": "@Book{olympus_Box:2005,
+                        Title   = {Statistics for experimenters: design, innovation and discovery},
+                        Author  = {Box, G. E. P. and Hunter, J. S. and Hunter, W. G.},
+                        Volume  = {2},
+                        Year    = {2005},
+                        }
+                        @Book{olympus_Fisher:1937,
+                          Title   = {The design of experiments},
+                          Author  = {Fisher, R. A.},
+                          Year    = {1937},
+                          Publisher = {Oliver and Boyd; Edinburgh; London},
+                        }
+                        @Book{olympus_Anderson:2016,
+                          Title   = {DOE simplified: practical tools for effective experimentation},
+                          Author  = {Anderson, M. J. and Whitcomb, P. J.},
+                          Year    = {2016},
+                          Publisher = {CRC Press},
+                        }"
+            },
+    "Sobol": {"cite_keys": ["olympus_Sobol:1967"],
+              "bibtex": "@article{olympus_Sobol:1967,
+                        title={On the distribution of points in a cube and the approximate evaluation of integrals},
+                        author={Sobol', Il'ya Meerovich},
+                        journal={Zhurnal Vychislitel'noi Matematiki i Matematicheskoi Fiziki},
+                        volume={7},
+                        number={4},
+                        pages={784--802},
+                        year={1967},
+                        publisher={Russian Academy of Sciences, Branch of Mathematical Sciences}
+                        }"
+            },
+    "RandomSearch": {"cite_keys": [],
+                     "bibtex": ""
+            },
+    "Snobfit": {"cite_keys": ["olympus_Huyer:2008", "olympus_Huyer:2006"],
+                "bibtex": "@article{olympus_Huyer:2008,
+                          title={SNOBFIT--stable noisy optimization by branch and fit},
+                          author={Huyer, Waltraud and Neumaier, Arnold},
+                          journal={ACM Transactions on Mathematical Software (TOMS)},
+                          volume={35},
+                          number={2},
+                          pages={1--25},
+                          year={2008},
+                          publisher={ACM New York, NY, USA}
+                        }
+                        @article{olympus_Huyer:2006,
+                          title={Snobfit-stable noisy optimization by branch and fit},
+                          author={Huyer, Waltraud and Neumaier, Arnold},
+                          journal={ACM Transactions on Mathematical Software},
+                          volume={35},
+                          number={2},
+                          pages={200},
+                          year={2006}
+                        }"
+            },
+    "BasinHopping": {"cite_keys": ["olympus_Wales:1997"],
+                    "bibtex": "@article{olympus_Wales:1997,
+                              title={Global optimization by basin-hopping and the lowest energy structures of Lennard-Jones clusters containing up to 110 atoms},
+                              author={Wales, David J and Doye, Jonathan PK},
+                              journal={The Journal of Physical Chemistry A},
+                              volume={101},
+                              number={28},
+                              pages={5111--5116},
+                              year={1997},
+                              publisher={ACS Publications}
+                              }"
+            },
+    "Simplex": {"cite_keys": ["olympus_Nelder:1965"],
+                "bibtex": "@article{olympus_Nelder:1965,
+                          title={A simplex method for function minimization},
+                          author={Nelder, John A and Mead, Roger},
+                          journal={The computer journal},
+                          volume={7},
+                          number={4},
+                          pages={308--313},
+                          year={1965},
+                          publisher={Oxford University Press}
+                        }"
+            }
+}

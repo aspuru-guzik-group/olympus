@@ -1,0 +1,17 @@
+{
+	"constraints": {
+		"parameters":   "simplex",
+		"measurements": "simplex"
+		},
+	"parameters": [
+			{"name": "red",    "type": "continuous", "lower": 0.0, "upper": 1.0},
+			{"name": "orange", "type": "continuous", "lower": 0.0, "upper": 1.0},
+			{"name": "yellow", "type": "continuous", "lower": 0.0, "upper": 1.0},
+			{"name": "blue",   "type": "continuous", "lower": 0.0, "upper": 1.0},
+		    {"name": "green",  "type": "continuous", "lower": 0.0, "upper": 1.0}
+	],
+    "measurements": [
+			{"name": "difference_to_green", "type": "continuous"}
+		],
+    "default_goal": "minimize"
+}

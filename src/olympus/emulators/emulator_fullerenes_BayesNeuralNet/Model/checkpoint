@@ -1,0 +1,2 @@
+model_checkpoint_path: "/home/flo/projects/olympus/src/olympus/.scratch/emulator_cg41up1l/Model/model.ckpt"
+all_model_checkpoint_paths: "/home/flo/projects/olympus/src/olympus/.scratch/emulator_cg41up1l/Model/model.ckpt"

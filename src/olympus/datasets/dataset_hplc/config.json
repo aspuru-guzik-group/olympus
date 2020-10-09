@@ -1,0 +1,18 @@
+{
+  "constraints": {
+		"parameters": "none",
+		"measurements": "positive"
+		},
+	"parameters": [
+			{"name": "sample_loop",       "low": 0.0,  "high": 0.08},
+			{"name": "additional_volume", "low": 0.0,  "high": 0.06},
+			{"name": "tubing_volume",     "low": 0.1,  "high": 0.9},
+			{"name": "sample_flow",       "low": 0.5,  "high": 2.5},
+			{"name": "push_speed",        "low": 80.0, "high": 150},
+			{"name": "wait_time",         "low": 0.5,  "high": 10.0}
+		],
+	"measurements": [
+		{"name": "peak_area", "type": "continuous"}
+	],
+    "default_goal": "maximize"
+}

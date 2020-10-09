@@ -1,0 +1,19 @@
+# list of extra requirements to access parts of olympus
+#
+# format:
+#     package[version_required]: tag1, tag2, etc.
+
+cma:                         planner, genetic, cma
+deap:                        planner, genetic, deap
+gpyopt:                      planner, bayesian, gpyopt
+hyperopt:                    planner, bayesian, hyperopt
+matplotlib:                  plotter
+pandas:                      dataset
+phoenics:                    planner, bayesian, phoenics
+pyswarms:                    planner, genetic, pyswarms
+silence-tensorflow:          emulator
+seaborn:                     plotter
+sqlalchemy:                  emulator
+SQSnobFit:                   planner, heuristic, snobfit
+tensorflow==1.15:            emulator
+tensorflow-probability==0.8: emulator

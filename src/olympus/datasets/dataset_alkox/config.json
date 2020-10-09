@@ -1,0 +1,16 @@
+{
+	"constraints": {
+		"parameters":   "none",
+		"measurements": "positive"
+		},
+	"parameters": [
+			{"name": "residence_time", "low": 0.5, "high": 2.0},
+			{"name": "ratio",          "low": 1.0, "high": 5.0},
+			{"name": "concentration",  "low": 0.1, "high": 0.5},
+			{"name": "temperature",    "low": 60.0, "high": 140.0}
+		],
+    "measurements": [
+			{"name": "conversion", "type": "continuous"}
+		],
+    "default_goal": "maximize"
+}
