@@ -1,26 +1,26 @@
-.. _dataset_alkox:
+.. _dataset_suzuki:
 
-Alkoxylation
-============
+Suzuki reaction
+===============
 
-This dataset reports the biocatalytic oxidation of benzyl alcohol by a copper radical oxidase (AlkOx). The effects of
-enzyme loading, cocatalyst loading, and pH balance on both initial rate and total conversion were assayed. [#f1]_
+This dataset reports palladium-catalyzed Suzuki cross-coupling between 2-bromophenyltetrazole and an electron-deficient
+aryl boronate. Four reaction conditions can be controlled to maximise the reaction yield. [#f1]_
 
-The dataset includes 104 samples with four parameters and one objective.
+The dataset includes 247 samples with four parameters and one objective.
 
 =============== ========== ============== ========================================
 Feature         Kind       Settings       Description
 =============== ========== ============== ========================================
-Catalase        continuous [ 0.05,  1.0]  concentration [μM]
-Peroxidase      continuous [  0.5, 10.0]  concentration [μM]
-Alcohol oxidase continuous [  2.0,  8.0]  concentration [nM]
-pH              continuous [    6,    8]  -log(H+)
+temperature     continuous [  75,  90]     temperature of the reaction [Celsius]
+Pd mol          continuous [ 0.5, 5.0]     loading of Pd catalyst [mol %]
+ArBpin          continuous [ 1.0, 1.8]     equivalents of boronate ester
+K3PO4           continuous [ 1.5,   3]     equivalents of tripotassium phosphate
 =============== ========== ============== ========================================
 
 ================= ========== ========
 Objective         Kind       Goal
 ================= ========== ========
-conversion        continuous maximize
+yield             continuous maximize
 ================= ========== ========
 
 .. rubric:: Reference

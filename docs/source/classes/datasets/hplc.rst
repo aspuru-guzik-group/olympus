@@ -1,10 +1,10 @@
 .. _dataset_hplc:
 
-HPLC N9
-=======
+HPLC
+====
 
 This dataset reports the peak response of an automated high-performance liquid
-chromatography (HPLC) system for varying process parameters.
+chromatography (HPLC) system for varying process parameters. [#f1]_
 
 The dataset includes 1,386 samples with six parameters and one objective
 

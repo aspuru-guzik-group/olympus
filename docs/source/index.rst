@@ -6,12 +6,16 @@ Welcome to Olympus' documentation!
 .. image:: https://codecov.io/gh/FlorianHase/olympus/branch/flo/graph/badge.svg?token=FyvePgBDQ5
     :target: https://codecov.io/gh/FlorianHase/olympus
 
+**Olympus**  is a toolkit that provides a consistent and easy-to-use framework to access a number of optimization
+algorithms (:ref:`planners`) as well as benchmark surfaces. In addition to analytic benchmark functions (:ref:`surfaces`),
+a collection of experimental emulators (:ref:`emulators`) are provided. These are based on models (:ref:`models`) trained on experimental
+datasets (:ref:`datasets`) from across the natural sciences, including examples from physics, chemistry, and materials science.
+
 
 .. toctree::
    :maxdepth: 1
    :caption: Getting Started
 
-   introduction
    overview
    install
    credits
@@ -20,10 +24,13 @@ Welcome to Olympus' documentation!
 
 .. toctree::
    :maxdepth: 1
-   :caption: User documentation
+   :caption: Examples
 
-   tutorials/index
-   examples/index
+   examples/notebooks/use_emulators
+   examples/notebooks/simple_benchmark
+   examples/notebooks/larger_benchmarks
+   examples/notebooks/custom_dataset
+   examples/notebooks/custom_planner
 
 
 .. toctree::
@@ -36,15 +43,14 @@ Welcome to Olympus' documentation!
    classes/emulators
    classes/surfaces/index
    classes/noises/index
-   classes/evaluator
 
 
 .. toctree::
    :maxdepth: 1
-   :caption: Developer's guide
+   :caption: Advanced Usage
 
+   custom_emulators
    custom_planners
-   custom_datasets
 
 
 .. toctree::
@@ -52,12 +58,6 @@ Welcome to Olympus' documentation!
    :caption: Complete API Reference
 
    apidoc/olympus
-
-.. toctree::
-   :maxdepth: 1
-   :caption: Misc
-
-   documentation
 
 
 Indices and tables

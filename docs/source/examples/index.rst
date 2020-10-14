@@ -12,7 +12,7 @@ Experiment emulators
 .. toctree::
    :maxdepth: 1
 
-   notebooks/experiment_emulators
+   notebooks/use_emulators
 
 
 Simple benchmarks

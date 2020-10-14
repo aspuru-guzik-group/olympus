@@ -1,14 +1,11 @@
 Overview
 ========
 
-**Olympus** is structured in the following way...
+The main components of **Olympus** and their relationships are depicted in the image below. The core classes that most
+users will find useful are ``Planner``, ``Emulator``, and ``Surface``. ``Model`` and ``Dataset`` can be used to create
+new, custom ``Emulator`` objects.
 
-The core classes are...
-
-A Dataset and a Model make an Emulator, which together with a Planner make an Evaluator etc etc...
-
-We wrap a number of planners, so see :ref:`planners`
-
-etc etc
+A ``Campaign`` instance can be used to store all information related to a specific optimization, from the results to the
+details of the algorithms used. An ``Evaluator`` can store the details of multiple optimization campaigns.
 
 .. image:: _static/core-classes-map.png

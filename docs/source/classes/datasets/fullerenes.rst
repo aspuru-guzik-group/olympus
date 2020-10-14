@@ -1,4 +1,4 @@
-.. dataset_fullerenes:
+.. _dataset_fullerenes:
 
 Buckminsterfullerene adducts
 ============================
@@ -7,7 +7,7 @@ This dataset reports the production of o-xylenyl adducts of
 Buckminsterfullerenes. Three process conditions (temperature, reaction time and
 ratio of sultine to C60) are varied to maximize the mole fraction of the desired
 product. Experiments are executed on a three factor fully factorial grid with
-six levels per factor.
+six levels per factor. [#f1]_
 
 The dataset includes 246 samples with three parameters and one objective.
 

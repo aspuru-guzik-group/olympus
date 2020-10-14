@@ -19,28 +19,30 @@ The datasets currently available are the following:
    :maxdepth: 1
 
    alkox
+   colors_bob
+   colors_n9
    fullerenes
-   hplc_n9
-   photobleaching_pce10
-   photobleaching_wf3
+   hplc
+   benzylation
+   photo_pce10
+   photo_wf3
    snar
+   suzuki
+
 
 ===== =========================== ============== ================= ======
- No.   Dataset                    Kind Keyword   Objective Name    Goal
+ No.   Dataset                    Kind Keyword   Objective         Goal
 ===== =========================== ============== ================= ======
   1    :ref:`dataset_alkox`       alkox          reaction rate     Max
-  2    color mixing (bob)         colormix_bob   green-ness        Max
-  3    color mixing (n9)          colormix_n9    green-ness        Max
-  4    excitonics                 excitonics     efficiency        Max
-  5    :ref:`dataset_fullerenes`  fullerenes     yield of X3       Max
-  6    :ref:`dataset_hplc`        hplc           peak area         Max
-  7    :ref:`dataset_photo_pce10` photobl        stability         Max
-  8    :ref:`dataset_photo_wf3`   photobl        stability         Max
-  9    :ref:`dataset_snar`        snar           e_factor          Max
- 10    n_benzylation              ??             e_factor         Max
- 11    suzuki                     suzuki         %AY
- 12    ptc                        ??             TBD
- 13    ada thin film?             ??             pseudo-mobility   Max
+  2    :ref:`dataset_colors_bob`  colors_bob     green-ness        Min
+  3    :ref:`dataset_colors_n9`   colors_n9      green-ness        Min
+  4    :ref:`dataset_fullerenes`  fullerenes     yield of X1+X2    Max
+  5    :ref:`dataset_hplc`        hplc           peak area         Max
+  6    :ref:`dataset_photo_pce10` photo_pce10    stability         Min
+  7    :ref:`dataset_photo_wf3`   photo_wf3      stability         Min
+  8    :ref:`dataset_snar`        snar           e_factor          Min
+  9    :ref:`dataset_benzylation` benzylation    e_factor          Min
+ 10    :ref:`dataset_suzuki`      suzuki         yield             Max
 ===== =========================== ============== ================= ======
 
 In addition to the **Olympus** datasets, you can load your own custom ones::

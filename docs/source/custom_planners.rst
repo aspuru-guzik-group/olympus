@@ -3,7 +3,7 @@
 Custom Planners
 ===============
 You can integrate your own optimization algorithm within **Olympus**. A simple example where we create a ``Planner`` that
-implements a random sampler can be found among the :ref:`examples`.
+implements a random sampler can be found among the examples.
 
 In brief, one can implement custom algorithms by inheriting from the `CustomPlanner` class::
 

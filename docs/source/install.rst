@@ -1,15 +1,26 @@
 Installation
 ============
 
-To install the package, please run::
+We recommend to install **Olympus** with ``pip``::
 
+    pip install olymp
+
+Alternatively, you can clone the GitHub repo and install it from source::
+
+    git clone git@github.com:aspuru-guzik-group/olympus.git
+    cd olympus
     python setup.py install
 
 Dependencies
 ------------
+The installation only requires:
 
-We use ``numpy``, and any recent version should suffice. You will need additional libraries to run specific :ref:`planners`
-or :ref:`emulators` though.
+* ``python >= 3.6``
+* ``numpy``
+* ``pandas``
+
+Additional libraries are required to use specific :ref:`planners` and :ref:`emulators`. However, **Olympus** will alert
+you about these requirements as you try access the related functionality.
 
 
 
