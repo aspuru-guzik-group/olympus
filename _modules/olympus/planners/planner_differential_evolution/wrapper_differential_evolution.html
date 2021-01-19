@@ -1,0 +1,530 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>olympus.planners.planner_differential_evolution.wrapper_differential_evolution &mdash; Olympus 0+untagged.5.g054f7b4 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+        <script type="text/javascript" src="../../../../_static/js/versions.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/msmb.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html">
+          
+
+          
+            
+            <img src="../../../../_static/logo2b.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0+untagged.5.g054f7b4
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../credits.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../support.html">Support</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/notebooks/use_emulators.html">Experiment emulators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/notebooks/simple_benchmark.html">Run a simple benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/notebooks/larger_benchmarks.html">Run a larger benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/notebooks/custom_dataset.html">Custom Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/notebooks/custom_planner.html">Custom Planner</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Core Classes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../classes/planners/index.html">Planners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../classes/datasets/index.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../classes/models/index.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../classes/emulators.html">Emulators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../classes/surfaces/index.html">Surfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../classes/noises/index.html">Noises</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Advanced Usage</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../custom_emulators.html">Custom Emulators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../custom_planners.html">Custom Planners</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Complete API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../apidoc/olympus.html">olympus package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Olympus</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+        
+      <li>olympus.planners.planner_differential_evolution.wrapper_differential_evolution</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for olympus.planners.planner_differential_evolution.wrapper_differential_evolution</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="kn">from</span> <span class="nn">olympus.objects.object_config</span>     <span class="kn">import</span> <span class="n">Config</span>
+<span class="kn">from</span> <span class="nn">olympus.objects</span>                   <span class="kn">import</span> <span class="n">ParameterVector</span>
+<span class="kn">from</span> <span class="nn">olympus.planners.abstract_planner</span> <span class="kn">import</span> <span class="n">AbstractPlanner</span>
+<span class="kn">from</span> <span class="nn">olympus.planners.utils_planner</span>    <span class="kn">import</span> <span class="n">get_init_guess</span><span class="p">,</span> <span class="n">get_bounds</span>
+<span class="kn">from</span> <span class="nn">olympus.utils</span>                     <span class="kn">import</span> <span class="n">daemon</span>
+
+
+<span class="c1">#===============================================================================</span>
+
+<div class="viewcode-block" id="DifferentialEvolution"><a class="viewcode-back" href="../../../../classes/planners/differential_evolution.html#olympus.planners.DifferentialEvolution">[docs]</a><span class="k">class</span> <span class="nc">DifferentialEvolution</span><span class="p">(</span><span class="n">AbstractPlanner</span><span class="p">):</span>
+
+    <span class="c1"># defaults are copied from scipy documentation</span>
+    <span class="c1"># --&gt; https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.differential_evolution.html</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">goal</span><span class="o">=</span><span class="s1">&#39;minimize&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(),</span> <span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;best1bin&#39;</span><span class="p">,</span> <span class="n">maxiter</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">popsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+                 <span class="n">tol</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">mutation</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">recombination</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">callback</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">disp</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">polish</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="s1">&#39;latinhypercube&#39;</span><span class="p">,</span>
+                 <span class="n">atol</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">updating</span><span class="o">=</span><span class="s1">&#39;immediate&#39;</span><span class="p">,</span> <span class="n">workers</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                 <span class="n">init_guess</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">init_guess_method</span><span class="o">=</span><span class="s1">&#39;random&#39;</span><span class="p">,</span> <span class="n">init_guess_seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Finds the global minimum of a multivariate function.</span>
+<span class="sd">            Differential Evolution is stochastic in nature (does not use gradient</span>
+<span class="sd">            methods) to find the minimium, and can search large areas of candidate</span>
+<span class="sd">            space, but often requires larger numbers of function evaluations than</span>
+<span class="sd">            conventional gradient based techniques.</span>
+<span class="sd">            The algorithm is due to Storn and Price [1]_.</span>
+
+<span class="sd">            Parameters</span>
+<span class="sd">            ----------</span>
+<span class="sd">            goal (str): The optimization goal, either &#39;minimize&#39; or &#39;maximize&#39;. Default is &#39;minimize&#39;.</span>
+<span class="sd">            func : callable</span>
+<span class="sd">                The objective function to be minimized.  Must be in the form</span>
+<span class="sd">                ``f(x, *args)``, where ``x`` is the argument in the form of a 1-D array</span>
+<span class="sd">                and ``args`` is a  tuple of any additional fixed parameters needed to</span>
+<span class="sd">                completely specify the function.</span>
+<span class="sd">            bounds : sequence</span>
+<span class="sd">                Bounds for variables.  ``(min, max)`` pairs for each element in ``x``,</span>
+<span class="sd">                defining the lower and upper bounds for the optimizing argument of</span>
+<span class="sd">                `func`. It is required to have ``len(bounds) == len(x)``.</span>
+<span class="sd">                ``len(bounds)`` is used to determine the number of parameters in ``x``.</span>
+<span class="sd">            args : tuple, optional</span>
+<span class="sd">                Any additional fixed parameters needed to</span>
+<span class="sd">                completely specify the objective function.</span>
+<span class="sd">            strategy : str, optional</span>
+<span class="sd">                The differential evolution strategy to use. Should be one of:</span>
+<span class="sd">                    - &#39;best1bin&#39;</span>
+<span class="sd">                    - &#39;best1exp&#39;</span>
+<span class="sd">                    - &#39;rand1exp&#39;</span>
+<span class="sd">                    - &#39;randtobest1exp&#39;</span>
+<span class="sd">                    - &#39;currenttobest1exp&#39;</span>
+<span class="sd">                    - &#39;best2exp&#39;</span>
+<span class="sd">                    - &#39;rand2exp&#39;</span>
+<span class="sd">                    - &#39;randtobest1bin&#39;</span>
+<span class="sd">                    - &#39;currenttobest1bin&#39;</span>
+<span class="sd">                    - &#39;best2bin&#39;</span>
+<span class="sd">                    - &#39;rand2bin&#39;</span>
+<span class="sd">                    - &#39;rand1bin&#39;</span>
+<span class="sd">                The default is &#39;best1bin&#39;.</span>
+<span class="sd">            maxiter : int, optional</span>
+<span class="sd">                The maximum number of generations over which the entire population is</span>
+<span class="sd">                evolved. The maximum number of function evaluations (with no polishing)</span>
+<span class="sd">                is: ``(maxiter + 1) * popsize * len(x)``</span>
+<span class="sd">            popsize : int, optional</span>
+<span class="sd">                A multiplier for setting the total population size.  The population has</span>
+<span class="sd">                ``popsize * len(x)`` individuals (unless the initial population is</span>
+<span class="sd">                supplied via the `init` keyword).</span>
+<span class="sd">            tol : float, optional</span>
+<span class="sd">                Relative tolerance for convergence, the solving stops when</span>
+<span class="sd">                ``np.std(pop) &lt;= atol + tol * np.abs(np.mean(population_energies))``,</span>
+<span class="sd">                where and `atol` and `tol` are the absolute and relative tolerance</span>
+<span class="sd">                respectively.</span>
+<span class="sd">            mutation : float or tuple(float, float), optional</span>
+<span class="sd">                The mutation constant. In the literature this is also known as</span>
+<span class="sd">                differential weight, being denoted by F.</span>
+<span class="sd">                If specified as a float it should be in the range [0, 2].</span>
+<span class="sd">                If specified as a tuple ``(min, max)`` dithering is employed. Dithering</span>
+<span class="sd">                randomly changes the mutation constant on a generation by generation</span>
+<span class="sd">                basis. The mutation constant for that generation is taken from</span>
+<span class="sd">                ``U[min, max)``. Dithering can help speed convergence significantly.</span>
+<span class="sd">                Increasing the mutation constant increases the search radius, but will</span>
+<span class="sd">                slow down convergence.</span>
+<span class="sd">            recombination : float, optional</span>
+<span class="sd">                The recombination constant, should be in the range [0, 1]. In the</span>
+<span class="sd">                literature this is also known as the crossover probability, being</span>
+<span class="sd">                denoted by CR. Increasing this value allows a larger number of mutants</span>
+<span class="sd">                to progress into the next generation, but at the risk of population</span>
+<span class="sd">                stability.</span>
+<span class="sd">            seed : int or `np.random.RandomState`, optional</span>
+<span class="sd">                If `seed` is not specified the `np.RandomState` singleton is used.</span>
+<span class="sd">                If `seed` is an int, a new `np.random.RandomState` instance is used,</span>
+<span class="sd">                seeded with seed.</span>
+<span class="sd">                If `seed` is already a `np.random.RandomState instance`, then that</span>
+<span class="sd">                `np.random.RandomState` instance is used.</span>
+<span class="sd">                Specify `seed` for repeatable minimizations.</span>
+<span class="sd">            disp : bool, optional</span>
+<span class="sd">                Display status messages</span>
+<span class="sd">            callback : callable, `callback(xk, convergence=val)`, optional</span>
+<span class="sd">                A function to follow the progress of the minimization. ``xk`` is</span>
+<span class="sd">                the current value of ``x0``. ``val`` represents the fractional</span>
+<span class="sd">                value of the population convergence.  When ``val`` is greater than one</span>
+<span class="sd">                the function halts. If callback returns `True`, then the minimization</span>
+<span class="sd">                is halted (any polishing is still carried out).</span>
+<span class="sd">            polish : bool, optional</span>
+<span class="sd">                If True (default), then `scipy.optimize.minimize` with the `L-BFGS-B`</span>
+<span class="sd">                method is used to polish the best population member at the end, which</span>
+<span class="sd">                can improve the minimization slightly.</span>
+<span class="sd">            init : str or array-like, optional</span>
+<span class="sd">                Specify which type of population initialization is performed. Should be</span>
+<span class="sd">                one of:</span>
+<span class="sd">                    - &#39;latinhypercube&#39;</span>
+<span class="sd">                    - &#39;random&#39;</span>
+<span class="sd">                    - array specifying the initial population. The array should have</span>
+<span class="sd">                      shape ``(M, len(x))``, where len(x) is the number of parameters.</span>
+<span class="sd">                      `init` is clipped to `bounds` before use.</span>
+<span class="sd">                The default is &#39;latinhypercube&#39;. Latin Hypercube sampling tries to</span>
+<span class="sd">                maximize coverage of the available parameter space. &#39;random&#39;</span>
+<span class="sd">                initializes the population randomly - this has the drawback that</span>
+<span class="sd">                clustering can occur, preventing the whole of parameter space being</span>
+<span class="sd">                covered. Use of an array to specify a population subset could be used,</span>
+<span class="sd">                for example, to create a tight bunch of initial guesses in an location</span>
+<span class="sd">                where the solution is known to exist, thereby reducing time for</span>
+<span class="sd">                convergence.</span>
+<span class="sd">            atol : float, optional</span>
+<span class="sd">                Absolute tolerance for convergence, the solving stops when</span>
+<span class="sd">                ``np.std(pop) &lt;= atol + tol * np.abs(np.mean(population_energies))``,</span>
+<span class="sd">                where and `atol` and `tol` are the absolute and relative tolerance</span>
+<span class="sd">                respectively.</span>
+<span class="sd">            updating : {&#39;immediate&#39;, &#39;deferred&#39;}, optional</span>
+<span class="sd">                If ``&#39;immediate&#39;``, the best solution vector is continuously updated</span>
+<span class="sd">                within a single generation [4]_. This can lead to faster convergence as</span>
+<span class="sd">                trial vectors can take advantage of continuous improvements in the best</span>
+<span class="sd">                solution.</span>
+<span class="sd">                With ``&#39;deferred&#39;``, the best solution vector is updated once per</span>
+<span class="sd">                generation. Only ``&#39;deferred&#39;`` is compatible with parallelization, and</span>
+<span class="sd">                the `workers` keyword can over-ride this option.</span>
+<span class="sd">                .. versionadded:: 1.2.0</span>
+<span class="sd">            workers : int or map-like callable, optional</span>
+<span class="sd">                If `workers` is an int the population is subdivided into `workers`</span>
+<span class="sd">                sections and evaluated in parallel (uses `multiprocessing.Pool`).</span>
+<span class="sd">                Supply -1 to use all available CPU cores.</span>
+<span class="sd">                Alternatively supply a map-like callable, such as</span>
+<span class="sd">                `multiprocessing.Pool.map` for evaluating the population in parallel.</span>
+<span class="sd">                This evaluation is carried out as ``workers(func, iterable)``.</span>
+<span class="sd">                This option will override the `updating` keyword to</span>
+<span class="sd">                ``updating=&#39;deferred&#39;`` if ``workers != 1``.</span>
+<span class="sd">                Requires that `func` be pickleable.</span>
+<span class="sd">                .. versionadded:: 1.2.0</span>
+<span class="sd">            init_guess (array, optional): initial guess for the optimization</span>
+<span class="sd">            init_guess_method (str): method to construct initial guesses if init_guess is not provided.</span>
+<span class="sd">                Choose from: random</span>
+<span class="sd">            init_guess_seed (str): random seed for init_guess_method</span>
+<span class="sd">            Returns</span>
+<span class="sd">            -------</span>
+<span class="sd">            res : OptimizeResult</span>
+<span class="sd">                The optimization result represented as a `OptimizeResult` object.</span>
+<span class="sd">                Important attributes are: ``x`` the solution array, ``success`` a</span>
+<span class="sd">                Boolean flag indicating if the optimizer exited successfully and</span>
+<span class="sd">                ``message`` which describes the cause of the termination. See</span>
+<span class="sd">                `OptimizeResult` for a description of other attributes.  If `polish`</span>
+<span class="sd">                was employed, and a lower minimum was obtained by the polishing, then</span>
+<span class="sd">                OptimizeResult also contains the ``jac`` attribute.</span>
+<span class="sd">            Notes</span>
+<span class="sd">            -----</span>
+<span class="sd">            Differential evolution is a stochastic population based method that is</span>
+<span class="sd">            useful for global optimization problems. At each pass through the population</span>
+<span class="sd">            the algorithm mutates each candidate solution by mixing with other candidate</span>
+<span class="sd">            solutions to create a trial candidate. There are several strategies [2]_ for</span>
+<span class="sd">            creating trial candidates, which suit some problems more than others. The</span>
+<span class="sd">            &#39;best1bin&#39; strategy is a good starting point for many systems. In this</span>
+<span class="sd">            strategy two members of the population are randomly chosen. Their difference</span>
+<span class="sd">            is used to mutate the best member (the `best` in `best1bin`), :math:`b_0`,</span>
+<span class="sd">            so far:</span>
+<span class="sd">            .. math::</span>
+<span class="sd">                b&#39; = b_0 + mutation * (population[rand0] - population[rand1])</span>
+<span class="sd">            A trial vector is then constructed. Starting with a randomly chosen &#39;i&#39;th</span>
+<span class="sd">            parameter the trial is sequentially filled (in modulo) with parameters from</span>
+<span class="sd">            ``b&#39;`` or the original candidate. The choice of whether to use ``b&#39;`` or the</span>
+<span class="sd">            original candidate is made with a binomial distribution (the &#39;bin&#39; in</span>
+<span class="sd">            &#39;best1bin&#39;) - a random number in [0, 1) is generated.  If this number is</span>
+<span class="sd">            less than the `recombination` constant then the parameter is loaded from</span>
+<span class="sd">            ``b&#39;``, otherwise it is loaded from the original candidate.  The final</span>
+<span class="sd">            parameter is always loaded from ``b&#39;``.  Once the trial candidate is built</span>
+<span class="sd">            its fitness is assessed. If the trial is better than the original candidate</span>
+<span class="sd">            then it takes its place. If it is also better than the best overall</span>
+<span class="sd">            candidate it also replaces that.</span>
+<span class="sd">            To improve your chances of finding a global minimum use higher `popsize`</span>
+<span class="sd">            values, with higher `mutation` and (dithering), but lower `recombination`</span>
+<span class="sd">            values. This has the effect of widening the search radius, but slowing</span>
+<span class="sd">            convergence.</span>
+<span class="sd">            By default the best solution vector is updated continuously within a single</span>
+<span class="sd">            iteration (``updating=&#39;immediate&#39;``). This is a modification [4]_ of the</span>
+<span class="sd">            original differential evolution algorithm which can lead to faster</span>
+<span class="sd">            convergence as trial vectors can immediately benefit from improved</span>
+<span class="sd">            solutions. To use the original Storn and Price behaviour, updating the best</span>
+<span class="sd">            solution once per iteration, set ``updating=&#39;deferred&#39;``.</span>
+<span class="sd">            .. versionadded:: 0.15.0</span>
+<span class="sd">            Examples</span>
+<span class="sd">            --------</span>
+<span class="sd">            Let us consider the problem of minimizing the Rosenbrock function. This</span>
+<span class="sd">            function is implemented in `rosen` in `scipy.optimize`.</span>
+<span class="sd">            &gt;&gt;&gt; from scipy.optimize import rosen, differential_evolution</span>
+<span class="sd">            &gt;&gt;&gt; bounds = [(0,2), (0, 2), (0, 2), (0, 2), (0, 2)]</span>
+<span class="sd">            &gt;&gt;&gt; result = differential_evolution(rosen, bounds)</span>
+<span class="sd">            &gt;&gt;&gt; result.x, result.fun</span>
+<span class="sd">            (array([1., 1., 1., 1., 1.]), 1.9216496320061384e-19)</span>
+<span class="sd">            Now repeat, but with parallelization.</span>
+<span class="sd">            &gt;&gt;&gt; bounds = [(0,2), (0, 2), (0, 2), (0, 2), (0, 2)]</span>
+<span class="sd">            &gt;&gt;&gt; result = differential_evolution(rosen, bounds, updating=&#39;deferred&#39;,</span>
+<span class="sd">            ...                                 workers=2)</span>
+<span class="sd">            &gt;&gt;&gt; result.x, result.fun</span>
+<span class="sd">            (array([1., 1., 1., 1., 1.]), 1.9216496320061384e-19)</span>
+<span class="sd">            Next find the minimum of the Ackley function</span>
+<span class="sd">            (https://en.wikipedia.org/wiki/Test_functions_for_optimization).</span>
+<span class="sd">            &gt;&gt;&gt; from scipy.optimize import differential_evolution</span>
+<span class="sd">            &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">            &gt;&gt;&gt; def ackley(x):</span>
+<span class="sd">            ...     arg1 = -0.2 * np.sqrt(0.5 * (x[0] ** 2 + x[1] ** 2))</span>
+<span class="sd">            ...     arg2 = 0.5 * (np.cos(2. * np.pi * x[0]) + np.cos(2. * np.pi * x[1]))</span>
+<span class="sd">            ...     return -20. * np.exp(arg1) - np.exp(arg2) + 20. + np.e</span>
+<span class="sd">            &gt;&gt;&gt; bounds = [(-5, 5), (-5, 5)]</span>
+<span class="sd">            &gt;&gt;&gt; result = differential_evolution(ackley, bounds)</span>
+<span class="sd">            &gt;&gt;&gt; result.x, result.fun</span>
+<span class="sd">            (array([ 0.,  0.]), 4.4408920985006262e-16)</span>
+<span class="sd">            References</span>
+<span class="sd">            ----------</span>
+<span class="sd">            .. [1] Storn, R and Price, K, Differential Evolution - a Simple and</span>
+<span class="sd">                   Efficient Heuristic for Global Optimization over Continuous Spaces,</span>
+<span class="sd">                   Journal of Global Optimization, 1997, 11, 341 - 359.</span>
+<span class="sd">            .. [2] http://www1.icsi.berkeley.edu/~storn/code.html</span>
+<span class="sd">            .. [3] http://en.wikipedia.org/wiki/Differential_evolution</span>
+<span class="sd">            .. [4] Wormington, M., Panaccione, C., Matney, K. M., Bowen, D. K., -</span>
+<span class="sd">                   Characterization of structures from X-ray scattering data using</span>
+<span class="sd">                   genetic algorithms, Phil. Trans. R. Soc. Lond. A, 1999, 357,</span>
+<span class="sd">                   2827-2848</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+        <span class="n">kwargs</span> <span class="o">=</span> <span class="nb">locals</span><span class="p">()</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">del</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;self&#39;</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">goal</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;goal&#39;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;goal&#39;</span><span class="p">,</span> <span class="s1">&#39;init_guess&#39;</span><span class="p">,</span> <span class="s1">&#39;init_guess_method&#39;</span><span class="p">,</span> <span class="s1">&#39;init_guess_seed&#39;</span><span class="p">]:</span>
+            <span class="k">del</span> <span class="n">kwargs</span><span class="p">[</span><span class="n">attr</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span> <span class="o">=</span> <span class="n">kwargs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">has_minimizer</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_converged</span>  <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">AbstractPlanner</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="nb">locals</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">_set_param_space</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">param_space</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">param_space</span> <span class="o">=</span> <span class="n">param_space</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bounds</span>      <span class="o">=</span> <span class="n">get_bounds</span><span class="p">(</span><span class="n">param_space</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">init_guess</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">init_guess</span> <span class="o">=</span> <span class="n">get_init_guess</span><span class="p">(</span><span class="n">param_space</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">init_guess_method</span><span class="p">,</span> <span class="n">random_seed</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">init_guess_seed</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_tell</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">observations</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_params</span> <span class="o">=</span> <span class="n">observations</span><span class="o">.</span><span class="n">get_params</span><span class="p">(</span><span class="n">as_array</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_values</span> <span class="o">=</span> <span class="n">observations</span><span class="o">.</span><span class="n">get_values</span><span class="p">(</span><span class="n">as_array</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">opposite</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">flip_measurements</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_values</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">RECEIVED_VALUES</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_values</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">_priv_evaluator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_project_into_domain</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">SUBMITTED_PARAMS</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">RECEIVED_VALUES</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">RECEIVED_VALUES</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">value</span>
+
+    <span class="nd">@daemon</span>
+    <span class="k">def</span> <span class="nf">create_optimizer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">differential_evolution</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">differential_evolution</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_priv_evaluator</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">bounds</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_converged</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="nf">_ask</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_minimizer</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">create_optimizer</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">has_minimizer</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">SUBMITTED_PARAMS</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_converged</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">ParameterVector</span><span class="p">()</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_params</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">SUBMITTED_PARAMS</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ParameterVector</span><span class="p">()</span><span class="o">.</span><span class="n">from_array</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">param_space</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Matteo Aldeghi, Riley Hickman and Florian Häse
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  <script>
+    var versions_json_url = ''
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        0+untagged.5.g054f7b4
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

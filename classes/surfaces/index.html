@@ -1,0 +1,402 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Surfaces &mdash; Olympus 0+untagged.5.g054f7b4 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+        <script type="text/javascript" src="../../_static/js/versions.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/msmb.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="AckleyPath" href="ackley_path.html" />
+    <link rel="prev" title="Emulators" href="../emulators.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/logo2b.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0+untagged.5.g054f7b4
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../credits.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../support.html">Support</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/notebooks/use_emulators.html">Experiment emulators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/notebooks/simple_benchmark.html">Run a simple benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/notebooks/larger_benchmarks.html">Run a larger benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/notebooks/custom_dataset.html">Custom Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/notebooks/custom_planner.html">Custom Planner</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Core Classes</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../planners/index.html">Planners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datasets/index.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models/index.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../emulators.html">Emulators</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Surfaces</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#traditional-surfaces">Traditional Surfaces</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ackley_path.html">AckleyPath</a></li>
+<li class="toctree-l3"><a class="reference internal" href="branin.html">Branin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dejong.html">Dejong</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hyper_ellipsoid.html">HyperEllipsoid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="levy.html">Levy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="michalewicz.html">Michalewicz</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rastrigin.html">Rastrigin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rosenbrock.html">Rosenbrock</a></li>
+<li class="toctree-l3"><a class="reference internal" href="schwefel.html">Schwefel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="styblinski_tang.html">StyblinskiTang</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zakharov.html">Zakharov</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#discrete-surfaces">Discrete Surfaces</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="discrete_ackley.html">DiscreteAckley</a></li>
+<li class="toctree-l3"><a class="reference internal" href="discrete_double_well.html">DiscreteDoubleWell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="discrete_michalewicz.html">DiscreteMichalewicz</a></li>
+<li class="toctree-l3"><a class="reference internal" href="linear_funnel.html">LinearFunnel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="narrow_funnel.html">NarrowFunnel</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#gaussian-mixture-surfaces">Gaussian Mixture Surfaces</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gaussian_mixture.html">GaussianMixture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="denali.html">Denali</a></li>
+<li class="toctree-l3"><a class="reference internal" href="everest.html">Everest</a></li>
+<li class="toctree-l3"><a class="reference internal" href="k2.html">K2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kilimanjaro.html">Kilimanjaro</a></li>
+<li class="toctree-l3"><a class="reference internal" href="matterhorn.html">Matterhorn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mont_blanc.html">MontBlanc</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#plots">Plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#surface-function">Surface Function</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../noises/index.html">Noises</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Advanced Usage</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../custom_emulators.html">Custom Emulators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../custom_planners.html">Custom Planners</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Complete API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../apidoc/olympus.html">olympus package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Olympus</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Surfaces</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/classes/surfaces/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="surfaces">
+<span id="id1"></span><h1>Surfaces<a class="headerlink" href="#surfaces" title="Permalink to this headline">¶</a></h1>
+<p><strong>Olympus</strong> provides a number of analytical functions that can be used to benchmark optimization algorithms.</p>
+<p>These can be accessed by importing the specific surface class
+from the <code class="docutils literal notranslate"><span class="pre">olympus.surfaces</span></code> module, or via the <code class="docutils literal notranslate"><span class="pre">Surface</span></code> function. For instance, to load the <em>Branin</em> function,
+you can use the <code class="docutils literal notranslate"><span class="pre">Surface</span></code> function:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">olympus</span> <span class="kn">import</span> <span class="n">Surface</span>
+<span class="n">surface</span> <span class="o">=</span> <span class="n">Surface</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;Branin&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The above is equivalent to importing the class <code class="docutils literal notranslate"><span class="pre">Branin</span></code> directly:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">olympus.surfaces</span> <span class="kn">import</span> <span class="n">Branin</span>
+<span class="n">surface</span> <span class="o">=</span> <span class="n">Branin</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This latter approach, however, allows for more control over the details of the function chosen. For instance, the
+<em>Michalewicz</em> also has a parameter <cite>m</cite> that controls the steepness of its valleys:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">olympus.surfaces</span> <span class="kn">import</span> <span class="n">Michalewicz</span>
+<span class="n">surface</span> <span class="o">=</span> <span class="n">Michalewicz</span><span class="p">(</span><span class="n">param_dim</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Once a surface instance is defined, it can be evaluated as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">surface</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="p">[</span><span class="n">ParamVector</span><span class="p">(</span><span class="n">target_0</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.000030517578125</span><span class="p">)]</span>
+
+<span class="c1"># evaluate a batch of points</span>
+<span class="n">surface</span><span class="o">.</span><span class="n">run</span><span class="p">([[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.75</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">]])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="p">[</span><span class="n">ParamVector</span><span class="p">(</span><span class="n">target_0</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.000030517578125</span><span class="p">),</span>
+     <span class="n">ParamVector</span><span class="p">(</span><span class="n">target_0</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.39509650003663577</span><span class="p">)]</span>
+</pre></div>
+</div>
+<div class="section" id="traditional-surfaces">
+<h2>Traditional Surfaces<a class="headerlink" href="#traditional-surfaces" title="Permalink to this headline">¶</a></h2>
+<p>Ablabl</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ackley_path.html">AckleyPath</a></li>
+<li class="toctree-l1"><a class="reference internal" href="branin.html">Branin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dejong.html">Dejong</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hyper_ellipsoid.html">HyperEllipsoid</a></li>
+<li class="toctree-l1"><a class="reference internal" href="levy.html">Levy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="michalewicz.html">Michalewicz</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rastrigin.html">Rastrigin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rosenbrock.html">Rosenbrock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="schwefel.html">Schwefel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="styblinski_tang.html">StyblinskiTang</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zakharov.html">Zakharov</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="discrete-surfaces">
+<h2>Discrete Surfaces<a class="headerlink" href="#discrete-surfaces" title="Permalink to this headline">¶</a></h2>
+<p>Ablabl</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="discrete_ackley.html">DiscreteAckley</a></li>
+<li class="toctree-l1"><a class="reference internal" href="discrete_double_well.html">DiscreteDoubleWell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="discrete_michalewicz.html">DiscreteMichalewicz</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linear_funnel.html">LinearFunnel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="narrow_funnel.html">NarrowFunnel</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="gaussian-mixture-surfaces">
+<h2>Gaussian Mixture Surfaces<a class="headerlink" href="#gaussian-mixture-surfaces" title="Permalink to this headline">¶</a></h2>
+<p>Ablabl</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="gaussian_mixture.html">GaussianMixture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="denali.html">Denali</a></li>
+<li class="toctree-l1"><a class="reference internal" href="everest.html">Everest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="k2.html">K2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kilimanjaro.html">Kilimanjaro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matterhorn.html">Matterhorn</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mont_blanc.html">MontBlanc</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="plots">
+<h2>Plots<a class="headerlink" href="#plots" title="Permalink to this headline">¶</a></h2>
+<p>Here below is an image that summarises all the analytical surfaces available in <strong>Olympus</strong>.</p>
+<img alt="../../_images/all_surfaces.png" class="align-center" src="../../_images/all_surfaces.png" />
+</div>
+<div class="section" id="surface-function">
+<h2>Surface Function<a class="headerlink" href="#surface-function" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt>
+<code class="sig-prename descclassname">olympus.surfaces.</code><code class="sig-name descname">Surface</code><span class="sig-paren">(</span><em class="sig-param">kind='Dejong'</em>, <em class="sig-param">param_dim=2</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/olympus/surfaces/surface.html#Surface"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Convenience function to access surfaces via a slightly higher level interface. It returns a certain surface
+with defaults arguments by keyword.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kind</strong> (<em>str</em><em> or </em><em>AbstractPlanner</em>) – Keyword identifying one of the algorithms available in Olympus. Alternatively,
+you can pass a custom algorithm that is a subclass of AbstractPlanner.</p></li>
+<li><p><strong>param_dim</strong> (<em>int</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An instance of the chosen surface.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Surface</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ackley_path.html" class="btn btn-neutral float-right" title="AckleyPath" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../emulators.html" class="btn btn-neutral float-left" title="Emulators" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Matteo Aldeghi, Riley Hickman and Florian Häse
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  <script>
+    var versions_json_url = ''
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        0+untagged.5.g054f7b4
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

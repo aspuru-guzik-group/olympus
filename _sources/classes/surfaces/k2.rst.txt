@@ -1,0 +1,17 @@
+K2
+--
+
+.. image:: ./k2.png
+   :align: center
+
+.. currentmodule:: olympus.surfaces
+
+.. autoclass:: K2
+   :noindex:
+   :exclude-members: add, from_dict, generate, get, to_dict
+
+
+   .. rubric:: Methods
+
+   .. autosummary::
+      run

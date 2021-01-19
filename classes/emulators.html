@@ -1,0 +1,444 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Emulators &mdash; Olympus 0+untagged.5.g054f7b4 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+        <script type="text/javascript" src="../_static/js/versions.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/msmb.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Surfaces" href="surfaces/index.html" />
+    <link rel="prev" title="Neural Network" href="models/nn.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo2b.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0+untagged.5.g054f7b4
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../credits.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../support.html">Support</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../examples/notebooks/use_emulators.html">Experiment emulators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/notebooks/simple_benchmark.html">Run a simple benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/notebooks/larger_benchmarks.html">Run a larger benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/notebooks/custom_dataset.html">Custom Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/notebooks/custom_planner.html">Custom Planner</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Core Classes</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="planners/index.html">Planners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="datasets/index.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models/index.html">Models</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Emulators</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#emulator-class">Emulator Class</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="surfaces/index.html">Surfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="noises/index.html">Noises</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Advanced Usage</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../custom_emulators.html">Custom Emulators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../custom_planners.html">Custom Planners</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Complete API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../apidoc/olympus.html">olympus package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Olympus</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Emulators</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/classes/emulators.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="emulators">
+<span id="id1"></span><h1>Emulators<a class="headerlink" href="#emulators" title="Permalink to this headline">¶</a></h1>
+<p><strong>Olympus</strong> provides many pre-trained emulators to be readily used as benchmarks for optimization and experimental
+planing algorithms. In particular, any combination of <a class="reference internal" href="datasets/index.html#datasets"><span class="std std-ref">Datasets</span></a> and <a class="reference internal" href="models/index.html#models"><span class="std std-ref">Models</span></a> specifies an <code class="docutils literal notranslate"><span class="pre">Emulator</span></code>
+that you can readily load from <strong>Olympus</strong> as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># we want to load the emulator that uses a Bayesian neural network model for the HPLC dataset</span>
+<span class="kn">from</span> <span class="nn">olympus</span> <span class="kn">import</span> <span class="n">Emulator</span>
+<span class="n">emulator</span> <span class="o">=</span> <span class="n">Emulator</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="s1">&#39;hplc_n9&#39;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s1">&#39;BayesNeuralNet&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Once an <code class="docutils literal notranslate"><span class="pre">Emulator</span></code> instance has been created, it can be used to simulate the outcome of an experimental evaluation
+of the query parameters:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">next_point</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">100.</span><span class="p">,</span> <span class="mf">7.</span><span class="p">]]</span>
+<span class="n">emulator</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">next_point</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;&gt;</span> <span class="p">[</span><span class="n">ParamVector</span><span class="p">(</span><span class="n">peak_area</span> <span class="o">=</span> <span class="mf">244.39515369060487</span><span class="p">)]</span>
+</pre></div>
+</div>
+<p>In addition to loading pre-trained emulators, you can define your own custom emulators by creating custom instances of
+<code class="docutils literal notranslate"><span class="pre">Dataset</span></code> and <code class="docutils literal notranslate"><span class="pre">Model</span></code>. For example, if you wanted to train an <code class="docutils literal notranslate"><span class="pre">Emulator</span></code> using different settings for the
+<code class="docutils literal notranslate"><span class="pre">BayesNeuralNet</span></code> model:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">olympus</span> <span class="kn">import</span> <span class="n">Emulator</span>
+<span class="kn">from</span> <span class="nn">olympus.models</span> <span class="kn">import</span> <span class="n">BayesNeuralNet</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">BayesNeuralNet</span><span class="p">(</span><span class="n">hidden_depth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">hidden_nodes</span><span class="o">=</span><span class="mi">48</span><span class="p">,</span> <span class="n">out_act</span><span class="o">=</span><span class="s1">&#39;sigmoid&#39;</span><span class="p">)</span>
+<span class="n">emulator</span> <span class="o">=</span> <span class="n">Emulator</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="s1">&#39;hplc_n9&#39;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You can then evaluate the performance on the model via cross validation:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">emulator</span><span class="o">.</span><span class="n">cross_validate</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>And then finally train the model:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">emulator</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The same can be done for a custom dataset. In this case you would load your own dataset (see <a class="reference internal" href="datasets/index.html#datasets"><span class="std std-ref">Datasets</span></a>) and train
+the emulator:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">olympus</span> <span class="kn">import</span> <span class="n">Emulator</span><span class="p">,</span> <span class="n">Dataset</span>
+<span class="kn">from</span> <span class="nn">olympus.models</span> <span class="kn">import</span> <span class="n">BayesNeuralNet</span>
+
+<span class="n">mydata</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">from_csv</span><span class="p">(</span><span class="s1">&#39;mydata.csv&#39;</span><span class="p">)</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">mydata</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">BayesNeuralNet</span><span class="p">(</span><span class="n">hidden_depth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">hidden_nodes</span><span class="o">=</span><span class="mi">48</span><span class="p">,</span> <span class="n">out_act</span><span class="o">=</span><span class="s1">&#39;sigmoid&#39;</span><span class="p">)</span>
+<span class="n">emulator</span> <span class="o">=</span> <span class="n">Emulator</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+<span class="n">emulator</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>To save the <code class="docutils literal notranslate"><span class="pre">Emulator</span></code> instance to file, such that you do not have to re-train it every time you’d like to use it,
+you can use the <code class="docutils literal notranslate"><span class="pre">save</span></code> method:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">emulator</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;my_new_emulator&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You can then retrieve this emulator with the <code class="docutils literal notranslate"><span class="pre">load_emulator</span></code> function:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">olympus.emulators</span> <span class="kn">import</span> <span class="n">load_emulator</span>
+<span class="n">emulator</span> <span class="o">=</span> <span class="n">load_emulator</span><span class="p">(</span><span class="s1">&#39;my_new_emulator&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="emulator-class">
+<h2>Emulator Class<a class="headerlink" href="#emulator-class" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="sig-prename descclassname">olympus.emulators.emulator.</code><code class="sig-name descname">Emulator</code><span class="sig-paren">(</span><em class="sig-param">dataset=None</em>, <em class="sig-param">model=None</em>, <em class="sig-param">feature_transform='identity'</em>, <em class="sig-param">target_transform='identity'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/olympus/emulators/emulator.html#Emulator"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>generic experiment emulator</p>
+<p>This class is intended to provide the interface to the user.</p>
+<p>Random notes:
+- emulators are uniquely determined via dataset + model + emulator_id</p>
+<p>Experiment emulator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataset</strong> (<em>str</em><em>, </em><a class="reference internal" href="../documentation.html#olympus.datasets.Dataset" title="olympus.datasets.Dataset"><em>Dataset</em></a>) – dataset used to train a model. Either a string, in which case a standard dataset
+is loaded, or a Dataset object. To see the list of available datasets …</p></li>
+<li><p><strong>model</strong> (<em>str</em><em>, </em><em>Model</em>) – the model used to create the emulator. Either a string, in which case a default model
+is loaded, or a Model object. To see the list of available models …</p></li>
+<li><p><strong>feature_transform</strong> (<em>str</em><em>, </em><em>list</em>) – the data transform to be applied to the features. See DataTransformer for the
+available transformations.</p></li>
+<li><p><strong>target_transform</strong> (<em>str</em><em>, </em><em>list</em>) – the data transform to be applied to the targets. See DataTransformer for the
+available transformations.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">run</span></code>(features[, num_samples, return_paramvector])</p></td>
+<td><p>Run the emulator and return a value given the features provided.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">train</span></code>([plot, retrain])</p></td>
+<td><p>Trains the model on the emulator dataset, using the emulator model.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">save</span></code>([path, include_cv])</p></td>
+<td><p>Save the emulator in a specified location.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">cross_validate</span></code>([rerun, plot])</p></td>
+<td><p>Performs cross validation on the emulator dataset, using the emulator model.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt>
+<code class="sig-name descname">cross_validate</code><span class="sig-paren">(</span><em class="sig-param">rerun=False</em>, <em class="sig-param">plot=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/olympus/emulators/emulator.html#Emulator.cross_validate"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Performs cross validation on the emulator dataset, using the emulator model. The number of folds used is
+defined in the Dataset object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>rerun</strong> (<em>bool</em>) – whether to run cross validation again, in case it had already been performed.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>dictionary with the list of train and validation R2 scores.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>scores (dict)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param">features</em>, <em class="sig-param">num_samples=1</em>, <em class="sig-param">return_paramvector=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/olympus/emulators/emulator.html#Emulator.run"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Run the emulator and return a value given the features provided.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>features</strong> (<em>ndarray</em>) – 2d array with the input features used for the predictions</p></li>
+<li><p><strong>num_samples</strong> (<em>int</em>) – number of samples to average. only useful for probabilistic models</p></li>
+<li><p><strong>return_paramvector</strong> (<em>bool</em>) – Whether to return a <code class="docutils literal notranslate"><span class="pre">ParameterVector</span></code> object instead of a list of lists.
+Default is False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>model prediction(s).</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>y (float or array)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="sig-name descname">save</code><span class="sig-paren">(</span><em class="sig-param">path='./olympus_emulator'</em>, <em class="sig-param">include_cv=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/olympus/emulators/emulator.html#Emulator.save"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Save the emulator in a specified location. This will save the emulator object as a pickle file, and the
+associated TensorFlow model, in the specified location. The saved emulator can then be loaded with the
+<cite>olympus.emulators.load_emulator</cite> function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em>) – relative path where to save the emulator.</p></li>
+<li><p><strong>include_cv</strong> (<em>bool</em>) – whether to include the cross validation models. Default is False.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="sig-name descname">train</code><span class="sig-paren">(</span><em class="sig-param">plot=False</em>, <em class="sig-param">retrain=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/olympus/emulators/emulator.html#Emulator.train"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Trains the model on the emulator dataset, using the emulator model. The train/test split is defined in the
+Dataset object <cite>emulator.dataset</cite>. Note that the test set is used for testing the model performance, and for
+early stopping.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>plot</strong> (<em>bool</em>) – </p></li>
+<li><p><strong>retrain</strong> (<em>bool</em>) – whether to retrain the model, in case it had already been trained.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>dictionary with the train and test R2 scores.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>scores (dict)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="surfaces/index.html" class="btn btn-neutral float-right" title="Surfaces" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="models/nn.html" class="btn btn-neutral float-left" title="Neural Network" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Matteo Aldeghi, Riley Hickman and Florian Häse
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  <script>
+    var versions_json_url = ''
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        0+untagged.5.g054f7b4
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

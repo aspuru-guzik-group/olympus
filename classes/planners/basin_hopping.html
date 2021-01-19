@@ -1,0 +1,647 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Basin Hopping &mdash; Olympus 0+untagged.5.g054f7b4 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+        <script type="text/javascript" src="../../_static/js/versions.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/msmb.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Datasets" href="../datasets/index.html" />
+    <link rel="prev" title="SNOBFIT" href="snobfit.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/logo2b.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0+untagged.5.g054f7b4
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../credits.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../support.html">Support</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/notebooks/use_emulators.html">Experiment emulators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/notebooks/simple_benchmark.html">Run a simple benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/notebooks/larger_benchmarks.html">Run a larger benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/notebooks/custom_dataset.html">Custom Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/notebooks/custom_planner.html">Custom Planner</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Core Classes</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Planners</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#bayesian-algorithms">Bayesian Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#evolutionary-algorithms">Evolutionary Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#gradient-methods">Gradient Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#grid-like-searches">Grid-Like Searches</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#others">Others</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="simplex.html">Simplex</a></li>
+<li class="toctree-l3"><a class="reference internal" href="snobfit.html">SNOBFIT</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Basin Hopping</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#planner-function">Planner Function</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../datasets/index.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models/index.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../emulators.html">Emulators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../surfaces/index.html">Surfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../noises/index.html">Noises</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Advanced Usage</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../custom_emulators.html">Custom Emulators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../custom_planners.html">Custom Planners</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Complete API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../apidoc/olympus.html">olympus package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Olympus</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Planners</a> &raquo;</li>
+        
+      <li>Basin Hopping</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/classes/planners/basin_hopping.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="basin-hopping">
+<span id="planner-basin-hopping"></span><h1>Basin Hopping<a class="headerlink" href="#basin-hopping" title="Permalink to this headline">¶</a></h1>
+<p>Basin-hopping is a two-phase method that combines a global stepping algorithm with local minimization at each step.
+As the step-taking, step acceptance, and minimization methods are all customizable, this function can also be used to
+implement other two-phase methods.</p>
+<p>This planner is based on the <code class="docutils literal notranslate"><span class="pre">scipy.optimize.basinhopping</span></code> implementation and as such requires you to have the
+<code class="docutils literal notranslate"><span class="pre">scipy</span></code> library installed. For more information please visit the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.basinhopping.html#scipy.optimize.basinhopping">SciPy documentation</a>.</p>
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="sig-prename descclassname">olympus.planners.</code><code class="sig-name descname">BasinHopping</code><span class="sig-paren">(</span><em class="sig-param">goal='minimize'</em>, <em class="sig-param">niter=100</em>, <em class="sig-param">T=1.0</em>, <em class="sig-param">stepsize=0.5</em>, <em class="sig-param">minimizer_kwargs=None</em>, <em class="sig-param">take_step=None</em>, <em class="sig-param">accept_test=None</em>, <em class="sig-param">callback=None</em>, <em class="sig-param">interval=50</em>, <em class="sig-param">disp=False</em>, <em class="sig-param">niter_success=None</em>, <em class="sig-param">seed=None</em>, <em class="sig-param">init_guess=None</em>, <em class="sig-param">init_guess_method='random'</em>, <em class="sig-param">init_guess_seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/olympus/planners/planner_basin_hopping/wrapper_basin_hopping.html#BasinHopping"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Find the global minimum of a function using the basin-hopping algorithm
+:param goal (str):
+:type goal (str): The optimization goal, either ‘minimize’ or ‘maximize’. Default is ‘minimize’.
+:param func: Function to be optimized.  <code class="docutils literal notranslate"><span class="pre">args</span></code> can be passed as an optional item</p>
+<blockquote>
+<div><p>in the dict <code class="docutils literal notranslate"><span class="pre">minimizer_kwargs</span></code></p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x0</strong> (<em>ndarray</em>) – Initial guess.</p></li>
+<li><p><strong>niter</strong> (<em>integer</em><em>, </em><em>optional</em>) – The number of basin hopping iterations</p></li>
+<li><p><strong>T</strong> (<em>float</em><em>, </em><em>optional</em>) – The “temperature” parameter for the accept or reject criterion.  Higher
+“temperatures” mean that larger jumps in function value will be
+accepted.  For best results <code class="docutils literal notranslate"><span class="pre">T</span></code> should be comparable to the
+separation
+(in function value) between local minima.</p></li>
+<li><p><strong>stepsize</strong> (<em>float</em><em>, </em><em>optional</em>) – initial step size for use in the random displacement.</p></li>
+<li><p><strong>minimizer_kwargs</strong> (<em>dict</em><em>, </em><em>optional</em>) – <p>Extra keyword arguments to be passed to the minimizer
+<code class="docutils literal notranslate"><span class="pre">scipy.optimize.minimize()</span></code> Some important options could be:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>method<span class="classifier">str</span></dt><dd><p>The minimization method (e.g. <code class="docutils literal notranslate"><span class="pre">&quot;L-BFGS-B&quot;</span></code>)</p>
+</dd>
+<dt>args<span class="classifier">tuple</span></dt><dd><p>Extra arguments passed to the objective function (<code class="docutils literal notranslate"><span class="pre">func</span></code>) and
+its derivatives (Jacobian, Hessian).</p>
+</dd>
+</dl>
+</div></blockquote>
+</p></li>
+<li><p><strong>take_step</strong> (callable <code class="docutils literal notranslate"><span class="pre">take_step(x)</span></code>, optional) – Replace the default step taking routine with this routine.  The default
+step taking routine is a random displacement of the coordinates, but
+other step taking algorithms may be better for some systems.
+<code class="docutils literal notranslate"><span class="pre">take_step</span></code> can optionally have the attribute <code class="docutils literal notranslate"><span class="pre">take_step.stepsize</span></code>.
+If this attribute exists, then <code class="docutils literal notranslate"><span class="pre">basinhopping</span></code> will adjust
+<code class="docutils literal notranslate"><span class="pre">take_step.stepsize</span></code> in order to try to optimize the global minimum
+search.</p></li>
+<li><p><strong>accept_test</strong> (callable, <code class="docutils literal notranslate"><span class="pre">accept_test(f_new=f_new,</span> <span class="pre">x_new=x_new,</span> <span class="pre">f_old=fold,</span> <span class="pre">x_old=x_old)</span></code>, optional) – Define a test which will be used to judge whether or not to accept the
+step.  This will be used in addition to the Metropolis test based on
+“temperature” <code class="docutils literal notranslate"><span class="pre">T</span></code>.  The acceptable return values are True,
+False, or <code class="docutils literal notranslate"><span class="pre">&quot;force</span> <span class="pre">accept&quot;</span></code>. If any of the tests return False
+then the step is rejected. If the latter, then this will override any
+other tests in order to accept the step. This can be used, for example,
+to forcefully escape from a local minimum that <code class="docutils literal notranslate"><span class="pre">basinhopping</span></code> is
+trapped in.</p></li>
+<li><p><strong>callback</strong> (callable, <code class="docutils literal notranslate"><span class="pre">callback(x,</span> <span class="pre">f,</span> <span class="pre">accept)</span></code>, optional) – A callback function which will be called for all minima found.  <code class="docutils literal notranslate"><span class="pre">x</span></code>
+and <code class="docutils literal notranslate"><span class="pre">f</span></code> are the coordinates and function value of the trial minimum,
+and <code class="docutils literal notranslate"><span class="pre">accept</span></code> is whether or not that minimum was accepted.  This can be
+used, for example, to save the lowest N minima found.  Also,
+<code class="docutils literal notranslate"><span class="pre">callback</span></code> can be used to specify a user defined stop criterion by
+optionally returning True to stop the <code class="docutils literal notranslate"><span class="pre">basinhopping</span></code> routine.</p></li>
+<li><p><strong>interval</strong> (<em>integer</em><em>, </em><em>optional</em>) – interval for how often to update the <code class="docutils literal notranslate"><span class="pre">stepsize</span></code></p></li>
+<li><p><strong>disp</strong> (<em>bool</em><em>, </em><em>optional</em>) – Set to True to print status messages</p></li>
+<li><p><strong>niter_success</strong> (<em>integer</em><em>, </em><em>optional</em>) – Stop the run if the global minimum candidate remains the same for this
+number of iterations.</p></li>
+<li><p><strong>seed</strong> (int or <cite>np.random.RandomState</cite>, optional) – If <cite>seed</cite> is not specified the <cite>np.RandomState</cite> singleton is used.
+If <cite>seed</cite> is an int, a new <cite>np.random.RandomState</cite> instance is used,
+seeded with seed.
+If <cite>seed</cite> is already a <cite>np.random.RandomState instance</cite>, then that
+<cite>np.random.RandomState</cite> instance is used.
+Specify <cite>seed</cite> for repeatable minimizations. The random numbers
+generated with this seed only affect the default Metropolis
+<cite>accept_test</cite> and the default <cite>take_step</cite>. If you supply your own
+<cite>take_step</cite> and <cite>accept_test</cite>, and these functions use random
+number generation, then those functions are responsible for the state
+of their random number generator.</p></li>
+<li><p><strong>(</strong><strong>array</strong><strong>, </strong><strong>optional</strong><strong>)</strong> (<em>init_guess</em>) – </p></li>
+<li><p><strong>(</strong><strong>str</strong><strong>)</strong> (<em>init_guess_seed</em>) – Choose from: random</p></li>
+<li><p><strong>(</strong><strong>str</strong><strong>)</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>res</strong> – The optimization result represented as a <code class="docutils literal notranslate"><span class="pre">OptimizeResult</span></code> object.  Important
+attributes are: <code class="docutils literal notranslate"><span class="pre">x</span></code> the solution array, <code class="docutils literal notranslate"><span class="pre">fun</span></code> the value of the
+function at the solution, and <code class="docutils literal notranslate"><span class="pre">message</span></code> which describes the cause of
+the termination. The <code class="docutils literal notranslate"><span class="pre">OptimzeResult</span></code> object returned by the selected
+minimizer at the lowest minimum is also contained within this object
+and can be accessed through the <code class="docutils literal notranslate"><span class="pre">lowest_optimization_result</span></code> attribute.
+See <cite>OptimizeResult</cite> for a description of other attributes.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>OptimizeResult</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-class docutils literal notranslate"><span class="pre">minimize</span></code></dt><dd><p>The local minimization function called once for each basinhopping step. <code class="docutils literal notranslate"><span class="pre">minimizer_kwargs</span></code> is passed to this routine.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>Basin-hopping is a stochastic algorithm which attempts to find the global
+minimum of a smooth scalar function of one or more variables <a class="footnote-reference brackets" href="#id7" id="id1">1</a> <a class="footnote-reference brackets" href="#id8" id="id2">2</a> <a class="footnote-reference brackets" href="#id9" id="id3">3</a>
+<a class="footnote-reference brackets" href="#id10" id="id4">4</a>.  The algorithm in its current form was described by David Wales and
+Jonathan Doye <a class="footnote-reference brackets" href="#id8" id="id5">2</a> <a class="reference external" href="http://www-wales.ch.cam.ac.uk/">http://www-wales.ch.cam.ac.uk/</a>.
+The algorithm is iterative with each cycle composed of the following
+features
+1) random perturbation of the coordinates
+2) local minimization
+3) accept or reject the new coordinates based on the minimized function</p>
+<blockquote>
+<div><p>value</p>
+</div></blockquote>
+<p>The acceptance test used here is the Metropolis criterion of standard Monte
+Carlo algorithms, although there are many other possibilities <a class="footnote-reference brackets" href="#id9" id="id6">3</a>.
+This global minimization method has been shown to be extremely efficient
+for a wide variety of problems in physics and chemistry.  It is
+particularly useful when the function has many minima separated by large
+barriers. See the Cambridge Cluster Database
+<a class="reference external" href="http://www-wales.ch.cam.ac.uk/CCD.html">http://www-wales.ch.cam.ac.uk/CCD.html</a> for databases of molecular systems
+that have been optimized primarily using basin-hopping.  This database
+includes minimization problems exceeding 300 degrees of freedom.
+See the free software program GMIN (<a class="reference external" href="http://www-wales.ch.cam.ac.uk/GMIN">http://www-wales.ch.cam.ac.uk/GMIN</a>) for
+a Fortran implementation of basin-hopping.  This implementation has many
+different variations of the procedure described above, including more
+advanced step taking algorithms and alternate acceptance criterion.
+For stochastic global optimization there is no way to determine if the true
+global minimum has actually been found. Instead, as a consistency check,
+the algorithm can be run from a number of different random starting points
+to ensure the lowest minimum found in each example has converged to the
+global minimum.  For this reason <code class="docutils literal notranslate"><span class="pre">basinhopping</span></code> will by default simply
+run for the number of iterations <code class="docutils literal notranslate"><span class="pre">niter</span></code> and return the lowest minimum
+found.  It is left to the user to ensure that this is in fact the global
+minimum.
+Choosing <code class="docutils literal notranslate"><span class="pre">stepsize</span></code>:  This is a crucial parameter in <code class="docutils literal notranslate"><span class="pre">basinhopping</span></code> and
+depends on the problem being solved.  Ideally it should be comparable to
+the typical separation between local minima of the function being
+optimized.  <code class="docutils literal notranslate"><span class="pre">basinhopping</span></code> will, by default, adjust <code class="docutils literal notranslate"><span class="pre">stepsize</span></code> to find
+an optimal value, but this may take many iterations.  You will get quicker
+results if you set a sensible value for <code class="docutils literal notranslate"><span class="pre">stepsize</span></code>.
+Choosing <code class="docutils literal notranslate"><span class="pre">T</span></code>: The parameter <code class="docutils literal notranslate"><span class="pre">T</span></code> is the temperature used in the
+metropolis criterion.  Basinhopping steps are accepted with probability
+<code class="docutils literal notranslate"><span class="pre">1</span></code> if <code class="docutils literal notranslate"><span class="pre">func(xnew)</span> <span class="pre">&lt;</span> <span class="pre">func(xold)</span></code>, or otherwise with probability:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">exp</span><span class="p">(</span> <span class="o">-</span><span class="p">(</span><span class="n">func</span><span class="p">(</span><span class="n">xnew</span><span class="p">)</span> <span class="o">-</span> <span class="n">func</span><span class="p">(</span><span class="n">xold</span><span class="p">))</span> <span class="o">/</span> <span class="n">T</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>So, for best results, <code class="docutils literal notranslate"><span class="pre">T</span></code> should to be comparable to the typical
+difference in function values between local minima.
+.. versionadded:: 0.12.0</p>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id7"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>Wales, David J. 2003, Energy Landscapes, Cambridge University Press,
+Cambridge, UK.</p>
+</dd>
+<dt class="label" id="id8"><span class="brackets">2</span><span class="fn-backref">(<a href="#id2">1</a>,<a href="#id5">2</a>)</span></dt>
+<dd><p>Wales, D J, and Doye J P K, Global Optimization by Basin-Hopping and
+the Lowest Energy Structures of Lennard-Jones Clusters Containing up to
+110 Atoms.  Journal of Physical Chemistry A, 1997, 101, 5111.</p>
+</dd>
+<dt class="label" id="id9"><span class="brackets">3</span><span class="fn-backref">(<a href="#id3">1</a>,<a href="#id6">2</a>)</span></dt>
+<dd><p>Li, Z. and Scheraga, H. A., Monte Carlo-minimization approach to the
+multiple-minima problem in protein folding, Proc. Natl. Acad. Sci. USA,
+1987, 84, 6611.</p>
+</dd>
+<dt class="label" id="id10"><span class="brackets"><a class="fn-backref" href="#id4">4</a></span></dt>
+<dd><p>Wales, D. J. and Scheraga, H. A., Global optimization of clusters,
+crystals, and biomolecules, Science, 1999, 285, 1368.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>The following example is a one-dimensional minimization problem,  with many
+local minima superimposed on a parabola.
+&gt;&gt;&gt; from scipy.optimize import basinhopping
+&gt;&gt;&gt; func = lambda x: np.cos(14.5 * x - 0.3) + (x + 0.2) * x
+&gt;&gt;&gt; x0=[1.]
+Basinhopping, internally, uses a local minimization algorithm.  We will use
+the parameter <code class="docutils literal notranslate"><span class="pre">minimizer_kwargs</span></code> to tell basinhopping which algorithm to
+use and how to set up that minimizer.  This parameter will be passed to
+<code class="docutils literal notranslate"><span class="pre">scipy.optimize.minimize()</span></code>.
+&gt;&gt;&gt; minimizer_kwargs = {“method”: “BFGS”}
+&gt;&gt;&gt; ret = basinhopping(func, x0, minimizer_kwargs=minimizer_kwargs,
+…                    niter=200)
+&gt;&gt;&gt; print(“global minimum: x = %.4f, f(x0) = %.4f” % (ret.x, ret.fun))
+global minimum: x = -0.1951, f(x0) = -1.0009
+Next consider a two-dimensional minimization problem. Also, this time we
+will use gradient information to significantly speed up the search.
+&gt;&gt;&gt; def func2d(x):
+…     f = np.cos(14.5 * x[0] - 0.3) + (x[1] + 0.2) * x[1] + (x[0] +
+…                                                            0.2) * x[0]
+…     df = np.zeros(2)
+…     df[0] = -14.5 * np.sin(14.5 * x[0] - 0.3) + 2. * x[0] + 0.2
+…     df[1] = 2. * x[1] + 0.2
+…     return f, df
+We’ll also use a different local minimization algorithm.  Also we must tell
+the minimizer that our function returns both energy and gradient (jacobian)
+&gt;&gt;&gt; minimizer_kwargs = {“method”:”L-BFGS-B”, “jac”:True}
+&gt;&gt;&gt; x0 = [1.0, 1.0]
+&gt;&gt;&gt; ret = basinhopping(func2d, x0, minimizer_kwargs=minimizer_kwargs,
+…                    niter=200)
+&gt;&gt;&gt; print(“global minimum: x = [%.4f, %.4f], f(x0) = %.4f” % (ret.x[0],
+…                                                           ret.x[1],
+…                                                           ret.fun))
+global minimum: x = [-0.1951, -0.1000], f(x0) = -1.0109
+Here is an example using a custom step taking routine.  Imagine you want
+the first coordinate to take larger steps then the rest of the coordinates.
+This can be implemented like so:
+&gt;&gt;&gt; class MyTakeStep(object):
+…    def __init__(self, stepsize=0.5):
+…        self.stepsize = stepsize
+…    def __call__(self, x):
+…        s = self.stepsize
+…        x[0] += np.random.uniform(-2.*s, 2.*s)
+…        x[1:] += np.random.uniform(-s, s, x[1:].shape)
+…        return x
+Since <code class="docutils literal notranslate"><span class="pre">MyTakeStep.stepsize</span></code> exists basinhopping will adjust the magnitude
+of <code class="docutils literal notranslate"><span class="pre">stepsize</span></code> to optimize the search.  We’ll use the same 2-D function as
+before
+&gt;&gt;&gt; mytakestep = MyTakeStep()
+&gt;&gt;&gt; ret = basinhopping(func2d, x0, minimizer_kwargs=minimizer_kwargs,
+…                    niter=200, take_step=mytakestep)
+&gt;&gt;&gt; print(“global minimum: x = [%.4f, %.4f], f(x0) = %.4f” % (ret.x[0],
+…                                                           ret.x[1],
+…                                                           ret.fun))
+global minimum: x = [-0.1951, -0.1000], f(x0) = -1.0109
+Now let’s do an example using a custom callback function which prints the
+value of every minimum found
+&gt;&gt;&gt; def print_fun(x, f, accepted):
+…         print(“at minimum %.4f accepted %d” % (f, int(accepted)))
+We’ll run it for only 10 basinhopping steps this time.
+&gt;&gt;&gt; np.random.seed(1)
+&gt;&gt;&gt; ret = basinhopping(func2d, x0, minimizer_kwargs=minimizer_kwargs,
+…                    niter=10, callback=print_fun)
+at minimum 0.4159 accepted 1
+at minimum -0.9073 accepted 1
+at minimum -0.1021 accepted 1
+at minimum -0.1021 accepted 1
+at minimum 0.9102 accepted 1
+at minimum 0.9102 accepted 1
+at minimum 2.2945 accepted 0
+at minimum -0.1021 accepted 1
+at minimum -1.0109 accepted 1
+at minimum -1.0109 accepted 1
+The minimum at -1.0109 is actually the global minimum, found already on the
+8th iteration.
+Now let’s implement bounds on the problem using a custom <code class="docutils literal notranslate"><span class="pre">accept_test</span></code>:
+&gt;&gt;&gt; class MyBounds(object):
+…     def __init__(self, xmax=[1.1,1.1], xmin=[-1.1,-1.1] ):
+…         self.xmax = np.array(xmax)
+…         self.xmin = np.array(xmin)
+…     def __call__(self, <a href="#id11"><span class="problematic" id="id12">**</span></a>kwargs):
+…         x = kwargs[“x_new”]
+…         tmax = bool(np.all(x &lt;= self.xmax))
+…         tmin = bool(np.all(x &gt;= self.xmin))
+…         return tmax and tmin
+&gt;&gt;&gt; mybounds = MyBounds()
+&gt;&gt;&gt; ret = basinhopping(func2d, x0, minimizer_kwargs=minimizer_kwargs,
+…                    niter=10, accept_test=mybounds)</p>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tell</span></code>([observations])</p></td>
+<td><p>Provide the planner with all previous observations.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ask</span></code>([return_as])</p></td>
+<td><p>suggest new set of parameters</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">recommend</span></code>([observations, return_as])</p></td>
+<td><p>Consecutively executes tell and ask: tell the planner about all previous observations, and ask about the next query point.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">optimize</span></code>(emulator[, num_iter, verbose])</p></td>
+<td><p>Optimizes a surface for a fixed number of iterations.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_param_space</span></code>(param_space)</p></td>
+<td><p>Defines the parameter space over which the planner will search.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt>
+<code class="sig-name descname">ask</code><span class="sig-paren">(</span><em class="sig-param">return_as=None</em><span class="sig-paren">)</span></dt>
+<dd><p>suggest new set of parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>return_as</strong> (<em>string</em>) – choose data type for returned parameters
+allowed options (dict, array)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>newly generated parameters</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ParameterVector</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="sig-name descname">optimize</code><span class="sig-paren">(</span><em class="sig-param">emulator</em>, <em class="sig-param">num_iter=1</em>, <em class="sig-param">verbose=False</em><span class="sig-paren">)</span></dt>
+<dd><p>Optimizes a surface for a fixed number of iterations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>emulator</strong> (<em>object</em>) – Emulator or a Surface instance to optimize over.</p></li>
+<li><p><strong>num_iter</strong> (<em>int</em>) – Maximum number of iterations allowed.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – Whether to print information to screen.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Campaign object with information about the optimization, including all parameters</dt><dd><p>tested and measurements obtained.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>campaign (Campaign)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="sig-name descname">recommend</code><span class="sig-paren">(</span><em class="sig-param">observations=None</em>, <em class="sig-param">return_as=None</em><span class="sig-paren">)</span></dt>
+<dd><p>Consecutively executes tell and ask: tell the planner about all previous observations, and ask about the
+next query point.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>observations</strong> (<em>list of ???</em>) – </p></li>
+<li><p><strong>return_as</strong> (<em>string</em>) – choose data type for returned parameters
+allowed options (dict, array)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>newly generated parameters</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="sig-name descname">set_param_space</code><span class="sig-paren">(</span><em class="sig-param">param_space</em><span class="sig-paren">)</span></dt>
+<dd><p>Defines the parameter space over which the planner will search.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>param_space</strong> (<em>ParameterSpace</em>) – a ParameterSpace object defining the space over which to search.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="sig-name descname">tell</code><span class="sig-paren">(</span><em class="sig-param">observations=&lt;olympus.campaigns.observations.Observations object&gt;</em><span class="sig-paren">)</span></dt>
+<dd><p>Provide the planner with all previous observations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>observations</strong> (<em>Observations</em>) – an Observation object containing all previous observations. This defines the
+history of the campaign seen by the planner. The default is None, i.e. there are no previous
+observations.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../datasets/index.html" class="btn btn-neutral float-right" title="Datasets" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="snobfit.html" class="btn btn-neutral float-left" title="SNOBFIT" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Matteo Aldeghi, Riley Hickman and Florian Häse
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  <script>
+    var versions_json_url = ''
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        0+untagged.5.g054f7b4
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

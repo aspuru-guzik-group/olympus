@@ -1,0 +1,324 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>olympus.evaluators.evaluator &mdash; Olympus 0+untagged.5.g054f7b4 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+        <script type="text/javascript" src="../../../_static/js/versions.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/msmb.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html">
+          
+
+          
+            
+            <img src="../../../_static/logo2b.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0+untagged.5.g054f7b4
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../credits.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../support.html">Support</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/notebooks/use_emulators.html">Experiment emulators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/notebooks/simple_benchmark.html">Run a simple benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/notebooks/larger_benchmarks.html">Run a larger benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/notebooks/custom_dataset.html">Custom Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/notebooks/custom_planner.html">Custom Planner</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Core Classes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../classes/planners/index.html">Planners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../classes/datasets/index.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../classes/models/index.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../classes/emulators.html">Emulators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../classes/surfaces/index.html">Surfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../classes/noises/index.html">Noises</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Advanced Usage</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../custom_emulators.html">Custom Emulators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../custom_planners.html">Custom Planners</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Complete API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../apidoc/olympus.html">olympus package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Olympus</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>olympus.evaluators.evaluator</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for olympus.evaluators.evaluator</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+
+<span class="kn">from</span> <span class="nn">olympus</span> <span class="kn">import</span> <span class="n">Emulator</span><span class="p">,</span> <span class="n">Surface</span><span class="p">,</span> <span class="n">Logger</span>
+<span class="kn">from</span> <span class="nn">olympus.campaigns</span> <span class="kn">import</span> <span class="n">Campaign</span>
+<span class="kn">from</span> <span class="nn">olympus.objects</span>   <span class="kn">import</span> <span class="n">Object</span>
+
+<span class="c1">#===============================================================================</span>
+
+<div class="viewcode-block" id="Evaluator"><a class="viewcode-back" href="../../../classes/evaluator.html#olympus.evaluators.evaluator.Evaluator">[docs]</a><span class="k">class</span> <span class="nc">Evaluator</span><span class="p">(</span><span class="n">Object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">planner</span><span class="p">,</span> <span class="n">emulator</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">surface</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">campaign</span><span class="o">=</span><span class="n">Campaign</span><span class="p">(),</span> <span class="n">database</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; The Evaluator does higher level operations that Planners and </span>
+<span class="sd">        Emulators do not do on their own. For instance, communicating parameters </span>
+<span class="sd">        and measurements to each other, keeping track of them ensuring they </span>
+<span class="sd">        match, and storing these in a Campaign object. All this can also be done </span>
+<span class="sd">        by the user using planner, emulator and campaign objects, which might </span>
+<span class="sd">        allow more customization. However, Evaluator provides a convenient </span>
+<span class="sd">        higher-level interface for common optimization tasks.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            planner (Planner): an instance of a Planner.</span>
+<span class="sd">            emulator (Emulator): an instance of a trained Emulator.</span>
+<span class="sd">            surface (Surface): an instance of a Surface</span>
+<span class="sd">            campaign (Campaign): an instance of a Campaign. By default, a new </span>
+<span class="sd">                Campaign instance is created. If this is set to None, no campaign </span>
+<span class="sd">                info will be stored.</span>
+<span class="sd">            database (object): ...</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">Object</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="nb">locals</span><span class="p">())</span>
+
+        <span class="k">if</span> <span class="n">emulator</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="n">surface</span> <span class="ow">is</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">emulator_type</span> <span class="o">=</span> <span class="s1">&#39;numerical&#39;</span>
+        <span class="k">elif</span> <span class="n">surface</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="n">emulator</span> <span class="ow">is</span> <span class="kc">None</span> 
+            <span class="bp">self</span><span class="o">.</span><span class="n">emulator_type</span> <span class="o">=</span> <span class="s1">&#39;analytic&#39;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">emulator</span> <span class="o">=</span> <span class="n">surface</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">Logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;One of emulator or surface needs to be provided&#39;</span><span class="p">,</span> <span class="s1">&#39;FATAL&#39;</span><span class="p">)</span>
+
+<span class="c1">#        if isinstance(self.emulator, Emulator):</span>
+<span class="c1">#            self.emulator_type = &#39;numerical&#39;</span>
+<span class="c1">#        elif isinstance(self.emulator, Surface):</span>
+<span class="c1">#            self.emulator_type = &#39;analytic&#39;</span>
+
+        <span class="c1"># provide the planner with the parameter space.</span>
+        <span class="c1"># NOTE: right now, outside of Evaluator, the param_space for a planner </span>
+        <span class="c1">#       needs to be set &quot;manually&quot; by the user</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">planner</span><span class="o">.</span><span class="n">set_param_space</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">emulator</span><span class="o">.</span><span class="n">param_space</span><span class="p">)</span>  <span class="c1"># param space in emulator as it originates from dataset</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">campaign</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">campaign</span><span class="o">.</span><span class="n">set_planner_specs</span><span class="p">(</span><span class="n">planner</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">campaign</span><span class="o">.</span><span class="n">set_emulator_specs</span><span class="p">(</span><span class="n">emulator</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="Evaluator.optimize"><a class="viewcode-back" href="../../../classes/evaluator.html#olympus.evaluators.evaluator.Evaluator.optimize">[docs]</a>    <span class="k">def</span> <span class="nf">optimize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_iter</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Optimizes a surface for a fixed number of iterations.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            num_iter (int): Maximum number of iterations allowed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Optimize: i.e. call the planner recommend method for max_iter times</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_iter</span><span class="p">):</span>
+            <span class="c1"># get new params from planner</span>
+            <span class="c1"># NOTE: now we get 1 param at a time, a possible future expansion is </span>
+            <span class="c1">#       to return batches</span>
+            <span class="n">params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">planner</span><span class="o">.</span><span class="n">recommend</span><span class="p">(</span><span class="n">observations</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">campaign</span><span class="o">.</span><span class="n">observations</span><span class="p">)</span>
+
+            <span class="c1"># get measurement from emulator/surface</span>
+            <span class="n">values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">emulator</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">to_array</span><span class="p">(),</span> <span class="n">return_paramvector</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+            <span class="c1"># store parameter and measurement pair in campaign</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">campaign</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">campaign</span><span class="o">.</span><span class="n">add_observation</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span>
+
+            <span class="c1"># if we have a database, log the campaign status</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">database</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">log_campaign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">campaign</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Matteo Aldeghi, Riley Hickman and Florian Häse
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  <script>
+    var versions_json_url = ''
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        0+untagged.5.g054f7b4
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

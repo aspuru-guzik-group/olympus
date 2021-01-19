@@ -1,0 +1,341 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Custom Planners &mdash; Olympus 0+untagged.5.g054f7b4 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+        <script type="text/javascript" src="_static/js/versions.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/msmb.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="olympus package" href="apidoc/olympus.html" />
+    <link rel="prev" title="Custom Emulators" href="custom_emulators.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html">
+          
+
+          
+            
+            <img src="_static/logo2b.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0+untagged.5.g054f7b4
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="credits.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="support.html">Support</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples/notebooks/use_emulators.html">Experiment emulators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/notebooks/simple_benchmark.html">Run a simple benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/notebooks/larger_benchmarks.html">Run a larger benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/notebooks/custom_dataset.html">Custom Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/notebooks/custom_planner.html">Custom Planner</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Core Classes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classes/planners/index.html">Planners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes/datasets/index.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes/models/index.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes/emulators.html">Emulators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes/surfaces/index.html">Surfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes/noises/index.html">Noises</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Advanced Usage</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="custom_emulators.html">Custom Emulators</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Custom Planners</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#init"><code class="docutils literal notranslate"><span class="pre">__init__</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#set-param-space"><code class="docutils literal notranslate"><span class="pre">_set_param_space</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tell"><code class="docutils literal notranslate"><span class="pre">_tell</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ask"><code class="docutils literal notranslate"><span class="pre">_ask</span></code></a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Complete API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="apidoc/olympus.html">olympus package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Olympus</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Custom Planners</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/custom_planners.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="custom-planners">
+<span id="id1"></span><h1>Custom Planners<a class="headerlink" href="#custom-planners" title="Permalink to this headline">¶</a></h1>
+<p>You can integrate your own optimization algorithm within <strong>Olympus</strong>. A simple example where we create a <code class="docutils literal notranslate"><span class="pre">Planner</span></code> that
+implements a random sampler can be found among the examples.</p>
+<p>In brief, one can implement custom algorithms by inheriting from the <cite>CustomPlanner</cite> class:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">olympus.planners</span> <span class="kn">import</span> <span class="n">CustomPlanner</span>
+</pre></div>
+</div>
+<p>Here, we will discuss in more detail the methods implemented in this class to allow the user to customize it as needed.</p>
+<p><code class="docutils literal notranslate"><span class="pre">CustomPlanner</span></code> class already comes with <code class="docutils literal notranslate"><span class="pre">__init__</span></code>, <code class="docutils literal notranslate"><span class="pre">_set_param_space</span></code>, <code class="docutils literal notranslate"><span class="pre">_tell</span></code> methods. This is important because all
+<code class="docutils literal notranslate"><span class="pre">Planner</span></code> instances in <strong>Olympus</strong> are expected to have these three methods, as well as an <code class="docutils literal notranslate"><span class="pre">_ask</span></code> method. Thus, at a minimum a custom
+planner class needs to implement the <code class="docutils literal notranslate"><span class="pre">_ask</span></code> method, while expanding upon the default <code class="docutils literal notranslate"><span class="pre">__init__</span></code>, <code class="docutils literal notranslate"><span class="pre">_set_param_space</span></code>, <code class="docutils literal notranslate"><span class="pre">_tell</span></code>
+methods is optional. Here below we provide a quick summary of what these four methods should do.</p>
+<div class="section" id="init">
+<h2><code class="docutils literal notranslate"><span class="pre">__init__</span></code><a class="headerlink" href="#init" title="Permalink to this headline">¶</a></h2>
+<p>This method works as in all Python classes, and for any <code class="docutils literal notranslate"><span class="pre">Planner</span></code> in <strong>Olympus</strong>, the minimal <code class="docutils literal notranslate"><span class="pre">__init__</span></code> should look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">goal</span><span class="o">=</span><span class="s1">&#39;minimize&#39;</span><span class="p">):</span>
+    <span class="n">AbstractPlanner</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="nb">locals</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>Where <code class="docutils literal notranslate"><span class="pre">goal</span></code> is a required “abstract attribute” and the parent <code class="docutils literal notranslate"><span class="pre">AbstractPlanner</span></code> class should be initialised with all
+variables in the local namespace. This is the default implemented in <code class="docutils literal notranslate"><span class="pre">CustomPlanner</span></code>. A customized <code class="docutils literal notranslate"><span class="pre">__init__</span></code> method
+could contain additional arguments specific to your algorithms. For instance, it could take the <code class="docutils literal notranslate"><span class="pre">random_seed</span></code> argument
+if the algorithm is stochastic.</p>
+</div>
+<div class="section" id="set-param-space">
+<h2><code class="docutils literal notranslate"><span class="pre">_set_param_space</span></code><a class="headerlink" href="#set-param-space" title="Permalink to this headline">¶</a></h2>
+<p>This method defines the domain for the optimization. Only points within this search space should be queried by the algorithm.
+This is what is implemented by default in <code class="docutils literal notranslate"><span class="pre">CustomPlanner</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">_set_param_space</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">param_space</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_param_space</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">param_space</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">param</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s1">&#39;continuous&#39;</span><span class="p">:</span>
+            <span class="n">param_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">param</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="n">param</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="s1">&#39;domain&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">low</span><span class="p">,</span> <span class="n">param</span><span class="o">.</span><span class="n">high</span><span class="p">)}</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_param_space</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">param_dict</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Basically, it creates a <code class="docutils literal notranslate"><span class="pre">_param_space</span></code> attribute that is a list of dictionaries, with the name of the parameters, their
+type (only ‘continuous’ is currently supported) and their bounds. You can then use this attribute to make sure your
+algorithm samples points within the defined optimisation domain.</p>
+</div>
+<div class="section" id="tell">
+<h2><code class="docutils literal notranslate"><span class="pre">_tell</span></code><a class="headerlink" href="#tell" title="Permalink to this headline">¶</a></h2>
+<p>This method provides the <code class="docutils literal notranslate"><span class="pre">Planner</span></code> instance with information about the history of the optimization, which may be used
+to select the next query point. This is what is implemented by default in <code class="docutils literal notranslate"><span class="pre">CustomPlanner</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">_tell</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">observations</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_params</span> <span class="o">=</span> <span class="n">observations</span><span class="o">.</span><span class="n">get_params</span><span class="p">(</span><span class="n">as_array</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_values</span> <span class="o">=</span> <span class="n">observations</span><span class="o">.</span><span class="n">get_values</span><span class="p">(</span><span class="n">as_array</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">opposite</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">flip_measurements</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It defined <code class="docutils literal notranslate"><span class="pre">_params</span></code> and <code class="docutils literal notranslate"><span class="pre">_values</span></code> attributes that contain all previous queried parameter locations and their merit, respectively.
+If the <code class="docutils literal notranslate"><span class="pre">Planner</span></code> was initialised with <code class="docutils literal notranslate"><span class="pre">goal='minimize'</span></code>, then <code class="docutils literal notranslate"><span class="pre">self.flip_measurements</span></code> will be <code class="docutils literal notranslate"><span class="pre">False</span></code>. If it
+was initialised with <code class="docutils literal notranslate"><span class="pre">goal='maximize'</span></code>, then <code class="docutils literal notranslate"><span class="pre">self.flip_measurements</span></code> will be <code class="docutils literal notranslate"><span class="pre">True</span></code>, which means that the <code class="docutils literal notranslate"><span class="pre">_values</span></code>
+will contain the merits multiplied by -1. This is because <code class="docutils literal notranslate"><span class="pre">Planner</span></code> instances are expected to always aim at minimizing the
+objective function.</p>
+</div>
+<div class="section" id="ask">
+<h2><code class="docutils literal notranslate"><span class="pre">_ask</span></code><a class="headerlink" href="#ask" title="Permalink to this headline">¶</a></h2>
+<p>This is the only method that has no implementation in <code class="docutils literal notranslate"><span class="pre">CustomPlanner</span></code> and always needs to be implemented by the user.
+What this method is expected to do is to decide which next set of parameters to query, and return this as a <code class="docutils literal notranslate"><span class="pre">ParameterVector</span></code>
+instance. This is an example in which we iterate over all dimensions of parameter space to sample the space at random:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">_ask</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">new_params</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># list with the parameter values for the next query location</span>
+    <span class="c1"># go through all dimensions of parameter space</span>
+    <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_param_space</span><span class="p">:</span>
+        <span class="c1"># sample uniformly at random within the bounds of the specific dimension</span>
+        <span class="n">new_param</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="n">param</span><span class="p">[</span><span class="s1">&#39;domain&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">high</span><span class="o">=</span><span class="n">param</span><span class="p">[</span><span class="s1">&#39;domain&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+        <span class="c1"># append to the list with the parameter values</span>
+        <span class="n">new_params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_param</span><span class="p">)</span>
+
+    <span class="c1"># return new_params as a ParameterVector object</span>
+    <span class="k">return</span> <span class="n">ParameterVector</span><span class="p">(</span><span class="n">array</span><span class="o">=</span><span class="n">new_params</span><span class="p">,</span> <span class="n">param_space</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">param_space</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In this case, the next sample does not depend on the history of the search, so we have not used <code class="docutils literal notranslate"><span class="pre">_params</span></code> and <code class="docutils literal notranslate"><span class="pre">_values</span></code>,
+but if you are implementing, e.g., a Bayesian optimization algorithm, you can used these attributes too.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="apidoc/olympus.html" class="btn btn-neutral float-right" title="olympus package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="custom_emulators.html" class="btn btn-neutral float-left" title="Custom Emulators" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Matteo Aldeghi, Riley Hickman and Florian Häse
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  <script>
+    var versions_json_url = ''
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        0+untagged.5.g054f7b4
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

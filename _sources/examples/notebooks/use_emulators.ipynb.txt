@@ -1,0 +1,194 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Experiment emulators"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import numpy as np \n",
+    "\n",
+    "from olympus import Emulator\n",
+    "from olympus import list_trained_emulators"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "['wf3_NeuralNet', 'hplc_BayesNeuralNet', 'snar_BayesNeuralNet', 'n9_NeuralNet', 'hplc_NeuralNet', 'suzuki_BayesNeuralNet', 'bob_NeuralNet', 'pce10_BayesNeuralNet', 'fullerenes_BayesNeuralNet', 'alkox_NeuralNet', 'benzylation_NeuralNet', 'fullerenes_NeuralNet', 'alkox_BayesNeuralNet', 'snar_NeuralNet', 'n9_BayesNeuralNet', 'suzuki_NeuralNet', 'benzylation_BayesNeuralNet', 'pce10_NeuralNet', 'bob_BayesNeuralNet', 'wf3_BayesNeuralNet']\n"
+     ]
+    }
+   ],
+   "source": [
+    "# checking trained emulators\n",
+    "print(list_trained_emulators())"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Here we will use `alkox_BayesNeuralNet`"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "\u001b[0;37m[INFO] Loading emulator using a BayesNeuralNet model for the dataset alkox...\n",
+      "\u001b[0m"
+     ]
+    }
+   ],
+   "source": [
+    "# initialize emulator\n",
+    "emulator = Emulator(dataset='alkox', model='BayesNeuralNet')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "<Emulator (Dataset(kind=alkox), model=\n",
+      "--> batch_size:    50\n",
+      "--> es_patience:   100\n",
+      "--> hidden_act:    leaky_relu\n",
+      "--> hidden_depth:  3\n",
+      "--> hidden_nodes:  96\n",
+      "--> kind:          BayesNeuralNet\n",
+      "--> learning_rate: 0.001\n",
+      "--> max_epochs:    100000\n",
+      "--> out_act:       relu\n",
+      "--> pred_int:      100\n",
+      "--> reg:           0.01\n",
+      "--> scope:         model)>\n"
+     ]
+    }
+   ],
+   "source": [
+    "# print emulator information\n",
+    "print(emulator)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 24,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "maximize\n"
+     ]
+    }
+   ],
+   "source": [
+    "# check on goal\n",
+    "print(emulator.get_goal())"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 25,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[[56.3565859]]\n"
+     ]
+    }
+   ],
+   "source": [
+    "# run single prediction\n",
+    "params = np.zeros(4)\n",
+    "values = emulator.run(params)\n",
+    "print(values)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 30,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[[47.04858576]\n",
+      " [35.74277879]\n",
+      " [20.47608956]]\n"
+     ]
+    }
+   ],
+   "source": [
+    "# run multiple predictions\n",
+    "params = [np.zeros(4) + 0.0, \n",
+    "          np.zeros(4) + 0.5, \n",
+    "          np.zeros(4) + 1.0]\n",
+    "values = emulator.run(params, num_samples = 5)\n",
+    "print(values)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "olympus",
+   "language": "python",
+   "name": "olympus"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.7.3"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 4
+}

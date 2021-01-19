@@ -1,0 +1,736 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>olympus.datasets.dataset &mdash; Olympus 0+untagged.5.g054f7b4 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+        <script type="text/javascript" src="../../../_static/js/versions.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/msmb.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html">
+          
+
+          
+            
+            <img src="../../../_static/logo2b.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0+untagged.5.g054f7b4
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../credits.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../support.html">Support</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/notebooks/use_emulators.html">Experiment emulators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/notebooks/simple_benchmark.html">Run a simple benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/notebooks/larger_benchmarks.html">Run a larger benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/notebooks/custom_dataset.html">Custom Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/notebooks/custom_planner.html">Custom Planner</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Core Classes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../classes/planners/index.html">Planners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../classes/datasets/index.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../classes/models/index.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../classes/emulators.html">Emulators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../classes/surfaces/index.html">Surfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../classes/noises/index.html">Noises</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Advanced Usage</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../custom_emulators.html">Custom Emulators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../custom_planners.html">Custom Planners</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Complete API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../apidoc/olympus.html">olympus package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Olympus</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>olympus.datasets.dataset</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for olympus.datasets.dataset</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">read_csv</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">olympus</span> <span class="kn">import</span> <span class="n">Logger</span>
+<span class="kn">from</span> <span class="nn">olympus.campaigns</span> <span class="kn">import</span> <span class="n">ParameterSpace</span>
+<span class="kn">from</span> <span class="nn">olympus.objects</span> <span class="kn">import</span> <span class="n">Parameter</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">glob</span> <span class="kn">import</span> <span class="n">glob</span>
+
+
+<span class="c1"># =========================</span>
+<span class="c1"># Main Class of This Module</span>
+<span class="c1"># =========================</span>
+<div class="viewcode-block" id="Dataset"><a class="viewcode-back" href="../../../documentation.html#olympus.datasets.Dataset">[docs]</a><span class="k">class</span> <span class="nc">Dataset</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A ``Dataset`` object stores the data of a dataset by wrapping a ``pandas.DataFrame`` in its ``data`` attribute, provides</span>
+<span class="sd">    additional information on the dataset, and provides convenience methods to access features and targets as well as</span>
+<span class="sd">    to generate training/validation/test splits.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        kind (str): kind of the Olympus dataset to load.</span>
+<span class="sd">        data (array): custom dataset. Same input as for pandas.DataFrame.</span>
+<span class="sd">        columns (list): column names. Same input as for pandas.DataFrame.</span>
+<span class="sd">        target_ids (list): list of column indices, or names if provided, that identify the targets for the predictions.</span>
+<span class="sd">        test_frac (float): fraction of the data to be used as test set.</span>
+<span class="sd">        num_folds (int): number of cross validation folds the training set will be split into.</span>
+<span class="sd">        random_seed (int): random seed for numpy. Setting a seed makes the random splits reproducible.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">kind</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">columns</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">target_ids</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">test_frac</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+        <span class="n">num_folds</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+        <span class="n">random_seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+
+        <span class="n">_validate_dataset_args</span><span class="p">(</span><span class="n">kind</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="n">target_ids</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">kind</span> <span class="o">=</span> <span class="n">kind</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">kind</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">test_frac</span> <span class="o">=</span> <span class="n">test_frac</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_folds</span> <span class="o">=</span> <span class="n">num_folds</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">random_seed</span> <span class="o">=</span> <span class="n">random_seed</span>
+
+        <span class="c1"># we defined the param_space as part of the Dataset object. When we</span>
+        <span class="c1"># load a standard dataset, we define the param_space from the config</span>
+        <span class="c1"># file. If Dataset is a custom dataset, the user will need to set_param_space</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">param_space</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value_space</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># ------------------------------------------</span>
+        <span class="c1"># Case 1: data directly provided by the user</span>
+        <span class="c1"># ------------------------------------------</span>
+        <span class="k">if</span> <span class="n">kind</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_description</span> <span class="o">=</span> <span class="s2">&quot;Custom Dataset&quot;</span>
+            <span class="k">if</span> <span class="n">target_ids</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_targets</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_targets</span> <span class="o">=</span> <span class="n">target_ids</span>
+            <span class="n">_data</span> <span class="o">=</span> <span class="n">data</span>
+
+        <span class="c1"># ------------------------------</span>
+        <span class="c1"># Case 2: Olympus dataset loaded</span>
+        <span class="c1"># ------------------------------</span>
+        <span class="k">elif</span> <span class="n">kind</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">_data</span><span class="p">,</span> <span class="n">_config</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_description</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="n">kind</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_targets</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">_config</span><span class="p">[</span><span class="s2">&quot;measurements&quot;</span><span class="p">]]</span>
+            <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">_config</span><span class="p">[</span><span class="s2">&quot;parameters&quot;</span><span class="p">]]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_targets</span>
+            <span class="c1"># create param_space from config file</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_create_param_space</span><span class="p">(</span><span class="n">_config</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_create_value_space</span><span class="p">(</span><span class="n">_config</span><span class="p">)</span>
+            <span class="c1"># define attributes of interest - done here so to avoid calling load_dataset again</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">constraints</span> <span class="o">=</span> <span class="n">_config</span><span class="p">[</span><span class="s2">&quot;constraints&quot;</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_goal</span> <span class="o">=</span> <span class="n">_config</span><span class="p">[</span><span class="s2">&quot;default_goal&quot;</span><span class="p">]</span>
+
+        <span class="c1"># the numeric data is stored here, wrapping a DataFrame</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">_data</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">)</span>
+
+        <span class="c1"># make sure the targets are the last column(s)</span>
+        <span class="k">for</span> <span class="n">tgt</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_targets</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="n">tgt</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">)[</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_targets</span><span class="p">)</span> <span class="p">:]</span>
+
+        <span class="c1"># create dataset splits</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create_train_validate_test_splits</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">goal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="s2">&quot;_goal&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">:</span>
+            <span class="n">_data</span><span class="p">,</span> <span class="n">_config</span><span class="p">,</span> <span class="n">_description</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">kind</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_goal</span> <span class="o">=</span> <span class="n">_config</span><span class="p">[</span><span class="s2">&quot;default_goal&quot;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_goal</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">measurement_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="s2">&quot;_measurement_name&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">:</span>
+            <span class="n">_data</span><span class="p">,</span> <span class="n">_config</span><span class="p">,</span> <span class="n">_description</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">kind</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_measurement_name</span> <span class="o">=</span> <span class="n">_config</span><span class="p">[</span><span class="s2">&quot;measurements&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_measurement_name</span>
+
+    <span class="k">def</span> <span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">attr</span> <span class="o">==</span> <span class="s2">&quot;__getstate__&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span>
+        <span class="k">elif</span> <span class="n">attr</span> <span class="o">==</span> <span class="s2">&quot;__setstate__&quot;</span><span class="p">:</span>
+
+            <span class="k">def</span> <span class="nf">set_state</span><span class="p">(</span><span class="n">_dict</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span> <span class="o">=</span> <span class="n">_dict</span>
+
+            <span class="k">return</span> <span class="n">set_state</span>
+        <span class="k">elif</span> <span class="n">attr</span> <span class="o">==</span> <span class="s2">&quot;kind&quot;</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">attr</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">:</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">)</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">val</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ATTR&#39;</span><span class="p">,</span> <span class="n">attr</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># TODO: add some more info here...</span>
+        <span class="n">string</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Dataset(kind=</span><span class="si">{self.kind}</span><span class="s2">)&quot;</span>
+        <span class="k">return</span> <span class="n">string</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">shape</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span>
+
+    <span class="c1"># we could also overwrite the DataFrame.info method</span>
+<div class="viewcode-block" id="Dataset.dataset_info"><a class="viewcode-back" href="../../../documentation.html#olympus.datasets.Dataset.dataset_info">[docs]</a>    <span class="k">def</span> <span class="nf">dataset_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Provide summary info about dataset.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">Logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_description</span><span class="p">,</span> <span class="s2">&quot;INFO&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Dataset.set_param_space"><a class="viewcode-back" href="../../../documentation.html#olympus.datasets.Dataset.set_param_space">[docs]</a>    <span class="k">def</span> <span class="nf">set_param_space</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">param_space</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Define the parameter space of the dataset.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            param_space (ParameterSpace): ParameterSpace object with information about all variables in the dataset.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># validate first...</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">param</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">param_space</span><span class="o">.</span><span class="n">parameters</span><span class="p">):</span>
+            <span class="c1"># check names are matching</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">feature_names</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">param</span><span class="o">.</span><span class="n">name</span><span class="p">:</span>
+                <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Parameter name `</span><span class="si">{self.feature_names[i]}</span><span class="s2">` does not match name `</span><span class="si">{param.name}</span><span class="s2">` found in dataset!&quot;</span>
+                <span class="n">Logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="s2">&quot;WARNING&quot;</span><span class="p">)</span>
+            <span class="c1"># check data provided is within param_space bounds</span>
+            <span class="k">if</span> <span class="n">param</span><span class="o">.</span><span class="n">low</span> <span class="o">&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]):</span>
+                <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Lower bound of </span><span class="si">{param.low}</span><span class="s2"> provided for parameter `</span><span class="si">{param.name}</span><span class="s2">` is higher than minimum found in the data!&quot;</span>
+                <span class="n">Logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="s2">&quot;ERROR&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">param</span><span class="o">.</span><span class="n">high</span> <span class="o">&lt;</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]):</span>
+                <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Upper bound of </span><span class="si">{param.high}</span><span class="s2"> provided for parameter `</span><span class="si">{param.name}</span><span class="s2">` is lower than maximum found in the data!&quot;</span>
+                <span class="n">Logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="s2">&quot;ERROR&quot;</span><span class="p">)</span>
+
+        <span class="c1"># ...then assign</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">param_space</span> <span class="o">=</span> <span class="n">param_space</span></div>
+
+<div class="viewcode-block" id="Dataset.infer_param_space"><a class="viewcode-back" href="../../../documentation.html#olympus.datasets.Dataset.infer_param_space">[docs]</a>    <span class="k">def</span> <span class="nf">infer_param_space</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Guess the parameter space from the dataset. The range for all parameters will be define based on the</span>
+<span class="sd">        minimum and maximum values in the dataset for each variable. All variables will be assumed not to be periodic.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">param_space</span> <span class="o">=</span> <span class="n">ParameterSpace</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">feature_names</span><span class="p">:</span>
+            <span class="n">param_dict</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+                <span class="s2">&quot;low&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">name</span><span class="p">]),</span>
+                <span class="s2">&quot;high&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">name</span><span class="p">]),</span>
+            <span class="p">}</span>
+            <span class="n">param</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">()</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">param_dict</span><span class="p">)</span>
+            <span class="n">param_space</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">param</span><span class="p">)</span>
+
+        <span class="c1"># set the param space</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_param_space</span><span class="p">(</span><span class="n">param_space</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Dataset.to_disk"><a class="viewcode-back" href="../../../documentation.html#olympus.datasets.Dataset.to_disk">[docs]</a>    <span class="k">def</span> <span class="nf">to_disk</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">folder</span><span class="o">=</span><span class="s1">&#39;custom_dataset&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Save the dataset to disk in the format expected by Olympus for its own datasets. This can be useful if you</span>
+<span class="sd">        plan to upload the dataset to the community datasets available online.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            folder (str): Folder in which to save the dataset files.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># create the folder</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">folder</span><span class="p">)</span>
+
+        <span class="c1"># save the numeric data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{folder}</span><span class="s1">/data.csv&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="c1"># save the description</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_generate_description</span><span class="p">()</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{folder}</span><span class="s1">/description.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_description</span><span class="p">)</span>
+
+        <span class="c1"># save the config file</span>
+        <span class="n">_config</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">_config</span><span class="p">[</span><span class="s1">&#39;constraints&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="s1">&#39;measurements&#39;</span><span class="p">:</span> <span class="s1">&#39;none&#39;</span><span class="p">}</span>
+
+        <span class="n">_config</span><span class="p">[</span><span class="s1">&#39;parameters&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">param_space</span><span class="o">.</span><span class="n">parameters</span><span class="p">:</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">param</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="n">param</span><span class="o">.</span><span class="n">kind</span><span class="p">,</span> <span class="s1">&#39;lower&#39;</span><span class="p">:</span> <span class="n">param</span><span class="o">.</span><span class="n">low</span><span class="p">,</span> <span class="s1">&#39;upper&#39;</span><span class="p">:</span><span class="n">param</span><span class="o">.</span><span class="n">high</span><span class="p">}</span>
+            <span class="n">_config</span><span class="p">[</span><span class="s1">&#39;parameters&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+
+        <span class="n">_config</span><span class="p">[</span><span class="s1">&#39;measurements&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">target</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_targets</span><span class="p">:</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">target</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">}</span>
+            <span class="n">_config</span><span class="p">[</span><span class="s1">&#39;measurements&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{folder}</span><span class="s1">/config.json&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">_config</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span></div>
+
+    <span class="k">def</span> <span class="nf">_generate_description</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">_description</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">kind</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">_description</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Custom Dataset</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">_description</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{self.kind}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="n">_description</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;=========================================&#39;</span><span class="p">)</span>
+        <span class="n">_description</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;                Summary&#39;</span><span class="p">)</span>
+        <span class="n">_description</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;-----------------------------------------&#39;</span><span class="p">)</span>
+        <span class="n">_description</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;    Number of Samples       </span><span class="si">{self.size:&gt;10}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">_description</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;    Dimensionality          {len(self.feature_names):&gt;10}&#39;</span><span class="p">)</span>
+        <span class="n">_description</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;    Features:&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">param_space</span><span class="o">.</span><span class="n">parameters</span><span class="p">:</span>
+            <span class="n">_description</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;        </span><span class="si">{param.name:&lt;10}</span><span class="s1">          </span><span class="si">{param.kind:&gt;10}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">_description</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;    Targets:&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">target</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_targets</span><span class="p">:</span>
+            <span class="n">_description</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;        </span><span class="si">{target:&lt;10}</span><span class="s1">          continuous&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_description</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_description</span><span class="p">)</span>
+
+    <span class="c1"># ----------------------------------</span>
+    <span class="c1"># Methods about features and targets</span>
+    <span class="c1"># ----------------------------------</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">feature_names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># return names of features</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="n">c</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_targets</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">target_names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># return names of targets</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_targets</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">features</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># return data for features</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="bp">self</span><span class="o">.</span><span class="n">feature_names</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">targets</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># return data for targets</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">target_names</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_names</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">target_names</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_names</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">features_dim</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_names</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">targets_dim</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">target_names</span><span class="p">)</span>
+
+    <span class="c1"># ----------------------------------------------------------------</span>
+    <span class="c1"># Methods for dataset splitting into training/validation/test sets</span>
+    <span class="c1"># ----------------------------------------------------------------</span>
+<div class="viewcode-block" id="Dataset.create_train_validate_test_splits"><a class="viewcode-back" href="../../../documentation.html#olympus.datasets.Dataset.create_train_validate_test_splits">[docs]</a>    <span class="k">def</span> <span class="nf">create_train_validate_test_splits</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">test_frac</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">num_folds</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">test_indices</span><span class="o">=</span><span class="kc">None</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            test_frac (float)</span>
+<span class="sd">            num_folds (int)</span>
+<span class="sd">            test_indices (array)</span>
+<span class="sd">                Array with the indices of the samples to be used as test set.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># update num_folds and test frac</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">test_frac</span> <span class="o">=</span> <span class="n">test_frac</span>
+        <span class="k">if</span> <span class="n">test_indices</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">test_frac</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_indices</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_folds</span> <span class="o">=</span> <span class="n">num_folds</span>
+
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">random_seed</span><span class="p">)</span>  <span class="c1"># set random seed</span>
+        <span class="n">nrows</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">indices</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">nrows</span><span class="p">)</span>
+        <span class="n">n_train_samples</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">nrows</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_frac</span><span class="p">,</span> <span class="n">ndigits</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+
+        <span class="c1"># test set</span>
+        <span class="k">if</span> <span class="n">test_indices</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">test_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span>
+                <span class="n">indices</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n_train_samples</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">test_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">test_indices</span><span class="p">)</span>
+
+        <span class="c1"># training set</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">train_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">setdiff1d</span><span class="p">(</span><span class="n">indices</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_indices</span><span class="p">)</span>
+
+        <span class="c1"># cross-validation sets are subsets of the training set</span>
+        <span class="n">train_indices_shuffled</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">train_indices</span>
+        <span class="p">)</span>  <span class="c1"># random shuffle</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cv_fold_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array_split</span><span class="p">(</span>
+            <span class="n">train_indices_shuffled</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_folds</span>
+        <span class="p">)</span>  <span class="c1"># split in approx equal sized arrays</span>
+        <span class="c1"># define train/valid indices for each fold</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cross_val_indices</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_folds</span><span class="p">):</span>
+            <span class="n">fold_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cv_fold_indices</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span>
+            <span class="p">)</span>
+            <span class="n">fold_valid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cv_fold_indices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cross_val_indices</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">fold_train</span><span class="p">,</span> <span class="n">fold_valid</span><span class="p">])</span></div>
+        <span class="c1"># TODO: unfix random seed?</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">train_set</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># The training set with features+targets</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">train_indices</span><span class="p">,</span> <span class="p">:]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">train_set_features</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># The training set with only the features</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">train_indices</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">feature_names</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">train_set_targets</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># The training set with only the targets</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">train_indices</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_names</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">test_set</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># The test set with features+targets</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">test_indices</span><span class="p">,</span> <span class="p">:]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">test_set_features</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># The test set with only the features</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">test_indices</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">feature_names</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">test_set_targets</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># The test set with only the targets</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">test_indices</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_names</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">cross_val_sets</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># List of cv sets with features+targets</span>
+        <span class="n">cv_sets</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">train_id</span><span class="p">,</span> <span class="n">valid_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cross_val_indices</span><span class="p">:</span>
+            <span class="n">train_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">train_id</span><span class="p">,</span> <span class="p">:]</span>
+            <span class="n">valid_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">valid_id</span><span class="p">,</span> <span class="p">:]</span>
+            <span class="n">cv_sets</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">train_data</span><span class="p">,</span> <span class="n">valid_data</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">cv_sets</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">cross_val_sets_features</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># List of cv sets with only features</span>
+        <span class="n">cv_sets</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">train_id</span><span class="p">,</span> <span class="n">valid_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cross_val_indices</span><span class="p">:</span>
+            <span class="n">train_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">train_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">feature_names</span><span class="p">]</span>
+            <span class="n">valid_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">valid_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">feature_names</span><span class="p">]</span>
+            <span class="n">cv_sets</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">train_data</span><span class="p">,</span> <span class="n">valid_data</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">cv_sets</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">cross_val_sets_targets</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># List of cv sets with only targets</span>
+        <span class="n">cv_sets</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">train_id</span><span class="p">,</span> <span class="n">valid_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cross_val_indices</span><span class="p">:</span>
+            <span class="n">train_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">train_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_names</span><span class="p">]</span>
+            <span class="n">valid_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">valid_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_names</span><span class="p">]</span>
+            <span class="n">cv_sets</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">train_data</span><span class="p">,</span> <span class="n">valid_data</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">cv_sets</span>
+
+<div class="viewcode-block" id="Dataset.get_cv_fold"><a class="viewcode-back" href="../../../documentation.html#olympus.datasets.Dataset.get_cv_fold">[docs]</a>    <span class="k">def</span> <span class="nf">get_cv_fold</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fold</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the data for a specific cross-validation fold.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            fold (int): fold id.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            data (DataFrame): data for the chosen fold.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">indices</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cv_fold_indices</span><span class="p">[</span><span class="n">fold</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">indices</span><span class="p">,</span> <span class="p">:]</span></div>
+
+    <span class="c1"># ---------------</span>
+    <span class="c1"># Private Methods</span>
+    <span class="c1"># ---------------</span>
+    <span class="k">def</span> <span class="nf">_create_param_space</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">param_space</span> <span class="o">=</span> <span class="n">ParameterSpace</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">param_space</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">Parameter</span><span class="p">()</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">feature</span><span class="p">)</span> <span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;parameters&quot;</span><span class="p">]]</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_create_value_space</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value_space</span> <span class="o">=</span> <span class="n">ParameterSpace</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value_space</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">Parameter</span><span class="p">()</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">feature</span><span class="p">)</span> <span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;measurements&quot;</span><span class="p">]]</span>
+        <span class="p">)</span></div>
+
+
+<span class="c1"># ===============</span>
+<span class="c1"># Other Functions</span>
+<span class="c1"># ===============</span>
+<span class="k">def</span> <span class="nf">load_dataset</span><span class="p">(</span><span class="n">kind</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Loads a dataset from the Olympus dataset library.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        kind (str): kind of Olympus dataset to load.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (tuple): tuple containing:</span>
+<span class="sd">            data (array): numpy array where each row is a sample and each column is a feature/target. The columns are</span>
+<span class="sd">            sorted such features come first and then targets.</span>
+<span class="sd">            config (dict): dict containing information on the features and targets present in data.</span>
+<span class="sd">            description (str): string describing the dataset.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_validate_dataset_args</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="n">kind</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">target_names</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="n">datasets_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
+
+    <span class="c1"># load description</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{datasets_path}</span><span class="s2">/dataset_</span><span class="si">{kind}</span><span class="s2">/description.txt&quot;</span><span class="p">))</span> <span class="k">as</span> <span class="n">txtfile</span><span class="p">:</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="n">txtfile</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+    <span class="c1"># load info on features/targets</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{datasets_path}</span><span class="s2">/dataset_</span><span class="si">{kind}</span><span class="s2">/config.json&quot;</span><span class="p">),</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">content</span><span class="p">:</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">content</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+
+    <span class="c1"># load data</span>
+    <span class="n">csv_file</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{datasets_path}</span><span class="s2">/dataset_</span><span class="si">{kind}</span><span class="s2">/data.csv&quot;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">read_csv</span><span class="p">(</span><span class="n">csv_file</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+    <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+        <span class="n">Logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not find data.csv for dataset </span><span class="si">{kind}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;FATAL&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">data</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">description</span>
+
+
+<span class="k">def</span> <span class="nf">_validate_dataset_args</span><span class="p">(</span><span class="n">kind</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="n">target_names</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">kind</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># -----------------------------------</span>
+        <span class="c1"># check that a correct name is passed</span>
+        <span class="c1"># -----------------------------------</span>
+        <span class="c1"># TODO: reduce redundant code by importing the list from where we have it already</span>
+        <span class="n">module_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
+        <span class="n">olympus_datasets</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">dir_name</span> <span class="ow">in</span> <span class="n">glob</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{module_path}</span><span class="s2">/dataset_*&quot;</span><span class="p">):</span>
+            <span class="n">dir_name</span> <span class="o">=</span> <span class="n">dir_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">8</span><span class="p">:]</span>
+            <span class="n">olympus_datasets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dir_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">kind</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">olympus_datasets</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="s2">&quot;Could not find dataset `</span><span class="si">{0}</span><span class="s2">`. Please choose from one of the available &quot;</span>
+                <span class="s2">&quot;datasets: </span><span class="si">{1}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">kind</span><span class="p">,</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">olympus_datasets</span><span class="p">)))</span>
+            <span class="p">)</span>
+            <span class="n">Logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="s2">&quot;FATAL&quot;</span><span class="p">)</span>
+        <span class="c1"># --------------------------------------------------------------</span>
+        <span class="c1"># we will discard these arguments, so check if they are provided</span>
+        <span class="c1"># --------------------------------------------------------------</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="s2">&quot;One of the Olympus datasets has been loaded via the argument `kind`, argument `data` &quot;</span>
+                <span class="s2">&quot;will be discarded&quot;</span>
+            <span class="p">)</span>
+            <span class="n">Logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="s2">&quot;WARNING&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">columns</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="s2">&quot;One of the Olympus datasets has been loaded via the argument `kind`, argument `columns` &quot;</span>
+                <span class="s2">&quot;will be discarded&quot;</span>
+            <span class="p">)</span>
+            <span class="n">Logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="s2">&quot;WARNING&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">target_names</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="s2">&quot;One of the Olympus datasets has been loaded via the argument `kind`, argument &quot;</span>
+                <span class="s2">&quot;`target_names` will be discarded&quot;</span>
+            <span class="p">)</span>
+            <span class="n">Logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="s2">&quot;WARNING&quot;</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Matteo Aldeghi, Riley Hickman and Florian Häse
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  <script>
+    var versions_json_url = ''
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        0+untagged.5.g054f7b4
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

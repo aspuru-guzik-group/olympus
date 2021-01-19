@@ -1,0 +1,325 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>olympus.planners.planner_hyperopt.wrapper_hyperopt &mdash; Olympus 0+untagged.5.g054f7b4 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+        <script type="text/javascript" src="../../../../_static/js/versions.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/msmb.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html">
+          
+
+          
+            
+            <img src="../../../../_static/logo2b.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0+untagged.5.g054f7b4
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../credits.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../support.html">Support</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/notebooks/use_emulators.html">Experiment emulators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/notebooks/simple_benchmark.html">Run a simple benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/notebooks/larger_benchmarks.html">Run a larger benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/notebooks/custom_dataset.html">Custom Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/notebooks/custom_planner.html">Custom Planner</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Core Classes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../classes/planners/index.html">Planners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../classes/datasets/index.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../classes/models/index.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../classes/emulators.html">Emulators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../classes/surfaces/index.html">Surfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../classes/noises/index.html">Noises</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Advanced Usage</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../custom_emulators.html">Custom Emulators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../custom_planners.html">Custom Planners</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Complete API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../apidoc/olympus.html">olympus package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Olympus</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+        
+      <li>olympus.planners.planner_hyperopt.wrapper_hyperopt</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for olympus.planners.planner_hyperopt.wrapper_hyperopt</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+
+<span class="kn">from</span> <span class="nn">hyperopt</span> <span class="kn">import</span> <span class="n">fmin</span><span class="p">,</span> <span class="n">tpe</span><span class="p">,</span> <span class="n">hp</span><span class="p">,</span> <span class="n">Trials</span><span class="p">,</span> <span class="n">STATUS_OK</span><span class="p">,</span> <span class="n">JOB_STATE_DONE</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+
+<span class="kn">from</span> <span class="nn">olympus.planners</span> <span class="kn">import</span> <span class="n">AbstractPlanner</span>
+<span class="kn">from</span> <span class="nn">olympus.objects</span> <span class="kn">import</span> <span class="n">ParameterVector</span>
+
+
+<div class="viewcode-block" id="Hyperopt"><a class="viewcode-back" href="../../../../classes/planners/hyperopt.html#olympus.planners.Hyperopt">[docs]</a><span class="k">class</span> <span class="nc">Hyperopt</span><span class="p">(</span><span class="n">AbstractPlanner</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">goal</span><span class="o">=</span><span class="s1">&#39;minimize&#39;</span><span class="p">,</span> <span class="n">show_progressbar</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Tree of Parzen Estimators (TPE) as implemented in HyperOpt.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            goal (str): The optimization goal, either &#39;minimize&#39; or &#39;maximize&#39;. Default is &#39;minimize&#39;.</span>
+<span class="sd">            show_progressbar (bool): If True, show a progressbar.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">AbstractPlanner</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="nb">locals</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_trials</span>   <span class="o">=</span> <span class="n">Trials</span><span class="p">()</span>  <span class="c1"># these is a Hyperopt object that stores the search history</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_hp_space</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># these are the params in the Hyperopt format</span>
+
+    <span class="k">def</span> <span class="nf">_set_param_space</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">param_space</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_param_space</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">param_space</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">param</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s1">&#39;continuous&#39;</span><span class="p">:</span>
+                <span class="n">param_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">param</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="n">param</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="s1">&#39;domain&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">low</span><span class="p">,</span> <span class="n">param</span><span class="o">.</span><span class="n">high</span><span class="p">)}</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_param_space</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">param_dict</span><span class="p">)</span>
+        <span class="c1"># update hyperopt space accordingly</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_hp_space</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_tell</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">observations</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_params</span> <span class="o">=</span> <span class="n">observations</span><span class="o">.</span><span class="n">get_params</span><span class="p">(</span><span class="n">as_array</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_values</span> <span class="o">=</span> <span class="n">observations</span><span class="o">.</span><span class="n">get_values</span><span class="p">(</span><span class="n">as_array</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">opposite</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">flip_measurements</span><span class="p">)</span>
+        <span class="c1"># update hyperopt Trials accordingly</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_hp_trials</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_set_hp_space</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">space</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># go through all parameters we have defined and convert them to Hyperopt format</span>
+        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_param_space</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">param</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;continuous&#39;</span><span class="p">:</span>
+                <span class="n">space</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">param</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">],</span> <span class="n">hp</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">param</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">],</span> <span class="n">param</span><span class="p">[</span><span class="s1">&#39;domain&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">param</span><span class="p">[</span><span class="s1">&#39;domain&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">])))</span>
+        <span class="c1"># update instance attribute that is the space input for Hyperopt fmin</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_hp_space</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">(</span><span class="n">space</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_set_hp_trials</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_trials</span> <span class="o">=</span> <span class="n">Trials</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_params</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_params</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">tid</span><span class="p">,</span> <span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="n">loss</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_params</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_values</span><span class="p">)):</span>
+                <span class="n">idxs</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="p">[</span><span class="n">tid</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">param</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+                <span class="n">vals</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">param</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+                <span class="n">hyperopt_trial</span> <span class="o">=</span> <span class="n">Trials</span><span class="p">()</span><span class="o">.</span><span class="n">new_trial_docs</span><span class="p">(</span>
+                                        <span class="n">tids</span><span class="o">=</span><span class="p">[</span><span class="n">tid</span><span class="p">],</span>
+                                        <span class="n">specs</span><span class="o">=</span><span class="p">[</span><span class="kc">None</span><span class="p">],</span>
+                                        <span class="n">results</span><span class="o">=</span><span class="p">[{</span><span class="s1">&#39;loss&#39;</span><span class="p">:</span> <span class="n">loss</span><span class="p">,</span> <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="n">STATUS_OK</span><span class="p">}],</span>
+                                        <span class="n">miscs</span><span class="o">=</span><span class="p">[{</span><span class="s1">&#39;tid&#39;</span><span class="p">:</span> <span class="n">tid</span><span class="p">,</span>
+                                                <span class="s1">&#39;cmd&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;domain_attachment&#39;</span><span class="p">,</span> <span class="s1">&#39;FMinIter_Domain&#39;</span><span class="p">),</span>
+                                                <span class="s1">&#39;idxs&#39;</span><span class="p">:</span> <span class="n">idxs</span><span class="p">,</span>
+                                                <span class="s1">&#39;vals&#39;</span><span class="p">:</span> <span class="n">vals</span><span class="p">,</span>
+                                                <span class="s1">&#39;workdir&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">}]</span>
+                                        <span class="p">)</span>
+                <span class="n">hyperopt_trial</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;state&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">JOB_STATE_DONE</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_trials</span><span class="o">.</span><span class="n">insert_trial_docs</span><span class="p">(</span><span class="n">hyperopt_trial</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_trials</span><span class="o">.</span><span class="n">refresh</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_ask</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># NOTE: we pass a dummy function as we just ask for the new (+1) set of parameters</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">fmin</span><span class="p">(</span><span class="n">fn</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">space</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_hp_space</span><span class="p">,</span> <span class="n">algo</span><span class="o">=</span><span class="n">tpe</span><span class="o">.</span><span class="n">suggest</span><span class="p">,</span> <span class="n">max_evals</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_generated</span><span class="p">,</span>
+                 <span class="n">trials</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_trials</span><span class="p">,</span> <span class="n">show_progressbar</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">show_progressbar</span><span class="p">)</span>
+
+        <span class="c1"># make sure the number of parameters asked matches the number of Hyperopt iterations/trials</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_trials</span><span class="o">.</span><span class="n">trials</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_generated</span>
+        <span class="c1"># get params from last dict in trials.trials</span>
+        <span class="n">proposed_params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_trials</span><span class="o">.</span><span class="n">trials</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;misc&#39;</span><span class="p">][</span><span class="s1">&#39;vals&#39;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">proposed_params</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">proposed_params</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># this is just to make value not a list</span>
+
+        <span class="k">return</span> <span class="n">ParameterVector</span><span class="p">(</span><span class="nb">dict</span><span class="o">=</span><span class="n">proposed_params</span><span class="p">,</span> <span class="n">param_space</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">param_space</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Matteo Aldeghi, Riley Hickman and Florian Häse
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  <script>
+    var versions_json_url = ''
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        0+untagged.5.g054f7b4
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

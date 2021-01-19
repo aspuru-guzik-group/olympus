@@ -1,0 +1,426 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Simplex &mdash; Olympus 0+untagged.5.g054f7b4 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+        <script type="text/javascript" src="../../_static/js/versions.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/msmb.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="SNOBFIT" href="snobfit.html" />
+    <link rel="prev" title="Random Search" href="random_search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/logo2b.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0+untagged.5.g054f7b4
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../credits.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../support.html">Support</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/notebooks/use_emulators.html">Experiment emulators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/notebooks/simple_benchmark.html">Run a simple benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/notebooks/larger_benchmarks.html">Run a larger benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/notebooks/custom_dataset.html">Custom Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/notebooks/custom_planner.html">Custom Planner</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Core Classes</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Planners</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#bayesian-algorithms">Bayesian Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#evolutionary-algorithms">Evolutionary Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#gradient-methods">Gradient Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#grid-like-searches">Grid-Like Searches</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#others">Others</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Simplex</a></li>
+<li class="toctree-l3"><a class="reference internal" href="snobfit.html">SNOBFIT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="basin_hopping.html">Basin Hopping</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#planner-function">Planner Function</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../datasets/index.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models/index.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../emulators.html">Emulators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../surfaces/index.html">Surfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../noises/index.html">Noises</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Advanced Usage</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../custom_emulators.html">Custom Emulators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../custom_planners.html">Custom Planners</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Complete API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../apidoc/olympus.html">olympus package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Olympus</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Planners</a> &raquo;</li>
+        
+      <li>Simplex</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/classes/planners/simplex.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="simplex">
+<span id="planner-simplex"></span><h1>Simplex<a class="headerlink" href="#simplex" title="Permalink to this headline">¶</a></h1>
+<p>GPyOpt does this and that…</p>
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="sig-prename descclassname">olympus.planners.</code><code class="sig-name descname">Simplex</code><span class="sig-paren">(</span><em class="sig-param">goal='minimize'</em>, <em class="sig-param">disp=False</em>, <em class="sig-param">maxiter=None</em>, <em class="sig-param">maxfev=None</em>, <em class="sig-param">initial_simplex=None</em>, <em class="sig-param">xatol=0.0001</em>, <em class="sig-param">fatol=0.0001</em>, <em class="sig-param">adaptive=False</em>, <em class="sig-param">init_guess=None</em>, <em class="sig-param">init_guess_method='random'</em>, <em class="sig-param">init_guess_seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/olympus/planners/planner_simplex/wrapper_simplex.html#Simplex"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Nelder-Mead simplex algorithm. Implementation from SciPy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>goal</strong> (<em>str</em>) – The optimization goal, either ‘minimize’ or ‘maximize’. Default is ‘minimize’.</p></li>
+<li><p><strong>disp</strong> (<em>bool</em>) – Set to True to print convergence messages.</p></li>
+<li><p><strong>maxiter</strong> (<em>int</em>) – Maximum allowed number of iterations. Will default
+to N*200, where N is the number of variables, if neither maxiter
+or maxfev is set. If both maxiter and maxfev are set,
+minimization will stop at the first reached.</p></li>
+<li><p><strong>maxfev</strong> (<em>int</em>) – Maximum allowed number of function evaluations. Will
+default to N*200, where N is the number of variables, if neither
+maxiter or maxfev is set. If both maxiter and maxfev are set,
+minimization will stop at the first reached.</p></li>
+<li><p><strong>initial_simplex</strong> (<em>array_like of shape</em><em> (</em><em>N + 1</em><em>, </em><em>N</em><em>)</em>) – Initial simplex.
+If given, overrides x0. initial_simplex[j,:] should contain the
+coordinates of the j-th vertex of the N+1 vertices in the
+simplex, where N is the dimension.</p></li>
+<li><p><strong>xatol</strong> (<em>float</em><em>, </em><em>optional</em>) – Absolute error in xopt between iterations
+that is acceptable for convergence.</p></li>
+<li><p><strong>fatol</strong> (<em>number</em><em>, </em><em>optional</em>) – Absolute error in func(xopt) between
+iterations that is acceptable for convergence.</p></li>
+<li><p><strong>adaptive</strong> (<em>bool</em><em>, </em><em>optional</em>) – Adapt algorithm parameters to
+dimensionality of problem. Useful for high-dimensional
+minimization.</p></li>
+<li><p><strong>init_guess</strong> (<em>array</em><em>, </em><em>optional</em>) – initial guess for the optimization</p></li>
+<li><p><strong>init_guess_method</strong> (<em>str</em>) – method to construct initial guesses if init_guess is not provided.
+Choose from: random</p></li>
+<li><p><strong>init_guess_seed</strong> (<em>str</em>) – random seed for init_guess_method</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tell</span></code>([observations])</p></td>
+<td><p>Provide the planner with all previous observations.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ask</span></code>([return_as])</p></td>
+<td><p>suggest new set of parameters</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">recommend</span></code>([observations, return_as])</p></td>
+<td><p>Consecutively executes tell and ask: tell the planner about all previous observations, and ask about the next query point.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">optimize</span></code>(emulator[, num_iter, verbose])</p></td>
+<td><p>Optimizes a surface for a fixed number of iterations.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_param_space</span></code>(param_space)</p></td>
+<td><p>Defines the parameter space over which the planner will search.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt>
+<code class="sig-name descname">ask</code><span class="sig-paren">(</span><em class="sig-param">return_as=None</em><span class="sig-paren">)</span></dt>
+<dd><p>suggest new set of parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>return_as</strong> (<em>string</em>) – choose data type for returned parameters
+allowed options (dict, array)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>newly generated parameters</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ParameterVector</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="sig-name descname">optimize</code><span class="sig-paren">(</span><em class="sig-param">emulator</em>, <em class="sig-param">num_iter=1</em>, <em class="sig-param">verbose=False</em><span class="sig-paren">)</span></dt>
+<dd><p>Optimizes a surface for a fixed number of iterations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>emulator</strong> (<em>object</em>) – Emulator or a Surface instance to optimize over.</p></li>
+<li><p><strong>num_iter</strong> (<em>int</em>) – Maximum number of iterations allowed.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – Whether to print information to screen.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Campaign object with information about the optimization, including all parameters</dt><dd><p>tested and measurements obtained.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>campaign (Campaign)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="sig-name descname">recommend</code><span class="sig-paren">(</span><em class="sig-param">observations=None</em>, <em class="sig-param">return_as=None</em><span class="sig-paren">)</span></dt>
+<dd><p>Consecutively executes tell and ask: tell the planner about all previous observations, and ask about the
+next query point.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>observations</strong> (<em>list of ???</em>) – </p></li>
+<li><p><strong>return_as</strong> (<em>string</em>) – choose data type for returned parameters
+allowed options (dict, array)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>newly generated parameters</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="sig-name descname">set_param_space</code><span class="sig-paren">(</span><em class="sig-param">param_space</em><span class="sig-paren">)</span></dt>
+<dd><p>Defines the parameter space over which the planner will search.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>param_space</strong> (<em>ParameterSpace</em>) – a ParameterSpace object defining the space over which to search.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="sig-name descname">tell</code><span class="sig-paren">(</span><em class="sig-param">observations=&lt;olympus.campaigns.observations.Observations object&gt;</em><span class="sig-paren">)</span></dt>
+<dd><p>Provide the planner with all previous observations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>observations</strong> (<em>Observations</em>) – an Observation object containing all previous observations. This defines the
+history of the campaign seen by the planner. The default is None, i.e. there are no previous
+observations.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="snobfit.html" class="btn btn-neutral float-right" title="SNOBFIT" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="random_search.html" class="btn btn-neutral float-left" title="Random Search" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Matteo Aldeghi, Riley Hickman and Florian Häse
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  <script>
+    var versions_json_url = ''
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        0+untagged.5.g054f7b4
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

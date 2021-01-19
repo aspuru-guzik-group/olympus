@@ -1,0 +1,335 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>olympus.planners.planner &mdash; Olympus 0+untagged.5.g054f7b4 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+        <script type="text/javascript" src="../../../_static/js/versions.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/msmb.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html">
+          
+
+          
+            
+            <img src="../../../_static/logo2b.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0+untagged.5.g054f7b4
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../credits.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../support.html">Support</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/notebooks/use_emulators.html">Experiment emulators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/notebooks/simple_benchmark.html">Run a simple benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/notebooks/larger_benchmarks.html">Run a larger benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/notebooks/custom_dataset.html">Custom Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/notebooks/custom_planner.html">Custom Planner</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Core Classes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../classes/planners/index.html">Planners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../classes/datasets/index.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../classes/models/index.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../classes/emulators.html">Emulators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../classes/surfaces/index.html">Surfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../classes/noises/index.html">Noises</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Advanced Usage</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../custom_emulators.html">Custom Emulators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../custom_planners.html">Custom Planners</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Complete API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../apidoc/olympus.html">olympus package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Olympus</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>olympus.planners.planner</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for olympus.planners.planner</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+
+<span class="kn">from</span> <span class="nn">olympus</span> <span class="kn">import</span> <span class="n">Logger</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">get_planners_list</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">import_planner</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">AbstractPlanner</span>
+
+
+<span class="c1"># NOTE: This goes against the python convention of having function names being</span>
+<span class="c1"># lowercase, but I thought Planner still works in this case as it effectively</span>
+<span class="c1"># returns a class instance</span>
+<span class="c1"># A function seems to me the easiest way to do this right now, but another</span>
+<span class="c1"># option would be to have a class and fiddle with __new__ an return an instance</span>
+<span class="c1"># of a different class. I would stick with the simplest option that achieve</span>
+<span class="c1"># what we need though, unless we already foresee possible expansions that need a</span>
+<span class="c1"># more complex object</span>
+<div class="viewcode-block" id="Planner"><a class="viewcode-back" href="../../../classes/planners/index.html#olympus.planners.Planner">[docs]</a><span class="k">def</span> <span class="nf">Planner</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;ConjugateGradient&quot;</span><span class="p">,</span> <span class="n">goal</span><span class="o">=</span><span class="s2">&quot;minimize&quot;</span><span class="p">,</span> <span class="n">param_space</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Convenience function to access planners via a slightly higher level interface It returns a certain planner</span>
+<span class="sd">    with defaults arguments by keyword.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        kind (str or AbstractPlanner): Keyword identifying one of the algorithms available in Olympus. Alternatively,</span>
+<span class="sd">            you can pass a custom algorithm that is a subclass of AbstractPlanner.</span>
+<span class="sd">        goal (bool): The optimization goal, either &#39;minimize&#39; or &#39;maximize&#39;. Default is &#39;minimize&#39;.</span>
+<span class="sd">        param_space (ParamSpace): A ParameterSpace object defining the space over which to search.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Planner: An instance of the chosen planning algorithm.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_validate_planner_kind</span><span class="p">(</span><span class="n">kind</span><span class="p">)</span>
+    <span class="c1"># if a string is passed, then load the corresponding wrapper</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">kind</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">PlannerLoader</span>
+
+        <span class="n">kind</span> <span class="o">=</span> <span class="n">PlannerLoader</span><span class="o">.</span><span class="n">file_to_class</span><span class="p">(</span><span class="n">kind</span><span class="p">)</span>
+        <span class="n">planner</span> <span class="o">=</span> <span class="n">import_planner</span><span class="p">(</span><span class="n">kind</span><span class="p">)</span>
+        <span class="n">planner</span> <span class="o">=</span> <span class="n">planner</span><span class="p">(</span><span class="n">goal</span><span class="o">=</span><span class="n">goal</span><span class="p">)</span>
+    <span class="c1"># if an instance of a planner is passed, simply return the same instance</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">kind</span><span class="p">,</span> <span class="n">AbstractPlanner</span><span class="p">):</span>
+        <span class="n">planner</span> <span class="o">=</span> <span class="n">kind</span>
+    <span class="c1"># if a custom class is passed, then that is the &#39;wrapper&#39;</span>
+    <span class="k">elif</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">kind</span><span class="p">,</span> <span class="n">AbstractPlanner</span><span class="p">):</span>
+        <span class="n">planner</span> <span class="o">=</span> <span class="n">kind</span><span class="p">()</span>
+
+    <span class="c1"># load param_space already if provided, otherwise it will have to be set by self.set_param_space</span>
+    <span class="k">if</span> <span class="n">param_space</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">planner</span><span class="o">.</span><span class="n">set_param_space</span><span class="p">(</span><span class="n">param_space</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">planner</span></div>
+
+
+<span class="k">def</span> <span class="nf">_validate_planner_kind</span><span class="p">(</span><span class="n">kind</span><span class="p">):</span>
+    <span class="c1"># if we received a string</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">kind</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">PlannerLoader</span>
+
+        <span class="n">kind</span> <span class="o">=</span> <span class="n">PlannerLoader</span><span class="o">.</span><span class="n">file_to_class</span><span class="p">(</span><span class="n">kind</span><span class="p">)</span>
+        <span class="n">avail_planners</span> <span class="o">=</span> <span class="n">get_planners_list</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">kind</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">avail_planners</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="s1">&#39;Planner &quot;</span><span class="si">{0}</span><span class="s1">&quot; not available in Olympus. Please choose &#39;</span>
+                <span class="s2">&quot;from one of the available planners: </span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">kind</span><span class="p">,</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">avail_planners</span><span class="p">)</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+            <span class="n">Logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="s2">&quot;FATAL&quot;</span><span class="p">)</span>
+
+    <span class="c1"># if we get an instance of a planner class</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">kind</span><span class="p">,</span> <span class="n">AbstractPlanner</span><span class="p">):</span>
+        <span class="c1"># make sure it has the necessary methods</span>
+        <span class="k">for</span> <span class="n">method</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;_set_param_space&quot;</span><span class="p">,</span> <span class="s2">&quot;_tell&quot;</span><span class="p">,</span> <span class="s2">&quot;_ask&quot;</span><span class="p">]:</span>
+            <span class="n">implementation</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">kind</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">callable</span><span class="p">(</span><span class="n">implementation</span><span class="p">):</span>
+                <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;The object </span><span class="si">{kind}</span><span class="s1"> does not implement the necessary method &quot;</span><span class="si">{method}</span><span class="s1">&quot;&#39;</span>
+                <span class="n">Logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="s2">&quot;FATAL&quot;</span><span class="p">)</span>
+
+    <span class="c1"># if we received a custom planner class</span>
+    <span class="k">elif</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">kind</span><span class="p">,</span> <span class="n">AbstractPlanner</span><span class="p">):</span>
+        <span class="c1"># make sure it has the necessary methods</span>
+        <span class="k">for</span> <span class="n">method</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;_set_param_space&quot;</span><span class="p">,</span> <span class="s2">&quot;_tell&quot;</span><span class="p">,</span> <span class="s2">&quot;_ask&quot;</span><span class="p">]:</span>
+            <span class="n">implementation</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">kind</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">callable</span><span class="p">(</span><span class="n">implementation</span><span class="p">):</span>
+                <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;The object </span><span class="si">{kind}</span><span class="s1"> does not implement the necessary method &quot;</span><span class="si">{method}</span><span class="s1">&quot;&#39;</span>
+                <span class="n">Logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="s2">&quot;FATAL&quot;</span><span class="p">)</span>
+
+    <span class="c1"># if we do not know what was passed raise an error</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;Could not initialize Planner: the argument &quot;kind&quot; is neither a string or AbstractPlanner subclass&#39;</span>
+        <span class="n">Logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="s2">&quot;FATAL&quot;</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Matteo Aldeghi, Riley Hickman and Florian Häse
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  <script>
+    var versions_json_url = ''
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        0+untagged.5.g054f7b4
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

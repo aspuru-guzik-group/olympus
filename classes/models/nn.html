@@ -1,0 +1,347 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Neural Network &mdash; Olympus 0+untagged.5.g054f7b4 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+        <script type="text/javascript" src="../../_static/js/versions.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/msmb.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Emulators" href="../emulators.html" />
+    <link rel="prev" title="Bayesian Neural Network" href="bnn.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/logo2b.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0+untagged.5.g054f7b4
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../credits.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../support.html">Support</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/notebooks/use_emulators.html">Experiment emulators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/notebooks/simple_benchmark.html">Run a simple benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/notebooks/larger_benchmarks.html">Run a larger benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/notebooks/custom_dataset.html">Custom Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/notebooks/custom_planner.html">Custom Planner</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Core Classes</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../planners/index.html">Planners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datasets/index.html">Datasets</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Models</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="bnn.html">Bayesian Neural Network</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Neural Network</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../emulators.html">Emulators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../surfaces/index.html">Surfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../noises/index.html">Noises</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Advanced Usage</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../custom_emulators.html">Custom Emulators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../custom_planners.html">Custom Planners</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Complete API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../apidoc/olympus.html">olympus package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Olympus</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Models</a> &raquo;</li>
+        
+      <li>Neural Network</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/classes/models/nn.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="neural-network">
+<span id="model-nn"></span><h1>Neural Network<a class="headerlink" href="#neural-network" title="Permalink to this headline">¶</a></h1>
+<p>This model is … by default we use this many layer/nodes etc etc. In the context of Olympus it has the
+advantage/disadvantage of …</p>
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="sig-prename descclassname">olympus.models.</code><code class="sig-name descname">NeuralNet</code><span class="sig-paren">(</span><em class="sig-param">scope='model'</em>, <em class="sig-param">hidden_depth=3</em>, <em class="sig-param">hidden_nodes=48</em>, <em class="sig-param">hidden_act='leaky_relu'</em>, <em class="sig-param">out_act='linear'</em>, <em class="sig-param">l2_activity=0.001</em>, <em class="sig-param">gaussian_dropout=0.0</em>, <em class="sig-param">dropout=0.1</em>, <em class="sig-param">learning_rate=0.001</em>, <em class="sig-param">pred_int=100</em>, <em class="sig-param">reg=0.001</em>, <em class="sig-param">es_patience=100</em>, <em class="sig-param">max_epochs=100000</em>, <em class="sig-param">batch_size=20</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/olympus/models/model_neural_net/wrapper_neural_net.html#NeuralNet"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Neural network model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>scope</strong> (<em>str</em>) – TensorFlow scope.</p></li>
+<li><p><strong>hidden_depth</strong> (<em>int</em>) – Number of hidden layers.</p></li>
+<li><p><strong>hidden_nodes</strong> (<em>int</em>) – Number of hidden nodes per layer.</p></li>
+<li><p><strong>hidden_act</strong> (<em>str</em>) – Hidden activation function. Available options are ‘linear’, ‘leaky_relu’, ‘relu’,
+‘softmax’, ‘softplus’, ‘softsign’, ‘sigmoid’.</p></li>
+<li><p><strong>out_act</strong> (<em>str</em>) – Output activation function. Available options are ‘linear’, ‘leaky_relu’, ‘relu’,
+‘softmax’, ‘softplus’, ‘softsign’, ‘sigmoid’.</p></li>
+<li><p><strong>l2_activity</strong> (<em>float</em>) – L2 regularization.</p></li>
+<li><p><strong>learning_rate</strong> (<em>float</em>) – Learning rate.</p></li>
+<li><p><strong>pred_int</strong> (<em>int</em>) – Frequency with which we make predictions on the validation/training set (in number of epochs).</p></li>
+<li><p><strong>reg</strong> (<em>float</em>) – <p>???</p>
+</p></li>
+<li><p><strong>es_patience</strong> (<em>int</em>) – Early stopping patience.</p></li>
+<li><p><strong>max_epochs</strong> (<em>int</em>) – Maximum number of epochs allowed.</p></li>
+<li><p><strong>batch_size</strong> (<em>int</em>) – Size batches used for training.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">train</span></code>(train_features, train_targets, …[, plot])</p></td>
+<td><p><dl class="field-list simple">
+<dt class="field-odd">param train_features</dt>
+<dd class="field-odd"><p>features of the training set.</p>
+</dd>
+</dl>
+</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict</span></code>(features[, num_samples])</p></td>
+<td><p>Method that returns a prediction.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt>
+<code class="sig-name descname">predict</code><span class="sig-paren">(</span><em class="sig-param">features</em>, <em class="sig-param">num_samples=1</em><span class="sig-paren">)</span></dt>
+<dd><p>Method that returns a prediction. We expect some standard output from this method.</p>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="sig-name descname">train</code><span class="sig-paren">(</span><em class="sig-param">train_features</em>, <em class="sig-param">train_targets</em>, <em class="sig-param">valid_features</em>, <em class="sig-param">valid_targets</em>, <em class="sig-param">model_path</em>, <em class="sig-param">plot=False</em><span class="sig-paren">)</span></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>train_features</strong> – features of the training set.</p></li>
+<li><p><strong>train_targets</strong> – targets of the training set.</p></li>
+<li><p><strong>valid_features</strong> – features of the validation/test set, used for early stopping.</p></li>
+<li><p><strong>valid_targets</strong> – targets of the validation/test set, used for early stopping.</p></li>
+<li><p><strong>model_path</strong> (<em>str</em>) – where the TensorFlow checkpoints will be written.</p></li>
+<li><p><strong>plot</strong> (<em>bool</em>) – whether to show scatter plots of the training progression.</p></li>
+<li><p><strong>feature_transformer</strong> – </p></li>
+<li><p><strong>target_transformer</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>best r2 score on training set
+max_valid_r2: best r2 score on validation set</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>max_train_r2</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../emulators.html" class="btn btn-neutral float-right" title="Emulators" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="bnn.html" class="btn btn-neutral float-left" title="Bayesian Neural Network" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Matteo Aldeghi, Riley Hickman and Florian Häse
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  <script>
+    var versions_json_url = ''
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        0+untagged.5.g054f7b4
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

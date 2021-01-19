@@ -1,0 +1,493 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Datasets &mdash; Olympus 0+untagged.5.g054f7b4 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+        <script type="text/javascript" src="../../_static/js/versions.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/msmb.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Alkoxylation" href="alkox.html" />
+    <link rel="prev" title="Basin Hopping" href="../planners/basin_hopping.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/logo2b.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0+untagged.5.g054f7b4
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../credits.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../support.html">Support</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/notebooks/use_emulators.html">Experiment emulators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/notebooks/simple_benchmark.html">Run a simple benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/notebooks/larger_benchmarks.html">Run a larger benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/notebooks/custom_dataset.html">Custom Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/notebooks/custom_planner.html">Custom Planner</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Core Classes</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../planners/index.html">Planners</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Datasets</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="alkox.html">Alkoxylation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="colors_bob.html">Colors Bob</a></li>
+<li class="toctree-l2"><a class="reference internal" href="colors_n9.html">Colors N9</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fullerenes.html">Buckminsterfullerene adducts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hplc.html">HPLC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="benzylation.html">N-benzylation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="photo_pce10.html">Photobleaching PCE10</a></li>
+<li class="toctree-l2"><a class="reference internal" href="photo_wf3.html">Photobleaching WF3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="snar.html">SnAr reaction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="suzuki.html">Suzuki reaction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dataset-class">Dataset Class</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../models/index.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../emulators.html">Emulators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../surfaces/index.html">Surfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../noises/index.html">Noises</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Advanced Usage</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../custom_emulators.html">Custom Emulators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../custom_planners.html">Custom Planners</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Complete API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../apidoc/olympus.html">olympus package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Olympus</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Datasets</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/classes/datasets/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="datasets">
+<span id="id1"></span><h1>Datasets<a class="headerlink" href="#datasets" title="Permalink to this headline">¶</a></h1>
+<p><strong>Olympus</strong> provides various datasets form across the natural sciences that form the basis of realistic and challenging
+benchmarks for optimization algorithms. <a class="reference internal" href="../models/index.html#models"><span class="std std-ref">Models</span></a> trained on these datasets provide <a class="reference internal" href="../emulators.html#emulators"><span class="std std-ref">Emulators</span></a> that are used
+to simulate an experimental campaign.</p>
+<p>While you can load pre-trained <a class="reference internal" href="../emulators.html#emulators"><span class="std std-ref">Emulators</span></a> based on these datasets, you can load these datasets with <code class="docutils literal notranslate"><span class="pre">Dataset</span></code>
+class:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">olympus.datasets</span> <span class="kn">import</span> <span class="n">Dataset</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;snar&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The datasets currently available are the following:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="alkox.html">Alkoxylation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="colors_bob.html">Colors Bob</a></li>
+<li class="toctree-l1"><a class="reference internal" href="colors_n9.html">Colors N9</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fullerenes.html">Buckminsterfullerene adducts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hplc.html">HPLC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="benzylation.html">N-benzylation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="photo_pce10.html">Photobleaching PCE10</a></li>
+<li class="toctree-l1"><a class="reference internal" href="photo_wf3.html">Photobleaching WF3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="snar.html">SnAr reaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="suzuki.html">Suzuki reaction</a></li>
+</ul>
+</div>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 7%" />
+<col style="width: 39%" />
+<col style="width: 20%" />
+<col style="width: 25%" />
+<col style="width: 9%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>No.</p></th>
+<th class="head"><p>Dataset</p></th>
+<th class="head"><p>Kind Keyword</p></th>
+<th class="head"><p>Objective</p></th>
+<th class="head"><p>Goal</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p><a class="reference internal" href="alkox.html#dataset-alkox"><span class="std std-ref">Alkoxylation</span></a></p></td>
+<td><p>alkox</p></td>
+<td><p>reaction rate</p></td>
+<td><p>Max</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p><a class="reference internal" href="colors_bob.html#dataset-colors-bob"><span class="std std-ref">Colors Bob</span></a></p></td>
+<td><p>colors_bob</p></td>
+<td><p>green-ness</p></td>
+<td><p>Min</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p><a class="reference internal" href="colors_n9.html#dataset-colors-n9"><span class="std std-ref">Colors N9</span></a></p></td>
+<td><p>colors_n9</p></td>
+<td><p>green-ness</p></td>
+<td><p>Min</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p><a class="reference internal" href="fullerenes.html#dataset-fullerenes"><span class="std std-ref">Buckminsterfullerene adducts</span></a></p></td>
+<td><p>fullerenes</p></td>
+<td><p>yield of X1+X2</p></td>
+<td><p>Max</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p><a class="reference internal" href="hplc.html#dataset-hplc"><span class="std std-ref">HPLC</span></a></p></td>
+<td><p>hplc</p></td>
+<td><p>peak area</p></td>
+<td><p>Max</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p><a class="reference internal" href="photo_pce10.html#dataset-photo-pce10"><span class="std std-ref">Photobleaching PCE10</span></a></p></td>
+<td><p>photo_pce10</p></td>
+<td><p>stability</p></td>
+<td><p>Min</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p><a class="reference internal" href="photo_wf3.html#dataset-photo-wf3"><span class="std std-ref">Photobleaching WF3</span></a></p></td>
+<td><p>photo_wf3</p></td>
+<td><p>stability</p></td>
+<td><p>Min</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p><a class="reference internal" href="snar.html#dataset-snar"><span class="std std-ref">SnAr reaction</span></a></p></td>
+<td><p>snar</p></td>
+<td><p>e_factor</p></td>
+<td><p>Min</p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p><a class="reference internal" href="benzylation.html#dataset-benzylation"><span class="std std-ref">N-benzylation</span></a></p></td>
+<td><p>benzylation</p></td>
+<td><p>e_factor</p></td>
+<td><p>Min</p></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p><a class="reference internal" href="suzuki.html#dataset-suzuki"><span class="std std-ref">Suzuki reaction</span></a></p></td>
+<td><p>suzuki</p></td>
+<td><p>yield</p></td>
+<td><p>Max</p></td>
+</tr>
+</tbody>
+</table>
+<p>In addition to the <strong>Olympus</strong> datasets, you can load your own custom ones:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">olympus.datasets</span> <span class="kn">import</span> <span class="n">Dataset</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">mydata</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">from_csv</span><span class="p">(</span><span class="s1">&#39;mydata.csv&#39;</span><span class="p">)</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">mydata</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="dataset-class">
+<h2>Dataset Class<a class="headerlink" href="#dataset-class" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="sig-prename descclassname">olympus.datasets.</code><code class="sig-name descname">Dataset</code><span class="sig-paren">(</span><em class="sig-param">kind=None</em>, <em class="sig-param">data=None</em>, <em class="sig-param">columns=None</em>, <em class="sig-param">target_ids=None</em>, <em class="sig-param">test_frac=0.2</em>, <em class="sig-param">num_folds=5</em>, <em class="sig-param">random_seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/olympus/datasets/dataset.html#Dataset"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>A <code class="docutils literal notranslate"><span class="pre">Dataset</span></code> object stores the data of a dataset by wrapping a <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code> in its <code class="docutils literal notranslate"><span class="pre">data</span></code> attribute, provides
+additional information on the dataset, and provides convenience methods to access features and targets as well as
+to generate training/validation/test splits.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kind</strong> (<em>str</em>) – kind of the Olympus dataset to load.</p></li>
+<li><p><strong>data</strong> (<em>array</em>) – custom dataset. Same input as for pandas.DataFrame.</p></li>
+<li><p><strong>columns</strong> (<em>list</em>) – column names. Same input as for pandas.DataFrame.</p></li>
+<li><p><strong>target_ids</strong> (<em>list</em>) – list of column indices, or names if provided, that identify the targets for the predictions.</p></li>
+<li><p><strong>test_frac</strong> (<em>float</em>) – fraction of the data to be used as test set.</p></li>
+<li><p><strong>num_folds</strong> (<em>int</em>) – number of cross validation folds the training set will be split into.</p></li>
+<li><p><strong>random_seed</strong> (<em>int</em>) – random seed for numpy. Setting a seed makes the random splits reproducible.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../documentation.html#olympus.datasets.Dataset.dataset_info" title="olympus.datasets.Dataset.dataset_info"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dataset_info</span></code></a>()</p></td>
+<td><p>Provide summary info about dataset.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../documentation.html#olympus.datasets.Dataset.set_param_space" title="olympus.datasets.Dataset.set_param_space"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_param_space</span></code></a>(param_space)</p></td>
+<td><p>Define the parameter space of the dataset.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../documentation.html#olympus.datasets.Dataset.get_cv_fold" title="olympus.datasets.Dataset.get_cv_fold"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_cv_fold</span></code></a>(fold)</p></td>
+<td><p>Get the data for a specific cross-validation fold.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt>
+<code class="sig-name descname">create_train_validate_test_splits</code><span class="sig-paren">(</span><em class="sig-param">test_frac=0.2</em>, <em class="sig-param">num_folds=5</em>, <em class="sig-param">test_indices=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/olympus/datasets/dataset.html#Dataset.create_train_validate_test_splits"><span class="viewcode-link">[source]</span></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>test_frac</strong> (<em>float</em>) – </p></li>
+<li><p><strong>num_folds</strong> (<em>int</em>) – </p></li>
+<li><p><strong>test_indices</strong> (<em>array</em>) – Array with the indices of the samples to be used as test set.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="sig-name descname">dataset_info</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/olympus/datasets/dataset.html#Dataset.dataset_info"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Provide summary info about dataset.</p>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="sig-name descname">get_cv_fold</code><span class="sig-paren">(</span><em class="sig-param">fold</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/olympus/datasets/dataset.html#Dataset.get_cv_fold"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Get the data for a specific cross-validation fold.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fold</strong> (<em>int</em>) – fold id.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>data for the chosen fold.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>data (DataFrame)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="sig-name descname">infer_param_space</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/olympus/datasets/dataset.html#Dataset.infer_param_space"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Guess the parameter space from the dataset. The range for all parameters will be define based on the
+minimum and maximum values in the dataset for each variable. All variables will be assumed not to be periodic.</p>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="sig-name descname">set_param_space</code><span class="sig-paren">(</span><em class="sig-param">param_space</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/olympus/datasets/dataset.html#Dataset.set_param_space"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Define the parameter space of the dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>param_space</strong> (<em>ParameterSpace</em>) – ParameterSpace object with information about all variables in the dataset.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="sig-name descname">to_disk</code><span class="sig-paren">(</span><em class="sig-param">folder='custom_dataset'</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/olympus/datasets/dataset.html#Dataset.to_disk"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Save the dataset to disk in the format expected by Olympus for its own datasets. This can be useful if you
+plan to upload the dataset to the community datasets available online.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>folder</strong> (<em>str</em>) – Folder in which to save the dataset files.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="alkox.html" class="btn btn-neutral float-right" title="Alkoxylation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../planners/basin_hopping.html" class="btn btn-neutral float-left" title="Basin Hopping" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Matteo Aldeghi, Riley Hickman and Florian Häse
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  <script>
+    var versions_json_url = ''
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        0+untagged.5.g054f7b4
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
