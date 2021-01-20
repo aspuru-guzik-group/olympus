@@ -8,7 +8,7 @@
 * Access **10 experimentally-derived benchmarks** emulated with probabilistic models, and **23 analytical test functions** for optimization
 * Easily integrate custom datasets, which can be used to train models for custom benchmarks
 
-You can find more details in the [documentation](https://florianhase.github.io/olympus/).
+You can find more details in the [documentation](https://aspuru-guzik-group.github.io/olympus/).
 
 ###  Installation
 ``Olympus`` can be installed with ``pip``:
