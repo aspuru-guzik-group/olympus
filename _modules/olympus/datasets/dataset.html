@@ -1,43 +1,46 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>olympus.datasets.dataset &mdash; Olympus 0+untagged.5.g054f7b4 documentation</title>
+  <title>olympus.datasets.dataset &mdash; Olympus 0+unknown documentation</title>
   
-
-  
-  
-  
-  
-
-  
-  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../../_static/language_data.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
-        <script type="text/javascript" src="../../../_static/js/versions.js"></script>
-    
-    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
-
-    
 
   
   <link rel="stylesheet" href="../../../_static/css/msmb.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+        <script src="../../../_static/js/versions.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
 </head>
@@ -66,7 +69,7 @@
             
             
               <div class="version">
-                0+untagged.5.g054f7b4
+                0+unknown
               </div>
             
           
@@ -83,6 +86,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -102,6 +106,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/notebooks/use_emulators.html">Experiment emulators</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/notebooks/simple_benchmark.html">Run a simple benchmark</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/notebooks/larger_benchmarks.html">Run a larger benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/notebooks/planners_interface.html">Planners Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/notebooks/noisy_inputs.html">Noisy Inputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/notebooks/custom_dataset.html">Custom Dataset</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/notebooks/custom_planner.html">Custom Planner</a></li>
 </ul>
@@ -127,6 +133,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -161,11 +168,13 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="../../index.html">Module code</a> &raquo;</li>
         
@@ -310,7 +319,7 @@
 
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># TODO: add some more info here...</span>
-        <span class="n">string</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Dataset(kind=</span><span class="si">{self.kind}</span><span class="s2">)&quot;</span>
+        <span class="n">string</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Dataset(kind=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">kind</span><span class="si">}</span><span class="s2">)&quot;</span>
         <span class="k">return</span> <span class="n">string</span>
 
     <span class="nd">@property</span>
@@ -322,12 +331,12 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span>
 
     <span class="c1"># we could also overwrite the DataFrame.info method</span>
-<div class="viewcode-block" id="Dataset.dataset_info"><a class="viewcode-back" href="../../../documentation.html#olympus.datasets.Dataset.dataset_info">[docs]</a>    <span class="k">def</span> <span class="nf">dataset_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">dataset_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Provide summary info about dataset.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">Logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_description</span><span class="p">,</span> <span class="s2">&quot;INFO&quot;</span><span class="p">)</span></div>
+        <span class="n">Logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_description</span><span class="p">,</span> <span class="s2">&quot;INFO&quot;</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Dataset.set_param_space"><a class="viewcode-back" href="../../../documentation.html#olympus.datasets.Dataset.set_param_space">[docs]</a>    <span class="k">def</span> <span class="nf">set_param_space</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">param_space</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_param_space</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">param_space</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Define the parameter space of the dataset.</span>
 
 <span class="sd">        Args:</span>
@@ -339,20 +348,20 @@
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">param</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">param_space</span><span class="o">.</span><span class="n">parameters</span><span class="p">):</span>
             <span class="c1"># check names are matching</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">feature_names</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">param</span><span class="o">.</span><span class="n">name</span><span class="p">:</span>
-                <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Parameter name `</span><span class="si">{self.feature_names[i]}</span><span class="s2">` does not match name `</span><span class="si">{param.name}</span><span class="s2">` found in dataset!&quot;</span>
+                <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Parameter name `</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_names</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2">` does not match name `</span><span class="si">{</span><span class="n">param</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">` found in dataset!&quot;</span>
                 <span class="n">Logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="s2">&quot;WARNING&quot;</span><span class="p">)</span>
             <span class="c1"># check data provided is within param_space bounds</span>
             <span class="k">if</span> <span class="n">param</span><span class="o">.</span><span class="n">low</span> <span class="o">&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]):</span>
-                <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Lower bound of </span><span class="si">{param.low}</span><span class="s2"> provided for parameter `</span><span class="si">{param.name}</span><span class="s2">` is higher than minimum found in the data!&quot;</span>
+                <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Lower bound of </span><span class="si">{</span><span class="n">param</span><span class="o">.</span><span class="n">low</span><span class="si">}</span><span class="s2"> provided for parameter `</span><span class="si">{</span><span class="n">param</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">` is higher than minimum found in the data!&quot;</span>
                 <span class="n">Logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="s2">&quot;ERROR&quot;</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">param</span><span class="o">.</span><span class="n">high</span> <span class="o">&lt;</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]):</span>
-                <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Upper bound of </span><span class="si">{param.high}</span><span class="s2"> provided for parameter `</span><span class="si">{param.name}</span><span class="s2">` is lower than maximum found in the data!&quot;</span>
+                <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Upper bound of </span><span class="si">{</span><span class="n">param</span><span class="o">.</span><span class="n">high</span><span class="si">}</span><span class="s2"> provided for parameter `</span><span class="si">{</span><span class="n">param</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">` is lower than maximum found in the data!&quot;</span>
                 <span class="n">Logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="s2">&quot;ERROR&quot;</span><span class="p">)</span>
 
         <span class="c1"># ...then assign</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">param_space</span> <span class="o">=</span> <span class="n">param_space</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">param_space</span> <span class="o">=</span> <span class="n">param_space</span>
 
-<div class="viewcode-block" id="Dataset.infer_param_space"><a class="viewcode-back" href="../../../documentation.html#olympus.datasets.Dataset.infer_param_space">[docs]</a>    <span class="k">def</span> <span class="nf">infer_param_space</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">infer_param_space</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Guess the parameter space from the dataset. The range for all parameters will be define based on the</span>
 <span class="sd">        minimum and maximum values in the dataset for each variable. All variables will be assumed not to be periodic.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -367,9 +376,9 @@
             <span class="n">param_space</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">param</span><span class="p">)</span>
 
         <span class="c1"># set the param space</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_param_space</span><span class="p">(</span><span class="n">param_space</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_param_space</span><span class="p">(</span><span class="n">param_space</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Dataset.to_disk"><a class="viewcode-back" href="../../../documentation.html#olympus.datasets.Dataset.to_disk">[docs]</a>    <span class="k">def</span> <span class="nf">to_disk</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">folder</span><span class="o">=</span><span class="s1">&#39;custom_dataset&#39;</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">to_disk</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">folder</span><span class="o">=</span><span class="s1">&#39;custom_dataset&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Save the dataset to disk in the format expected by Olympus for its own datasets. This can be useful if you</span>
 <span class="sd">        plan to upload the dataset to the community datasets available online.</span>
 
@@ -381,11 +390,11 @@
         <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">folder</span><span class="p">)</span>
 
         <span class="c1"># save the numeric data</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{folder}</span><span class="s1">/data.csv&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">folder</span><span class="si">}</span><span class="s1">/data.csv&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
         <span class="c1"># save the description</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_generate_description</span><span class="p">()</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{folder}</span><span class="s1">/description.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">folder</span><span class="si">}</span><span class="s1">/description.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_description</span><span class="p">)</span>
 
         <span class="c1"># save the config file</span>
@@ -402,27 +411,27 @@
             <span class="n">t</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">target</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">}</span>
             <span class="n">_config</span><span class="p">[</span><span class="s1">&#39;measurements&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{folder}</span><span class="s1">/config.json&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">_config</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span></div>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">folder</span><span class="si">}</span><span class="s1">/config.json&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">_config</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">_generate_description</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">_description</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">kind</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">_description</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Custom Dataset</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">_description</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{self.kind}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">_description</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">kind</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
 
         <span class="n">_description</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;=========================================&#39;</span><span class="p">)</span>
         <span class="n">_description</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;                Summary&#39;</span><span class="p">)</span>
         <span class="n">_description</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;-----------------------------------------&#39;</span><span class="p">)</span>
-        <span class="n">_description</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;    Number of Samples       </span><span class="si">{self.size:&gt;10}</span><span class="s1">&#39;</span><span class="p">)</span>
-        <span class="n">_description</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;    Dimensionality          {len(self.feature_names):&gt;10}&#39;</span><span class="p">)</span>
+        <span class="n">_description</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;    Number of Samples       </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="si">:</span><span class="s1">&gt;10</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">_description</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;    Dimensionality          </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_names</span><span class="p">)</span><span class="si">:</span><span class="s1">&gt;10</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="n">_description</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;    Features:&#39;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">param_space</span><span class="o">.</span><span class="n">parameters</span><span class="p">:</span>
-            <span class="n">_description</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;        </span><span class="si">{param.name:&lt;10}</span><span class="s1">          </span><span class="si">{param.kind:&gt;10}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">_description</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;        </span><span class="si">{</span><span class="n">param</span><span class="o">.</span><span class="n">name</span><span class="si">:</span><span class="s1">&lt;10</span><span class="si">}</span><span class="s1">          </span><span class="si">{</span><span class="n">param</span><span class="o">.</span><span class="n">kind</span><span class="si">:</span><span class="s1">&gt;10</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="n">_description</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;    Targets:&#39;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">target</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_targets</span><span class="p">:</span>
-            <span class="n">_description</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;        </span><span class="si">{target:&lt;10}</span><span class="s1">          continuous&#39;</span><span class="p">)</span>
+            <span class="n">_description</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;        </span><span class="si">{</span><span class="n">target</span><span class="si">:</span><span class="s1">&lt;10</span><span class="si">}</span><span class="s1">          continuous&#39;</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_description</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_description</span><span class="p">)</span>
 
@@ -463,7 +472,7 @@
     <span class="c1"># ----------------------------------------------------------------</span>
     <span class="c1"># Methods for dataset splitting into training/validation/test sets</span>
     <span class="c1"># ----------------------------------------------------------------</span>
-<div class="viewcode-block" id="Dataset.create_train_validate_test_splits"><a class="viewcode-back" href="../../../documentation.html#olympus.datasets.Dataset.create_train_validate_test_splits">[docs]</a>    <span class="k">def</span> <span class="nf">create_train_validate_test_splits</span><span class="p">(</span>
+    <span class="k">def</span> <span class="nf">create_train_validate_test_splits</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">test_frac</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">num_folds</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">test_indices</span><span class="o">=</span><span class="kc">None</span>
     <span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -509,7 +518,7 @@
                 <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cv_fold_indices</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span>
             <span class="p">)</span>
             <span class="n">fold_valid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cv_fold_indices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">cross_val_indices</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">fold_train</span><span class="p">,</span> <span class="n">fold_valid</span><span class="p">])</span></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cross_val_indices</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">fold_train</span><span class="p">,</span> <span class="n">fold_valid</span><span class="p">])</span>
         <span class="c1"># TODO: unfix random seed?</span>
 
     <span class="nd">@property</span>
@@ -572,7 +581,7 @@
             <span class="n">cv_sets</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">train_data</span><span class="p">,</span> <span class="n">valid_data</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">cv_sets</span>
 
-<div class="viewcode-block" id="Dataset.get_cv_fold"><a class="viewcode-back" href="../../../documentation.html#olympus.datasets.Dataset.get_cv_fold">[docs]</a>    <span class="k">def</span> <span class="nf">get_cv_fold</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fold</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_cv_fold</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fold</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the data for a specific cross-validation fold.</span>
 
 <span class="sd">        Args:</span>
@@ -582,7 +591,7 @@
 <span class="sd">            data (DataFrame): data for the chosen fold.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">indices</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cv_fold_indices</span><span class="p">[</span><span class="n">fold</span><span class="p">]</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">indices</span><span class="p">,</span> <span class="p">:]</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">indices</span><span class="p">,</span> <span class="p">:]</span>
 
     <span class="c1"># ---------------</span>
     <span class="c1"># Private Methods</span>
@@ -621,19 +630,19 @@
     <span class="n">datasets_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
 
     <span class="c1"># load description</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{datasets_path}</span><span class="s2">/dataset_</span><span class="si">{kind}</span><span class="s2">/description.txt&quot;</span><span class="p">))</span> <span class="k">as</span> <span class="n">txtfile</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">datasets_path</span><span class="si">}</span><span class="s2">/dataset_</span><span class="si">{</span><span class="n">kind</span><span class="si">}</span><span class="s2">/description.txt&quot;</span><span class="p">))</span> <span class="k">as</span> <span class="n">txtfile</span><span class="p">:</span>
         <span class="n">description</span> <span class="o">=</span> <span class="n">txtfile</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 
     <span class="c1"># load info on features/targets</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{datasets_path}</span><span class="s2">/dataset_</span><span class="si">{kind}</span><span class="s2">/config.json&quot;</span><span class="p">),</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">content</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">datasets_path</span><span class="si">}</span><span class="s2">/dataset_</span><span class="si">{</span><span class="n">kind</span><span class="si">}</span><span class="s2">/config.json&quot;</span><span class="p">),</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">content</span><span class="p">:</span>
         <span class="n">config</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">content</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
 
     <span class="c1"># load data</span>
-    <span class="n">csv_file</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{datasets_path}</span><span class="s2">/dataset_</span><span class="si">{kind}</span><span class="s2">/data.csv&quot;</span><span class="p">)</span>
+    <span class="n">csv_file</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">datasets_path</span><span class="si">}</span><span class="s2">/dataset_</span><span class="si">{</span><span class="n">kind</span><span class="si">}</span><span class="s2">/data.csv&quot;</span><span class="p">)</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">data</span> <span class="o">=</span> <span class="n">read_csv</span><span class="p">(</span><span class="n">csv_file</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
     <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
-        <span class="n">Logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not find data.csv for dataset </span><span class="si">{kind}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;FATAL&quot;</span><span class="p">)</span>
+        <span class="n">Logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not find data.csv for dataset </span><span class="si">{</span><span class="n">kind</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;FATAL&quot;</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">data</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">description</span>
 
@@ -646,7 +655,7 @@
         <span class="c1"># TODO: reduce redundant code by importing the list from where we have it already</span>
         <span class="n">module_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
         <span class="n">olympus_datasets</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">dir_name</span> <span class="ow">in</span> <span class="n">glob</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{module_path}</span><span class="s2">/dataset_*&quot;</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">dir_name</span> <span class="ow">in</span> <span class="n">glob</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">module_path</span><span class="si">}</span><span class="s2">/dataset_*&quot;</span><span class="p">):</span>
             <span class="n">dir_name</span> <span class="o">=</span> <span class="n">dir_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">8</span><span class="p">:]</span>
             <span class="n">olympus_datasets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dir_name</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">kind</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">olympus_datasets</span><span class="p">:</span>
@@ -682,19 +691,17 @@
            
           </div>
           <footer>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2020, Matteo Aldeghi, Riley Hickman and Florian Häse
+        &#169; Copyright 2020, Matteo Aldeghi, Riley Hickman and Florian Häse.
 
     </p>
   </div> 
 
 </footer>
-
         </div>
       </div>
 
@@ -709,7 +716,7 @@
      aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <span class="fa fa-book"></span>
-        0+untagged.5.g054f7b4
+        0+unknown
       <span class="fa fa-caret-down"></span>
     </span>
 

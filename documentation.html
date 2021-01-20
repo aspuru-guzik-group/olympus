@@ -1,43 +1,46 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>API Documentation &mdash; Olympus 0+untagged.5.g054f7b4 documentation</title>
+  <title>API Documentation &mdash; Olympus 0+unknown documentation</title>
   
-
-  
-  
-  
-  
-
-  
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
-        <script type="text/javascript" src="_static/js/versions.js"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
 
   
   <link rel="stylesheet" href="_static/css/msmb.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+        <script src="_static/js/versions.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" /> 
 </head>
@@ -66,7 +69,7 @@
             
             
               <div class="version">
-                0+untagged.5.g054f7b4
+                0+unknown
               </div>
             
           
@@ -83,6 +86,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -102,6 +106,8 @@
 <li class="toctree-l1"><a class="reference internal" href="examples/notebooks/use_emulators.html">Experiment emulators</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples/notebooks/simple_benchmark.html">Run a simple benchmark</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples/notebooks/larger_benchmarks.html">Run a larger benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/notebooks/planners_interface.html">Planners Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/notebooks/noisy_inputs.html">Noisy Inputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples/notebooks/custom_dataset.html">Custom Dataset</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples/notebooks/custom_planner.html">Custom Planner</a></li>
 </ul>
@@ -127,6 +133,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -161,18 +168,20 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index.html">Docs</a> &raquo;</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
       <li>API Documentation</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
             <a href="_sources/documentation.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -190,9 +199,9 @@
 <h1>API Documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="olympus">
 <h2>Olympus<a class="headerlink" href="#olympus" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="olympus.Olympus">
-<em class="property">class </em><code class="sig-prename descclassname">olympus.</code><code class="sig-name descname">Olympus</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/olympus/olympus.html#Olympus"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#olympus.Olympus" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">olympus.</code><code class="sig-name descname">Olympus</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/olympus/olympus.html#Olympus"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#olympus.Olympus" title="Permalink to this definition">¶</a></dt>
 <dd><p>Master class of the olympus package</p>
 <p>creates empty object and loads defaults</p>
 <dl class="field-list simple">
@@ -204,77 +213,12 @@ representation</p></li>
 </ul>
 </dd>
 </dl>
-<dl class="method">
-<dt id="olympus.Olympus.add">
-<code class="sig-name descname">add</code><span class="sig-paren">(</span><em class="sig-param">prop</em>, <em class="sig-param">attr</em><span class="sig-paren">)</span><a class="headerlink" href="#olympus.Olympus.add" title="Permalink to this definition">¶</a></dt>
-<dd><p>dynamically adds property and attribute to object</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>prop</strong> (<em>any</em>) – property associated with attribute</p></li>
-<li><p><strong>attr</strong> (<em>any</em>) – property value</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
+<dl class="py method">
 <dt id="olympus.Olympus.benchmark">
-<code class="sig-name descname">benchmark</code><span class="sig-paren">(</span><em class="sig-param">dataset='alkox'</em>, <em class="sig-param">planners='all'</em>, <em class="sig-param">database=&lt;Database (name=olympus_ce09b6d1</em>, <em class="sig-param">kind=sqlite)&gt;</em>, <em class="sig-param">num_ind_runs=5</em>, <em class="sig-param">num_iter=3</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/olympus/olympus.html#Olympus.benchmark"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#olympus.Olympus.benchmark" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">benchmark</code><span class="sig-paren">(</span><em class="sig-param">dataset='alkox'</em>, <em class="sig-param">planners='all'</em>, <em class="sig-param">database=&lt;Database (name=olympus_eb71d764</em>, <em class="sig-param">kind=sqlite)&gt;</em>, <em class="sig-param">num_ind_runs=5</em>, <em class="sig-param">num_iter=3</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/olympus/olympus.html#Olympus.benchmark"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#olympus.Olympus.benchmark" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>dataset</strong> (<em>str</em>) – the dataset to use</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="olympus.Olympus.from_dict">
-<code class="sig-name descname">from_dict</code><span class="sig-paren">(</span><em class="sig-param">info_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#olympus.Olympus.from_dict" title="Permalink to this definition">¶</a></dt>
-<dd><p>returns object representation of given dictionary</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>info_dict</strong> (<em>dict</em>) – dictionary to be represented</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Object representation of dictionary</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Object</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="olympus.Olympus.get">
-<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param">prop</em><span class="sig-paren">)</span><a class="headerlink" href="#olympus.Olympus.get" title="Permalink to this definition">¶</a></dt>
-<dd><p>returns attribute associated with given property</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>prop</strong> (<em>any</em>) – valid property</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>attribute associated with property</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>any</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="olympus.Olympus.to_dict">
-<code class="sig-name descname">to_dict</code><span class="sig-paren">(</span><em class="sig-param">exclude=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#olympus.Olympus.to_dict" title="Permalink to this definition">¶</a></dt>
-<dd><p>returns dictionary representation of presented object</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>exclude</strong> (<em>list of any</em>) – properties to be excluded</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>representation of presented object</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>dict</p>
 </dd>
 </dl>
 </dd></dl>
@@ -284,9 +228,9 @@ representation</p></li>
 </div>
 <div class="section" id="datasets">
 <h2>Datasets<a class="headerlink" href="#datasets" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="olympus.datasets.Dataset">
-<em class="property">class </em><code class="sig-prename descclassname">olympus.datasets.</code><code class="sig-name descname">Dataset</code><span class="sig-paren">(</span><em class="sig-param">kind=None</em>, <em class="sig-param">data=None</em>, <em class="sig-param">columns=None</em>, <em class="sig-param">target_ids=None</em>, <em class="sig-param">test_frac=0.2</em>, <em class="sig-param">num_folds=5</em>, <em class="sig-param">random_seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/olympus/datasets/dataset.html#Dataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#olympus.datasets.Dataset" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">olympus.datasets.</code><code class="sig-name descname">Dataset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">kind</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">data</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">columns</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">target_ids</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">test_frac</span><span class="o">=</span><span class="default_value">0.2</span></em>, <em class="sig-param"><span class="n">num_folds</span><span class="o">=</span><span class="default_value">5</span></em>, <em class="sig-param"><span class="n">random_seed</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/olympus/datasets/dataset.html#Dataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#olympus.datasets.Dataset" title="Permalink to this definition">¶</a></dt>
 <dd><p>A <code class="docutils literal notranslate"><span class="pre">Dataset</span></code> object stores the data of a dataset by wrapping a <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code> in its <code class="docutils literal notranslate"><span class="pre">data</span></code> attribute, provides
 additional information on the dataset, and provides convenience methods to access features and targets as well as
 to generate training/validation/test splits.</p>
@@ -303,73 +247,6 @@ to generate training/validation/test splits.</p>
 </ul>
 </dd>
 </dl>
-<dl class="method">
-<dt id="olympus.datasets.Dataset.create_train_validate_test_splits">
-<code class="sig-name descname">create_train_validate_test_splits</code><span class="sig-paren">(</span><em class="sig-param">test_frac=0.2</em>, <em class="sig-param">num_folds=5</em>, <em class="sig-param">test_indices=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/olympus/datasets/dataset.html#Dataset.create_train_validate_test_splits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#olympus.datasets.Dataset.create_train_validate_test_splits" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>test_frac</strong> (<em>float</em>) – </p></li>
-<li><p><strong>num_folds</strong> (<em>int</em>) – </p></li>
-<li><p><strong>test_indices</strong> (<em>array</em>) – Array with the indices of the samples to be used as test set.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="olympus.datasets.Dataset.dataset_info">
-<code class="sig-name descname">dataset_info</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/olympus/datasets/dataset.html#Dataset.dataset_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#olympus.datasets.Dataset.dataset_info" title="Permalink to this definition">¶</a></dt>
-<dd><p>Provide summary info about dataset.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="olympus.datasets.Dataset.get_cv_fold">
-<code class="sig-name descname">get_cv_fold</code><span class="sig-paren">(</span><em class="sig-param">fold</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/olympus/datasets/dataset.html#Dataset.get_cv_fold"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#olympus.datasets.Dataset.get_cv_fold" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the data for a specific cross-validation fold.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>fold</strong> (<em>int</em>) – fold id.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>data for the chosen fold.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>data (DataFrame)</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="olympus.datasets.Dataset.infer_param_space">
-<code class="sig-name descname">infer_param_space</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/olympus/datasets/dataset.html#Dataset.infer_param_space"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#olympus.datasets.Dataset.infer_param_space" title="Permalink to this definition">¶</a></dt>
-<dd><p>Guess the parameter space from the dataset. The range for all parameters will be define based on the
-minimum and maximum values in the dataset for each variable. All variables will be assumed not to be periodic.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="olympus.datasets.Dataset.set_param_space">
-<code class="sig-name descname">set_param_space</code><span class="sig-paren">(</span><em class="sig-param">param_space</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/olympus/datasets/dataset.html#Dataset.set_param_space"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#olympus.datasets.Dataset.set_param_space" title="Permalink to this definition">¶</a></dt>
-<dd><p>Define the parameter space of the dataset.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>param_space</strong> (<em>ParameterSpace</em>) – ParameterSpace object with information about all variables in the dataset.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="olympus.datasets.Dataset.to_disk">
-<code class="sig-name descname">to_disk</code><span class="sig-paren">(</span><em class="sig-param">folder='custom_dataset'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/olympus/datasets/dataset.html#Dataset.to_disk"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#olympus.datasets.Dataset.to_disk" title="Permalink to this definition">¶</a></dt>
-<dd><p>Save the dataset to disk in the format expected by Olympus for its own datasets. This can be useful if you
-plan to upload the dataset to the community datasets available online.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>folder</strong> (<em>str</em>) – Folder in which to save the dataset files.</p>
-</dd>
-</dl>
-</dd></dl>
-
 </dd></dl>
 
 </div>
@@ -386,19 +263,17 @@ plan to upload the dataset to the community datasets available online.</p>
            
           </div>
           <footer>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2020, Matteo Aldeghi, Riley Hickman and Florian Häse
+        &#169; Copyright 2020, Matteo Aldeghi, Riley Hickman and Florian Häse.
 
     </p>
   </div> 
 
 </footer>
-
         </div>
       </div>
 
@@ -413,7 +288,7 @@ plan to upload the dataset to the community datasets available online.</p>
      aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <span class="fa fa-book"></span>
-        0+untagged.5.g054f7b4
+        0+unknown
       <span class="fa fa-caret-down"></span>
     </span>
 

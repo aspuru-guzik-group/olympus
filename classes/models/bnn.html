@@ -1,43 +1,46 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Bayesian Neural Network &mdash; Olympus 0+untagged.5.g054f7b4 documentation</title>
+  <title>Bayesian Neural Network &mdash; Olympus 0+unknown documentation</title>
   
-
-  
-  
-  
-  
-
-  
-  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/language_data.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
-        <script type="text/javascript" src="../../_static/js/versions.js"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
 
   
   <link rel="stylesheet" href="../../_static/css/msmb.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+        <script src="../../_static/js/versions.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Neural Network" href="nn.html" />
@@ -68,7 +71,7 @@
             
             
               <div class="version">
-                0+untagged.5.g054f7b4
+                0+unknown
               </div>
             
           
@@ -85,6 +88,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -104,6 +108,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../../examples/notebooks/use_emulators.html">Experiment emulators</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/notebooks/simple_benchmark.html">Run a simple benchmark</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/notebooks/larger_benchmarks.html">Run a larger benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/notebooks/planners_interface.html">Planners Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/notebooks/noisy_inputs.html">Noisy Inputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/notebooks/custom_dataset.html">Custom Dataset</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/notebooks/custom_planner.html">Custom Planner</a></li>
 </ul>
@@ -133,6 +139,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -167,11 +174,13 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../index.html">Docs</a> &raquo;</li>
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="index.html">Models</a> &raquo;</li>
         
@@ -180,7 +189,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
             <a href="../../_sources/classes/models/bnn.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -198,9 +207,9 @@
 <span id="model-bnn"></span><h1>Bayesian Neural Network<a class="headerlink" href="#bayesian-neural-network" title="Permalink to this headline">¶</a></h1>
 <p>This model is … by default we use this many layer/nodes etc etc. In the context of Olympus it has the
 advantage/disadvantage of …</p>
-<dl class="class">
+<dl class="py class">
 <dt>
-<em class="property">class </em><code class="sig-prename descclassname">olympus.models.</code><code class="sig-name descname">BayesNeuralNet</code><span class="sig-paren">(</span><em class="sig-param">scope='model'</em>, <em class="sig-param">hidden_depth=3</em>, <em class="sig-param">hidden_nodes=48</em>, <em class="sig-param">hidden_act='leaky_relu'</em>, <em class="sig-param">out_act='linear'</em>, <em class="sig-param">learning_rate=0.001</em>, <em class="sig-param">pred_int=100</em>, <em class="sig-param">reg=0.001</em>, <em class="sig-param">es_patience=100</em>, <em class="sig-param">max_epochs=100000</em>, <em class="sig-param">batch_size=20</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/olympus/models/model_bayes_neural_net/wrapper_bayes_neural_net.html#BayesNeuralNet"><span class="viewcode-link">[source]</span></a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">olympus.models.</code><code class="sig-name descname">BayesNeuralNet</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">scope</span><span class="o">=</span><span class="default_value">'model'</span></em>, <em class="sig-param"><span class="n">hidden_depth</span><span class="o">=</span><span class="default_value">3</span></em>, <em class="sig-param"><span class="n">hidden_nodes</span><span class="o">=</span><span class="default_value">48</span></em>, <em class="sig-param"><span class="n">hidden_act</span><span class="o">=</span><span class="default_value">'leaky_relu'</span></em>, <em class="sig-param"><span class="n">out_act</span><span class="o">=</span><span class="default_value">'linear'</span></em>, <em class="sig-param"><span class="n">learning_rate</span><span class="o">=</span><span class="default_value">0.001</span></em>, <em class="sig-param"><span class="n">pred_int</span><span class="o">=</span><span class="default_value">100</span></em>, <em class="sig-param"><span class="n">reg</span><span class="o">=</span><span class="default_value">0.001</span></em>, <em class="sig-param"><span class="n">es_patience</span><span class="o">=</span><span class="default_value">100</span></em>, <em class="sig-param"><span class="n">max_epochs</span><span class="o">=</span><span class="default_value">100000</span></em>, <em class="sig-param"><span class="n">batch_size</span><span class="o">=</span><span class="default_value">20</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/olympus/models/model_bayes_neural_net/wrapper_bayes_neural_net.html#BayesNeuralNet"><span class="viewcode-link">[source]</span></a></dt>
 <dd><p>Bayesian Neural Network model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -242,38 +251,6 @@ advantage/disadvantage of …</p>
 </tr>
 </tbody>
 </table>
-<dl class="method">
-<dt>
-<code class="sig-name descname">predict</code><span class="sig-paren">(</span><em class="sig-param">features</em>, <em class="sig-param">num_samples=1</em><span class="sig-paren">)</span></dt>
-<dd><p>Method that returns a prediction. We expect some standard output from this method.</p>
-</dd></dl>
-
-<dl class="method">
-<dt>
-<code class="sig-name descname">train</code><span class="sig-paren">(</span><em class="sig-param">train_features</em>, <em class="sig-param">train_targets</em>, <em class="sig-param">valid_features</em>, <em class="sig-param">valid_targets</em>, <em class="sig-param">model_path</em>, <em class="sig-param">plot=False</em><span class="sig-paren">)</span></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>train_features</strong> – features of the training set.</p></li>
-<li><p><strong>train_targets</strong> – targets of the training set.</p></li>
-<li><p><strong>valid_features</strong> – features of the validation/test set, used for early stopping.</p></li>
-<li><p><strong>valid_targets</strong> – targets of the validation/test set, used for early stopping.</p></li>
-<li><p><strong>model_path</strong> (<em>str</em>) – where the TensorFlow checkpoints will be written.</p></li>
-<li><p><strong>plot</strong> (<em>bool</em>) – whether to show scatter plots of the training progression.</p></li>
-<li><p><strong>feature_transformer</strong> – </p></li>
-<li><p><strong>target_transformer</strong> – </p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>best r2 score on training set
-max_valid_r2: best r2 score on validation set</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>max_train_r2</p>
-</dd>
-</dl>
-</dd></dl>
-
 </dd></dl>
 
 </div>
@@ -283,28 +260,21 @@ max_valid_r2: best r2 score on validation set</p>
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="nn.html" class="btn btn-neutral float-right" title="Neural Network" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="index.html" class="btn btn-neutral float-left" title="Models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="nn.html" class="btn btn-neutral float-right" title="Neural Network" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2020, Matteo Aldeghi, Riley Hickman and Florian Häse
+        &#169; Copyright 2020, Matteo Aldeghi, Riley Hickman and Florian Häse.
 
     </p>
   </div> 
 
 </footer>
-
         </div>
       </div>
 
@@ -319,7 +289,7 @@ max_valid_r2: best r2 score on validation set</p>
      aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <span class="fa fa-book"></span>
-        0+untagged.5.g054f7b4
+        0+unknown
       <span class="fa fa-caret-down"></span>
     </span>
 

@@ -1,43 +1,46 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>olympus.emulators.emulator &mdash; Olympus 0+untagged.5.g054f7b4 documentation</title>
+  <title>olympus.emulators.emulator &mdash; Olympus 0+unknown documentation</title>
   
-
-  
-  
-  
-  
-
-  
-  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../../_static/language_data.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
-        <script type="text/javascript" src="../../../_static/js/versions.js"></script>
-    
-    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
-
-    
 
   
   <link rel="stylesheet" href="../../../_static/css/msmb.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+        <script src="../../../_static/js/versions.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
 </head>
@@ -66,7 +69,7 @@
             
             
               <div class="version">
-                0+untagged.5.g054f7b4
+                0+unknown
               </div>
             
           
@@ -83,6 +86,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -102,6 +106,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/notebooks/use_emulators.html">Experiment emulators</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/notebooks/simple_benchmark.html">Run a simple benchmark</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/notebooks/larger_benchmarks.html">Run a larger benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/notebooks/planners_interface.html">Planners Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/notebooks/noisy_inputs.html">Noisy Inputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/notebooks/custom_dataset.html">Custom Dataset</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/notebooks/custom_planner.html">Custom Planner</a></li>
 </ul>
@@ -127,6 +133,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -161,11 +168,13 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="../../index.html">Module code</a> &raquo;</li>
         
@@ -249,10 +258,10 @@
             <span class="c1"># check model string</span>
             <span class="n">_validate_model_kind</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
             <span class="n">Logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;Loading emulator using a </span><span class="si">{model}</span><span class="s2"> model for the dataset </span><span class="si">{dataset}</span><span class="s2">...&quot;</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s2">&quot;Loading emulator using a </span><span class="si">{</span><span class="n">model</span><span class="si">}</span><span class="s2"> model for the dataset </span><span class="si">{</span><span class="n">dataset</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">,</span>
                 <span class="s2">&quot;INFO&quot;</span><span class="p">,</span>
             <span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_load</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{__emulator_path__}</span><span class="s2">/emulator_</span><span class="si">{dataset}</span><span class="s2">_</span><span class="si">{model}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_load</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">__emulator_path__</span><span class="si">}</span><span class="s2">/emulator_</span><span class="si">{</span><span class="n">dataset</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">model</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
         <span class="c1"># -----------------------------------------</span>
         <span class="c1"># otherwise, assume it is a custom emulator</span>
@@ -282,15 +291,15 @@
 
         <span class="c1"># create tmp dir to store model files</span>
         <span class="c1"># also if we are loading a model (the user could call &#39;train&#39; again)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_scratch_dir</span> <span class="o">=</span> <span class="n">TemporaryDirectory</span><span class="p">(</span><span class="nb">dir</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{__scratch__}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;emulator_&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_scratch_dir</span> <span class="o">=</span> <span class="n">TemporaryDirectory</span><span class="p">(</span><span class="nb">dir</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">__scratch__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;emulator_&quot;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;Emulator (</span><span class="si">{self.dataset}</span><span class="s2">, model=</span><span class="si">{self.model}</span><span class="s2">)&gt;&quot;</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;Emulator (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="si">}</span><span class="s2">, model=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="si">}</span><span class="s2">)&gt;&quot;</span>
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;Emulator (</span><span class="si">{self.dataset}</span><span class="s2">)&gt;&quot;</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;Emulator (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="si">}</span><span class="s2">)&gt;&quot;</span>
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;Emulator (model=</span><span class="si">{self.model}</span><span class="s2">)&gt;&quot;</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;Emulator (model=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="si">}</span><span class="s2">)&gt;&quot;</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;Emulator (unspecified)&gt;&quot;</span>
 
@@ -352,7 +361,7 @@
     <span class="c1"># =========================</span>
     <span class="c1"># Train and Predict Methods</span>
     <span class="c1"># =========================</span>
-<div class="viewcode-block" id="Emulator.cross_validate"><a class="viewcode-back" href="../../../classes/emulators.html#olympus.emulators.emulator.Emulator.cross_validate">[docs]</a>    <span class="k">def</span> <span class="nf">cross_validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rerun</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">cross_validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rerun</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="c1"># TODO: allow setting verbosity: verbose=True/False will be enough</span>
         <span class="sd">&quot;&quot;&quot;Performs cross validation on the emulator dataset, using the emulator model. The number of folds used is</span>
 <span class="sd">        defined in the Dataset object.</span>
@@ -416,14 +425,14 @@
             <span class="n">model_fold</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_ghost_model</span>
             <span class="p">)</span>  <span class="c1"># the model we will use for training the fold</span>
-            <span class="n">model_fold</span><span class="o">.</span><span class="n">scope</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Fold_</span><span class="si">{fold}</span><span class="s2">&quot;</span>
-            <span class="n">model_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{self._scratch_dir.name}</span><span class="s2">/</span><span class="si">{model_fold.scope}</span><span class="s2">&quot;</span>
+            <span class="n">model_fold</span><span class="o">.</span><span class="n">scope</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Fold_</span><span class="si">{</span><span class="n">fold</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">model_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_scratch_dir</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">model_fold</span><span class="o">.</span><span class="n">scope</span><span class="si">}</span><span class="s2">&quot;</span>
             <span class="c1"># TODO/QUESTION: in case we are overwriting the output of a previous call, should we first remove the folder</span>
             <span class="c1">#  to make sure to have a cleared path?</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">model_path</span><span class="p">):</span>
                 <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">model_path</span><span class="p">)</span>
 
-            <span class="n">Logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&gt;&gt;&gt; Training model on fold #</span><span class="si">{fold}</span><span class="s2">...&quot;</span><span class="p">,</span> <span class="s2">&quot;INFO&quot;</span><span class="p">)</span>
+            <span class="n">Logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&gt;&gt;&gt; Training model on fold #</span><span class="si">{</span><span class="n">fold</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">,</span> <span class="s2">&quot;INFO&quot;</span><span class="p">)</span>
             <span class="p">(</span>
                 <span class="n">mdl_train_r2</span><span class="p">,</span>
                 <span class="n">mdl_valid_r2</span><span class="p">,</span>
@@ -444,15 +453,15 @@
             <span class="n">training_rmsd_scores</span><span class="p">[</span><span class="n">fold</span><span class="p">]</span> <span class="o">=</span> <span class="n">mdl_train_rmsd</span>
             <span class="n">valid_rmsd_scores</span><span class="p">[</span><span class="n">fold</span><span class="p">]</span> <span class="o">=</span> <span class="n">mdl_test_rmsd</span>
             <span class="c1"># write file to indicate training is complete and add R2 in there</span>
-            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{model_path}</span><span class="s2">/training_completed.info&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">content</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">model_path</span><span class="si">}</span><span class="s2">/training_completed.info&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">content</span><span class="p">:</span>
                 <span class="n">content</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
-                    <span class="sa">f</span><span class="s2">&quot;Train R2=</span><span class="si">{mdl_train_r2}</span><span class="se">\n</span><span class="s2">Validation R2=</span><span class="si">{mdl_valid_r2}</span><span class="se">\n</span><span class="s2">&quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;Train RMSD=</span><span class="si">{mdl_train_rmsd}</span><span class="se">\n</span><span class="s2">Validation RMSD=</span><span class="si">{mdl_test_rmsd}</span><span class="se">\n</span><span class="s2">&quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;Train R2=</span><span class="si">{</span><span class="n">mdl_train_r2</span><span class="si">}</span><span class="se">\n</span><span class="s2">Validation R2=</span><span class="si">{</span><span class="n">mdl_valid_r2</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;Train RMSD=</span><span class="si">{</span><span class="n">mdl_train_rmsd</span><span class="si">}</span><span class="se">\n</span><span class="s2">Validation RMSD=</span><span class="si">{</span><span class="n">mdl_test_rmsd</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
                 <span class="p">)</span>
 
         <span class="c1"># print some info to screen</span>
         <span class="n">Logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Performance statistics based on transformed data &quot;</span>
-                   <span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{self.feature_transform}</span><span class="s2">, </span><span class="si">{self.target_transform}</span><span class="s2">]:&quot;</span><span class="p">,</span> <span class="s2">&quot;INFO&quot;</span><span class="p">)</span>
+                   <span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_transform</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">target_transform</span><span class="si">}</span><span class="s2">]:&quot;</span><span class="p">,</span> <span class="s2">&quot;INFO&quot;</span><span class="p">)</span>
         <span class="n">cv_r2_score_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">valid_r2_scores</span><span class="p">)</span>
         <span class="n">cv_r2_score_stderr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">valid_r2_scores</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span>
             <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">valid_r2_scores</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
@@ -481,9 +490,9 @@
             <span class="s2">&quot;train_rmsd&quot;</span><span class="p">:</span> <span class="n">training_rmsd_scores</span><span class="p">,</span>
             <span class="s2">&quot;validate_rmsd&quot;</span><span class="p">:</span> <span class="n">valid_rmsd_scores</span><span class="p">,</span>
         <span class="p">}</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cv_scores</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cv_scores</span>
 
-<div class="viewcode-block" id="Emulator.train"><a class="viewcode-back" href="../../../classes/emulators.html#olympus.emulators.emulator.Emulator.train">[docs]</a>    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">retrain</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">retrain</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="c1"># TODO: allow setting verbosity: verbose=True/False will be enough</span>
         <span class="sd">&quot;&quot;&quot;Trains the model on the emulator dataset, using the emulator model. The train/test split is defined in the</span>
 <span class="sd">        Dataset object `emulator.dataset`. Note that the test set is used for testing the model performance, and for</span>
@@ -525,7 +534,7 @@
         <span class="n">test_targets_scaled</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_transformer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">test_targets</span><span class="p">)</span>
 
         <span class="c1"># define path where to store model</span>
-        <span class="n">model_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{self._scratch_dir.name}</span><span class="s2">/Model&quot;</span>
+        <span class="n">model_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_scratch_dir</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">/Model&quot;</span>
         <span class="c1"># TODO/QUESTION: in case we are overwriting the output of a previous call, should we first remove the folder</span>
         <span class="c1">#  to make sure to have a cleared path?</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">model_path</span><span class="p">):</span>
@@ -548,14 +557,14 @@
         <span class="p">)</span>
 
         <span class="c1"># write file to indicate training is complete and add R2 in there</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{model_path}</span><span class="s2">/training_completed.info&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">content</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">model_path</span><span class="si">}</span><span class="s2">/training_completed.info&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">content</span><span class="p">:</span>
             <span class="n">content</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;Train R2=</span><span class="si">{mdl_train_r2}</span><span class="se">\n</span><span class="s2">Validation R2=</span><span class="si">{mdl_test_r2}</span><span class="se">\n</span><span class="s2">&quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;Train RMSD=</span><span class="si">{mdl_train_rmsd}</span><span class="se">\n</span><span class="s2">Validation RMSD=</span><span class="si">{mdl_test_rmsd}</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;Train R2=</span><span class="si">{</span><span class="n">mdl_train_r2</span><span class="si">}</span><span class="se">\n</span><span class="s2">Validation R2=</span><span class="si">{</span><span class="n">mdl_test_r2</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;Train RMSD=</span><span class="si">{</span><span class="n">mdl_train_rmsd</span><span class="si">}</span><span class="se">\n</span><span class="s2">Validation RMSD=</span><span class="si">{</span><span class="n">mdl_test_rmsd</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
             <span class="p">)</span>
 
         <span class="n">Logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Performance statistics based on transformed data &quot;</span>
-                   <span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{self.feature_transform}</span><span class="s2">, </span><span class="si">{self.target_transform}</span><span class="s2">]:&quot;</span><span class="p">,</span> <span class="s2">&quot;INFO&quot;</span><span class="p">)</span>
+                   <span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_transform</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">target_transform</span><span class="si">}</span><span class="s2">]:&quot;</span><span class="p">,</span> <span class="s2">&quot;INFO&quot;</span><span class="p">)</span>
         <span class="n">Logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;Train R2   Score: </span><span class="si">{0:.4f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mdl_train_r2</span><span class="p">),</span> <span class="s2">&quot;INFO&quot;</span><span class="p">)</span>
         <span class="n">Logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;Test  R2   Score: </span><span class="si">{0:.4f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mdl_test_r2</span><span class="p">),</span> <span class="s2">&quot;INFO&quot;</span><span class="p">)</span>
         <span class="n">Logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;Train RMSD Score: </span><span class="si">{0:.4f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mdl_train_rmsd</span><span class="p">),</span> <span class="s2">&quot;INFO&quot;</span><span class="p">)</span>
@@ -588,9 +597,9 @@
             <span class="s2">&quot;train_rmsd&quot;</span><span class="p">:</span> <span class="n">mdl_train_rmsd</span><span class="p">,</span>
             <span class="s2">&quot;test_rmsd&quot;</span><span class="p">:</span> <span class="n">mdl_test_rmsd</span><span class="p">,</span>
         <span class="p">}</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_scores</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_scores</span>
 
-<div class="viewcode-block" id="Emulator.run"><a class="viewcode-back" href="../../../classes/emulators.html#olympus.emulators.emulator.Emulator.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">num_samples</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">return_paramvector</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">num_samples</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">return_paramvector</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Run the emulator and return a value given the features provided.</span>
 
 <span class="sd">        Args:</span>
@@ -653,9 +662,9 @@
             <span class="c1"># append object to list</span>
             <span class="n">y_pred_objects</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y_pred_object</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">y_pred_objects</span></div>
+        <span class="k">return</span> <span class="n">y_pred_objects</span>
 
-<div class="viewcode-block" id="Emulator.save"><a class="viewcode-back" href="../../../classes/emulators.html#olympus.emulators.emulator.Emulator.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;./olympus_emulator&quot;</span><span class="p">,</span> <span class="n">include_cv</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;./olympus_emulator&quot;</span><span class="p">,</span> <span class="n">include_cv</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Save the emulator in a specified location. This will save the emulator object as a pickle file, and the</span>
 <span class="sd">        associated TensorFlow model, in the specified location. The saved emulator can then be loaded with the</span>
 <span class="sd">        `olympus.emulators.load_emulator` function.</span>
@@ -670,7 +679,7 @@
 
         <span class="c1"># create path, or overwrite existing one</span>
         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
-            <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Overwriting existing emulator in </span><span class="si">{path}</span><span class="s2">!&quot;</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Overwriting existing emulator in </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">!&quot;</span>
             <span class="n">Logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="s2">&quot;WARNING&quot;</span><span class="p">)</span>
             <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
         <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
@@ -708,12 +717,12 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">emulator_to_save</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
 
         <span class="c1"># pickle emulator object</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{path}</span><span class="s2">/emulator.pickle&quot;</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">/emulator.pickle&quot;</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">emulator_to_save</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
 
         <span class="c1"># copy over model files</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_trained</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
-            <span class="n">shutil</span><span class="o">.</span><span class="n">copytree</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{self._scratch_dir.name}</span><span class="s2">/Model&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{path}</span><span class="s2">/Model&quot;</span><span class="p">)</span>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">copytree</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_scratch_dir</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">/Model&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">/Model&quot;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;The emulator you are saving has not been trained. Its model-related files will not be written to disk.&quot;</span>
             <span class="n">Logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="s2">&quot;WARNING&quot;</span><span class="p">)</span>
@@ -721,15 +730,15 @@
         <span class="c1"># if include_cv is True ==&gt; copy also CV models</span>
         <span class="k">if</span> <span class="n">include_cv</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cross_val_performed</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
-                <span class="k">for</span> <span class="n">folder</span> <span class="ow">in</span> <span class="n">glob</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{self._scratch_dir.name}</span><span class="s2">/Fold*&quot;</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">folder</span> <span class="ow">in</span> <span class="n">glob</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_scratch_dir</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">/Fold*&quot;</span><span class="p">):</span>
                     <span class="n">dirname</span> <span class="o">=</span> <span class="n">folder</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-                    <span class="n">shutil</span><span class="o">.</span><span class="n">copytree</span><span class="p">(</span><span class="n">folder</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{path}</span><span class="s2">/</span><span class="si">{dirname}</span><span class="s2">&quot;</span><span class="p">)</span>
+                    <span class="n">shutil</span><span class="o">.</span><span class="n">copytree</span><span class="p">(</span><span class="n">folder</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">dirname</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">message</span> <span class="o">=</span> <span class="p">(</span>
                     <span class="s2">&quot;You are trying to save the cross validation models for an emulator that did not perform &quot;</span>
                     <span class="s2">&quot;cross validation. No cross validation models to be saved.&quot;</span>
                 <span class="p">)</span>
-                <span class="n">Logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="s2">&quot;WARNING&quot;</span><span class="p">)</span></div>
+                <span class="n">Logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="s2">&quot;WARNING&quot;</span><span class="p">)</span>
 
         <span class="c1"># TODO: also dump some info in human readable format? json like we had before?</span>
 
@@ -754,11 +763,11 @@
 
     <span class="c1"># check path exists</span>
     <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">emulator_folder</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
-        <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Folder &quot;</span><span class="si">{emulator_folder}</span><span class="s1">&quot; does not exist&#39;</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Folder &quot;</span><span class="si">{</span><span class="n">emulator_folder</span><span class="si">}</span><span class="s1">&quot; does not exist&#39;</span>
         <span class="n">Logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="s2">&quot;FATAL&quot;</span><span class="p">)</span>
 
     <span class="k">try</span><span class="p">:</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{emulator_folder}</span><span class="s2">/emulator.pickle&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">emulator_folder</span><span class="si">}</span><span class="s2">/emulator.pickle&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">emulator_stored</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
         <span class="n">Logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;Failed to restore emulator&quot;</span><span class="p">,</span> <span class="s2">&quot;FATAL&quot;</span><span class="p">)</span>
@@ -769,8 +778,8 @@
             <span class="n">emulator_to_load</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">emulator_stored</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">message</span> <span class="o">=</span> <span class="p">(</span>
-                <span class="sa">f</span><span class="s1">&#39;Key &quot;</span><span class="si">{key}</span><span class="s1">&quot; from Emulator of olympus v.</span><span class="si">{emulator_stored._version}</span><span class="s1"> not found in Emulator &#39;</span>
-                <span class="sa">f</span><span class="s1">&#39;class of olympus v.</span><span class="si">{__version__}</span><span class="s1">). Attribute &quot;</span><span class="si">{key}</span><span class="s1">&quot; will not be set.&#39;</span>
+                <span class="sa">f</span><span class="s1">&#39;Key &quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">&quot; from Emulator of olympus v.</span><span class="si">{</span><span class="n">emulator_stored</span><span class="o">.</span><span class="n">_version</span><span class="si">}</span><span class="s1"> not found in Emulator &#39;</span>
+                <span class="sa">f</span><span class="s1">&#39;class of olympus v.</span><span class="si">{</span><span class="n">__version__</span><span class="si">}</span><span class="s1">). Attribute &quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">&quot; will not be set.&#39;</span>
             <span class="p">)</span>
             <span class="n">Logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="s2">&quot;WARNING&quot;</span><span class="p">)</span>
 
@@ -779,7 +788,7 @@
             <span class="n">features_dim</span><span class="o">=</span><span class="n">emulator_to_load</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">features_dim</span><span class="p">,</span>
             <span class="n">targets_dim</span><span class="o">=</span><span class="n">emulator_to_load</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">targets_dim</span><span class="p">,</span>
         <span class="p">)</span>
-        <span class="n">restored</span> <span class="o">=</span> <span class="n">emulator_to_load</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{emulator_folder}</span><span class="s2">/Model&quot;</span><span class="p">)</span>
+        <span class="n">restored</span> <span class="o">=</span> <span class="n">emulator_to_load</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">emulator_folder</span><span class="si">}</span><span class="s2">/Model&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">restored</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
             <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;failed to restore model&quot;</span>
             <span class="n">Logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="s2">&quot;ERROR&quot;</span><span class="p">)</span>
@@ -793,19 +802,17 @@
            
           </div>
           <footer>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2020, Matteo Aldeghi, Riley Hickman and Florian Häse
+        &#169; Copyright 2020, Matteo Aldeghi, Riley Hickman and Florian Häse.
 
     </p>
   </div> 
 
 </footer>
-
         </div>
       </div>
 
@@ -820,7 +827,7 @@
      aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <span class="fa fa-book"></span>
-        0+untagged.5.g054f7b4
+        0+unknown
       <span class="fa fa-caret-down"></span>
     </span>
 

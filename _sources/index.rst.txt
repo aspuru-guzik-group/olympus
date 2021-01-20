@@ -29,6 +29,8 @@ datasets (:ref:`datasets`) from across the natural sciences, including examples 
    examples/notebooks/use_emulators
    examples/notebooks/simple_benchmark
    examples/notebooks/larger_benchmarks
+   examples/notebooks/planners_interface
+   examples/notebooks/noisy_inputs
    examples/notebooks/custom_dataset
    examples/notebooks/custom_planner
 

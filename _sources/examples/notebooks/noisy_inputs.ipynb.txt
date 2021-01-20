@@ -1,0 +1,134 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Noisy Inputs"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "In **Olympus** we allow to add noise to the measurements. However, also noise in the input parameters may be added by the user. Here we show how one can artificially inject noise into the input parameters proposed by the experiment planning algorihms."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# import olympus\n",
+    "from olympus import Planner, Surface, Campaign\n",
+    "import numpy as np"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "planner = Planner('Hyperopt')\n",
+    "surface = Surface(kind='Dejong', param_dim=2)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Iter 1\n",
+      "------\n",
+      "Noiseless Parameters: [0.91516692 0.20302945]\n",
+      "Noisy Parameters: [ 0.73368038 -0.15661178]\n",
+      "Values: [4.09110448]\n",
+      "\n",
+      "Iter 2\n",
+      "------\n",
+      "Noiseless Parameters: [0.57761863 0.07672387]\n",
+      "Noisy Parameters: [0.61797856 0.10844515]\n",
+      "Values: [3.06495384]\n",
+      "\n",
+      "Iter 3\n",
+      "------\n",
+      "Noiseless Parameters: [0.59093962 0.16875164]\n",
+      "Noisy Parameters: [0.3161343  0.13549561]\n",
+      "Values: [3.26517068]\n",
+      "\n",
+      "Iter 4\n",
+      "------\n",
+      "Noiseless Parameters: [0.20300339 0.97610323]\n",
+      "Noisy Parameters: [0.44173351 1.19968439]\n",
+      "Values: [3.40847969]\n",
+      "\n",
+      "Iter 5\n",
+      "------\n",
+      "Noiseless Parameters: [0.41894133 0.59690823]\n",
+      "Noisy Parameters: [0.2575433  0.40528083]\n",
+      "Values: [2.53033984]\n",
+      "\n"
+     ]
+    }
+   ],
+   "source": [
+    "max_iter = 5\n",
+    "\n",
+    "# instantiate a Campaign object, which stores the results of the optimization\n",
+    "campaign = Campaign()\n",
+    "\n",
+    "# tell the planner what is the optimization domain\n",
+    "planner.set_param_space(surface.param_space)\n",
+    "\n",
+    "for i in range(max_iter):\n",
+    "    print(f\"Iter {i+1}\\n------\")\n",
+    "    \n",
+    "    # ask the planner for a new set of parameters\n",
+    "    params = planner.recommend(observations=campaign.observations)\n",
+    "    print('Noiseless Parameters:', params.to_array())\n",
+    "    \n",
+    "    # -----------------------------------------\n",
+    "    # Here we add noise to the input parameters \n",
+    "    # -----------------------------------------\n",
+    "    noisy_params = params.to_array() + np.random.normal(loc=0, scale=0.2, size=2)\n",
+    "    print('Noisy Parameters:', noisy_params)\n",
+    "    \n",
+    "    # evaluate the merit of the new parameters\n",
+    "    values = surface.run(noisy_params, return_paramvector=True)\n",
+    "    print('Values:', values[0].to_array())\n",
+    "\n",
+    "    # store parameter and measurement pair in campaign\n",
+    "    campaign.add_observation(params, values)\n",
+    "    \n",
+    "    print()"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "olympus",
+   "language": "python",
+   "name": "olympus"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.7.9"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 4
+}

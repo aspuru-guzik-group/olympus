@@ -1,43 +1,46 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>olympus.planners.planner_grid.wrapper_grid &mdash; Olympus 0+untagged.5.g054f7b4 documentation</title>
+  <title>olympus.planners.planner_grid.wrapper_grid &mdash; Olympus 0+unknown documentation</title>
   
-
-  
-  
-  
-  
-
-  
-  <script type="text/javascript" src="../../../../_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../../../_static/language_data.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
-        <script type="text/javascript" src="../../../../_static/js/versions.js"></script>
-    
-    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
-
-    
 
   
   <link rel="stylesheet" href="../../../../_static/css/msmb.css" type="text/css" />
   <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+        <script src="../../../../_static/js/versions.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
 </head>
@@ -66,7 +69,7 @@
             
             
               <div class="version">
-                0+untagged.5.g054f7b4
+                0+unknown
               </div>
             
           
@@ -83,6 +86,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -102,6 +106,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../examples/notebooks/use_emulators.html">Experiment emulators</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../examples/notebooks/simple_benchmark.html">Run a simple benchmark</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../examples/notebooks/larger_benchmarks.html">Run a larger benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/notebooks/planners_interface.html">Planners Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/notebooks/noisy_inputs.html">Noisy Inputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../examples/notebooks/custom_dataset.html">Custom Dataset</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../examples/notebooks/custom_planner.html">Custom Planner</a></li>
 </ul>
@@ -127,6 +133,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -161,11 +168,13 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="../../../index.html">Module code</a> &raquo;</li>
         
@@ -222,11 +231,11 @@
         <span class="n">AbstractPlanner</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="nb">locals</span><span class="p">())</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">grid_created</span> <span class="o">=</span> <span class="kc">False</span>
 
-<div class="viewcode-block" id="Grid.reset"><a class="viewcode-back" href="../../../../classes/planners/grid.html#olympus.planners.Grid.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Clears the remaining samples in the grid and prepares the planner for re-initialisation.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">samples_loc</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">samples</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">grid_created</span> <span class="o">=</span> <span class="kc">False</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grid_created</span> <span class="o">=</span> <span class="kc">False</span>
 
     <span class="k">def</span> <span class="nf">_set_param_space</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">param_space</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">param_space</span> <span class="o">=</span> <span class="n">param_space</span>
@@ -242,8 +251,8 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_levels</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">levels</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dims</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">levels</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">levels</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">levels</span><span class="p">)</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dims</span><span class="p">:</span>
-                <span class="n">message</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The number of levels provided ({len(self.levels)}) does not match dimensionality of the &#39;</span>
-                           <span class="sa">f</span><span class="s1">&#39;parameter space (</span><span class="si">{self.dimlists}</span><span class="s1">).&#39;</span><span class="p">)</span>
+                <span class="n">message</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The number of levels provided (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">levels</span><span class="p">)</span><span class="si">}</span><span class="s1">) does not match dimensionality of the &#39;</span>
+                           <span class="sa">f</span><span class="s1">&#39;parameter space (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">dimlists</span><span class="si">}</span><span class="s1">).&#39;</span><span class="p">)</span>
                 <span class="n">Logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="s1">&#39;ERROR&#39;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_levels</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">levels</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
@@ -303,10 +312,10 @@
             <span class="n">excess_type</span> <span class="o">=</span> <span class="s1">&#39;budgeted evaluations&#39;</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">excess_type</span> <span class="o">=</span> <span class="s1">&#39;grid points&#39;</span>
-        <span class="n">message</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Budget provided, discarding argument `levels`. Given a budget of </span><span class="si">{self.budget}</span><span class="s1"> and a &#39;</span>
-                   <span class="sa">f</span><span class="s1">&#39;parameter space of dimensionality </span><span class="si">{self.dims}</span><span class="s1">, we will explore </span><span class="si">{self.levels}</span><span class="s1"> levels. &#39;</span>
-                   <span class="sa">f</span><span class="s1">&#39;Given an excess of {np.abs(excess)} </span><span class="si">{excess_type}</span><span class="s1">, the effective number &#39;</span>
-                   <span class="sa">f</span><span class="s1">&#39;of evaluations required is </span><span class="si">{effective_budget}</span><span class="s1">.&#39;</span><span class="p">)</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Budget provided, discarding argument `levels`. Given a budget of </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">budget</span><span class="si">}</span><span class="s1"> and a &#39;</span>
+                   <span class="sa">f</span><span class="s1">&#39;parameter space of dimensionality </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">dims</span><span class="si">}</span><span class="s1">, we will explore </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">levels</span><span class="si">}</span><span class="s1"> levels. &#39;</span>
+                   <span class="sa">f</span><span class="s1">&#39;Given an excess of </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">excess</span><span class="p">)</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">excess_type</span><span class="si">}</span><span class="s1">, the effective number &#39;</span>
+                   <span class="sa">f</span><span class="s1">&#39;of evaluations required is </span><span class="si">{</span><span class="n">effective_budget</span><span class="si">}</span><span class="s1">.&#39;</span><span class="p">)</span>
         <span class="n">Logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="s1">&#39;INFO&#39;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_ask</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -328,19 +337,17 @@
            
           </div>
           <footer>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2020, Matteo Aldeghi, Riley Hickman and Florian Häse
+        &#169; Copyright 2020, Matteo Aldeghi, Riley Hickman and Florian Häse.
 
     </p>
   </div> 
 
 </footer>
-
         </div>
       </div>
 
@@ -355,7 +362,7 @@
      aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <span class="fa fa-book"></span>
-        0+untagged.5.g054f7b4
+        0+unknown
       <span class="fa fa-caret-down"></span>
     </span>
 
