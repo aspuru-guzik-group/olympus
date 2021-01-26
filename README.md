@@ -17,6 +17,10 @@ You can find more details in the [documentation](https://aspuru-guzik-group.gith
 pip install olymp
 ```
 
+You can explore ``Olympus`` using the following Colab notebook:
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/aspuru-guzik-group/olympus/blob/master/olympus_get_started.ipynb)
+
 ### Dependencies
 The installation only requires:
 * ``python >= 3.6``
