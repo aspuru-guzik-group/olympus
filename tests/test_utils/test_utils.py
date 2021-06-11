@@ -11,4 +11,5 @@ def test_r2_score():
 
     assert np.allclose(r2_score(data1, data2), r2_score0(data1, data2))
 
-test_r2_score()
+if __name__ == "__main__":
+    test_r2_score()
