@@ -5,6 +5,8 @@
 import uuid
 import traceback
 
+from ._r2_score import r2_score
+
 #===============================================================================
 
 def generate_id():
@@ -33,4 +35,3 @@ def check_planner_module(planner, module, link):
     available planner: {planners_list}'''
     check_module(module, message, planner=planner, planners_list=', '.join(get_planners_list()), link=link)
 
-#===============================================================================
