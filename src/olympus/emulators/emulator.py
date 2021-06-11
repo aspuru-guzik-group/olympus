@@ -7,7 +7,11 @@ import shutil
 from glob import glob
 from copy import deepcopy
 from tempfile import TemporaryDirectory
-from sklearn.metrics import r2_score
+try:
+    from sklearn.metrics import r2_score
+except ModuleNotFoundError:
+    # import minimal version
+    from olympus.utils.misc import r2_score
 
 from olympus import __emulator_path__, __scratch__, __version__, Logger
 from olympus.datasets.dataset import Dataset
@@ -15,6 +19,7 @@ from olympus.models.model import Model
 from olympus.models.abstract_model import AbstractModel
 from olympus.objects import Object, ParameterVector
 from olympus.utils.data_transformer import DataTransformer
+from olympus.utils.misc import r2_score
 from olympus.models.model import _validate_model_kind
 from olympus.datasets.dataset import _validate_dataset_args
 
