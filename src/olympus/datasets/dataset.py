@@ -11,6 +11,9 @@ from olympus.objects import Parameter
 import os
 from glob import glob
 
+#To silence VisibleDeprecationWarning we use 'ignore'. We can use 'error' instead of 'ignore' to get a traceback and resolve the issue. 
+np.warnings.filterwarnings('ignore', category=np.VisibleDeprecationWarning)
+
 
 # =========================
 # Main Class of This Module
