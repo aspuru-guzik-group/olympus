@@ -39,6 +39,7 @@ class ParticleSwarms(AbstractPlanner):
         while len(self.RECEIVED_VALUES) < self.particles:
             time.sleep(0.1)
         measurements = np.array(self.RECEIVED_VALUES)
+        measurements = np.reshape(measurements, (len(measurements),))
         self.RECEIVED_VALUES = []
         return measurements
 

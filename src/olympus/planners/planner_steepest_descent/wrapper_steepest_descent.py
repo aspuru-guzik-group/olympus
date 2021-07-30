@@ -62,8 +62,8 @@ class SteepestDescent(AbstractPlanner):
                 probed = self._priv_evaluator(perturb)
                 dy[index] = (probed - func) / self.dx
                 perturb[index] -= self.dx
-            guess = guess - self.eta * dy
-            guess = self._project_into_domain(domain)
+            guess = guess - self.learning_rate * dy
+            guess = self._project_into_domain(guess)
 
     def _ask(self):
         if self.has_optimizer is False:
@@ -71,7 +71,7 @@ class SteepestDescent(AbstractPlanner):
             self.has_optimizer = True
 
         while len(self.SUBMITTED_PARAMS) == 0:
-            print('SUBMITTED_PARAMS', len(self.SUBMITTED_PARAMS))
+            #print('SUBMITTED_PARAMS', len(self.SUBMITTED_PARAMS))
             time.sleep(0.1)
         params = self.SUBMITTED_PARAMS.pop(0)
         return ParameterVector().from_array(params, self.param_space)
