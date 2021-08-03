@@ -17,14 +17,27 @@ class Gryffin(AbstractPlanner):
         batches=1,
         sampling_strategies=[-1, 1],
         boosted=False,
-        caching=True,
         random_seed=None,
         acquisition_optimizer='adam',#'genetic',
         verbosity=4,
     ):
         """
-        Categorical Bayesian optimization based on Bayesian deep learning and Bayesian KDE
+        A Bayesian optimization algorithm based on Bayesian Kernel Density estimation.
+
         Args:
+            goal (str): The optimization goal, either 'minimize' or 'maximize'. Default is 'minimize'.
+            num_cpus (int): Number of parallel cpus to use in multiprocessing
+            auto_desc_gen (bool): switch on automatic descriptor refinement (for categorical params only)
+            batches (int): number of parameter batches to return at each 'ask'
+                iteration.
+            sampling_strategies (list): list of sampling strategies to use. Each sampling
+                strategy uses a different balance between exploration and exploitation.
+            boosted (bool): whether to use a lower fidelity approximation in
+                regions of low density during kernel density estimation. Setting
+                this to True reduces the run time of the planner.
+            random_seed (int): random seed
+            acquisition_optimizer (str): algorithm to optimize the acquisition function - currently
+                supported are 'adam' and 'genetic'
         """
         AbstractPlanner.__init__(**locals())
         # check for and set random seed
@@ -76,7 +89,7 @@ class Gryffin(AbstractPlanner):
                 "batches": self.batches,
                 "sampling_strategies": self.batches,
                 "boosted":  self.boosted,
-                "caching": self.caching,
+                "caching": True,
                 "random_seed": self.random_seed,
                 "acquisition_optimizer": self.acquisition_optimizer,
                 "verbosity": self.verbosity
