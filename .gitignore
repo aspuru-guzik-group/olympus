@@ -18,6 +18,11 @@
 *.log
 *olympus*.pkl
 
+#############
+# DEBUGGING #
+#############
+rileys_tests/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
