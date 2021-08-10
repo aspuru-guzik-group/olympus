@@ -71,7 +71,7 @@ class SteepestDescent(AbstractPlanner):
             self.has_optimizer = True
 
         while len(self.SUBMITTED_PARAMS) == 0:
-            print('SUBMITTED_PARAMS', len(self.SUBMITTED_PARAMS))
+            #print('SUBMITTED_PARAMS', len(self.SUBMITTED_PARAMS))
             time.sleep(0.1)
         params = self.SUBMITTED_PARAMS.pop(0)
         return ParameterVector().from_array(params, self.param_space)
