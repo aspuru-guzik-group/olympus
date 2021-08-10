@@ -6,7 +6,14 @@ from olympus.objects import ParameterVector
 
 class Gpyopt(AbstractPlanner):
 
-    def __init__(self, goal='minimize', batch_size=1, exact_eval=True, model_type='GP_MCMC', acquisition_type='EI_MCMC'):
+    def __init__(
+        self,
+        goal='minimize',
+        batch_size=1,
+        exact_eval=True,
+        model_type='GP_MCMC',
+        acquisition_type='EI_MCMC',
+    ):
         """
         Gaussian Process optimization as implemented in GPyOpt.
 
@@ -32,7 +39,7 @@ class Gpyopt(AbstractPlanner):
             self._param_space.append(param_dict)
 
     def _tell(self, observations):
-        self._params = observations.get_params(as_array = 'True')
+        self._params = observations.get_params(as_array=True)
         self._values = observations.get_values(as_array=True, opposite=self.flip_measurements)
 
     def _get_bo_instance(self):
@@ -44,7 +51,8 @@ class Gpyopt(AbstractPlanner):
                 exact_eval       = self.exact_eval,
                 model_type       = self.model_type,
                 acquisition_type = self.acquisition_type,
-                X = self._params, Y = self._values,
+                X = self._params,
+                Y = self._values,
             )
         return bo
 
