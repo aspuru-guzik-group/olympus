@@ -35,7 +35,11 @@ Logger = MessageLogger()
 
 from .objects import Object
 from .objects import Parameter
-from .objects import ParameterContinuous
+from .objects import (
+    ParameterContinuous,
+    ParameterDiscrete,
+    ParameterCategorical,
+)
 from .objects import ParameterVector
 
 from .campaigns import Campaign
