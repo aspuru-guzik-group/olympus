@@ -11,7 +11,7 @@ from olympus.objects import Parameter
 import os
 from glob import glob
 
-#To silence VisibleDeprecationWarning we use 'ignore'. We can use 'error' to get a traceback and resolve the issue. 
+#To silence VisibleDeprecationWarning we use 'ignore'. We can use 'error' to get a traceback and resolve the issue.
 np.warnings.filterwarnings('ignore', category=np.VisibleDeprecationWarning)
 
 # =========================
@@ -462,12 +462,12 @@ def _validate_dataset_args(kind, data, columns, target_names):
         module_path = os.path.dirname(os.path.abspath(__file__))
         olympus_datasets = []
         for dir_name in glob(f"{module_path}/dataset_*"):
-            
+
             if '/' in dir_name:
             	dir_name = dir_name.split("/")[-1][8:]
             elif '\\' in dir_name:
-            	dir_name = dir_name.split("\\")[-1][8:] 
-                
+            	dir_name = dir_name.split("\\")[-1][8:]
+
             olympus_datasets.append(dir_name)
         if kind not in olympus_datasets:
             message = (
