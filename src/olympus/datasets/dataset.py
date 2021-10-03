@@ -6,7 +6,13 @@ import numpy as np
 
 from olympus import Logger
 from olympus.campaigns import ParameterSpace
-from olympus.objects import Parameter, ParameterContinuous, ParameterDiscrete, ParameterCategorical
+from olympus.objects import   (
+    Parameter,
+    ParameterVector,
+    ParameterContinuous,
+    ParameterDiscrete,
+    ParameterCategorical,
+)
 
 import os
 from glob import glob
@@ -246,6 +252,52 @@ class Dataset:
             _description.append(f'        {target:<10}          continuous')
 
         self._description = "\n".join(_description)
+
+
+    def run(self, params, return_paramvector=False):
+        ''' run method to allow lookup of target values for fully categorical
+        parameter spaces. This method is named run to make it interchangable with
+        the emulator and surface objects within Olympus, such that it can be used in the
+        higher level Evaluator class for optimization runs and larger benchmarks
+
+        Args:
+            params (ndarray): 2d array which contains the input parameters
+            return_paramvector (bool): return an Olympus ParameterVector object
+                or a list of lists. Default is False
+
+        Returns:
+            values (ParamVector): output value referenced from the lookup table
+        '''
+        # check to see if we have a fully categorical space
+        if not np.all([param['type']=='categorical' for param in self.param_space]):
+            message = f'Value lookup only supported for fully categorical parameter spaces'
+            Logger.log(message, 'FATAL')
+
+        assert np.all([len(param)==len(self.feature_names) for param in params])
+
+        values = []
+        for param in params:
+            sub_df = self.data.copy()
+            for name, val in zip(self.feature_names, param):
+                sub_df = sub_df.loc[(sub_df[name]==val), :]
+            if not sub_df.shape[0]==1:
+                message = f'Could not find value for parameter setting {param}'
+                Logger.log(message, 'FATAL')
+
+            value_objs = []
+            # iterate over all objectives/targets
+            for target_name in self.target_names:
+                val = sub_df[target_name].tolist()[0]
+                if return_paramvector:
+                    value_obj = ParameterVector().from_dict({target_name: val})
+                else:
+                    value_obj = val
+                value_objs.append(value_obj)
+            values.append(value_obj)
+
+        return values
+
+
 
     # ----------------------------------
     # Methods about features and targets
