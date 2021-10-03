@@ -88,6 +88,16 @@ class Dataset:
             # create param_space from config file
             self._create_param_space(_config)
             self._create_value_space(_config)
+
+            # store the dataset type in an attribute ('full_cont', 'full_cat', 'mixed')
+            # TODO: for now, full_cont could include continous or discrete parameters, should we change this?
+            if np.all([param['type']=='categorical' for param in self.param_space]):
+                self.dataset_type = 'full_cat'
+            elif np.all([param['type'] in ['continuous', 'discrete'] for param in self.param_space]):
+                self.dataset_type = 'full_cont'
+            else:
+                self.dataset_type = 'mixed'
+
             # define attributes of interest - done here so to avoid calling load_dataset again
             self.constraints = _config["constraints"]
             self._goal = _config["default_goal"]
@@ -269,9 +279,13 @@ class Dataset:
             values (ParamVector): output value referenced from the lookup table
         '''
         # check to see if we have a fully categorical space
-        if not np.all([param['type']=='categorical' for param in self.param_space]):
+        if self.dataset_type is not 'full_cat':
             message = f'Value lookup only supported for fully categorical parameter spaces'
             Logger.log(message, 'FATAL')
+
+        # check to see if provided a list of param vectors
+        if np.all([type(param)==ParameterVector for param in params]):
+            params = [param.to_array() for param in params]
 
         assert np.all([len(param)==len(self.feature_names) for param in params])
 
