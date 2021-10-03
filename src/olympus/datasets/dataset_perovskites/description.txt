@@ -1,0 +1,18 @@
+Dataset of band gaps for hybrid organic/inorganic
+perovskite materials simulated at the HSE06 level
+of theory. Physicochemical descriptors for the
+individual components of the perovskites
+are available in Olympus.
+
+=========================================
+                Summary
+-----------------------------------------
+    Number of Samples             192
+    Dimensionality                 3
+    Features:
+        organic              categorical
+        cation               categorical
+        anion                categorical
+    Targets:
+        hse_gap              continuous
+=========================================

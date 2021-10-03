@@ -6,7 +6,7 @@ import numpy as np
 
 from olympus import Logger
 from olympus.campaigns import ParameterSpace
-from olympus.objects import Parameter
+from olympus.objects import Parameter, ParameterContinuous, ParameterDiscrete, ParameterCategorical
 
 import os
 from glob import glob
@@ -73,9 +73,12 @@ class Dataset:
         # Case 2: Olympus dataset loaded
         # ------------------------------
         elif kind is not None:
-            _data, _config, self._description = load_dataset(kind)
+            _data, _config, self._description, _descriptors = load_dataset(kind)
             self._targets = [t["name"] for t in _config["measurements"]]
             columns = [f["name"] for f in _config["parameters"]] + self._targets
+            # descriptors are stored in the descriptors attribute
+            desc_columns = ['param', 'option', 'name', 'value']
+            self.descriptors = DataFrame(data=_descriptors, index=None, columns=desc_columns)
             # create param_space from config file
             self._create_param_space(_config)
             self._create_value_space(_config)
@@ -85,6 +88,9 @@ class Dataset:
 
         # the numeric data is stored here, wrapping a DataFrame
         self.data = DataFrame(data=_data, index=None, columns=columns)
+
+
+
 
         # make sure the targets are the last column(s)
         for tgt in self._targets:
@@ -96,14 +102,14 @@ class Dataset:
     @property
     def goal(self):
         if not "_goal" in self.__dict__:
-            _data, _config, _description = load_dataset(self.kind)
+            _data, _config, _description, _ = load_dataset(self.kind)
             self._goal = _config["default_goal"]
         return self._goal
 
     @property
     def measurement_name(self):
         if not "_measurement_name" in self.__dict__:
-            _data, _config, _description = load_dataset(self.kind)
+            _data, _config, _description, _ = load_dataset(self.kind)
             self._measurement_name = _config["measurements"][0]["name"]
         return self._measurement_name
 
@@ -402,11 +408,41 @@ class Dataset:
     # ---------------
     # Private Methods
     # ---------------
+    def _get_descriptors(self, param):
+        ''' if categorical parameter options have descriptors have desc,
+        list of lists containing descriptors
+        '''
+        if not param['descriptors']:
+            # no descriptors, return None for each option
+            desc = [None for _ in param['options']]
+        else:
+            # we have some descritptors
+            desc = []
+            assert not type(self.descriptors)==type(None)
+            param_desc = self.descriptors[self.descriptors['param']==param['name']]
+            for option in param['options']:
+                d = param_desc[param_desc['option']==option]['value'].tolist()
+                desc.append(d)
+        return desc
+
     def _create_param_space(self, config):
+        # TODO: handle the categorical parameter instances
         self.param_space = ParameterSpace()
-        self.param_space.add(
-            [Parameter().from_dict(feature) for feature in config["parameters"]]
-        )
+        for param in config["parameters"]:
+            if param['type'] == 'categorical':
+                desc_ = self._get_descriptors(param)
+                self.param_space.add(
+                    ParameterCategorical(
+                        name=param['name'],
+                        options=param['options'],
+                        descriptors=desc_,
+                    )
+                )
+            # continuous or categorical
+            else:
+                self.param_space.add(
+                   [Parameter().from_dict(param)]
+                )
 
     def _create_value_space(self, config):
         self.value_space = ParameterSpace()
@@ -450,7 +486,15 @@ def load_dataset(kind):
     except FileNotFoundError:
         Logger.log(f"Could not find data.csv for dataset {kind}", "FATAL")
 
-    return data, config, description
+    # load descriptors
+    csv_file = "".join(f'{datasets_path}/dataset_{kind}/descriptors.csv')
+    try:
+        descriptors = read_csv(csv_file, header=None).to_numpy()
+    except FileNotFoundError:
+        Logger.log(f'No descriptors found for dataset {kind}', 'WARNING')
+        descriptors = None
+
+    return data, config, description, descriptors
 
 
 def _validate_dataset_args(kind, data, columns, target_names):

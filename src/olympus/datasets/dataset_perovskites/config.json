@@ -1,0 +1,18 @@
+{
+	"constraints": {
+		"parameters":   "none",
+		"measurements": "none"
+		},
+	"parameters": [
+			{"name": "organic", "type": "categorical", "options": ["ethylammonium", "propylammonium", "butylammonium", "isopropylammonium",
+            "dimethylammonium", "acetamidinium", "methylammonium", "guanidinium",
+            "hydroxylammonium", "formamidinium", "tetramethylammonium", "hydrazinium",
+            "ammonium", "trimethylammonium", "azetidinium", "imidazolium"], "descriptors": ["homo", "lumo", "dipole", "atomization", "r_gyr", "total_mass"]},
+			{"name": "cation", "type": "categorical", "options": ["Ge", "Sn", "Pb"], "descriptors": ["electron_affinity", "ionization_energy", "mass", "electronegativity"]},
+			{"name": "anion",  "type": "categorical", "options": ["F", "Cl", "Br", "I"], "descriptors": ["electron_affinity", "ionization_energy", "mass", "electronegativity"]}
+		],
+    "measurements": [
+			{"name": "hse_gap", "type": "continuous"}
+		],
+    "default_goal": "minimize"
+}
