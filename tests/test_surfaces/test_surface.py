@@ -5,6 +5,9 @@ import pytest
 from olympus.surfaces import Surface
 from olympus.surfaces import get_surfaces_list
 
+CAT_SURFS = ['CatDejong', 'CatAckley', 'CatMichalewicz', 'CatCamel', 'CatSlope']
+GMM_SURFS = ['Denali', 'Everest', 'K2', 'Kilimanjaro', 'Matterhorn', 'MontBlanc', 'GaussianMixture']
+
 
 def test_init():
     surface = Surface(kind='Dejong', param_dim=2)
@@ -20,11 +23,12 @@ def test_run_dejong():
 
 
 @pytest.mark.parametrize("kind", get_surfaces_list())
-def test_surfaces(kind):
-    surface = Surface(kind=kind, param_dim=2)
-    min_dicts = surface.minima
-    if kind not in ['Denali', 'Everest', 'K2', 'Kilimanjaro', 'Matterhorn', 'MontBlanc', 'GaussianMixture']:
-        for min_dict in min_dicts:
-            params, value = min_dict['params'], min_dict['value']
-            calc_value = surface.run(params)[0][0]
-            np.testing.assert_almost_equal(value, calc_value)
+def test_cont_surfaces(kind):
+    if not kind in CAT_SURFS:
+        surface = Surface(kind=kind, param_dim=2)
+        min_dicts = surface.minima
+        if kind not in GMM_SURFS:
+            for min_dict in min_dicts:
+                params, value = min_dict['params'], min_dict['value']
+                calc_value = surface.run(params)[0][0]
+                np.testing.assert_almost_equal(value, calc_value)

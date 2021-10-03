@@ -7,7 +7,7 @@ from . import import_surface
 from . import AbstractSurface
 
 
-def Surface(kind='Dejong', param_dim=2):
+def Surface(kind='Dejong', param_dim=2, num_opts=None):
     """Convenience function to access surfaces via a slightly higher level interface. It returns a certain surface
     with defaults arguments by keyword.
 
@@ -28,6 +28,15 @@ def Surface(kind='Dejong', param_dim=2):
             if param_dim != 2:
                 message = f'Surface {kind} is only defined in 2 dimensions: setting `param_dim`=2'
                 Logger.log(message, 'WARNING')
+        elif kind in ['CatDejong', 'CatAckley', 'CatMichalewicz', 'CatCamel', 'CatSlope']:
+            # categorical surface
+            if not num_opts:
+                message = f'Categorical surface chosen, but `num_opts` not defined. Setting `num_opts=21`'
+                Logger.log(message, 'WARNING')
+                num_opts = 21
+            else:
+                pass
+            surface = surface(param_dim=param_dim, num_opts=num_opts)
         else:
             surface = surface(param_dim=param_dim)
     # if an instance of a planner is passed, simply return the same instance
@@ -71,3 +80,9 @@ def _validate_surface_kind(kind):
     else:
         message = 'Could not initialize Surface: the argument "kind" is neither a string or AbstractSurface subclass'
         Logger.log(message, 'FATAL')
+
+
+# DEBUGGING
+if __name__ == '__main__':
+    surf = Surface(kind='CatMichalewicz', param_dim=2, num_opts=21)
+    print(surf.minima)
