@@ -6,10 +6,34 @@ from olympus.planners import planner_names
 import pytest
 
 
-test_tuples = []
-for planner in planner_names:
-    for dataset in datasets_list:
-        test_tuples.append((planner, dataset))
+CONT_PLANNERS = [
+    'Snobfit', 'Phoenics', 'Slsqp', 'Genetic',
+    'ConjugateGradient', 'RandomSearch', 'DifferentialEvolution',
+    'ParticleSwarms', 'SteepestDescent', 'Cma', 'Grid',
+    'Hyperopt', 'BasinHopping', 'Gpyopt', 'Lbfgs',
+    'LatinHypercube', 'Sobol', 'Gryffin', 'Simplex',
+]
+
+CAT_PLANNERS = []
+
+EMULATED_DATASETS = [
+    'snar', 'photo_wf3', 'benzylation',
+    'fullerenes', 'colors_bob', 'photo_pce10',
+    'alkox', 'hplc', 'colors_n9', 'suzuki',
+]
+
+FULL_CAT_DATASETS = ['perovskites']
+
+
+emulated_tuples = []
+for planner in CONT_PLANNERS:
+    for dataset in EMULATED_DATASETS:
+        emulated_tuples.append((planner, dataset))
+
+full_cat_tuples = []
+for planner in CAT_PLANNERS:
+    for dataset in FULL_CAT_DATASETS:
+        full_cat_tuples.append((planner, dataset))
 
 @pytest.mark.parametrize("planner, dataset", test_tuples)
 def test_bnn_emulators_optimization(planner, dataset):
@@ -22,3 +46,5 @@ def test_bnn_emulators_optimization(planner, dataset):
         pass
 
 
+# TODO: implement optimization tests of fully categorical and mixed datasets
+# TODO: also test optimization with descriptors vs optimization without

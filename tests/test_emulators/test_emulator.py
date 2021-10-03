@@ -6,6 +6,12 @@ from olympus.emulators import Emulator, list_trained_emulators
 from olympus.datasets import Dataset, datasets_list
 from olympus.models import BayesNeuralNet, NeuralNet, get_models_list
 
+EMULATED_DATASETS = [
+    'snar', 'photo_wf3', 'benzylation',
+    'fullerenes', 'colors_bob', 'photo_pce10',
+    'alkox', 'hplc', 'colors_n9', 'suzuki',
+]
+
 
 def test_init_existing():
     emulator = Emulator(dataset='hplc', model='BayesNeuralNet')
@@ -26,7 +32,7 @@ def test_init_with_objects():
 
 def test_loading_all_emulators():
     models_list = get_models_list()
-    for dataset in datasets_list:
+    for dataset in EMULATED_DATASETS:
         for model in ['BayesNeuralNet', 'NeuralNet']:
             _ = Emulator(dataset=dataset, model=model)
 

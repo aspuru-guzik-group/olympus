@@ -168,8 +168,6 @@ class ParameterSpace:
         for param_ix, param_val in enumerate(param_vector):
             param = self[param_ix]
             if param.type in ['continuous',  'discrete']:
-                print('PARAM LOW : ', param.low)
-                print('PARAM HIGH :', param.high)
                 is_valid = is_valid and param.low <= param_val
                 is_valid = is_valid and param.high >= param_val
             elif param.type == 'categorical':

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import time
-import numpy as np 
+import numpy as np
 
 from olympus.objects                   import ParameterVector
 from olympus.planners.abstract_planner import AbstractPlanner
@@ -9,7 +9,7 @@ from olympus.planners.abstract_planner import AbstractPlanner
 
 #===============================================================================
 
-class RandomSearch(AbstractPlanner):    
+class RandomSearch(AbstractPlanner):
 
     def __init__(self, goal='minimize', seed=None):
         AbstractPlanner.__init__(**locals())
@@ -26,13 +26,10 @@ class RandomSearch(AbstractPlanner):
     def _ask(self):
         vals = []
         for param in self.param_space:
-            if param.type == 'continuous': 
+            if param.type == 'continuous':
                 val = np.random.uniform(low=param.low, high=param.high)
             else:
                 raise NotImplementedError
             vals.append(val)
         vals = np.array(vals)
         return ParameterVector().from_array(vals, self.param_space)
-
-
-

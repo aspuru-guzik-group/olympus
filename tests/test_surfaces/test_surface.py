@@ -21,6 +21,12 @@ def test_run_dejong():
     values = surface.run(params)[0][0]
     assert values < 1e-7
 
+def test_run_catdejong():
+    surface = Surface(kind='CatDejong', param_dim=2, num_opts=21)
+    params = ['x10', 'x10']
+    values = surface.run(params)[0][0]
+    assert values < 1e-7
+
 
 @pytest.mark.parametrize("kind", get_surfaces_list())
 def test_cont_surfaces(kind):
@@ -32,3 +38,4 @@ def test_cont_surfaces(kind):
                 params, value = min_dict['params'], min_dict['value']
                 calc_value = surface.run(params)[0][0]
                 np.testing.assert_almost_equal(value, calc_value)
+                

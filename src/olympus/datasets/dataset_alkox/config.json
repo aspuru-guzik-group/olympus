@@ -4,10 +4,10 @@
 		"measurements": "positive"
 		},
 	"parameters": [
-			{"name": "catalase", "low": 0.05, "high": 1.0},
-			{"name": "peroxidase", "low": 0.5, "high": 10.0},
-			{"name": "alcohol_oxidase",  "low": 2.0, "high": 8.0},
-			{"name": "ph",    "low": 6.0, "high": 8.0}
+			{"name": "catalase", "type": "continuous", "low": 0.05, "high": 1.0},
+			{"name": "peroxidase", "type": "continuous", "low": 0.5, "high": 10.0},
+			{"name": "alcohol_oxidase", "type": "continuous", "low": 2.0, "high": 8.0},
+			{"name": "ph",  "type": "continuous",  "low": 6.0, "high": 8.0}
 		],
     "measurements": [
 			{"name": "conversion", "type": "continuous"}

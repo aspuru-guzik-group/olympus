@@ -4,9 +4,9 @@
 		"measurements": "simplex"
 		},
 	"parameters": [
-			{"name": "red", "type": "continuous", "lower": 0.0, "upper": 1.0},
-			{"name": "green", "type": "continuous", "lower": 0.0, "upper": 1.0},
-			{"name": "blue",  "type": "continuous", "lower": 0.0, "upper": 1.0}
+			{"name": "red", "type": "continuous", "low": 0.0, "high": 1.0},
+			{"name": "green", "type": "continuous", "low": 0.0, "high": 1.0},
+			{"name": "blue",  "type": "continuous", "low": 0.0, "high": 1.0}
 		],
     "measurements": [
 			{"name": "difference_to_green", "type": "continuous"}
