@@ -14,7 +14,7 @@ CONT_PLANNERS = [
     'LatinHypercube', 'Sobol', 'Gryffin', 'Simplex',
 ]
 
-CAT_PLANNERS = []
+CAT_PLANNERS = ['RandomSearch']
 
 EMULATED_DATASETS = [
     'snar', 'photo_wf3', 'benzylation',
@@ -35,7 +35,7 @@ for planner in CAT_PLANNERS:
     for dataset in FULL_CAT_DATASETS:
         full_cat_tuples.append((planner, dataset))
 
-@pytest.mark.parametrize("planner, dataset", test_tuples)
+@pytest.mark.parametrize("planner, dataset", emulated_tuples)
 def test_bnn_emulators_optimization(planner, dataset):
     # this is because e.g. excitonics does not have a BNN emulator yet
     try:
@@ -48,3 +48,10 @@ def test_bnn_emulators_optimization(planner, dataset):
 
 # TODO: implement optimization tests of fully categorical and mixed datasets
 # TODO: also test optimization with descriptors vs optimization without
+#
+# @pytest.mark.parametrize("planner, dataset", full_cat_tuples)
+# def test_full_cat_optimization(planner, dataset):
+#
+#     dset = Dataset(kind=dataset)
+#     planner = Planner(kind=planner, goal='minimize')
+#     campaign = planner.optimize(emulator=emulator, num_iter=3)
