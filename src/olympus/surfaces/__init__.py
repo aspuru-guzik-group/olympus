@@ -73,6 +73,13 @@ class SurfaceLoader:
     def list_surfaces(self):
         return sorted(self.surface_names)
 
+    def list_cont_surfaces(self):
+        all_surfaces = self.list_surfaces()
+        return [surf for surf in all_surfaces if not surf.startswith('Cat')]
+
+    def list_cat_surfaces(self):
+        all_surfaces = self.list_surfaces()
+        return [surf for surf in all_surfaces if surf.startswith('Cat')]
+
 
 sys.modules[__name__] = SurfaceLoader(**locals())
-

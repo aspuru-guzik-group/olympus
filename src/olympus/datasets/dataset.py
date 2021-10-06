@@ -99,6 +99,9 @@ class Dataset:
             else:
                 self.dataset_type = 'mixed'
 
+            # param_type attribute stores unique parameter types for the dataset
+            self.param_types = list(set([param['type'] for param in self.param_space]))
+
             # define attributes of interest - done here so to avoid calling load_dataset again
             self.constraints = _config["constraints"]
             self._goal = _config["default_goal"]
@@ -279,6 +282,9 @@ class Dataset:
         Returns:
             values (ParamVector): output value referenced from the lookup table
         '''
+        # TODO: this is a hack to artificially inflate params (1d --> 2d)
+        if len(params.shape)==1:
+            params = params.reshape((1, params.shape[0]))
         # check to see if we have a fully categorical space
         if self.dataset_type is not 'full_cat':
             message = f'Value lookup only supported for fully categorical parameter spaces'
