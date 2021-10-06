@@ -4,7 +4,6 @@ import numpy as np
 
 from olympus.planners              import AbstractPlanner
 from olympus.objects               import ParameterVector
-from olympus.objects.object_config import Config
 
 
 class Gryffin(AbstractPlanner):
