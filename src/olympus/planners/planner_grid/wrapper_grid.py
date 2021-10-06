@@ -8,6 +8,8 @@ from olympus import Logger
 
 class Grid(AbstractPlanner):
 
+    PARAM_TYPES = ['continuous', 'discrete', 'categorical']
+
     def __init__(
         self,
         goal='minimize',

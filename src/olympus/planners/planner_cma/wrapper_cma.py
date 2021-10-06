@@ -10,6 +10,8 @@ from olympus.utils    import daemon
 
 class Cma(AbstractPlanner):
 
+    PARAM_TYPES = ['continuous']
+
     def __init__(self, goal='minimize', stddev=0.5, init_guess=None,
                  init_guess_method='random', init_guess_seed=None):
         """

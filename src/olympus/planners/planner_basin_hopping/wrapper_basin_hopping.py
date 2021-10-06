@@ -13,6 +13,8 @@ from olympus.utils                  import daemon
 
 class BasinHopping(AbstractPlanner):
 
+    PARAM_TYPES = ['continuous']
+
     # defaults are copied from scipy documentation
     # --> https://docs.scipy.org/doc/scipy-0.19.0/reference/generated/scipy.optimize.basinhopping.html
     def __init__(self, goal='minimize', niter=100, T=1.0, stepsize=0.5, minimizer_kwargs=None,

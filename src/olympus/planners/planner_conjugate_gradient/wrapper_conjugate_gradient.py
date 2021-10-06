@@ -8,6 +8,8 @@ from olympus.objects.object_config  import Config
 
 class ConjugateGradient(WrapperScipy):
 
+    PARAM_TYPES = ['continuous']
+
     METHOD = 'cg'
 
     # defaults are copied from scipy documentation

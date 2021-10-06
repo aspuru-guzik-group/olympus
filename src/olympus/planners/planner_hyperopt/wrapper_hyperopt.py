@@ -10,6 +10,9 @@ from olympus.objects import ParameterVector
 
 class Hyperopt(AbstractPlanner):
 
+    PARAM_TYPES = ['continuous', 'categorical']
+
+
     def __init__(self, goal='minimize', show_progressbar=False):
         """
         Tree of Parzen Estimators (TPE) as implemented in HyperOpt.

@@ -15,6 +15,8 @@ from olympus.planners.abstract_planner import AbstractPlanner
 
 class RandomSearch(AbstractPlanner):
 
+    PARAM_TYPES = ['continuous', 'discrete', 'categorical']
+
     def __init__(self, goal='minimize', seed=None):
         AbstractPlanner.__init__(**locals())
         if self.seed is None:

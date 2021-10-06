@@ -26,6 +26,7 @@ except ModuleNotFoundError:
 	https://www.automl.org/automated-algorithm-design/algorithm-configuration/smac/ for further instructions'''.format(module = module)
 	Logger.log(message, 'FATAL')
 
+param_types = ['continuous']
 #======================================================================
 
 from .wrapper_smac import Smac

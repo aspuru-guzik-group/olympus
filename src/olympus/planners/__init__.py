@@ -58,10 +58,17 @@ class PlannerLoader:
 		_class = getattr(module, attr)
 		return _class
 
+	@staticmethod
+	def get_param_types(name):
+		file = PlannerLoader.class_to_file(name)
+		module = __import__(f'olympus.planners.planner_{file}', fromlist=[name])
+		return module.param_types
+
 
 	def _find_planners(self):
 		self.planner_files = []
 		self.planner_names = []
+		self.planner_param_types = []
 		self.planners_map  = {}
 		for dir_name in glob.glob(f'{__home__}/planner_*'):
 
@@ -73,9 +80,26 @@ class PlannerLoader:
 			self.planner_files.append(planner_name)
 			self.planner_names.append(PlannerLoader.file_to_class(planner_name))
 
-
 	def get_planners_list(self):
 		return sorted(self.planner_names)
+
+	def get_cont_planners_list(self):
+		''' return list of all planner which can handle continuous variables
+		'''
+		planner_param_types = [PlannerLoader.get_param_types(name) for name in self.planner_names]
+		return [planner for planner, types in zip(self.planner_names, planner_param_types) if 'continuous' in types]
+
+	def get_disc_planners_list(self):
+		''' return list of all planners which can handle discrete variables
+		'''
+		planner_param_types = [PlannerLoader.get_param_types(name) for name in self.planner_names]
+		return [planner for planner, types in zip(self.planner_names, planner_param_types) if 'discrete' in types]
+
+	def get_cat_planners_list(self):
+		''' return list of all planners which can handle categorical variables
+		'''
+		planner_param_types = [PlannerLoader.get_param_types(name) for name in self.planner_names]
+		return [planner for planner, types in zip(self.planner_names, planner_param_types) if 'categorical' in types]
 
 	def list_planners(self):
 		return sorted(self.planner_names)

@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import os
 import json
 from pandas import DataFrame, read_csv
 import numpy as np
@@ -554,10 +555,14 @@ def load_dataset(kind):
 
     # load descriptors
     csv_file = "".join(f'{datasets_path}/dataset_{kind}/descriptors.csv')
-    try:
+    # try:
+    #     descriptors = read_csv(csv_file, header=None).to_numpy()
+    # except FileNotFoundError:
+    #     Logger.log(f'No descriptors found for dataset {kind}', 'WARNING')
+    #     descriptors = None
+    if os.path.isfile(csv_file):
         descriptors = read_csv(csv_file, header=None).to_numpy()
-    except FileNotFoundError:
-        Logger.log(f'No descriptors found for dataset {kind}', 'WARNING')
+    else:
         descriptors = None
 
     return data, config, description, descriptors

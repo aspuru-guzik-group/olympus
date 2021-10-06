@@ -14,6 +14,8 @@ from olympus.objects import ParameterVector
 
 class Dragonfly(AbstractPlanner):
 
+    PARAM_TYPES = ['continuous', 'discrete', 'categorical']
+
     def __init__(
         self,
         goal='minimize',

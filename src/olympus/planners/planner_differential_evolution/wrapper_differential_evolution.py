@@ -13,6 +13,8 @@ from olympus.utils                     import daemon
 
 class DifferentialEvolution(AbstractPlanner):
 
+    PARAM_TYPES = ['continuous']
+
     # defaults are copied from scipy documentation
     # --> https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.differential_evolution.html
     def __init__(self, goal='minimize', args=(), strategy='best1bin', maxiter=1000, popsize=15,

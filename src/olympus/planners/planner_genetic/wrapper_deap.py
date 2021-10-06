@@ -13,6 +13,8 @@ from copy import deepcopy
 # ==========
 class Genetic(AbstractPlanner):
 
+    PARAM_TYPES = ['continuous']
+
     def __init__(self, goal='minimize', pop_size=10, cx_prob=0.5, mut_prob=0.2, verbose=False,
                  mate_args={'function':tools.cxTwoPoint},
                  mutate_args={'function':tools.mutGaussian, 'mu':0, 'sigma':0.2, 'indpb':0.2},
@@ -237,4 +239,3 @@ class Genetic(AbstractPlanner):
                 return offspring
             return wrapper
         return decorator
-

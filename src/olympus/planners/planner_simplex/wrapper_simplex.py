@@ -6,6 +6,8 @@ from olympus.objects.object_config import Config
 
 class Simplex(WrapperScipy):
 
+    PARAM_TYPES = ['continuous']
+
     METHOD = 'Nelder-Mead'
 
     # defaults are copied from scipy documentation

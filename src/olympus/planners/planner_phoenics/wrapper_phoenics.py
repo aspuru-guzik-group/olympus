@@ -9,6 +9,8 @@ from olympus.objects.object_config import Config
 
 class Phoenics(AbstractPlanner):
 
+    PARAM_TYPES = ['continuous']
+
     def __init__(self, goal='minimize', batches=1, boosted=True, parallel=True, sampling_strategies=2):
         """
         A Bayesian optimization algorithm based on Bayesian Kernel Density estimation.

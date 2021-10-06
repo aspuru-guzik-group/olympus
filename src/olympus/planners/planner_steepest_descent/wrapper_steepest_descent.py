@@ -12,6 +12,9 @@ from olympus.utils    import daemon
 
 class SteepestDescent(AbstractPlanner):
 
+    PARAM_TYPES = ['continuous']
+
+
     def __init__(self, goal='minimize', learning_rate=1e-3, dx=1e-5, random_seed=None,
                  init_guess=None, init_guess_method='random', init_guess_seed=None):
         """
