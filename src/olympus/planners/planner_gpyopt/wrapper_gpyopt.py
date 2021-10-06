@@ -5,8 +5,6 @@ import numpy as np
 from olympus.planners import AbstractPlanner
 from olympus.objects import ParameterVector
 
-from olympus import Planner
-
 
 class Gpyopt(AbstractPlanner):
 
@@ -15,14 +13,12 @@ class Gpyopt(AbstractPlanner):
         goal='minimize',
         batch_size=1,
         exact_eval=True,
-        model_type='GP',
-        acquisition_type='EI',
-        num_init_design=2,
-        init_design_type='RandomSearch',
+        model_type='GP', #'GP_MCMC',
+        acquisition_type='EI', #'EI_MCMC',
+        initial_design_num_data=1,
     ):
         """
         Gaussian Process optimization as implemented in GPyOpt.
-
         Args:
             goal (str): The optimization goal, either 'minimize' or 'maximize'. Default is 'minimize'.
             batch_size (int): size of the batch in which the objective is evaluated.
@@ -34,35 +30,62 @@ class Gpyopt(AbstractPlanner):
                 expected improvement (requires GP_MCMC model). 'MPI': maximum probability of improvement. 'MPI_MCMC':
                 maximum probability of improvement (requires GP_MCMC model). 'LCB': GP-Lower confidence bound. 'LCB_MCMC':
                 integrated GP-Lower confidence bound (requires GP_MCMC model).
-            num_init_design (int): the number of points to be measurement using the initial design strategy
-            init_design_type (str): Olympus planner name for the intial design strategy - supports only RandomSearch
-                for now
         """
         AbstractPlanner.__init__(**locals())
-
-        if self.init_design_type == 'RandomSearch':
-            self.init_design_planner = Planner(
-                kind=self.init_design_type, goal=self.goal,
-            )
-        else:
-            raise NotImplementedError
-
+        self.has_categorical = False
 
     def _set_param_space(self, param_space):
         self._param_space = []
         for param in param_space:
             if param.type == 'continuous':
-                param_dict = {'name': param.name, 'type': param.type, 'domain': (param.low, param.high)}
+                param_dict = {'name': param.name, 'type': param.type, 'domain': (param.low, param.high), 'dimensionality': 1}
+            elif param.type == 'categorical':
+                # generate an array of integers corresponding to each categorical variable option
+                param_dict = {
+                        'name': param.name, 'type': param.type,
+                        'domain': np.arange(len(param.options)), 'dimensionality': 1,
+                        'original': param.options
+                    }
+                self.has_categorical = True
+            elif param.type == 'discrete':
+                # make a map between discrete options and an array of integers that can be referenced later
+                # TODO: this is a bit of a hack, since it will only work if upper and lower bounds are actually
+                # included in the options
+                num_options = (param.high-param.low / param.stride)+1
+                options = np.linspace(param.low, param.high, num_options)
+                print(num_options, options)
+                param_dict = {
+                    'name': param.name, 'type': param.type,
+                    'domain': options, 'dimensionality': 1,
+                }
+            else:
+                raise NotImplementedError(
+                    f'Parameter type {param.type} for {param.name} is not implemnted'
+                )
             self._param_space.append(param_dict)
 
-        self.init_design_planner.set_param_space(self.param_space)
-
     def _tell(self, observations):
-        self._params = observations.get_params(as_array=True)
-        self._values = np.array(observations.get_values(as_array=True, opposite=self.flip_measurements))
+        self.observations = observations
+        self._params = self.observations.get_params(as_array=True)
+        self._values = np.array(self.observations.get_values(as_array=True, opposite=self.flip_measurements))
+
         # need to inflate the shape, I guess (at least 2d)
         if len(self._values.shape) == 1:
             self._values = self._values.reshape(-1, 1)
+        # apply transformation for categorical variables "olympus --> Gpyopt"
+        #if self.has_categorical:
+        self._gpyopt_params = []
+        for obs in self._params:
+            gpyopt_obs = []
+            for param_ix, param in enumerate(self._param_space):
+                if param['type'] == 'categorical':
+                    ix = param['original'].index(obs[param_ix])
+                    gpyopt_obs.append(int(ix))
+                else:
+                    gpyopt_obs.append(obs[param_ix])
+            self._gpyopt_params.append(gpyopt_obs)
+        self._gpyopt_params = np.array(self._gpyopt_params)
+
 
     def _get_bo_instance(self):
         from GPyOpt.methods import BayesianOptimization
@@ -73,21 +96,66 @@ class Gpyopt(AbstractPlanner):
                 exact_eval       = self.exact_eval,
                 model_type       = self.model_type,
                 acquisition_type = self.acquisition_type,
-                X = self._params,
-                Y = self._values,
-                de_duplication = True,
+                X                = self._gpyopt_params,
+                Y                = self._values,
+                de_duplication   = True,
             )
         return bo
 
     def _ask(self):
-        if self._params is None or len(self._params) < self.num_init_design:
-            # initial design suggestions
-            param = self.init_design_planner.ask(return_as=None)
-            return_param = param
-        else:
-            # bo suggestions
-            bo    = self._get_bo_instance()
-            array = bo.suggest_next_locations()[0]
-            return_param = ParameterVector().from_array(array, self.param_space)
+        params_return = []
+        if 0 <= len(self._params) < self.initial_design_num_data:
+            # do the initial design randomly
+            from olympus.planners import Planner
+            init_design_planner = Planner(kind='RandomSearch', goal=self.goal)
+            init_design_planner.set_param_space(self.param_space)
 
-        return return_param
+            for _ in range(self.batch_size):
+                init_design_planner.tell(self.observations)
+                param = init_design_planner.ask(return_as=None)
+                params_return.append(param)
+
+        else:
+            bo = self._get_bo_instance()
+            array = bo.suggest_next_locations()
+            for batch_ix in range(self.batch_size):
+                # transform back to Olympus categotical parameters
+                array_olymp = []
+                for param_ix, suggestion in enumerate(array[batch_ix]):
+                    if self._param_space[param_ix]['type'] == 'categorical':
+                        array_olymp.append(
+                            self._param_space[param_ix]['original'][int(suggestion)]
+                        )
+                    else:
+                        array_olymp.append(suggestion)
+                params_return.append(ParameterVector().from_array(array_olymp, self.param_space))
+
+        # TODO: this is a hack returning the first list element
+        return params_return[0]
+
+
+# DEBUG:
+if __name__ == '__main__':
+
+    from olympus.datasets import Dataset
+    from olympus import Campaign
+
+    d = Dataset(kind='perovskites')
+
+    planner = Gpyopt(goal='minimize')
+    planner.set_param_space(d.param_space)
+
+    campaign = Campaign()
+    campaign.set_param_space(d.param_space)
+
+    BUDGET = 200
+    for i in range(BUDGET):
+        print(f'ITERATION : ', i)
+
+        sample = planner.recommend(campaign.observations)
+        print('SAMPLE : ', sample)
+
+        measurement = d.run([sample], return_paramvector=False)[0]
+        print('MEASUREMENT : ', measurement)
+
+        campaign.add_observation(sample, measurement)

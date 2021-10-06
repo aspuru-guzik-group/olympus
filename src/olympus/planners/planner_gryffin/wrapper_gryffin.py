@@ -22,7 +22,8 @@ class Gryffin(AbstractPlanner):
         verbosity=4,
     ):
         """
-        A Bayesian optimization algorithm based on Bayesian Kernel Density estimation.
+        A Bayesian optimization algorithm based on Bayesian Kernel Density estimation which supports
+        categorical variables
 
         Args:
             goal (str): The optimization goal, either 'minimize' or 'maximize'. Default is 'minimize'.
@@ -55,6 +56,23 @@ class Gryffin(AbstractPlanner):
                     "low": param.low,
                     "high": param.high,
                 }
+            elif param.type == 'discrete':
+                param_dict = {
+                    "name": param.name,
+                    "type": param.type,
+                    "size": 1,
+                    "low": param.low,
+                    "high": param.high,
+                    "stride": param.stride,
+                }
+            elif param.type == 'categorical':
+                param_dict = {
+                    "name": param.name,
+                    "type": param.type,
+                    "size": 1,
+                    "options": param.options,
+                    "descriptors": param.descriptors,
+                }
             else:
                 raise NotImplementedError(f'Parameter type {param.type} for {param.name} not implemnted')
             self._param_space.append(param_dict)
@@ -70,8 +88,10 @@ class Gryffin(AbstractPlanner):
             # format the observations
             obs = {}
             for param_val, space_true in zip(param, self.param_space.parameters):
-
-                obs[space_true.name] = np.float(param_val)
+                if space_true.type == "categorical":
+                    obs[space_true.name] = param_val
+                else:
+                    obs[space_true.name] = np.float(param_val)
             obs["obj"] = self._values[obs_ix]
             obs["obj"] = np.squeeze(obs["obj"])
 
@@ -79,9 +99,25 @@ class Gryffin(AbstractPlanner):
 
 
     def _get_gryffin_instance(self):
+
         from gryffin import Gryffin as ActualGryffin
 
         params = self.param_space.item()
+        # gryffin expects category detail dict for categorical parameters
+        # with options as keys and descriptors as values, e.g.
+        # {'A':[1, 2], 'B':[5,6]}
+        # if there are no descriptors, then use None or empty lists as the values
+        # {'A':None, 'B':None}`` or ``{'A':[], 'B':[]}
+        for param in params:
+            if param['type'] == 'categorical':
+                category_details = {
+                    str(param['options'][ix]): param['descriptors'][ix]
+                    for ix in range(len(param['options']))
+                }
+                param['category_details'] = category_details
+                del param['options']
+                del param['descriptors']
+
         config = {
             "general": {
                 "num_cpus": self.num_cpus,
@@ -97,7 +133,6 @@ class Gryffin(AbstractPlanner):
             "parameters": params,
             "objectives": [{'name': 'obj', 'goal': self.goal[:3]}],
         }
-
         self.gryffin = ActualGryffin(config_dict=config)
 
 
@@ -117,3 +152,31 @@ class Gryffin(AbstractPlanner):
         param = params[0]
 
         return ParameterVector().from_dict(param, self.param_space)
+
+
+
+# DEBUG:
+if __name__ == '__main__':
+
+    from olympus.datasets import Dataset
+    from olympus import Campaign
+
+    d = Dataset(kind='perovskites')
+
+    planner = Gryffin(goal='minimize')
+    planner.set_param_space(d.param_space)
+
+    campaign = Campaign()
+    campaign.set_param_space(d.param_space)
+
+    BUDGET = 200
+    for i in range(BUDGET):
+        print(f'ITERATION : ', i)
+
+        sample = planner.recommend(campaign.observations)
+        print('SAMPLE : ', sample)
+
+        measurement = d.run([sample], return_paramvector=False)[0]
+        print('MEASUREMENT : ', measurement)
+
+        campaign.add_observation(sample, measurement)

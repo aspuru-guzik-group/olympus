@@ -8,7 +8,15 @@ from olympus import Logger
 
 class Grid(AbstractPlanner):
 
-    def __init__(self, goal='minimize', levels=2, budget=None, exceed_budget=True, shuffle=False, random_seed=None):
+    def __init__(
+        self,
+        goal='minimize',
+        levels=2,
+        budget=None,
+        exceed_budget=True,
+        shuffle=False,
+        random_seed=None,
+    ):
         """Grid search.
 
         Note that the number of samples grow exponentially with the number of dimensions. E.g. for a 2-dimensional
@@ -71,7 +79,21 @@ class Grid(AbstractPlanner):
 
         # define location of grid samples for each dimension
         for param, level in zip(self.param_space, self._levels):
-            loc = np.linspace(start=param.low, stop=param.high, num=level)
+            if param.type == 'continuous':
+                loc = np.linspace(start=param.low, stop=param.high, num=level)
+            elif param.type == 'discrete':
+                num_options = int(((param.high-param.low)/param.stride)+1)
+                options = np.linspace(param.low, param.high, num_options)
+                tiled_options = np.tile(options, (level//num_options)+1)
+                if self.shuffle:
+                    np.random.shuffle(tiled_options)
+                loc = tiled_options[:level]
+            elif param.type == 'categorical':
+                options = param.options
+                num_options = len(param.options)
+                tiled_options = np.tile(options, (level//num_options)+1)
+                loc = tiled_options[:level]
+
             self.samples_loc.append(loc)
 
         meshgrid = np.stack(np.meshgrid(*self.samples_loc), len(self.samples_loc))  # make grid
@@ -79,12 +101,10 @@ class Grid(AbstractPlanner):
 
         # all grid samples in a 2D array
         self.samples = np.reshape(meshgrid, newshape=(num_samples, len(self.samples_loc)))
-
         # shuffle is we are sampling these points at random
         if self.shuffle is True:
             np.random.seed(self.random_seed)
             np.random.shuffle(self.samples)
-
         self.samples = list(self.samples)
         self.grid_created = True
 
@@ -125,7 +145,15 @@ class Grid(AbstractPlanner):
     def _ask(self):
         if self.grid_created is False:
             self._create_grid()
+
         param = self.samples.pop(0)
+
+        olymp_param = []
+        for param_ix, suggestion in enumerate(param):
+            if self.param_space[param_ix] in ['continuous', 'discrete']:
+                olymp_param.append(np.float(suggestion))
+            else:
+                olymp_param.append(suggestion)
 
         if len(self.samples) == 0:
             message = 'Last parameter being provided - there will not be any more available samples in the grid.'
@@ -135,3 +163,29 @@ class Grid(AbstractPlanner):
 
 
 
+# DEBUG:
+if __name__ == '__main__':
+
+    from olympus.datasets import Dataset
+    from olympus import Campaign
+
+    BUDGET = 100
+
+    d = Dataset(kind='perovskites')
+
+    planner = Grid(goal='minimize', budget=BUDGET, shuffle=True)
+    planner.set_param_space(d.param_space)
+
+    campaign = Campaign()
+    campaign.set_param_space(d.param_space)
+
+    for i in range(BUDGET):
+        print(f'ITERATION : ', i)
+
+        sample = planner.recommend(campaign.observations)
+        print('SAMPLE : ', sample)
+
+        measurement = d.run([sample], return_paramvector=False)[0]
+        print('MEASUREMENT : ', measurement)
+
+        campaign.add_observation(sample, measurement)

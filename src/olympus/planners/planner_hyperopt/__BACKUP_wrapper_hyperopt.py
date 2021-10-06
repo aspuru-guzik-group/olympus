@@ -1,4 +1,3 @@
-
 #!/usr/bin/env python
 
 from hyperopt import fmin, tpe, hp, Trials, STATUS_OK, JOB_STATE_DONE
@@ -10,9 +9,14 @@ from olympus.objects import ParameterVector
 
 class Hyperopt(AbstractPlanner):
 
-    def __init__(self, goal='minimize', show_progressbar=False):
+    def __init__(
+        self,
+        goal='minimize',
+        show_progressbar=False,
+    ):
         """
         Tree of Parzen Estimators (TPE) as implemented in HyperOpt.
+
         Args:
             goal (str): The optimization goal, either 'minimize' or 'maximize'. Default is 'minimize'.
             show_progressbar (bool): If True, show a progressbar.
@@ -40,11 +44,10 @@ class Hyperopt(AbstractPlanner):
         # update hyperopt space accordingly
         self._set_hp_space()
 
+
     def _tell(self, observations):
         self._params = observations.get_params(as_array=False)
-        self._values = observations.get_values(
-            as_array=True, opposite=self.flip_measurements,
-        )
+        self._values = observations.get_values(as_array=True, opposite=self.flip_measurements)
         # update hyperopt Trials accordingly
         self._set_hp_trials()
 
@@ -54,9 +57,8 @@ class Hyperopt(AbstractPlanner):
         for param in self._param_space:
             if param['type'] == 'continuous':
                 space.append((param['name'], hp.uniform(param['name'], param['domain'][0], param['domain'][1])))
-            if param['type'] == 'categorical':
+            elif param['type'] == 'categorical':
                 space.append((param['name'], hp.choice(param['name'], param['options'])))
-
         # update instance attribute that is the space input for Hyperopt fmin
         self._hp_space = OrderedDict(space)
 
@@ -81,31 +83,23 @@ class Hyperopt(AbstractPlanner):
                 self._trials.refresh()
 
     def _ask(self):
-
         # NOTE: we pass a dummy function as we just ask for the new (+1) set of parameters
-        _ = fmin(
-            fn=lambda x: 0,
-            space=self._hp_space,
-            algo=tpe.suggest,
-            max_evals=self.num_generated,
-            trials=self._trials,
-            show_progressbar=self.show_progressbar,
-        )
+        _ = fmin(fn=lambda x: 0, space=self._hp_space, algo=tpe.suggest, max_evals=self.num_generated,
+                 trials=self._trials, show_progressbar=self.show_progressbar)
+
         # make sure the number of parameters asked matches the number of Hyperopt iterations/trials
         assert len(self._trials.trials) == self.num_generated
         # get params from last dict in trials.trials
         proposed_params = self._trials.trials[-1]['misc']['vals']
 
-        return_params = {}
-        # iterate through the olympus param space
-        for param_ix, param in enumerate(self._param_space):
-            value = proposed_params[param['name']]
-            if param['type'] == 'continuous':
-                return_params[param['name']] = value[0]
-            elif param['type'] == 'categorical':
-                return_params[param['name']] = param['options'][value[0]] # reference option
 
-        return ParameterVector(dict=return_params, param_space=self.param_space)
+        for param_ix, (key, value) in enumerate(proposed_params.items()):
+            if self._param_space[param_ix]['type'] == 'continuous':
+                proposed_params[key] = value[0]
+            elif self._param_space[param_ix]['type'] == 'categorical':
+                proposed_params[key] = self._param_space[param_ix]['options'][value[0]]
+
+        return ParameterVector(dict=proposed_params, param_space=self.param_space)
 
 
 # DEBUG:
@@ -122,7 +116,7 @@ if __name__ == '__main__':
     campaign = Campaign()
     campaign.set_param_space(d.param_space)
 
-    BUDGET = 30
+    BUDGET = 200
     for i in range(BUDGET):
         print(f'ITERATION : ', i)
 
