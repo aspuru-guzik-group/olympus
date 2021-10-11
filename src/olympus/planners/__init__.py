@@ -64,14 +64,10 @@ class PlannerLoader:
 		self.planner_names = []
 		self.planners_map  = {}
 		for dir_name in glob.glob(f'{__home__}/planner_*'):
-
-			if '/' in dir_name:
-				planner_name = dir_name.split('/')[-1][8:]
-			elif '\\' in dir_name:
-				planner_name = dir_name.split('/')[-1][8:]
-
-			self.planner_files.append(planner_name)
-			self.planner_names.append(PlannerLoader.file_to_class(planner_name))
+			if 'planner_' in os.path.split(dir_name)[-1][:8]:
+				planner_name = os.path.split(dir_name)[-1][8:]
+				self.planner_files.append(planner_name)
+				self.planner_names.append(PlannerLoader.file_to_class(planner_name))
 
 
 	def get_planners_list(self):
