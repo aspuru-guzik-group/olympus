@@ -461,12 +461,11 @@ def _validate_dataset_args(kind, data, columns, target_names):
         # TODO: reduce redundant code by importing the list from where we have it already
         module_path = os.path.dirname(os.path.abspath(__file__))
         olympus_datasets = []
-        for dir_name in glob(f"{module_path}/dataset_*"):
-
-            if '/' in dir_name:
-            	dir_name = dir_name.split("/")[-1][8:]
-            elif '\\' in dir_name:
-            	dir_name = dir_name.split("\\")[-1][8:]
+        for dir_name in os.scandir(module_path):
+            
+            if 'dataset_' in os.path.split(dir_name)[-1][:8]:
+                dir_name = os.path.split(dir_name)[-1][8:]
+                olympus_datasets.append(dir_name)
 
             olympus_datasets.append(dir_name)
         if kind not in olympus_datasets:
