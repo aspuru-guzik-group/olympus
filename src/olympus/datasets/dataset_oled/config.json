@@ -1,0 +1,15 @@
+{
+	"constraints": {
+		"parameters":   "none",
+		"measurements": "none"
+		},
+	"parameters": [
+			{"name": "donor", "type": "categorical", "options": ["D1", "D2", "D3", "D4", "D5", "D6"], "descriptors": ["HOMO(eV)", "LUMO(eV)", "IP(eV)", "EA(eV)", "excE(eV)"]},
+			{"name": "bridge", "type": "categorical", "options": ["B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8", "B9"], "descriptors": ["HOMO(eV)", "LUMO(eV)", "IP(eV)", "EA(eV)", "excE(eV)"]},
+			{"name": "acceptor", "type": "categorical", "options": ["A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8"], "descriptors": ["HOMO(eV)", "LUMO(eV)", "IP(eV)", "EA(eV)", "excE(eV)"]}
+		],
+    "measurements": [
+			{"name": "exc_osc(a.u.)", "type": "continuous"}
+		],
+    "default_goal": "maximize"
+}

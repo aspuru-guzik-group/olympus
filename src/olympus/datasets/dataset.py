@@ -110,8 +110,6 @@ class Dataset:
         self.data = DataFrame(data=_data, index=None, columns=columns)
 
 
-
-
         # make sure the targets are the last column(s)
         for tgt in self._targets:
             assert tgt in list(self.data.columns)[-len(self._targets) :]
