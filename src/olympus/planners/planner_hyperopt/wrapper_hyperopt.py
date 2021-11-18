@@ -1,6 +1,6 @@
 
 #!/usr/bin/env python
-
+import numpy as np
 from hyperopt import fmin, tpe, hp, Trials, STATUS_OK, JOB_STATE_DONE
 from collections import OrderedDict
 
@@ -48,23 +48,34 @@ class Hyperopt(AbstractPlanner):
         self._values = observations.get_values(
             as_array=True, opposite=self.flip_measurements,
         )
+    #    print(self._params)
+    #    print(self._values)
+        print(len(self._params))
+        print(len(self._values))
         # update hyperopt Trials accordingly
         self._set_hp_trials()
+
+
 
     def _set_hp_space(self):
         space = []
         # go through all parameters we have defined and convert them to Hyperopt format
         for param in self._param_space:
             if param['type'] == 'continuous':
-                space.append((param['name'], hp.uniform(param['name'], param['domain'][0], param['domain'][1])))
-            if param['type'] == 'categorical':
-                space.append((param['name'], hp.choice(param['name'], param['options'])))
+                space.append(
+                    (param['name'], hp.uniform(param['name'], param['domain'][0], param['domain'][1]))
+                )
+            elif param['type'] == 'categorical':
+                space.append(
+                    (param['name'], hp.choice(param['name'], param['options'] ))
+                ) # map to integers
 
         # update instance attribute that is the space input for Hyperopt fmin
         self._hp_space = OrderedDict(space)
 
     def _set_hp_trials(self):
         self._trials = Trials()
+        print(self._params)
         if self._params is not None and len(self._params) > 0:
             for tid, (param, loss) in enumerate(zip(self._params, self._values)):
                 idxs = {k: [tid] for k, v in param.items()}
@@ -84,6 +95,12 @@ class Hyperopt(AbstractPlanner):
                 self._trials.refresh()
 
     def _ask(self):
+
+        print('\n\n')
+        print(len(self._params))
+        print(self._hp_space)
+        print(self.num_generated)
+        print(self._trials)
 
         # NOTE: we pass a dummy function as we just ask for the new (+1) set of parameters
         _ = fmin(

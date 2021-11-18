@@ -64,9 +64,10 @@ class Olympus(Object):
         dataset_obj = Dataset(kind=dataset)
 
         for param_type in dataset_obj.param_types:
-            if not self._check_planner_param_type(planner, param_type):
-                message = f'Planner {planner} cannot handle {param_type} parameters!'
-                Logger.log(message, 'FATAL')
+            print(planner)
+            # if not self._check_planner_param_type(planner, param_type):
+            #     message = f'Planner {planner} cannot handle {param_type} parameters!'
+            #     Logger.log(message, 'FATAL')
 
         if 'continuous' in dataset_obj.param_types:
             # we need a NN emulator
