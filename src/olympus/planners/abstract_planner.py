@@ -135,7 +135,7 @@ class AbstractPlanner(Object, metaclass=ABCMeta):
         """Optimizes a surface for a fixed number of iterations.
 
         Args:
-            emulator (object): Emulator or a Surface instance to optimize over.
+            emulator (object): Emulator, Dataset, or Surface instance to optimize over.
             num_iter (int): Maximum number of iterations allowed.
             verbose (bool): Whether to print information to screen.
 
@@ -158,6 +158,8 @@ class AbstractPlanner(Object, metaclass=ABCMeta):
         # This is used by Deap for example, to clear the latest population before doing another optimization
         if callable(getattr(self, "reset", None)):
             self.reset()
+
+        # TODO: add check to see if planner and emulator/dataset/surface are compatible
 
         # use campaign to store info, and then to be returned
         campaign = Campaign()

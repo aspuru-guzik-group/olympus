@@ -92,7 +92,7 @@ class Dataset:
 
             # store the dataset type in an attribute ('full_cont', 'full_cat', 'mixed')
             # TODO: for now, full_cont could include continous or discrete parameters, should we change this?
-            if np.all([param['type']=='categorical' for param in self.param_space]):
+            if np.all([param['type'] in ['categorical', 'discrete'] for param in self.param_space]):
                 self.dataset_type = 'full_cat'
             elif np.all([param['type'] in ['continuous', 'discrete'] for param in self.param_space]):
                 self.dataset_type = 'full_cont'
@@ -283,8 +283,8 @@ class Dataset:
             values (ParamVector): output value referenced from the lookup table
         '''
         # TODO: this is a hack to artificially inflate params (1d --> 2d)
-        if len(params.shape)==1:
-            params = params.reshape((1, params.shape[0]))
+        # if len(params.shape)==1:
+        #     params = params.reshape((1, params.shape[0]))
         # check to see if we have a fully categorical space
         if self.dataset_type is not 'full_cat':
             message = f'Value lookup only supported for fully categorical parameter spaces'
@@ -300,7 +300,10 @@ class Dataset:
         for param in params:
             sub_df = self.data.copy()
             for name, val in zip(self.feature_names, param):
+                val = round(val, 5) # five should be max precision, but his may cause errors
+                print(name, val, type(val))
                 sub_df = sub_df.loc[(sub_df[name]==val), :]
+                print(sub_df.head())
             if not sub_df.shape[0]==1:
                 message = f'Could not find value for parameter setting {param}'
                 Logger.log(message, 'FATAL')

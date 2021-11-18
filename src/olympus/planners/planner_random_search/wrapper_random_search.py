@@ -94,9 +94,9 @@ if  __name__ == '__main__':
     from olympus.datasets import Dataset
     from olympus import Campaign
 
-    d = Dataset(kind='perovskites')
+    d = Dataset(kind='cross_barrel')
 
-    planner = RandomSearch(goal='minimize')
+    planner = RandomSearch(goal='maximize')
     planner.set_param_space(d.param_space)
 
     campaign = Campaign()

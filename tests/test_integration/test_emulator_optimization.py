@@ -38,12 +38,12 @@ for planner in CAT_PLANNERS:
 @pytest.mark.parametrize("planner, dataset", emulated_tuples)
 def test_bnn_emulators_optimization(planner, dataset):
     # this is because e.g. excitonics does not have a BNN emulator yet
-    try:
-        emulator = Emulator(dataset=dataset, model='BayesNeuralNet')
-        planner = Planner(kind=planner, goal='minimize')
-        campaign = planner.optimize(emulator=emulator, num_iter=3)
-    except:
-        pass
+    #try:
+    emulator = Emulator(dataset=dataset, model='BayesNeuralNet')
+    planner = Planner(kind=planner, goal='minimize')
+    campaign = planner.optimize(emulator=emulator, num_iter=3)
+    #except:
+    #    pass
 
 
 # TODO: implement optimization tests of fully categorical and mixed datasets
