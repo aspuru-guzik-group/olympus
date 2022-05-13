@@ -98,9 +98,11 @@ class Emulator(Object):
                 transformations=self.target_transform
             )
 
+
         # create tmp dir to store model files
         # also if we are loading a model (the user could call 'train' again)
         self._scratch_dir = TemporaryDirectory(dir=f"{__scratch__}", prefix="emulator_")
+
 
     def __str__(self):
         if self.dataset is not None and self.model is not None:

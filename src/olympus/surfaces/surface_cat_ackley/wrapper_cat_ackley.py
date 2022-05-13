@@ -18,6 +18,7 @@ class CatAckley(AbstractSurface):
 		''' descriptors must be an iterable with the length num_opts
 		For these surfaces, the same descriptors are used for each dimension
 		'''
+		value_dim = 1
 		AbstractSurface.__init__(param_type='categorical', **locals())
 
 

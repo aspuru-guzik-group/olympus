@@ -1,0 +1,17 @@
+{
+  "constraints": {
+		"parameters": "none",
+		"measurements": "positive"
+		},
+	"parameters": [
+			{"name": "p3ht_content", "type": "continuous", "low": 15.0,  "high": 96.27},
+			{"name": "d1_content", "type": "continuous", "low": 0.0,  "high": 60.0},
+			{"name": "d2_content", "type": "continuous", "low": 0.0,  "high": 70.0},
+      {"name": "d6_content", "type": "continuous", "low": 0.0,  "high": 85.0},
+			{"name": "d8_content", "type": "continuous", "low": 0.0,  "high": 75.0}
+		],
+	"measurements": [
+		{"name": "conductivity", "type": "continuous"}
+	],
+    "default_goal": "maximize"
+}

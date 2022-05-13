@@ -15,6 +15,7 @@ class Branin(AbstractSurface):
             noise (Noise): Noise object that injects noise into the evaluations of the surface. Default is None.
         """
         param_dim = 2
+        value_dim = 1
         AbstractSurface.__init__(**locals())
 
     @property

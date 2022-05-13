@@ -3,10 +3,11 @@
 import numpy as np
 from olympus.emulators.emulator import Emulator
 from olympus.surfaces.surface import AbstractSurface
-from olympus.objects import Object
+from olympus.objects import Object, ParameterContinuous
 from olympus.utils import generate_id
 from olympus.campaigns import ParameterSpace
 from olympus.campaigns import Observations
+from olympus import Logger
 
 
 class Campaign(Object):
@@ -38,7 +39,12 @@ class Campaign(Object):
     ATT_ID = {"type": "string", "default": generate_id}
     ATT_OBSERVATIONS = {"type": "Observations", "default": Observations}
     ATT_PARAM_SPACE = {"type": "ParameterSpace", "default": ParameterSpace}
+    ATT_VALUE_SPACE = {"type": "ParameterSpace", "default": ParameterSpace}
     ATT_PLANNER_KIND = {"type": "string", "default": "n/a"}
+
+    ATT_IS_MOO = {"type": "bool", "default": False}
+    ATT_SCALARIZED_OBSERVATIONS = {"type": "Observations", "default": Observations}
+
 
     def __repr__(self):
         repr_ = f"<Campaign (dataset={self.dataset_kind}, model={self.model_kind}, planner={self.planner_kind}, num_iter={len(self.params)})>"
@@ -53,21 +59,74 @@ class Campaign(Object):
         return self.observations.get_values(*args, **kwargs)
 
     @property
+    def scalarized_values(self, *args, **kwargs):
+        return self.scalarized_observations.get_values(*args, **kwargs)
+
+    @property
     def best_values(self):
-        vals = self.observations.get_values()
-        if len(vals) == 0:
-            return vals
-        best_vals = [vals[0]]
-        for val in vals[1:]:
-            if self.goal == "minimize":
-                best_vals.append(np.minimum(val, best_vals[-1]))
-            elif self.goal == "maximize":
-                best_vals.append(np.maximum(val, best_vals[-1]))
-        best_vals = np.array(best_vals)
-        return best_vals
+        ''' returns an array of the best objective function values at each
+        iteration of the campaign
+        '''
+        # check to see if we have a moo problem
+        if self.is_moo:
+            # multiobjective optimization, the minimum scalarized merit
+            # value always corresponds to the best parameters (irrespective
+            # of the individual optimization goals)
+            vals = self.observations.get_values()
+            scal_vals = self.scalarized_observations.get_values()
+            if len(scal_vals) == 0:
+                return vals
+            best_vals = [vals[0]]
+            best_merit = scal_vals[0]
+            for idx, scal_val, val in enumerate(scal_vals[1:], vals[1:]):
+                to_add = np.argmin([scal_val, best_merit])  # 0 means add current measurement, 1 means re-append previous best
+                best_vals.append([val, best_vals[-1]])
+            best_vals = np.array(best_vals)
+            return best_vals
+
+        else:
+            vals = self.observations.get_values()
+            if len(vals) == 0:
+                return vals
+            best_vals = [vals[0]]
+            for val in vals[1:]:
+                if self.goal == "minimize":
+                    best_vals.append(np.minimum(val, best_vals[-1]))
+                elif self.goal == "maximize":
+                    best_vals.append(np.maximum(val, best_vals[-1]))
+            best_vals = np.array(best_vals)
+            return best_vals
 
     def add_observation(self, param, value):
         self.observations.add_observation(param, value)
+
+    def add_and_scalarize(self, param, value, scalarizer):
+        # successively add observation, then scalarize the entire history
+        # of objective measurements
+        self.observations.add_observation(param, value)
+        self.scalarized_observations.add_observation(param, 1.) # dummy objective value
+
+        # compute the scalarized merits from the objective values
+        values = self.observations.get_values() # (# obs, # objs)
+        merits = scalarizer.scalarize(values)
+        # update scalarized_observations
+        self.reset_merit_history(merits)
+
+
+    def reset_merit_history(self, merits):
+        ''' updates the scalarized_observation history with a 1d list or
+        array of merits values
+        '''
+        if not len(merits)==len(self.scalarized_observations.get_values):
+            message = 'Length of provided merits does not match the number of current observations'
+            Logger.log(message, 'FATAL')
+        dim_merits = len(np.array(merits).shape)
+        if not dim_merits==1:
+            message = f'Merits must be a 1D list or array. You provided a {dim_merits}D array.'
+            Logger.log(message, 'FATAL')
+        # TODO: should we check here if the merits are bewteen 0 and 1? nessecary??
+        self.scalarized_observations.values = merits
+
 
     def set_planner_specs(self, planner):
         self.set_planner_kind(planner.kind)
@@ -76,10 +135,23 @@ class Campaign(Object):
     def set_param_space(self, param_space):
         self.param_space = param_space
         self.observations.set_param_space(param_space)
+        # FOR MOO
+        self.scalarized_observations.set_param_space(param_space)
 
     def set_value_space(self, value_space):
         self.value_space = value_space
         self.observations.set_value_space(value_space)
+        # for moo --> make merit objective
+        self.scalarized_observations.set_value_space(
+            ParameterSpace().add(
+                ParameterContinuous(
+                        name='merit',
+                        low=0.,
+                        high=1.,
+                    )
+            )
+        )
+
 
     def set_emulator_specs(self, emulator):
         """Store info about the Emulator (or Surface) into the campaign object.

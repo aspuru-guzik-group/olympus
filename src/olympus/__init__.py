@@ -27,7 +27,7 @@ del get_versions
 # ===============================================================================
 # this is where we can read in environment variables to modify
 # the behavior of the logger
-from .utils import MessageLogger
+from .utils.logger import MessageLogger
 
 Logger = MessageLogger()
 

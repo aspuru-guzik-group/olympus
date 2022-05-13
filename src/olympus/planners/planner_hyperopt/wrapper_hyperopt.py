@@ -33,6 +33,12 @@ class Hyperopt(AbstractPlanner):
                     'type': param.type,
                     'domain': (param.low, param.high),
                 }
+            elif param.type == 'discrete':
+                param_dict = {
+                    'name': param.name,
+                    'type': param.type,
+                    'domain': (param.low, param.high, param.stirde),
+                }
             elif param.type == 'categorical':
                 param_dict = {
                     'name': param.name,
@@ -64,6 +70,10 @@ class Hyperopt(AbstractPlanner):
             if param['type'] == 'continuous':
                 space.append(
                     (param['name'], hp.uniform(param['name'], param['domain'][0], param['domain'][1]))
+                )
+            elif param['type'] == 'discrete':
+                space.append(
+                    (param['name'], hp.quniform(param['name'], param['domian'][0],  param['domian'][1],  param['domian'][2]))
                 )
             elif param['type'] == 'categorical':
                 space.append(

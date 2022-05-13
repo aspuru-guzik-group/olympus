@@ -31,7 +31,7 @@ class AbstractSurface(Object, metaclass=ABCMeta):
 			Logger.log(message, 'FATAL')
 
 		self._create_param_space(self.param_dim)
-		self._create_value_space()
+		self._create_value_space(value_dim=self.value_dim)
 
 	def _validate_param_type(self):
 		return self.param_type in self.ACCEPTED_PARAM_TYPES

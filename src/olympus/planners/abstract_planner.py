@@ -192,9 +192,13 @@ class AbstractPlanner(Object, metaclass=ABCMeta):
     def _validate_paramvector(self, param_vector):
         for key, value in param_vector.to_dict().items():
             param = self.param_space.get_param(name=key)
-            if param['type'] == 'continuous':
-                if not param['low'] <= value <= param['high']:
+            if param['type'] in ('continuous', 'discrete'):
+                if not param['low'] <= np.float(value) <= param['high']:
                     message = 'Proposed parameter {0} not within defined bounds ({1},{2})'.format(value, param['low'], param['high'])
+                    Logger.log(message, 'WARNING')
+            elif param['type'] == 'categorical':
+                if value not in param['options']:
+                    message = f'Proposed parameter {key} with {value} is not defined within the param options: {param["options"]}'
                     Logger.log(message, 'WARNING')
 
     def _project_into_domain(self, params):

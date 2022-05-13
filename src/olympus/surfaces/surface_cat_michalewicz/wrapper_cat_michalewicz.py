@@ -18,6 +18,7 @@ others. In addition, the number of pseudo-local minima scales factorially with t
 	def __init__(self, param_dim, num_opts, descriptors=None):
 		'''
 		'''
+		value_dim = 1
 		AbstractSurface.__init__(param_type='categorical', **locals())
 
 

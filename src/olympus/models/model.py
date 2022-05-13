@@ -27,7 +27,7 @@ def Model(kind='Neuralnet'):
 		model = kind()
 
 	return model
-	
+
 
 def _validate_model_kind(kind):
 	# if we received a string

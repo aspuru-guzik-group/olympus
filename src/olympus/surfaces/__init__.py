@@ -81,5 +81,14 @@ class SurfaceLoader:
         all_surfaces = self.list_surfaces()
         return [surf for surf in all_surfaces if surf.startswith('Cat')]
 
+    def list_moo_surfaces(self):
+        all_surfaces = self.list_surfaces()
+        return [surf for surf in all_surfaces if surf.startswith('Mult')]
+
+    def list_so_surfaces(self):
+        all_surfaces = self.list_surfaces()
+        return [surf for surf in all_surfaces if not surf.startswith('Mult')]
+
+
 
 sys.modules[__name__] = SurfaceLoader(**locals())

@@ -21,6 +21,7 @@
 #############
 # DEBUGGING #
 #############
+__DEV_/
 rileys_tests/
 
 # Byte-compiled / optimized / DLL files

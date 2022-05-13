@@ -1,0 +1,23 @@
+Crossed barrel 3D printed structure dataset.
+600 measurements with mechanical toughness
+objective. Reference: Aldair E Gongora,
+Bowen Xu, Wyatt Perry, Chika Okoye,
+Patrick Riley, Kristofer G Reyes, Elise F Morgan,
+and Keith A Brown. A bayesian experimental
+autonomous researcher for mechanical design.
+Science advances, 6(15):eaaz1708, 2020
+
+
+=========================================
+                Summary
+-----------------------------------------
+    Number of Samples             600
+    Dimensionality                 4
+    Features:
+        n                    continuous
+        theta                continuous
+        r                    continuous
+        t                    continuous
+    Targets:
+        toughness            continuous
+=========================================
