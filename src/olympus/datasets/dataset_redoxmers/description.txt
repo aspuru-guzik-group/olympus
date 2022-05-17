@@ -1,0 +1,18 @@
+Dataset of redoxmer candidates for the
+non-aqueous redox flow batteries.
+
+=========================================
+                Summary
+-----------------------------------------
+    Number of Samples             1408
+    Dimensionality                 4
+    Features:
+        r1_label           categorical (2 options)
+        r3_label           categorical (8 options)
+        r4_label           categorical (8 options)
+        r5_label           categorical (11 options)
+    Targets:
+        abs_lam_diff       continuous (min)
+        ered               continuous (min)
+        gsol               continuous (min)
+=========================================

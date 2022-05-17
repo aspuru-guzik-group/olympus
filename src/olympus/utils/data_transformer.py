@@ -93,6 +93,9 @@ class DataTransformer(Object):
         # ------------------------
         data = np.array(data)
 
+        print('DATA : ', type(data))
+        print('DATA INNER : ', type(data[0]))
+
         self._mean = np.mean(data, axis=0)
         self._stddev = np.std(data, axis=0)
         self._min = np.amin(data, axis=0)
@@ -247,3 +250,67 @@ class DataTransformer(Object):
     def _compose_transformations(functions_list):
         # compose transformations as provided in the list
         return lambda x: reduce(lambda a, f: f(a), functions_list, x)
+
+
+
+
+#--------------------------------
+# CUBE TO SIMLPEX TRANSFORMATION
+#--------------------------------
+
+def cube_to_simpl(cubes):
+    '''
+    converts and n-cube (used for optimization) to an n+1 simplex (used
+    as features for emulator)
+    '''
+    features = []
+    for cube in cubes:
+        cube = (1 - 2 * 1e-6) * np.squeeze(np.array([c for c in cube])) + 1e-6
+        simpl = np.zeros(len(cube)+1)
+        sums = np.sum(cube / (1 - cube))
+
+        alpha = 4.0
+        simpl[-1] = alpha / (alpha + sums)
+        for _ in range(len(simpl)-1):
+            simpl[_] = (cube[_] / (1 - cube[_])) / (alpha + sums)
+        features.append(np.array(simpl))
+    return np.array(features)
+
+
+
+def simpl_to_cube(simplices):
+    ''' 
+    converts from an n+1 simplex (used as features for the emulator)
+    to an n-cube (used for optimization)
+    '''
+    return None
+
+
+
+#------------------------------------
+# CATEGORICAL PARAMS TO OHE FEATURES
+#------------------------------------
+
+
+def cat_param_to_feat(param, val):
+    ''' convert the option selection of a categorical variable to
+    a machine readable feature vector
+    Args:
+        param (object): the categorical olympus parameter
+        val (): the value of the chosen categorical option
+    '''
+    #print(param, val)
+    # get the index of the selected value amongst the options
+    arg_val = param.options.index(val)
+    if np.all([d==None for d in param.descriptors]):
+        # no provided descriptors, resort to one-hot encoding
+        #feat = np.array([arg_val])
+        feat = np.zeros(len(param.options))
+        feat[arg_val] += 1.
+    else:
+        # we have descriptors, use them as the features
+        feat = param.descriptors[arg_val]
+    return feat
+
+
+

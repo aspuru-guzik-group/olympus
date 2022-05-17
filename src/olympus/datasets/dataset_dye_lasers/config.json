@@ -1,0 +1,82 @@
+{
+	"constraints": {
+		"parameters":   "none",
+		"measurements": "none"
+		},
+	"parameters": [
+			{
+				"name": "frag_a", 
+				"type": "categorical", 
+				"options": [
+						"OB(O)c1ccnc(F)c1",
+						"OB(O)c1cc(F)cc(F)c1",
+						"OB(O)c1ccc(F)c2ccccc12",
+						"CC(C)(C)OC(=O)n1ccc2cc(B3OC(C)(C)C(C)(C)O3)ccc21",
+						"OB(O)c1ccc2ncccc2c1",
+						"CS(=O)(=O)c1cncc(B(O)O)c1",
+						"OB(O)c1cc(Cl)ccc1Cl",
+						"CC1(C)OB(c2ccc3c(ccn3-c3cnccn3)c2)OC1(C)C",
+						"OB(O)c1ccco1",
+						"OB(O)c1cc(-n2c3ccccc3c3ccccc32)cc(-n2c3ccccc3c3ccccc32)c1",
+						"CSc1cncc(B(O)O)c1",
+						"OB(O)c1ccc(-n2c3ccccc3c3ccccc32)c2ccccc12",
+						"OB(O)c1nccs1",
+						"OB(O)c1ccnc(-n2c3ccccc3c3ccccc32)c1"
+					], 
+				"descriptors": []
+			},
+			{
+				"name": "frag_b", 
+				"type": "categorical", 
+				"options": [
+					"C[N+]12CC(=O)O[B-]1(c1cccc(Br)c1-n1c3ccccc3c3ccccc31)OC(=O)C2",
+					"C[N+]12CC(=O)O[B-]1(c1ccc(Br)cc1)OC(=O)C2",
+					"C[N+]12CC(=O)O[B-]1(c1ccccc1Br)OC(=O)C2",
+					"C[N+]12CC(=O)O[B-]1(c1cccc(Br)c1F)OC(=O)C2",
+					"C[N+]12CC(=O)O[B-]1(c1sccc1Br)OC(=O)C2",
+					"C[N+]12CC(=O)O[B-]1(c1cccc(Br)c1)OC(=O)C2",
+					"C[N+]12CC(=O)O[B-]1(c1c(F)cccc1Br)OC(=O)C2",
+					"C[N+]12CC(=O)O[B-]1(c1cc3cc(Br)ccc3o1)OC(=O)C2",
+					"Cn1ncc(Br)c1[B-]12OC(=O)C[N+]1(C)CC(=O)O2",
+					"C[N+]12CC(=O)O[B-]1(c1cc(I)cc(C(F)(F)F)c1)OC(=O)C2",
+					"C[N+]12CC(=O)O[B-]1(c1ccc(Br)s1)OC(=O)C2",
+					"C[N+]12CC(=O)O[B-]1(c1c(Br)cccc1-n1c3ccccc3c3ccccc31)OC(=O)C2",
+					"C[N+]12CC(=O)O[B-]1(c1cccnc1Br)OC(=O)C2"
+				], 
+				"descriptors": []
+			},
+			{
+				"name": "frag_c", 
+				"type": "categorical", 
+				"options": [
+					"Brc1cc(Br)c2ccccc2c1",
+					"Clc1cc(Br)sc1Br",
+					"Cc1nc2c(Br)c3nsnc3c(Br)c2nc1C",
+					"Brc1ccccc1Oc1ccccc1Br",
+					"CC(C)(C)c1ccc2c(Br)c3ccccc3c(Br)c2c1",
+					"Fc1cc(Br)c(F)cc1Br",
+					"Brc1ccc2oc(Br)cc2c1",
+					"Brc1ccc(Br)o1",
+					"Brc1ccc2c(c1)C1(c3ccccc3-c3ccccc31)c1cc(Br)ccc1-2",
+					"Clc1cc(Cl)c(Br)cc1Br",
+					"Brc1cnc2nc(Br)ccc2c1",
+					"Brc1cccc2cccc(Br)c12",
+					"CCCCC(CC)CC1(CC(CC)CCCC)c2cc(I)ccc2-c2ccc(I)cc21",
+					"Fc1c(F)c(Br)c2nsnc2c1Br",
+					"C[Si](C)(c1ccc(Br)cc1)c1ccc(Br)cc1",
+					"Brc1ccc2nc3ccc(Br)cc3nc2c1",
+					"C[Si](C)(c1ccccc1Br)c1ccccc1Br",
+					"Brc1ccc(Br)nc1",
+					"Brc1cc(-n2c3ccccc3c3ccccc32)c(Br)cc1-n1c2ccccc2c2ccccc21"
+				], 
+				"descriptors": []
+			}
+			
+		],
+    "measurements": [
+			{"name": "peak_score", "type": "continuous"},
+			{"name": "spectral_overlap", "type": "continuous"},
+			{"name": "fluo_rate", "type": "continuous"}
+		],
+    "default_goal": ["maximize", "minimize", "maximize"]
+}

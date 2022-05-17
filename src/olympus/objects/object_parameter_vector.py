@@ -78,6 +78,10 @@ class ObjectParameterVector(Object):
 		array = np.array([getattr(self, param_name) for param_name in self.param_space.param_names])
 		return array
 
+	def to_list(self):
+		list_ = [getattr(self, param_name) for param_name in self.param_space.param_names]
+		return list_
+
 	def from_dict(self, info_dict, param_space=None):
 		""" Creates a ParamVector representation of a given dictionary.
 

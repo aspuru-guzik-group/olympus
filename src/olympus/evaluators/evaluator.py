@@ -3,6 +3,8 @@
 from olympus import Emulator, Surface, Logger
 from olympus.campaigns import Campaign
 from olympus.objects   import Object
+from olympus.scalarizers import Scalarizer
+
 
 #===============================================================================
 
@@ -14,6 +16,7 @@ class Evaluator(Object):
         emulator=None,
         surface=None,
         campaign=Campaign(),
+        scalarizer=None,
         database=None,
     ):
         """ The Evaluator does higher level operations that Planners and
@@ -31,6 +34,8 @@ class Evaluator(Object):
             campaign (Campaign): an instance of a Campaign. By default, a new
                 Campaign instance is created. If this is set to None, no campaign
                 info will be stored.
+            scalarizer (Scalarizer): an instance of a Scalarizer (i.e. achievement 
+                scalarizing function) used for multiobjective optimization problems
             database (object): ...
         """
         Object.__init__(**locals())
@@ -55,13 +60,33 @@ class Evaluator(Object):
         #       needs to be set "manually" by the user
         self.planner.set_param_space(self.emulator.param_space)  # param space in emulator as it originates from dataset
 
+
+        # check for provision of scalarizing function if we have a MOO function
+        # TODO: should we default here to a weighted sum with
+        if self.campaign.is_moo:
+
+            if self.scalarizer is None:
+                message = 'You must provided an instance of a Scalarizer for multiobjective optimization in Olympus'
+                Logger.log('FATAL')
+
+            # make sure the goal of the planner/campaign is minimization (always minimization 
+            # for multi-objective problems, the individual optimization goals are specified in the
+            # the scalarizer)
+            if not self.planner.goal == 'minimize':
+                message = 'For multiobjective optimization in Olympus, the overall optimization goal must be set to "minimize". Updating now ...'
+                Logger.log(message, 'WARNING')
+                self.planner.goal = 'minimize'
+                self.campaign.goal = 'minimize'
+
+
         if self.campaign is not None:
             self.campaign.set_planner_specs(planner)
             self.campaign.set_emulator_specs(emulator)
 
 
+
     def optimize(self, num_iter=1):
-        """Optimizes a surface for a fixed number of iterations.
+        """Optimizes an objective for a fixed number of iterations.
 
         Args:
             num_iter (int): Maximum number of iterations allowed.
@@ -69,17 +94,28 @@ class Evaluator(Object):
 
         # Optimize: i.e. call the planner recommend method for max_iter times
         for i in range(num_iter):
-            # get new params from planner
+
             # NOTE: now we get 1 param at a time, a possible future expansion is
             #       to return batches
-            params = self.planner.recommend(observations=self.campaign.observations)
+
+            if self.campaign.is_moo:
+                planner_observations = self.campaign.scalarized_observations
+            else:
+                planner_observations = self.campaign.observations
+            # get new params from planner
+            params = self.planner.recommend(observations=planner_observations)
 
             # get measurement from emulator/surface
             values = self.emulator.run(params.to_array(), return_paramvector=True)
 
             # store parameter and measurement pair in campaign
-            if self.campaign is not None:
-                self.campaign.add_observation(params, values)
+            # TODO: we probably do not need this check for NoneType Campaign here... consider removing
+            if self.campaign is not None:  
+                if self.campaign.is_moo:
+                    self.campaign.add_and_scalarize(params, values, self.scalarizer)
+                else:
+                    self.campaign.add_observation(params, values)
+
 
             # if we have a database, log the campaign status
             if self.database is not None:

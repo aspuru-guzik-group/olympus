@@ -78,9 +78,9 @@ class Campaign(Object):
                 return vals
             best_vals = [vals[0]]
             best_merit = scal_vals[0]
-            for idx, scal_val, val in enumerate(scal_vals[1:], vals[1:]):
+            for idx, (scal_val, val) in enumerate(zip(scal_vals[1:], vals[1:])):
                 to_add = np.argmin([scal_val, best_merit])  # 0 means add current measurement, 1 means re-append previous best
-                best_vals.append([val, best_vals[-1]])
+                best_vals.append([val, best_vals[-1]][to_add])
             best_vals = np.array(best_vals)
             return best_vals
 
@@ -108,7 +108,10 @@ class Campaign(Object):
 
         # compute the scalarized merits from the objective values
         values = self.observations.get_values() # (# obs, # objs)
+        print('values : ', values)
         merits = scalarizer.scalarize(values)
+
+        print('merits : ', merits)
         # update scalarized_observations
         self.reset_merit_history(merits)
 
@@ -117,7 +120,7 @@ class Campaign(Object):
         ''' updates the scalarized_observation history with a 1d list or
         array of merits values
         '''
-        if not len(merits)==len(self.scalarized_observations.get_values):
+        if not len(merits)==len(self.scalarized_observations.get_values()):
             message = 'Length of provided merits does not match the number of current observations'
             Logger.log(message, 'FATAL')
         dim_merits = len(np.array(merits).shape)
@@ -141,6 +144,8 @@ class Campaign(Object):
     def set_value_space(self, value_space):
         self.value_space = value_space
         self.observations.set_value_space(value_space)
+        if len(self.value_space) > 1:
+            self.is_moo = True
         # for moo --> make merit objective
         self.scalarized_observations.set_value_space(
             ParameterSpace().add(
@@ -149,9 +154,9 @@ class Campaign(Object):
                         low=0.,
                         high=1.,
                     )
+                )
             )
-        )
-
+        
 
     def set_emulator_specs(self, emulator):
         """Store info about the Emulator (or Surface) into the campaign object.

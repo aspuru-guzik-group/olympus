@@ -250,7 +250,7 @@ class WrapperTensorflowModel(AbstractModel):
             )
 
         with self.sess.as_default():
-            pred = np.empty((num_samples, len(features), 1))
+            pred = np.empty((num_samples, len(features), self.targets_dim))
             resolution = divmod(len(features), self.batch_size)
             res = [self.batch_size for i in range(resolution[0])]
             res.append(resolution[1])

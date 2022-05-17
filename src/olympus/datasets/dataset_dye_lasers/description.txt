@@ -1,0 +1,18 @@
+Dataset of symmetric pentamer molecules which are
+screened computationally for photophysical figures of 
+merit for applications as organic dye lasers.
+
+=========================================
+                Summary
+-----------------------------------------
+    Number of Samples             3458
+    Dimensionality                 3
+    Features:
+        frag_a           categorical (14 options)
+        frag_b           categorical (13 options)
+        frag_c           categorical (19 options)
+    Targets:
+        peak_score           continuous (min)
+        spectral_overlap     continuous (min)
+        fluo_rate            continuous (min)
+=========================================

@@ -115,7 +115,13 @@ class AbstractSurface(Object, metaclass=ABCMeta):
 			self.param_space.validate(param_set)
 
 		# get values from the surface class
-		y_preds = [[self._run(param_set)] for param_set in params]  # 2d array
+		# messy check to make sure we are always returning a 2d array
+		# with shape (num_obs, num_objs)
+		if len(self.value_space)==1:
+			y_preds = [[self._run(param_set)] for param_set in params]  # 2d array
+		else:
+			y_preds = [self._run(param_set) for param_set in params]  # 2d array
+
 
 		# if we are not asking for a ParamVector, we can just return y_preds
 		if return_paramvector is False:
@@ -129,8 +135,8 @@ class AbstractSurface(Object, metaclass=ABCMeta):
 		for y_pred in y_preds:
 			y_pred_object = ParameterVector()
 			# iterate over all objectives/targets
-			for target_name, y in zip(['target_0'], y_pred):
-				y_pred_object.from_dict({target_name: y})
+			for value_name, y in zip([v.name for v in self.value_space], y_pred):
+				y_pred_object.from_dict({value_name: y})
 			# append object to list
 			y_pred_objects.append(y_pred_object)
 

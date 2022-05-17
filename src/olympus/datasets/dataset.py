@@ -90,11 +90,13 @@ class Dataset:
             self._create_param_space(_config)
             self._create_value_space(_config)
 
+            # TODO: add full discrete to these types. Do we need mixed_cat_discrete, mixed_cont_cat etc..
+            # level of specificity for the dataset types?? 
             # store the dataset type in an attribute ('full_cont', 'full_cat', 'mixed')
             # TODO: for now, full_cont could include continous or discrete parameters, should we change this?
             if np.all([param['type'] in ['categorical', 'discrete'] for param in self.param_space]):
                 self.dataset_type = 'full_cat'
-            elif np.all([param['type'] in ['continuous', 'discrete'] for param in self.param_space]):
+            elif np.all([param['type'] in ['continuous'] for param in self.param_space]):
                 self.dataset_type = 'full_cont'
             else:
                 self.dataset_type = 'mixed'
@@ -173,23 +175,32 @@ class Dataset:
             param_space (ParameterSpace): ParameterSpace object with information about all variables in the dataset.
 
         """
-
         # validate first...
         for i, param in enumerate(param_space.parameters):
+
             # check names are matching
             if self.feature_names[i] != param.name:
                 message = f"Parameter name `{self.feature_names[i]}` does not match name `{param.name}` found in dataset!"
                 Logger.log(message, "WARNING")
-            # check data provided is within param_space bounds
-            if param.low > np.min(self.data.iloc[:, i]):
-                message = f"Lower bound of {param.low} provided for parameter `{param.name}` is higher than minimum found in the data!"
-                Logger.log(message, "ERROR")
-            if param.high < np.min(self.data.iloc[:, i]):
-                message = f"Upper bound of {param.high} provided for parameter `{param.name}` is lower than maximum found in the data!"
-                Logger.log(message, "ERROR")
+
+            if param.type in ['discrete', 'continuous']:
+                # check data provided is within param_space bounds
+                if param.low > np.min(self.data.iloc[:, i]):
+                    message = f"Lower bound of {param.low} provided for parameter `{param.name}` is higher than minimum found in the data!"
+                    Logger.log(message, "ERROR")
+                if param.high < np.min(self.data.iloc[:, i]):
+                    message = f"Upper bound of {param.high} provided for parameter `{param.name}` is lower than maximum found in the data!"
+                    Logger.log(message, "ERROR")
+            elif param.type == 'categorical':
+                # check to see if all the provided options are inlcuded in the param_space options
+                provided_options = self.data.iloc[:, i].unique().tolist()
+                if not set(provided_options).issubset(param.options):
+                    message = f"Set of options for categorcial value {param.name} does not match the set of options found in the data!"
+                    Logger.log(message, "ERROR")
 
         # ...then assign
         self.param_space = param_space
+
 
     def infer_param_space(self):
         """Guess the parameter space from the dataset. The range for all parameters will be define based on the
@@ -278,44 +289,71 @@ class Dataset:
                 or a list of lists. Default is False
 
         Returns:
-            values (ParamVector): output value referenced from the lookup table
+            values (ParamVector): output value referenced from the lookup table. Returns
+                a list of num samples elements. 
         '''
-        # TODO: this is a hack to artificially inflate params (1d --> 2d)
-        # if len(params.shape)==1:
-        #     params = params.reshape((1, params.shape[0]))
-        # check to see if we have a fully categorical space
         if self.dataset_type is not 'full_cat':
-            message = f'Value lookup only supported for fully categorical parameter spaces'
+            message = f'Value lookup only supported for fully categorical/discrete parameter spaces'
             Logger.log(message, 'FATAL')
 
-        # check to see if provided a list of param vectors
-        if np.all([type(param)==ParameterVector for param in params]):
-            params = [param.to_array() for param in params]
+        # check the type of params that have been passed, convert to list of 
+        # arrays to be processed in the lookup step
+        if isinstance(params, np.ndarray):
+            if len(params.shape)==2:
+                params = list(params) # multiple observations
+            elif len(params.shape)==1:
+                params = [params] # assuming a single observation
+            else: 
+                message = f'You can pass either a 1d or 2d np.ndarray for argument params. You have passed a {len(params.shape)}d np.ndarray.'
+                Logger.log(message, 'ERROR')
 
+        elif isinstance(params, list):
+            if type(params[0]) in [str, int, float]:
+                # assume we have a single value passed
+                params = [params]
+            elif type(params[0]) in [list, np.ndarray]:
+                # assume multiple parameters are passed already in array form
+                pass
+            elif type(params[0]) == ParameterVector:
+                # list of ParamVectors, convert to list of arrays
+                params = [param.to_array() for param in params]
+            
+        elif isinstance(params, ParameterVector):
+            # assuming single ParameterVector object, convert to array
+            params = [params.to_array()]
+        else:
+            Logger.log('Params type not understood. Accepted types are: np.ndarray, list, and ParameterVector', 'FATAL')
+
+        # assert that have the correct number of parameters for each sample
         assert np.all([len(param)==len(self.feature_names) for param in params])
 
         values = []
         for param in params:
             sub_df = self.data.copy()
-            for name, val in zip(self.feature_names, param):
-                val = round(val, 5) # five should be max precision, but his may cause errors
-                print(name, val, type(val))
+            for name, space, val in zip(self.feature_names, self.param_space, param):
+                if space.type in ['continuous', 'discrete']:
+                    val = round(val, 5) # five should be max precision, but this may cause errors
+                print(name, space.name, val, type(val))
                 sub_df = sub_df.loc[(sub_df[name]==val), :]
-                print(sub_df.head())
+                #print(sub_df.head())
             if not sub_df.shape[0]==1:
-                message = f'Could not find value for parameter setting {param}'
+                message = f'Could not find lookup value for parameter setting {param}'
                 Logger.log(message, 'FATAL')
 
             value_objs = []
             # iterate over all objectives/targets
             for target_name in self.target_names:
                 val = sub_df[target_name].tolist()[0]
-                if return_paramvector:
-                    value_obj = ParameterVector().from_dict({target_name: val})
-                else:
-                    value_obj = val
-                value_objs.append(value_obj)
-            values.append(value_obj)
+                # if return_paramvector:
+                #     value_obj = ParameterVector().from_dict({target_name: val})
+                # else:
+                #     value_obj = val
+                value_objs.append(val)
+            if return_paramvector:
+                value_objs = ParameterVector().from_dict(
+                    {target_name: val for target_name, val in zip(self.target_names, value_objs)}
+                )
+            values.append(value_objs)
 
         return values
 
