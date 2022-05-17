@@ -34,7 +34,7 @@ class Evaluator(Object):
             campaign (Campaign): an instance of a Campaign. By default, a new
                 Campaign instance is created. If this is set to None, no campaign
                 info will be stored.
-            scalarizer (Scalarizer): an instance of a Scalarizer (i.e. achievement 
+            scalarizer (Scalarizer): an instance of a Scalarizer (i.e. achievement
                 scalarizing function) used for multiobjective optimization problems
             database (object): ...
         """
@@ -69,7 +69,7 @@ class Evaluator(Object):
                 message = 'You must provided an instance of a Scalarizer for multiobjective optimization in Olympus'
                 Logger.log('FATAL')
 
-            # make sure the goal of the planner/campaign is minimization (always minimization 
+            # make sure the goal of the planner/campaign is minimization (always minimization
             # for multi-objective problems, the individual optimization goals are specified in the
             # the scalarizer)
             if not self.planner.goal == 'minimize':
@@ -110,7 +110,7 @@ class Evaluator(Object):
 
             # store parameter and measurement pair in campaign
             # TODO: we probably do not need this check for NoneType Campaign here... consider removing
-            if self.campaign is not None:  
+            if self.campaign is not None:
                 if self.campaign.is_moo:
                     self.campaign.add_and_scalarize(params, values, self.scalarizer)
                 else:

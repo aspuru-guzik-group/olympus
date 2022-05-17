@@ -156,7 +156,7 @@ class Campaign(Object):
                     )
                 )
             )
-        
+
 
     def set_emulator_specs(self, emulator):
         """Store info about the Emulator (or Surface) into the campaign object.

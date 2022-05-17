@@ -1,4 +1,3 @@
-ligand,res_time,temperature,catalyst_loading,yield,turnover
 L2,600.0,30.0,0.498,0.6,1.1
 L5,600.0,30.0,2.515,0.6,0.2
 L3,60.0,30.0,2.508,0.6,0.2
