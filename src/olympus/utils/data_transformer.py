@@ -5,7 +5,7 @@ from olympus.objects.abstract_object import Object
 from olympus.datasets.dataset import Dataset
 from olympus import Logger
 from functools import reduce
-
+from copy import deepcopy
 
 class DataTransformer(Object):
 
@@ -93,13 +93,22 @@ class DataTransformer(Object):
         # ------------------------
         data = np.array(data)
 
-        print('DATA : ', type(data))
-        print('DATA INNER : ', type(data[0]))
-
         self._mean = np.mean(data, axis=0)
         self._stddev = np.std(data, axis=0)
         self._min = np.amin(data, axis=0)
         self._max = np.amax(data, axis=0)
+
+        # replace instances with 0. stddev with 1.
+        self._stable_stddev = np.where(self._stddev==0., 1., self._stddev)
+
+        # replace instances where the denominator of minmax scaling is 0.
+        self._stable_min = deepcopy(self._min)
+        self._stable_max = deepcopy(self._max)
+        ixs = np.where(np.abs(self._max-self._min)<1e-10)[0]
+        if not ixs.size == 0:
+            self._stable_max[ixs] = np.ones_like(ixs)
+            self._stable_min[ixs] = np.zeros_like(ixs)
+
 
         self.trained = True
 
@@ -155,16 +164,16 @@ class DataTransformer(Object):
     # Private Methods
     # ===============
     def _forward_standardize(self, data):
-        return (data - self._mean) / self._stddev
+        return (data - self._mean) / self._stable_stddev
 
     def _backward_standardize(self, data):
-        return data * self._stddev + self._mean
+        return data * self._stable_stddev + self._mean
 
     def _forward_normalize(self, data):
-        return (data - self._min) / (self._max - self._min)
+        return (data - self._stable_min) / (self._stable_max - self._stable_min)
 
     def _backward_normalize(self, data):
-        return (self._max - self._min) * data + self._min
+        return (self._stable_max - self._stable_min) * data + self._stable_min
 
     def _forward_identity(self, data):
         return data
@@ -279,7 +288,7 @@ def cube_to_simpl(cubes):
 
 
 def simpl_to_cube(simplices):
-    ''' 
+    '''
     converts from an n+1 simplex (used as features for the emulator)
     to an n-cube (used for optimization)
     '''
@@ -311,6 +320,3 @@ def cat_param_to_feat(param, val):
         # we have descriptors, use them as the features
         feat = param.descriptors[arg_val]
     return feat
-
-
-
