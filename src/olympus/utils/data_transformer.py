@@ -264,8 +264,8 @@ class DataTransformer(Object):
 
 
 #--------------------------------
-# CUBE TO SIMLPEX TRANSFORMATION
-#--------------------------------
+# CUBE-SIMLPEX TRANSFORMATION
+#--------------------------------/
 
 def cube_to_simpl(cubes):
     '''
@@ -274,27 +274,40 @@ def cube_to_simpl(cubes):
     '''
     features = []
     for cube in cubes:
-        cube = (1 - 2 * 1e-6) * np.squeeze(np.array([c for c in cube])) + 1e-6
+        #cube = (1 - 2 * 1e-6) * np.squeeze(np.array([c for c in cube])) + 1e-6
+        cube = np.array(cube)
+    
         simpl = np.zeros(len(cube)+1)
         sums = np.sum(cube / (1 - cube))
 
         alpha = 4.0
         simpl[-1] = alpha / (alpha + sums)
-        for _ in range(len(simpl)-1):
-            simpl[_] = (cube[_] / (1 - cube[_])) / (alpha + sums)
+        for i in range(len(simpl)-1):
+            simpl[i] = (cube[i] / (1 - cube[i])) / (alpha + sums)
         features.append(np.array(simpl))
     return np.array(features)
 
 
 
-def simpl_to_cube(simplices):
+def simpl_to_cube(simpls):
     '''
     converts from an n+1 simplex (used as features for the emulator)
     to an n-cube (used for optimization)
     '''
-    return None
+    features = []
 
+    for simpl in simpls:
+        alpha = 4.0
+        sums = (alpha*(simpl[-1] - 1)) / (simpl[-1])
 
+        cube = np.zeros(len(simpl)-1)
+
+        for i in range(len(cube)):
+            cube[i] = (simpl[i] * (sums-alpha)) / (simpl[i]*(sums-alpha)-1)
+
+        features.append(cube)
+
+    return np.array(features)
 
 #------------------------------------
 # CATEGORICAL PARAMS TO OHE FEATURES
@@ -320,3 +333,22 @@ def cat_param_to_feat(param, val):
         # we have descriptors, use them as the features
         feat = param.descriptors[arg_val]
     return feat
+
+
+#-----------
+# DEBUGGING
+#-----------
+
+if __name__ == '__main__':
+
+    cubes = [[0.1, 0.5, 0.8], [0.5, 0.9, 0.04]]
+
+    print('CUBES : ', cubes)
+
+    simpls = cube_to_simpl(cubes)
+
+    print('SIMPLS : ', simpls)
+
+    cubes = simpl_to_cube(simpls)
+
+    print('CUBES : ', cubes)

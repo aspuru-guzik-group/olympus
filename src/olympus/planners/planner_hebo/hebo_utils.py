@@ -35,7 +35,6 @@ def propose_randomly(num_proposals, param_space):
 		proposals.append(sample)
 		raw_proposals.append(raw_sample)
 	proposals = np.array(proposals)
-	raw_proposals = np.array(raw_proposals)
 
 	return proposals, raw_proposals
 

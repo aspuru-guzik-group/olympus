@@ -390,6 +390,16 @@ class Dataset:
         return len(self.feature_names)
 
     @property
+    def features_dim_ohe(self):
+        dim = 0
+        for param in self.param_space:
+            if param.type in ['continuous', 'discrete']:
+                dim+=1
+            elif param.type == 'categorical':
+                dim += len(param.options)
+        return dim
+
+    @property
     def targets_dim(self):
         return len(self.target_names)
 

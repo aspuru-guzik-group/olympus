@@ -476,10 +476,7 @@ class Emulator(Object):
                 % (features.shape[1], len(self.param_space))
             )
             Logger.log(message, "ERROR")
-
-        print('list features : ', list(features))
         for feature in features:
-            print('FEATURE : ', feature)
             if not self.param_space.validate(list(feature)):
                 message = "Not all parameters are within bounds"
                 Logger.log(message, "WARNING")
@@ -566,7 +563,6 @@ class Emulator(Object):
         else:
             Logger.log('Features type not understood. Accepted types are: np.ndarray, list, and ParameterVector', 'FATAL')
 
-        print('processed features : ', features)
 
         # validate the provided features
         if not np.all([len(feature)==len(self.param_space)] for feature in features):
@@ -736,7 +732,7 @@ def load_emulator(emulator_folder):
 
     if emulator_to_load.is_trained is True:
         emulator_to_load.model._set_dims(
-            features_dim=emulator_to_load.dataset.features_dim,
+            features_dim=emulator_to_load.dataset.features_dim_ohe,
             targets_dim=emulator_to_load.dataset.targets_dim,
         )
         restored = emulator_to_load.model.restore(f"{emulator_folder}/Model")

@@ -244,6 +244,7 @@ class WrapperTensorflowModel(AbstractModel):
     def predict(self, features, num_samples=1):
         # features = self._project_features(features, feature_transformer)
         # make sure the dimensionality of the input matches that used for training
+ 
         if features.shape[1] != self.features_dim:
             raise ValueError(
                 "dimensionality of input features provided does not match that of the training dataset"

@@ -97,16 +97,17 @@ class Evaluator(Object):
 
             # NOTE: now we get 1 param at a time, a possible future expansion is
             #       to return batches
-
             if self.campaign.is_moo:
                 planner_observations = self.campaign.scalarized_observations
             else:
                 planner_observations = self.campaign.observations
+
+
             # get new params from planner
             params = self.planner.recommend(observations=planner_observations)
 
             # get measurement from emulator/surface
-            values = self.emulator.run(params.to_array(), return_paramvector=True)
+            values = self.emulator.run(params, return_paramvector=True)
 
             # store parameter and measurement pair in campaign
             # TODO: we probably do not need this check for NoneType Campaign here... consider removing

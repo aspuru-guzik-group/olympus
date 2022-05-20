@@ -65,7 +65,9 @@ class RandomSearch(AbstractPlanner):
             # sample categorical and discrete parameters together
             if self.has_continuous:
                 # do not need to remove parameters, sample randomly with replacement
-                cat_discr_vals = np.random.choice(self.opts)
+                indices = np.arange(len(self.opts))
+                np.random.shuffle(indices)
+                cat_discr_vals = self.opts[indices[0]]#np.random.choice(self.opts)
             else:
                 # fully categorical space, remove selected options to avoid
                 # iterate through by iteration nunber
@@ -83,8 +85,8 @@ class RandomSearch(AbstractPlanner):
             else:
                 raise NotImplementedError
             vals.append(val)
-        vals = np.array(vals)
-        return ParameterVector().from_array(vals, self.param_space)
+            
+        return ParameterVector().from_list(vals, self.param_space)
 
 
 

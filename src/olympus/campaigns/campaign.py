@@ -108,10 +108,8 @@ class Campaign(Object):
 
         # compute the scalarized merits from the objective values
         values = self.observations.get_values() # (# obs, # objs)
-        print('values : ', values)
         merits = scalarizer.scalarize(values)
-
-        print('merits : ', merits)
+        
         # update scalarized_observations
         self.reset_merit_history(merits)
 
