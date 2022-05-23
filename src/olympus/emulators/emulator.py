@@ -72,6 +72,11 @@ class Emulator(Object):
             )
             self._load(f"{__emulator_path__}/emulator_{dataset}_{model}")
 
+            self.parameter_constriants = self.dataset.constraints['parameters']
+            self.aux_param_space = self.dataset.aux_param_space
+
+
+
         # -----------------------------------------
         # otherwise, assume it is a custom emulator
         # -----------------------------------------
@@ -445,74 +450,6 @@ class Emulator(Object):
         }
         return self.model_scores
 
-    def __OLD_run(self, features, num_samples=1, return_paramvector=False):
-        """Run the emulator and return a value given the features provided.
-
-        Args:
-            features (ndarray): 2d array with the input features used for the predictions
-            num_samples (int): number of samples to average. only useful for probabilistic models
-            return_paramvector (bool): Whether to return a ``ParameterVector`` object instead of a list of lists.
-                Default is False.
-
-        Returns:
-            y (float or array): model prediction(s).
-        """
-
-        # first check if we have a trained model
-        if not self.is_trained:
-            message = "This emulator has not been trained yet. Please train the emulator before you can use it for prediction."
-            Logger.log(message, "ERROR")
-
-        # check the inputs
-        if type(features) == list:
-            features = np.array(features)
-        if len(features.shape) == 1:
-            features = np.expand_dims(features, axis=0)
-
-        # validate features
-        if not features.shape[1] == len(self.param_space):
-            message = (
-                "Dimensions of provided features (%d) did not match expected dimension (%d)"
-                % (features.shape[1], len(self.param_space))
-            )
-            Logger.log(message, "ERROR")
-        for feature in features:
-            if not self.param_space.validate(list(feature)):
-                message = "Not all parameters are within bounds"
-                Logger.log(message, "WARNING")
-
-        # convert categorical params to ohe vectors
-        features = self.transform_cat_params(features)
-
-        # scale the features using the DataTransformer that was fit when training
-        features_scaled = self.feature_transformer.transform(features)
-
-        # predict, drawing a certain amount of samples
-        y_pred_scaled = self.model.predict(features_scaled, num_samples=num_samples)
-
-        # return the prediction after inverting the transform
-        y_preds = self.target_transformer.back_transform(
-            y_pred_scaled
-        )  # this is a 2d array
-
-        # if we are not asking for a ParamVector, we can just return y_preds
-        if return_paramvector is False:
-            return y_preds
-
-        # NOTE: while we do not allow batches or multiple objectives yet, this code is supposed to be able to support
-        #  those
-        y_pred_objects = []  # list of ParamVectors with all samples and objectives
-        # iterate over all samples (if we returned a batch of predictions)
-        for y_pred in y_preds:
-            y_pred_object = ParameterVector()
-            # iterate over all objectives/targets
-            for target_name, y in zip(self.dataset.target_names, y_pred):
-                y_pred_object.from_dict({target_name: y})
-            # append object to list
-            y_pred_objects.append(y_pred_object)
-
-        return y_pred_objects
-
 
 
     def run(self, features, num_samples=1, return_paramvector=False):
@@ -694,6 +631,7 @@ class Emulator(Object):
         self.__dict__.update(emulator.__dict__)
 
 
+
 # ===============
 # Other Functions
 # ===============
@@ -739,6 +677,9 @@ def load_emulator(emulator_folder):
         if restored is False:
             message = "failed to restore model"
             Logger.log(message, "ERROR")
+
+
+
 
     # NOTE: we are not leading any cross validation models for the moment. If CV was performed though, we still have
     # the data about the CV performance

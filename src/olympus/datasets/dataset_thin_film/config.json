@@ -1,6 +1,6 @@
 {
   "constraints": {
-		"parameters": "none",
+		"parameters": "simplex",
 		"measurements": "positive"
 		},
 	"parameters": [

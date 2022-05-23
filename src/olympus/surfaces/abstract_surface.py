@@ -33,6 +33,9 @@ class AbstractSurface(Object, metaclass=ABCMeta):
 		self._create_param_space(self.param_dim)
 		self._create_value_space(value_dim=self.value_dim)
 
+		# meta information for evalautor 
+		self.parameter_constriants = None
+
 	def _validate_param_type(self):
 		return self.param_type in self.ACCEPTED_PARAM_TYPES
 

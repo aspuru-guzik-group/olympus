@@ -106,6 +106,17 @@ class Dataset:
 
             # define attributes of interest - done here so to avoid calling load_dataset again
             self.constraints = _config["constraints"]
+
+            # meta information for the evaluator
+            self.parameter_constriants = self.constraints['parameters']
+
+            # if we have a "simplex" constrained parameter space, create an auxillary
+            # parameter space of dimensions n-1 (n is the original feature dimension)
+            if self.parameter_constriants=='simplex':
+                self._create_aux_param_space(len(self.param_space))
+            else:
+                self.aux_param_space = ParameterSpace()
+
             self._goal = _config["default_goal"]
 
         # the numeric data is stored here, wrapping a DataFrame
@@ -548,7 +559,6 @@ class Dataset:
         return desc
 
     def _create_param_space(self, config):
-        # TODO: handle the categorical parameter instances
         self.param_space = ParameterSpace()
         for param in config["parameters"]:
             if param['type'] == 'categorical':
@@ -565,6 +575,17 @@ class Dataset:
                 self.param_space.add(
                    [Parameter().from_dict(param)]
                 )
+
+    def _create_aux_param_space(self, param_dim):
+        self.aux_param_space = ParameterSpace()
+        for i in range(param_dim-1):
+            self.aux_param_space.add(
+                ParameterContinuous(
+                    name=f'param_{i}',
+                    low=0.,
+                    high=1.
+                )
+            )
 
     def _create_value_space(self, config):
         self.value_space = ParameterSpace()

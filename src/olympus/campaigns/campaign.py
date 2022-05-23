@@ -5,6 +5,7 @@ from olympus.emulators.emulator import Emulator
 from olympus.surfaces.surface import AbstractSurface
 from olympus.objects import Object, ParameterContinuous
 from olympus.utils import generate_id
+from olympus.utils.data_transformer import cube_to_simpl, simpl_to_cube
 from olympus.campaigns import ParameterSpace
 from olympus.campaigns import Observations
 from olympus import Logger
@@ -109,9 +110,40 @@ class Campaign(Object):
         # compute the scalarized merits from the objective values
         values = self.observations.get_values() # (# obs, # objs)
         merits = scalarizer.scalarize(values)
-        
+
         # update scalarized_observations
         self.reset_merit_history(merits)
+
+    def observations_to_simpl(self):
+        ''' convert parameters for the current observations from cube 
+        to simplex
+        '''
+        # do not need to make transformation if we have no observations yet,
+        # leave the params attribute as None
+        if self.observations.params is not None:
+            cube_params = self.observations.get_params()
+            simpl_params = cube_to_simpl(cube_params)
+            self.observations.params = simpl_params
+            self.scalarized_observations.params = simpl_params 
+        else:
+            message = f'No observations found. Skipping requested cube to simplex transformation on parameters.'
+            Logger.log(message, 'WARNING')
+
+    
+    def observations_to_cube(self):
+        ''' convert parameters for the current observations from simplex
+        to cube
+        '''
+        # do not need to make transformation if we have no observations yet,
+        # leave the params attribute as None
+        if self.observations.params is not None: 
+            simpl_params = self.observations.get_params()
+            cube_params = simpl_to_cube(simpl_params)
+            self.observations.params = cube_params
+            self.scalarized_observations.params = cube_params
+        else:
+            message = 'No observations found. Skipping requested simplex to cube transformation on parameters'
+
 
 
     def reset_merit_history(self, merits):
