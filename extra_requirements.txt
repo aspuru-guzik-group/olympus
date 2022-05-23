@@ -3,9 +3,13 @@
 # format:
 #     package[version_required]: tag1, tag2, etc.
 
+botorch:					 planner, bayesian, botorch
 cma:                         planner, genetic, cma
 deap:                        planner, genetic, deap
+dragonfly-opt: 				 planner, bayesian, dragonfly
 gpyopt:                      planner, bayesian, gpyopt
+gryffin: 					 planner, bayesian, gryffin
+hebo: 						 planner, bayesian, hebo
 hyperopt:                    planner, bayesian, hyperopt
 matplotlib:                  plotter
 pandas:                      dataset
@@ -17,3 +21,4 @@ sqlalchemy:                  emulator
 SQSnobFit:                   planner, heuristic, snobfit
 tensorflow==1.15:            emulator
 tensorflow-probability==0.8: emulator
+

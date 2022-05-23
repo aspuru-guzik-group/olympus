@@ -9,19 +9,23 @@ import pytest
 #  the minimum/maximum is found (approximately)
 
 CONT_SURFACES = [
-    'CatDejong', 'CatSlope', 'Dejong', 'Zakharov',
+    'Dejong', 'Zakharov',
     'Matterhorn', 'Rastrigin', 'Kilimanjaro',
-    'Rosenbrock', 'CatMichalewicz', 'NarrowFunnel',
+    'Rosenbrock', 'NarrowFunnel',
     'DiscreteDoubleWell', 'MontBlanc', 'K2', 'Denali',
     'Schwefel', 'DiscreteMichalewicz', 'StyblinskiTang',
-    'Levy', 'CatAckley', 'LinearFunnel', 'GaussianMixture',
+    'Levy', 'LinearFunnel', 'GaussianMixture',
     'Branin', 'AckleyPath', 'HyperEllipsoid', 'Everest',
-    'Michalewicz', 'CatCamel', 'DiscreteAckley',
+    'Michalewicz', 'DiscreteAckley',
 ]
 
 CAT_SURFACES = [
     'CatDejong', 'CatSlope' 'CatAckley', 'CatCamel', 'CatSlope'
 ]
+
+MOO_SURFACES = [
+    'MultFonseca', 'MultViennet', 'MultZdt1', 'MultZdt2', 'MultZdt3'
+] # all continuous, for now
 
 CONT_PLANNERS = [
     'Snobfit', 'Phoenics', 'Slsqp', 'Genetic',
@@ -29,9 +33,12 @@ CONT_PLANNERS = [
     'ParticleSwarms', 'SteepestDescent', 'Cma', 'Grid',
     'Hyperopt', 'BasinHopping', 'Gpyopt', 'Lbfgs',
     'LatinHypercube', 'Sobol', 'Gryffin', 'Simplex',
-]
+    'Botorch', 'Hebo'
+] # Dragonfly, Entmoot, Smac
 
-CAT_PLANNERS = []
+CAT_PLANNERS = [
+    'RandomSearch', 'Botorch', 'Gryffin', 'Hebo', 'Gpyopt', 'Hyperopt', 'Grid',
+] # Genetic, Dragonfly
 
 
 cont_tuples = []
@@ -45,6 +52,12 @@ for planner in CAT_PLANNERS:
         cat_tuples.append((planner, surface))
 
 
+moo_tuples = []
+for planner in CONT_PLANNERS:
+    for surface in MOO_SURFACES:
+        moo_tuples.append((planner, surface))
+
+
 @pytest.mark.parametrize("planner, surface", cont_tuples)
 def test_cont_surface_optimization(planner, surface):
     surface = Surface(kind=surface, param_dim=2)
@@ -56,8 +69,8 @@ def test_cont_surface_optimization(planner, surface):
     #assert np.min(values) < 0.5
 
 
-# @pytest.mark.parametrize("planner, surface", cat_tuples)
-# def test_cat_surface_optimization(planner, surface):
-#     surface = Surface(kind=surface, param_dim=2, num_opts=21)
-#     planner = Planner(kind=planner, goal='minimize')
-#     campaign = planner.optimize(emulator=surface, num_iter=3)
+@pytest.mark.parametrize("planner, surface", cat_tuples)
+def test_cat_surface_optimization(planner, surface):
+    surface = Surface(kind=surface, param_dim=2, num_opts=21)
+    planner = Planner(kind=planner, goal='minimize')
+    campaign = planner.optimize(emulator=surface, num_iter=3)

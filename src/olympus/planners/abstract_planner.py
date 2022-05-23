@@ -6,6 +6,8 @@ from olympus import Logger
 from olympus.campaigns import Observations, Campaign
 from olympus.objects import Object, abstract_attribute, ABCMeta, Config
 
+from olympus.scalarizers import Scalarizer
+
 
 class AbstractPlanner(Object, metaclass=ABCMeta):
     """ This class is intended to contain methods shared by all wrappers, as well as define abstract methods and
@@ -131,12 +133,13 @@ class AbstractPlanner(Object, metaclass=ABCMeta):
         self.tell(observations)
         return self.ask(return_as=return_as)
 
-    def optimize(self, emulator, num_iter=1, verbose=False):
+    def optimize(self, emulator, num_iter=1, scalarizer=None, verbose=False):
         """Optimizes a surface for a fixed number of iterations.
 
         Args:
             emulator (object): Emulator, Dataset, or Surface instance to optimize over.
             num_iter (int): Maximum number of iterations allowed.
+            scalarizer (Scalarizer): 
             verbose (bool): Whether to print information to screen.
 
         Returns:
@@ -166,9 +169,12 @@ class AbstractPlanner(Object, metaclass=ABCMeta):
         campaign.set_planner_specs(self)
         campaign.set_emulator_specs(emulator)
 
+    
+
         # provide the planner with the parameter space.
         # param space in emulator as it originates from dataset
         self.set_param_space(emulator.param_space)
+        self.set_value_space(emulator.value_space)
 
         # Optimize: i.e. call the planner recommend method for max_iter times
         for i in range(num_iter):

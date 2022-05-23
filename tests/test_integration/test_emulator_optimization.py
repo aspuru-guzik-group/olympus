@@ -12,9 +12,12 @@ CONT_PLANNERS = [
     'ParticleSwarms', 'SteepestDescent', 'Cma', 'Grid',
     'Hyperopt', 'BasinHopping', 'Gpyopt', 'Lbfgs',
     'LatinHypercube', 'Sobol', 'Gryffin', 'Simplex',
-]
+    'Botorch', 'Hebo',
+] # Dragonfly, Entmoot, Smac
 
-CAT_PLANNERS = ['RandomSearch']
+CAT_PLANNERS = [
+    'RandomSearch', 'Botorch', 'Gryffin', 'Hebo', 'Gpyopt', 'Hyperopt', 'Grid',
+] # Genetic, Dragonfly
 
 EMULATED_DATASETS = [
     'snar', 'photo_wf3', 'benzylation',
@@ -22,7 +25,19 @@ EMULATED_DATASETS = [
     'alkox', 'hplc', 'colors_n9', 'suzuki',
 ]
 
-FULL_CAT_DATASETS = ['perovskites']
+FULL_CAT_DATASETS = ['perovskites', 'dye_lasers', 'redoxmers']
+
+DESC_DATASETS = ['perovskites', 'redoxmers'] # datasets which have descriptors
+
+MIXED_DATASETS = ['suzuki_i', 'suzuki_ii', 'suzuki_iii', 'suzuki_iv']
+
+MOO_DATASETS = [
+            'dye_lasers', 'redoxmers', 'suzuki_i', 
+            'suzuki_ii', 'suzuki_iii', 'suzuki_iv',
+    ]
+
+SIMPLEX_CONSTRAINED_DATASETS = ['thin_film', 'photo_pce10', 'photo_wf3']
+
 
 
 emulated_tuples = []

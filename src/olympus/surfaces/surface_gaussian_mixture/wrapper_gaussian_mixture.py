@@ -33,6 +33,7 @@ class GaussianMixture(AbstractSurface):
             random_seed (int): Fix the random seed for reproducible surfaces. Default is None, i.e. random.
         """
         param_dim, _num_gauss = self._determine_param_dim_and_num_gauss(param_dim, num_gauss, means, covariances)
+        value_dim=1
         AbstractSurface.__init__(**locals())
         np.random.seed(self.random_seed)  # set random seed
         self._create_gaussian_mixture()

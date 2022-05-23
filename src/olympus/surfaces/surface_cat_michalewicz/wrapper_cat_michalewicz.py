@@ -24,11 +24,12 @@ others. In addition, the number of pseudo-local minima scales factorially with t
 
 	@property
 	def minima(self):
-		return None
+		return self.get_best(goal='minimize')
 
 	@property
 	def maxima(self):
-		return None
+		return self.get_best(goal='maximize')
+
 
 	def michalewicz(self, vector, m = 10.):
 		result = 0.
@@ -50,3 +51,33 @@ others. In addition, the number of pseudo-local minima scales factorially with t
 			# TODO: add else statement here and return error
 			vector[index] = np.pi * element / float(self.num_opts - 1)
 		return self.michalewicz(vector)
+
+
+	def get_best(self, goal='minimize'):
+		''' get the location and value of the optimum (minimum) point on the
+		surfaces
+		'''
+		domain = [f'x{i}' for i in range(self.num_opts)]
+		params = []
+		values = []
+		for x in domain:
+			for y in domain:
+				values.append(self._run([x, y]))
+				params.append([x, y])
+		values = np.array(values)
+		params = np.array(params)
+		# get the indices that sort values in ascending order
+		ind = np.argsort(values)
+		if goal == 'maximize':
+			ind = ind[::-1] # default is from smallest to largest
+		sort_values = values[ind]
+		sort_params = params[ind]
+
+		best_values = [sort_values[i] for i in range(len(sort_values)) if sort_values[i]==sort_values[0] ]
+		best_params = [list(sort_params[i]) for i in range(len(best_values))]
+
+		result = []
+		for param, value in zip(best_params, best_values):
+			result.append({'params':param, 'value': value})
+
+		return result

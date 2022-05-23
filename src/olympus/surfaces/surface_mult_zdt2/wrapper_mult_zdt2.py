@@ -9,7 +9,7 @@ class MultZdt2(AbstractSurface):
     def __init__(self, param_dim=2, noise=None):
         """ Zitzler–Deb–Thiele's function N. 2
         Deb, Kalyan; Thiele, L.; Laumanns, Marco; Zitzler, Eckart (2002).
-        "Scalable multi-objective optimization test problems". Proceedings
+        "Scalable multi-obj@ective optimization test problems". Proceedings
         of the 2002 IEEE Congress on Evolutionary Computation. Vol. 1. pp.
         825–830
 

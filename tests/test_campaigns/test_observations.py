@@ -27,7 +27,7 @@ def test_declaration():
     assert np.linalg.norm(test_values - observations.get_values()) < 1e-7
 
 
-def test_add_obseration():
+def test_add_observation():
     np.random.seed(100691)
     param_vects = np.random.uniform(low=0, high=1, size=(3, 2))
     values_vects = np.random.uniform(low=0, high=1, size=(3, 1))
