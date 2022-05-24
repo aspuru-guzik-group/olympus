@@ -1,25 +1,72 @@
 #!/usr/bin/env python
 
-#===============================================================================
 
 import abc
 import numpy as np
 
-#===============================================================================
-
 from olympus import Object
+from olympus import Logger
 
-#===============================================================================
+
 
 class AbstractPlotter(Object):
+
 
 
     @abc.abstractmethod
     def _plot(self, emulators, planners, measurements, *args, **kwargs):
         pass
 
+    # @abc.abstractmethod
+    # def _plot_traces(self, emulators, planners, measurements, *args, **kwargs):
+    #     pass
 
-    def plot_from_db(self, database, emulator=None, plot_file_name='test.png', *args, **kwargs):
+    # @abc.abstractmethod
+    # def _plot_simple_regret_traces(self, emulators, planners, measurements, *args, **kwargs):
+    #     pass
+
+    # @abc.abstractmethod
+    # def _plot_cumulative_regret_traces(self, emulators, planners, measurements, *args, **kwargs):
+    #     pass
+
+    # @abc.abstractmethod
+    # def _plot_rank_traces(self, emulators, planners, measurements, *args, **kwargs):
+    #     pass 
+
+    # @abc.abstractmethod
+    # def _plot_num_evals_top_x(self, emulators, planners, measurements, top_x, *args, **kwargs):
+    #     pass 
+
+    # @abc.abstractmethod
+    # def _plot_num_evals_top_x_percent(self, emulators, planners, measurements, top_x_percent,  *args, **kwargs):
+    #     pass
+
+    # @abc.abstractmethod
+    # def _plot_fraction_top_x(self, emulators, planners, measurements, top_x, *args, **kwargs):
+    #     pass
+
+    # @abc.abstractmethod
+    # def _plot_fraction_top_x_percent(self, emulators, planners, measurements, top_x_percent, *args, **kwargs):
+    #     pass
+
+
+    # def _validate_plot_kind(self, kind, problem_type):
+    #     if problem_type in ['fully_continuous', 'mixed']:
+    #         if kind not in ['traces', 'simple_regret', 'cumulative_regret']:
+    #             message = ' Traces are the only accepted plot kind for fully_continuous and mixed spaces'
+    #             Logger.log(message, 'FATAL')
+    #     elif problem_type == 'fully_categorical':
+            
+
+
+    def plot_from_db(
+            self, 
+            database, 
+            emulator=None, 
+            plot_file_name='test.png', 
+            *args, 
+            **kwargs,
+        ):
         campaigns    = database.get_campaigns()
         emulators    = []
         planners     = []
@@ -57,3 +104,6 @@ class AbstractPlotter(Object):
                 except KeyError: continue
 
         self._plot(emulators, planners, measurements, file_name=plot_file_name, *args, **kwargs)
+
+
+

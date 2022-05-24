@@ -114,6 +114,7 @@ class Campaign(Object):
         # update scalarized_observations
         self.reset_merit_history(merits)
 
+
     def observations_to_simpl(self):
         ''' convert parameters for the current observations from cube 
         to simplex
@@ -150,7 +151,7 @@ class Campaign(Object):
         ''' updates the scalarized_observation history with a 1d list or
         array of merits values
         '''
-        if not len(merits)==len(self.scalarized_observations.get_values()):
+        if not len(merits)==len(self.observations.get_values()):
             message = 'Length of provided merits does not match the number of current observations'
             Logger.log(message, 'FATAL')
         dim_merits = len(np.array(merits).shape)
@@ -174,6 +175,7 @@ class Campaign(Object):
     def set_value_space(self, value_space):
         self.value_space = value_space
         self.observations.set_value_space(value_space)
+        print('value space length : ', len(self.value_space) )
         if len(self.value_space) > 1:
             self.is_moo = True
         # for moo --> make merit objective

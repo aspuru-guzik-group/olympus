@@ -7,17 +7,25 @@ import pytest
 
 
 CONT_PLANNERS = [
-    'Snobfit', 'Phoenics', 'Slsqp', 'Genetic',
+    'Snobfit', 'Slsqp', 
     'ConjugateGradient', 'RandomSearch', 'DifferentialEvolution',
-    'ParticleSwarms', 'SteepestDescent', 'Cma', 'Grid',
+    'SteepestDescent', 'Cma', 'Grid',
     'Hyperopt', 'BasinHopping', 'Gpyopt', 'Lbfgs',
     'LatinHypercube', 'Sobol', 'Gryffin', 'Simplex',
-    'Botorch', 'Hebo',
-] # Dragonfly, Entmoot, Smac
+    'Botorch', 'Hebo'
+] # MISSING PLANNERS: Dragonfly, Entmoot, Smac,
+
+# BROKEN PLANNERS: Phoenics, Genetic, ParticleSwarms, 
+
 
 CAT_PLANNERS = [
     'RandomSearch', 'Botorch', 'Gryffin', 'Hebo', 'Gpyopt', 'Hyperopt', 'Grid',
 ] # Genetic, Dragonfly
+
+MOO_PLANNERS = [
+    'RandomSearch', 'Botorch', 'Gryffin', 'Hebo', 'Gpyopt', 'Hyperopt', 'Grid', 
+    'Sobol', 'LatinHypercube', 'Cma', 'Snobfit'
+]
 
 EMULATED_DATASETS = [
     'snar', 'photo_wf3', 'benzylation',
@@ -36,7 +44,11 @@ MOO_DATASETS = [
             'suzuki_ii', 'suzuki_iii', 'suzuki_iv',
     ]
 
-SIMPLEX_CONSTRAINED_DATASETS = ['thin_film', 'photo_pce10', 'photo_wf3']
+SIMPLEX_CONSTRAINED_DATASETS = [
+    'thin_film', 'photo_pce10', 'photo_wf3',
+    'oer_plate_3496', 'oer_plate_3851', 'oer_plate_3860', 
+    'oer_plate_4098',
+]
 
 
 
@@ -49,6 +61,9 @@ full_cat_tuples = []
 for planner in CAT_PLANNERS:
     for dataset in FULL_CAT_DATASETS:
         full_cat_tuples.append((planner, dataset))
+
+
+
 
 @pytest.mark.parametrize("planner, dataset", emulated_tuples)
 def test_bnn_emulators_optimization(planner, dataset):

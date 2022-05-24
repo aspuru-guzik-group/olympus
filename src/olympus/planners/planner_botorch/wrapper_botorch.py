@@ -28,7 +28,7 @@ from olympus.planners import AbstractPlanner
 from olympus.objects import ParameterVector
 
 
-from botorch_utils import (
+from .botorch_utils import (
 	cat_param_to_feat,
 	propose_randomly,
 	# TODO: sync up these normalize/standardize functions with the
@@ -257,7 +257,8 @@ class Botorch(AbstractPlanner):
 					bounds=bounds,
 					num_restarts=200,
 					q=self.batch_size,
-					raw_samples=1000
+					raw_samples=1000,
+					fixed_features_list=[],
 				)
 			elif self.problem_type == 'fully_categorical':
 				# need to implement the choices input, which is a
@@ -303,115 +304,115 @@ class Botorch(AbstractPlanner):
 #-----------
 # DEBUGGING
 #-----------
+if __name__ == '__main__':
+	PARAM_TYPE = 'mixed'
 
-PARAM_TYPE = 'mixed'
+	NUM_RUNS = 40
 
-NUM_RUNS = 40
-
-from olympus.objects import (
-	ParameterContinuous,
-	ParameterDiscrete,
-	ParameterCategorical,
-)
-from olympus.campaigns import Campaign, ParameterSpace
-from olympus.surfaces import Surface
-
-
-
-def surface(x):
-	return np.sin(8*x)
-
-if PARAM_TYPE == 'continuous':
-	param_space = ParameterSpace()
-	param_0 = ParameterContinuous(name='param_0', low=0.0, high=1.0)
-	param_space.add(param_0)
-
-	planner = Botorch(goal='minimize')
-	planner.set_param_space(param_space)
-
-	campaign = Campaign()
-	campaign.set_param_space(param_space)
-
-	BUDGET = 24
-
-	for num_iter in range(BUDGET):
-
-		samples = planner.recommend(campaign.observations)
-		print(f'ITER : {num_iter}\tSAMPLES : {samples}')
-		#for sample in samples:
-		sample_arr = samples.to_array()
-		measurement = surface(
-			sample_arr.reshape((1, sample_arr.shape[0]))
-		)
-		campaign.add_observation(sample_arr, measurement[0])
+	from olympus.objects import (
+		ParameterContinuous,
+		ParameterDiscrete,
+		ParameterCategorical,
+	)
+	from olympus.campaigns import Campaign, ParameterSpace
+	from olympus.surfaces import Surface
 
 
-elif PARAM_TYPE == 'categorical':
 
-	surface_kind = 'CatDejong'
-	surface = Surface(kind=surface_kind, param_dim=2, num_opts=21)
+	def surface(x):
+		return np.sin(8*x)
 
-	campaign = Campaign()
-	campaign.set_param_space(surface.param_space)
+	if PARAM_TYPE == 'continuous':
+		param_space = ParameterSpace()
+		param_0 = ParameterContinuous(name='param_0', low=0.0, high=1.0)
+		param_space.add(param_0)
 
-	planner = Botorch(goal='minimize')
-	planner.set_param_space(surface.param_space)
+		planner = Botorch(goal='minimize')
+		planner.set_param_space(param_space)
 
-	OPT = ['x10', 'x10']
+		campaign = Campaign()
+		campaign.set_param_space(param_space)
 
-	BUDGET = 442
+		BUDGET = 24
 
-	for iter in range(BUDGET):
+		for num_iter in range(BUDGET):
 
-		samples = planner.recommend(campaign.observations)
-		print(f'ITER : {iter}\tSAMPLES : {samples}')
-		#sample = samples[0]
-		sample_arr = samples.to_array()
-		measurement = np.array(surface.run(sample_arr))
-		campaign.add_observation(sample_arr, measurement[0])
-
-		if [sample_arr[0], sample_arr[1]] == OPT:
-			print(f'FOUND OPTIMUM AFTER {iter+1} ITERATIONS!')
-			break
-
-
-elif PARAM_TYPE == 'mixed':
-
-	def surface(params):
-		return np.random.uniform()
+			samples = planner.recommend(campaign.observations)
+			print(f'ITER : {num_iter}\tSAMPLES : {samples}')
+			#for sample in samples:
+			sample_arr = samples.to_array()
+			measurement = surface(
+				sample_arr.reshape((1, sample_arr.shape[0]))
+			)
+			campaign.add_observation(sample_arr, measurement[0])
 
 
-	param_space = ParameterSpace()
-	# continuous parameter 0
-	param_0 = ParameterContinuous(name='param_0', low=0.0, high=1.0)
-	param_space.add(param_0)
+	elif PARAM_TYPE == 'categorical':
 
-	# continuous parameter 1
-	param_1 = ParameterContinuous(name='param_1', low=0.0, high=1.0)
-	param_space.add(param_1)
+		surface_kind = 'CatDejong'
+		surface = Surface(kind=surface_kind, param_dim=2, num_opts=21)
 
-	# categorical parameter 2
-	param_2 = ParameterCategorical(name='param_2', options=['a', 'b', 'c'])
-	param_space.add(param_2)
+		campaign = Campaign()
+		campaign.set_param_space(surface.param_space)
 
-	# categorcial parameter 3
-	param_3 = ParameterCategorical(name='param_3', options=['x', 'y', 'z'])
-	param_space.add(param_3)
+		planner = Botorch(goal='minimize')
+		planner.set_param_space(surface.param_space)
 
-	campaign = Campaign()
-	campaign.set_param_space(param_space)
+		OPT = ['x10', 'x10']
 
-	planner = Botorch(goal='minimize')
-	planner.set_param_space(param_space)
+		BUDGET = 442
+
+		for iter in range(BUDGET):
+
+			samples = planner.recommend(campaign.observations)
+			print(f'ITER : {iter}\tSAMPLES : {samples}')
+			#sample = samples[0]
+			sample_arr = samples.to_array()
+			measurement = np.array(surface.run(sample_arr))
+			campaign.add_observation(sample_arr, measurement[0])
+
+			if [sample_arr[0], sample_arr[1]] == OPT:
+				print(f'FOUND OPTIMUM AFTER {iter+1} ITERATIONS!')
+				break
 
 
-	BUDGET = 20
+	elif PARAM_TYPE == 'mixed':
 
-	for iter in range(BUDGET):
+		def surface(params):
+			return np.random.uniform()
 
-		samples  = planner.recommend(campaign.observations)
-		#sample = samples[0]
-		sample_arr = samples.to_array()
-		measurement = surface(sample_arr)
-		print(f'ITER : {iter}\tSAMPLES : {samples}\t MEASUREMENT : {measurement}')
-		campaign.add_observation(sample_arr, measurement)
+
+		param_space = ParameterSpace()
+		# continuous parameter 0
+		param_0 = ParameterContinuous(name='param_0', low=0.0, high=1.0)
+		param_space.add(param_0)
+
+		# continuous parameter 1
+		param_1 = ParameterContinuous(name='param_1', low=0.0, high=1.0)
+		param_space.add(param_1)
+
+		# categorical parameter 2
+		param_2 = ParameterCategorical(name='param_2', options=['a', 'b', 'c'])
+		param_space.add(param_2)
+
+		# categorcial parameter 3
+		param_3 = ParameterCategorical(name='param_3', options=['x', 'y', 'z'])
+		param_space.add(param_3)
+
+		campaign = Campaign()
+		campaign.set_param_space(param_space)
+
+		planner = Botorch(goal='minimize')
+		planner.set_param_space(param_space)
+
+
+		BUDGET = 20
+
+		for iter in range(BUDGET):
+
+			samples  = planner.recommend(campaign.observations)
+			#sample = samples[0]
+			sample_arr = samples.to_array()
+			measurement = surface(sample_arr)
+			print(f'ITER : {iter}\tSAMPLES : {samples}\t MEASUREMENT : {measurement}')
+			campaign.add_observation(sample_arr, measurement)

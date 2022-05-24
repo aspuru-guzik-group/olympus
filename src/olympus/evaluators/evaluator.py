@@ -57,6 +57,7 @@ class Evaluator(Object):
 #        elif isinstance(self.emulator, Surface):
 #            self.emulator_type = 'analytic'
 
+
         # provide the planner with the parameter space.
         # NOTE: right now, outside of Evaluator, the param_space for a planner
         #       needs to be set "manually" by the user

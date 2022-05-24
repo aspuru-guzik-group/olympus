@@ -20,7 +20,7 @@ CONT_SURFACES = [
 ]
 
 CAT_SURFACES = [
-    'CatDejong', 'CatSlope' 'CatAckley', 'CatCamel', 'CatSlope'
+    'CatDejong', 'CatMichalewicz', 'CatAckley', 'CatCamel', 'CatSlope'
 ]
 
 MOO_SURFACES = [
@@ -28,17 +28,26 @@ MOO_SURFACES = [
 ] # all continuous, for now
 
 CONT_PLANNERS = [
-    'Snobfit', 'Phoenics', 'Slsqp', 'Genetic',
+    'Snobfit', 'Slsqp', 
     'ConjugateGradient', 'RandomSearch', 'DifferentialEvolution',
-    'ParticleSwarms', 'SteepestDescent', 'Cma', 'Grid',
+    'SteepestDescent', 'Cma', 'Grid',
     'Hyperopt', 'BasinHopping', 'Gpyopt', 'Lbfgs',
     'LatinHypercube', 'Sobol', 'Gryffin', 'Simplex',
     'Botorch', 'Hebo'
-] # Dragonfly, Entmoot, Smac
+] # MISSING PLANNERS: Dragonfly, Entmoot, Smac,
+
+# BROKEN PLANNERS: Phoenics, Genetic, ParticleSwarms, 
+
 
 CAT_PLANNERS = [
     'RandomSearch', 'Botorch', 'Gryffin', 'Hebo', 'Gpyopt', 'Hyperopt', 'Grid',
 ] # Genetic, Dragonfly
+
+
+MOO_PLANNERS = [
+    'RandomSearch', 'Botorch', 'Gryffin', 'Hebo', 'Gpyopt', 'Hyperopt', 'Grid', 
+    'Sobol', 'LatinHypercube', 'Cma', 'Snobfit'
+]
 
 
 cont_tuples = []
@@ -51,9 +60,8 @@ for planner in CAT_PLANNERS:
     for surface in CAT_SURFACES:
         cat_tuples.append((planner, surface))
 
-
 moo_tuples = []
-for planner in CONT_PLANNERS:
+for planner in MOO_PLANNERS:
     for surface in MOO_SURFACES:
         moo_tuples.append((planner, surface))
 
@@ -64,13 +72,16 @@ def test_cont_surface_optimization(planner, surface):
     planner = Planner(kind=planner, goal='minimize')
     campaign = planner.optimize(emulator=surface, num_iter=3)
 
-    #values = campaign.get_values()
-    # now check that we are close to the minimum
-    #assert np.min(values) < 0.5
-
 
 @pytest.mark.parametrize("planner, surface", cat_tuples)
 def test_cat_surface_optimization(planner, surface):
     surface = Surface(kind=surface, param_dim=2, num_opts=21)
     planner = Planner(kind=planner, goal='minimize')
     campaign = planner.optimize(emulator=surface, num_iter=3)
+
+
+# @pytest.mark.parametrize("planner, surface", moo_tuples)
+# def test_moo_surface_optimization(planner, surface):
+#     surface = Surface(kind=surface, param_dim=2)
+#     planner = Planner(kind=planner, goal='minimize')
+#     campaign = planner.optimize(emulator=surface, num_iter)
