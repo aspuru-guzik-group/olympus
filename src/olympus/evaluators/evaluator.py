@@ -102,8 +102,6 @@ class Evaluator(Object):
         # Optimize: i.e. call the planner recommend method for max_iter times
         for i in range(num_iter):
 
-            print('ITERATION : ', i)
-
             # NOTE: now we get 1 param at a time, a possible future expansion is
             #       to return batches
 
@@ -116,24 +114,16 @@ class Evaluator(Object):
             else:
                 planner_observations = self.campaign.observations
 
-
             # get new params from planner
             params = self.planner.recommend(observations=planner_observations)
-
-            print('CUBE PARAMS : ', params)
-
 
             if self.emulator.parameter_constriants == 'simplex':
                 params = cube_to_simpl([params.to_array()])
                 params = ParameterVector().from_array(params[0], self.emulator.param_space)
-                print('SIMPL PARAMS : ', params)
                 self.campaign.observations_to_simpl()
 
             # get measurement from emulator/surface
             values = self.emulator.run(params, return_paramvector=True)
-
-            print('MEASUREMENT : ', values)
-
 
             # store parameter and measurement pair in campaign
             # TODO: we probably do not need this check for NoneType Campaign here... consider removing
@@ -146,6 +136,3 @@ class Evaluator(Object):
             # if we have a database, log the campaign status
             if self.database is not None:
                 self.database.log_campaign(self.campaign)
-
-
-            print(' ')

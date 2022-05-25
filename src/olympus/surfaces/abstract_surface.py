@@ -103,6 +103,8 @@ class AbstractSurface(Object, metaclass=ABCMeta):
 			params = np.array([params])
 		elif type(params) == list:
 			params = np.array(params)
+		elif isinstance(params, ParameterVector):
+			params = np.array([params.to_array()])
 		if len(params.shape) == 1:
 			params = np.expand_dims(params, axis=0)
 

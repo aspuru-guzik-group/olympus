@@ -4,6 +4,7 @@ import numpy as np
 from olympus.emulators.emulator import Emulator
 from olympus.surfaces.surface import AbstractSurface
 from olympus.objects import Object, ParameterContinuous
+from olympus.datasets import Dataset
 from olympus.utils import generate_id
 from olympus.utils.data_transformer import cube_to_simpl, simpl_to_cube
 from olympus.campaigns import ParameterSpace
@@ -175,7 +176,6 @@ class Campaign(Object):
     def set_value_space(self, value_space):
         self.value_space = value_space
         self.observations.set_value_space(value_space)
-        print('value space length : ', len(self.value_space) )
         if len(self.value_space) > 1:
             self.is_moo = True
         # for moo --> make merit objective
@@ -203,6 +203,12 @@ class Campaign(Object):
             self.set_dataset_kind(emulator.dataset.kind)
             self.set_measurement_name(emulator.dataset.measurement_name)
             self.set_model_kind(emulator.model.kind)
+        elif isinstance(emulator, Dataset):
+            # emualtor is a dataset
+            self.set_emulator_type("numeric")
+            self.set_dataset_kind(emulator.kind)
+            self.set_measurement_name(emulator.measurement_name)
+            # self.set_model_kind(emulator.model.kind)
         elif isinstance(emulator, AbstractSurface):
             self.set_emulator_type("analytic")
             self.set_surface_kind(emulator.kind)

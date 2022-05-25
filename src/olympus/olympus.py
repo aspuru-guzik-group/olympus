@@ -22,6 +22,7 @@ from .surfaces import (
     list_cat_surfaces,
     list_cont_surfaces,
 )
+from .scalarizers import Scalarizer
 from . import Logger
 
 from . import __home__, __scratch__
@@ -103,6 +104,7 @@ class Olympus(Object):
         param_dim=2,
         num_opts=None,
         goal="minimize",
+        scalarizer=None,
         campaign=Campaign(),
         database=Database(),
         num_iter=3,
@@ -121,12 +123,23 @@ class Olympus(Object):
                 Logger.log(message, 'FATAL')
 
         self.surface = Surface(kind=surface, param_dim=param_dim, num_opts=num_opts)
+
+        if len(self.surface.value_space) > 1 and not scalarizer:
+            message = f'You must pass a scalarizer instance for multiobjective optimization in Olympus'
+            Logger.log(message, 'FATAL')
+        elif len(self.surface.value_space) > 1 and scalarizer:
+            self.scalarizer = scalarizer
+        else:
+            self.scalarizer = None
+        
+
         self.campaign = campaign
         self.database = database
         self.evaluator = Evaluator(
             planner=self.planner,
             emulator=self.surface,
             campaign=self.campaign,
+            scalarizer=self.scalarizer,
             database=self.database,
         )
         self.evaluator.optimize(num_iter=num_iter)
