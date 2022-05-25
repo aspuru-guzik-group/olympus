@@ -273,6 +273,72 @@ class PlotterSeaborn(AbstractPlotter):
             plt.show()
 
 
+    def _plot_regret_x_evals(
+        self, 
+        emulators, 
+        planners, 
+        measurements, 
+        num_evals, 
+        is_cumulative,
+        file_name=None, 
+        show=False, 
+        *args, 
+        **kwargs,
+    ):
+
+        self._set_color_palette()
+        num_plots  = len(emulators)
+        num_graphs = len(planners)
+        fig = plt.figure(figsize = (6, 5 * num_plots))
+        axs = []
+        for plot_index in range(num_plots):
+            ax = plt.subplot2grid((num_plots, 1), (plot_index, 0))
+            axs.append(ax)
+
+
+        for plot_index, emulator in enumerate(emulators):
+            ax = axs[plot_index]
+            all_data = {'planner': [], 'vals': []}
+            for planner_ix, planner in enumerate(planners):
+                #measurements[emulator][planner]['vals'] = np.squeeze(measurements[emulator][planner]['vals'])
+                all_data['planner'].extend(measurements[emulator][planner]['planner'])
+                all_data['vals'].extend(measurements[emulator][planner]['vals'])
+            sns.boxplot(
+                x='planner',
+                y='vals',
+                #hue='planner',
+                data=all_data,
+                #color=self.line_palette[:len(planners)],
+                ax=ax,
+                linewidth=2.,
+            )
+            sns.swarmplot(
+                x='planner',
+                y='vals',
+                #hue='planner',
+                data=all_data,
+                #color=self.line_palette[:len(planners)],
+                ax=ax,
+                linewidth=0.5,
+            )
+
+            ax.grid(linestyle = ':')
+            ax.set_title(f'{emulator.capitalize()}')
+
+            ax.set_xlabel('planner')
+            if is_cumulative:
+                ax.set_ylabel(f'cumulative regret after\n{num_evals} iterations')
+            else:
+                ax.set_ylabel(f'regret aft3er\n{num_evals} iterations')
+
+        plt.tight_layout()
+
+        if file_name is not None:
+            plt.savefig(file_name, bbox_inches = 'tight')
+        if show is True:
+            plt.show()
+
+
 
 
 

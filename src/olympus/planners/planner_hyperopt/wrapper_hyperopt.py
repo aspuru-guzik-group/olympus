@@ -10,7 +10,7 @@ from olympus.objects import ParameterVector
 
 class Hyperopt(AbstractPlanner):
 
-    PARAM_TYPES = ['continuous', 'categorical']
+    PARAM_TYPES = ['continuous', 'discrete', 'categorical']
 
 
     def __init__(self, goal='minimize', show_progressbar=False):
@@ -54,10 +54,7 @@ class Hyperopt(AbstractPlanner):
         self._values = observations.get_values(
             as_array=True, opposite=self.flip_measurements,
         )
-    #    print(self._params)
-    #    print(self._values)
-        print(len(self._params))
-        print(len(self._values))
+
         # update hyperopt Trials accordingly
         self._set_hp_trials()
 
@@ -85,7 +82,6 @@ class Hyperopt(AbstractPlanner):
 
     def _set_hp_trials(self):
         self._trials = Trials()
-        print(self._params)
         if self._params is not None and len(self._params) > 0:
             for tid, (param, loss) in enumerate(zip(self._params, self._values)):
                 idxs = {k: [tid] for k, v in param.items()}
@@ -106,11 +102,10 @@ class Hyperopt(AbstractPlanner):
 
     def _ask(self):
 
-        print('\n\n')
-        print(len(self._params))
-        print(self._hp_space)
-        print(self.num_generated)
-        print(self._trials)
+        print('TRIALS : ', self._trials)
+
+        if self.num_generated > 1:
+            print('TRIALS MISC: ', self._trials.trials[-1]['misc'])
 
         # NOTE: we pass a dummy function as we just ask for the new (+1) set of parameters
         _ = fmin(
@@ -125,6 +120,7 @@ class Hyperopt(AbstractPlanner):
         assert len(self._trials.trials) == self.num_generated
         # get params from last dict in trials.trials
         proposed_params = self._trials.trials[-1]['misc']['vals']
+
 
         return_params = {}
         # iterate through the olympus param space
@@ -163,3 +159,5 @@ if __name__ == '__main__':
         print('MEASUREMENT : ', measurement)
 
         campaign.add_observation(sample, measurement)
+
+        print('\n\n\n')

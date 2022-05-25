@@ -30,7 +30,7 @@ class Smac(AbstractPlanner):
 
 		from ConfigSpace.hyperparameters import UniformFloatHyperparameter 
 		from smac.configspace            import ConfigurationSpace 
-		from smac.optimizer.objective    import average_cost
+		#from smac.optimizer.objective    import average_cost
 		from smac.runhistory.runhistory  import RunHistory
 		from smac.scenario.scenario      import Scenario
 		from smac.stats.stats            import Stats	
@@ -41,14 +41,15 @@ class Smac(AbstractPlanner):
 			if param.type == 'continuous':
 				var = UniformFloatHyperparameter(param.name, param.low, param.high)
 				self.cs.add_hyperparameter(var)
-		self.runhistory = RunHistory(aggregate_func=average_cost)
+		self.runhistory = RunHistory(overwrite_existing_runs=True)#(aggregate_func=average_cost)
 		self.scenario = Scenario({
 			'run_obj': 'quality', 'runcount-limit': self.budget, 'cs': self.cs})
 		self.stats = Stats(self.scenario)
 		self.traj_logger = TrajLogger(output_dir=__scratch__, stats=self.stats)
 
 
-	def _set_observations(self, observations):
+	#def _set_observations(self, observations):
+	def _tell(self, observations):
 		from smac.tae.execute_ta_run import StatusType
 		self._params = observations.get_params(as_array=True)
 		self._values = observations.get_values(as_array=True, opposite=self.flip_measurements)
@@ -102,7 +103,7 @@ class Smac(AbstractPlanner):
 			'runhistory': self.runhistory,
 			'runhistory2epm': runhistory2epm,
 			'intensifier': intensifier,
-			'aggregate_func': average_cost,
+			#'aggregate_func': average_cost,
 			'num_run': self.seed,
 			'model': model,
 			'acq_optimizer': InterleavedLocalAndRandomSearch(acq_func, self.scenario.cs, np.random.RandomState(seed=self.rng.randint(MAXINT))),
@@ -114,7 +115,8 @@ class Smac(AbstractPlanner):
 		self.smbo = SMBO(**smbo_args)
 
 
-	def _generate(self):
+	#def _generate(self):
+	def _ask(self):
 		if self.has_optimizer is False:
 			self.create_optimizer()
 			self.has_optimizer = True 
@@ -127,4 +129,130 @@ class Smac(AbstractPlanner):
 		param_dict = {key: self.smac_param[key] for key in self.smac_param}
 		return ParameterVector().from_dict(param_dict)
 
-#===============================================================================
+
+
+
+
+#-----------
+# DEBUGGING
+#-----------
+if __name__ == '__main__':
+	PARAM_TYPE = 'continuous'
+
+	NUM_RUNS = 40
+
+	from olympus.objects import (
+		ParameterContinuous,
+		ParameterDiscrete,
+		ParameterCategorical,
+	)
+	from olympus.campaigns import Campaign, ParameterSpace
+	from olympus.surfaces import Surface
+
+
+
+	def surface(x):
+		return np.sin(8*x)
+
+	if PARAM_TYPE == 'continuous':
+		param_space = ParameterSpace()
+		param_0 = ParameterContinuous(name='param_0', low=0.0, high=1.0)
+		param_space.add(param_0)
+
+		planner = Smac(goal='minimize')
+		planner.set_param_space(param_space)
+
+		campaign = Campaign()
+		campaign.set_param_space(param_space)
+
+		BUDGET = 24
+
+		for num_iter in range(BUDGET):
+
+			samples = planner.recommend(campaign.observations)
+			print(f'ITER : {num_iter}\tSAMPLES : {samples}')
+			#for sample in samples:
+			sample_arr = samples.to_array()
+			measurement = surface(
+				sample_arr.reshape((1, sample_arr.shape[0]))
+			)
+			campaign.add_observation(sample_arr, measurement[0])
+
+
+	elif PARAM_TYPE == 'categorical':
+
+		surface_kind = 'CatDejong'
+		surface = Surface(kind=surface_kind, param_dim=2, num_opts=21)
+
+		campaign = Campaign()
+		campaign.set_param_space(surface.param_space)
+
+		planner = Smac(goal='minimize')
+		planner.set_param_space(surface.param_space)
+
+		OPT = ['x10', 'x10']
+
+		BUDGET = 442
+
+		for iter in range(BUDGET):
+
+			samples = planner.recommend(campaign.observations)
+			print(f'ITER : {iter}\tSAMPLES : {samples}')
+			#sample = samples[0]
+			sample_arr = samples.to_array()
+			measurement = np.array(surface.run(sample_arr))
+			campaign.add_observation(sample_arr, measurement[0])
+
+			if [sample_arr[0], sample_arr[1]] == OPT:
+				print(f'FOUND OPTIMUM AFTER {iter+1} ITERATIONS!')
+				break
+
+
+	elif PARAM_TYPE == 'mixed':
+
+		def surface(params):
+			return np.random.uniform()
+
+
+		param_space = ParameterSpace()
+		# continuous parameter 0
+		param_0 = ParameterContinuous(name='param_0', low=0.0, high=1.0)
+		param_space.add(param_0)
+
+		# continuous parameter 1
+		param_1 = ParameterContinuous(name='param_1', low=0.0, high=1.0)
+		param_space.add(param_1)
+
+		# categorical parameter 2
+		param_2 = ParameterCategorical(name='param_2', options=['a', 'b', 'c'])
+		param_space.add(param_2)
+
+		# categorcial parameter 3
+		param_3 = ParameterCategorical(name='param_3', options=['x', 'y', 'z'])
+		param_space.add(param_3)
+
+		campaign = Campaign()
+		campaign.set_param_space(param_space)
+
+		planner = Smac(goal='minimize')
+		planner.set_param_space(param_space)
+
+
+		BUDGET = 20
+
+		for iter in range(BUDGET):
+
+			samples  = planner.recommend(campaign.observations)
+			#sample = samples[0]
+			sample_arr = samples.to_array()
+			measurement = surface(sample_arr)
+			print(f'ITER : {iter}\tSAMPLES : {samples}\t MEASUREMENT : {measurement}')
+			campaign.add_observation(sample_arr, measurement)
+
+
+
+
+
+
+
+

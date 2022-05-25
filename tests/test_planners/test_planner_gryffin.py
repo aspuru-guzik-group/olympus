@@ -9,4 +9,4 @@
 # 	[(4, np.array([-1, 1]), True, 100700, 'adam'),
 # 	 (1, np.array([-1, -0.5, 0.5, 1]), False, 2022, 'genetic'),
 # 	 (4, np.array([-1, 1]), True, 100, 'genetic')])
-# def test_planner_ask_tell()
+# def test_planner_ask_tell()3

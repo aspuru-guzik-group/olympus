@@ -37,8 +37,10 @@ class AbstractPlotter(Object):
         pass
 
     @abc.abstractmethod
-    def _plot_cumulative_regret_x_evals(self, emulators, planners, measurements, num_evals, plot_file_name,*args, **kwargs):
+    def _plot_regret_x_evals(self, emulators, planners, measurements, num_evals, is_cumulative, plot_file_name, *args, **kwargs):
         pass
+
+
 
 
     def plot_from_db(
@@ -96,8 +98,13 @@ class AbstractPlotter(Object):
             emulators, planners, measurements = self._get_num_evals_top_k(campaigns, threshold, is_percent )
             self._plot_num_evals_top_k(emulators, planners, measurements, threshold, is_percent, plot_file_name, *args, **kwargs)
         elif kind == 'cumulative_regret_x_evals':
-            emulators, planners, measurements = self._get_cumulative_regret_x_evals(campaigns, num_evals)
-            self._plot_cumulative_regret_x_evals(emulators, planners, measurements, threshold, is_percent, plot_file_name, *args, **kwargs)
+            is_cumulative = True
+            emulators, planners, measurements = self._get_regret_x_evals(campaigns, num_evals, is_cumulative=is_cumulative)
+            self._plot_regret_x_evals(emulators, planners, measurements, num_evals, is_cumulative, plot_file_name, *args, **kwargs)
+        elif kind == 'regret_x_evals':
+            is_cumulative = False
+            emulators, planners, measurements = self._get_regret_x_evals(campaigns, num_evals, is_cumulative=is_cumulative)
+            self._plot_regret_x_evals(emulators, planners, measurements, num_evals, is_cumulative, plot_file_name, *args, **kwargs)
         else:
             raise NotImplementedError
 
@@ -488,7 +495,7 @@ class AbstractPlotter(Object):
         return emulators, planners, measurements
 
 
-    def _get_cumulative_regret_x_evals(self, campaigns, num_evals, is_percent=False):
+    def _get_regret_x_evals(self, campaigns, num_evals, is_cumulative=False):
 
         emulators    = []
         planners     = []
@@ -526,12 +533,14 @@ class AbstractPlotter(Object):
                 measurements[camp_emulator] = {}
             if planner not in planners:
                 planners.append(planner)
-                measurements[camp_emulator][planner] = {'idxs': [], 'vals': []}
-            # for val_index, value in enumerate(campaign.best_values):
-            #     measurements[camp_emulator][planner]['idxs'].append(val_index)
-            #     measurements[camp_emulator][planner]['vals'].append(np.abs(value-opt_obj)) # regret
-            campaign_best_values = campaign.best_values()
-            
+                measurements[camp_emulator][planner] = {'planner': [], 'vals': []}
+  
+            if is_cumulative: 
+                regret_to_add = np.sum(campaign.best_values[:num_evals] - opt_obj) # cumulative regret
+            else:
+                regret_to_add = campaign.best_values[num_evals] - opt_obj # instantaneous regret
+            measurements[camp_emulator][planner]['vals'].append(regret_to_add) 
+            measurements[camp_emulator][planner]['planner'].append(planner)
    
         for emulator in emulators:
             for planner in planners:
@@ -542,6 +551,8 @@ class AbstractPlotter(Object):
             pass
 
         return emulators, planners, measurements
+
+
 
 
 
@@ -599,69 +610,4 @@ class AbstractPlotter(Object):
 
 
         return current_avail_cat
-
-
-    def __OLD_plot_from_db(self, database, kind='traces', emulator=None, plot_file_name='test.png', *args, **kwargs):
-        # unpack the campaigns from the database
-        campaigns    = database.get_campaigns()
-        emulators    = []
-        planners     = []
-        measurements = {}
-        problem_types  = []
-
-        # unpack the campaigns
-        for campaign in campaigns:
-
-            # unpack parameter/value types, infer the problem type
-            problem_types.append(
-                self._infer_problem_type(
-                    campaign.param_space, 
-                    campaign.value_space,
-                    )
-                )
-
-            # parse emulator type
-            if campaign.emulator_type == 'n/a':  # this means campaign never got an Emulator or Surface
-                continue
-            emulator_type = campaign.get_emulator_type()
-            if emulator_type == 'numeric':
-                # neural network based emulator or lookup table for fully categorical
-                camp_emulator = f'{campaign.model_kind}_{campaign.dataset_kind}'
-            elif emulator_type == 'analytic':
-                # analytic surface 
-                camp_emulator = f'analytic_{campaign.surface_kind}'
-            if emulator is None:
-                emulator = camp_emulator
-            if camp_emulator != emulator: continue
-
-            # parse planner information
-            planner  = campaign.get_planner_kind()
-            if emulator not in emulators:
-                emulators.append(emulator)
-                measurements[emulator] = {}
-            if planner not in planners:
-                planners.append(planner)
-                measurements[emulator][planner] = {'idxs': [], 'vals': []}
-            for val_index, value in enumerate(campaign.best_values):
-                measurements[emulator][planner]['idxs'].append(val_index)
-                measurements[emulator][planner]['vals'].append(value)
-
-        # check to see if we have all the same problem types throughout the campaings
-        problem_type = list(set(problem_types))
-        if len(problem_type) > 1:
-            message = f'Your database must include campaigns with the same probelm type. You have provided types : {", ".join(problem_type)}'
-            Logger.log('FATAL')
-
-        self._validate_plot_kind(problem_type, kind)
-
-
-        for emulator in emulators:
-            for planner in planners:
-                try:
-                    measurements[emulator][planner]['idxs'] = np.array(measurements[emulator][planner]['idxs'])
-                    measurements[emulator][planner]['vals'] = np.array(measurements[emulator][planner]['vals'])
-                except KeyError: continue
-
-        self._plot(kind, emulators, planners, measurements, plot_file_name, *args, **kwargs)
-
 

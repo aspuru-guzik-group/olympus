@@ -58,6 +58,7 @@ class Hebo(AbstractPlanner):
 				# TODO: map the discrete parameters onto integers
 				self.olympus_encoding = np.arange(param.low, param.high, param.stride) # actual parameter values
 				self.int_encoding = np.arange(len(self.olympus_encoding)) # integers from 0, ..., num_opts
+				self.discrete_param_encodings[param.name] = {i:o for i, o in zip(self.int_encoding, self.olympus_encoding)}
 				param_dict = {
 					'name': param.name,
 					'type': 'int',

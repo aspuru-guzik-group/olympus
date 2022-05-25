@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+import numpy as np
+
 def infer_problem_type(param_space):
 	''' infer the parameter space from Olympus. The three possibilities are
 	"fully_continuous", "mixed", or "fully_categorical"

@@ -1,89 +1,102 @@
 #!/usr/bin/env python
 
-import time
 import numpy as np
+import pandas as pd
 
-from dragonfly.exd.cp_domain_utils import load_config
-from dragonfly.exd.experiment_caller import CPFunctionCaller, EuclideanFunctionCaller
-from dragonfly import maximise_function, minimise_function
-from dragonfly.opt import gp_bandit
+
+import ConfigSpace as CS
+from ConfigSpace.hyperparameters import (
+    CategoricalHyperparameter,
+    UniformFloatHyperparameter,
+    UniformIntegerHyperparameter,
+)
+from smac.configspace import ConfigurationSpace
+from smac.scenario.scenario import Scenario
+
+from smac.facade.smac_ac_facade import SMAC4AC
+from smac.runhistory.runhistory import RunHistory
+from smac.stats.stats import Stats
+from smac.utils.io.traj_logging import TrajLogger
+
+from smac.optimizer.acquisition import EI, LCB, PI
 
 from olympus.planners import AbstractPlanner
 from olympus.objects import ParameterVector
-
-
-from dragonfly_utils import infer_problem_type
-
 from olympus.utils import daemon
 
-
-class Dragonfly(AbstractPlanner):
-
-	KNOWS_BOUNDS = True
+class Smac(AbstractPlanner):
 
 	PARAM_TYPES = ['continuous', 'discrete', 'categorical']
+
+	KNOWS_BOUNDS = True
 
 	def __init__(
 		self,
 		goal='minimize',
-		opt_method='bo', # bo, rand, ga, ea, direct, or pdoo
-		num_workers=1,
-		captial_type='num_evals',
-		options=None,
+		model_type='rf',
+		acquisition_function='ei',
+		batch_size=1,
 		random_seed=None,
-
-
 	):
 		"""
-		Scalable Bayesian optimization as implemented in the Dragonfly package:
-		https://github.com/dragonfly/dragonfly
-
-		Args:
-			goal (str): The optimization goal, either 'minimize' or 'maximize'. Default is 'minimize'.
+		Bayesian optimization with SMAC3 
 		"""
 		AbstractPlanner.__init__(**locals())
 		# check for and set the random seed
 		if not self.random_seed:
 			self.random_seed = np.random.randint(1, int(1e7))
 
-		self._has_dragonfly_domain = False
-		self._is_dragonfly_built = False
-
+		self._is_smac_built = False
 		self.has_minimizer = False
 		self.is_converged = False
 
+
 	def _set_param_space(self, param_space):
 		self._param_space = []
+		self.discrete_param_encodings = {}
+
 		for param in param_space:
 			if param.type == 'continuous':
-				param_dict = {
-					"name": param.name,
-					"type": "float",
-					"min": param.low,
-					"max": param.high,
-				}
-			elif param.type == 'discrete':
-				# discrete numeric
-				param_dict = {
-					"name": param.name,
-					"type": "discrete_numeric",
-					"items": f"{param.low}:{param.stride}:{param.high}",
-				}
+				self._param_space.append(
+					UniformFloatHyperparameter(
+						param.name, # name
+						param.low, # lower bound
+						param.high, # upper bound
+						default_value = param.high-param.high/2,
+					)
+				)
+			elif param_type == 'discrete':
+				# map the discrete parameters onto integers
+				self.olympus_encoding = np.arange(param.low, param.high, param.stride) # actual parameter values
+				self.int_encoding = np.arange(len(self.olympus_encoding)) # integers from 0, ..., num_opts
+				self.discrete_param_encodings[param.name] = {i:o for i, o in zip(self.int_encoding, self.olympus_encoding)}
+				self._param_space.append(
+					UniformIntegerHyperparameter(
+						param.name,  # name
+						0, # lower bound
+						len(self.int_encoding)-1, # higher bound
+						default_value=0,
+					)
+				)
+
 			elif param.type == 'categorical':
-				# discrete
-				param_dict = {
-					"name": param.name,
-					"type": "discrete",
-#                    "items": "-".join([opt for opt in param.options]),
-					"items": param.options,
-				}
-			else:
-				raise NotImplementedError(f'Parameter type {param.type} for {param.name} not implemnted')
+				self._param_space.append(
+					CategoricaHyperparameter(
+						param.name, # name
+						param.options, # options
+						default_value=param.options[0]
+					)
+				)
 
-			self._param_space.append(param_dict)
+		# makee configuration space 
+		self.cs = ConfigurationSpace()
+		self.cs.add_hyperparameters(self._param_space)
 
-		self.problem_type = infer_problem_type(param_space)
 
+	@daemon
+	def create_minimizer(self):
+		_ = self.smac.optimize()
+		self.is_converged = True
 
 	def _priv_evaluator(self, params):
 		if self.KNOWS_BOUNDS is False:
@@ -95,49 +108,41 @@ class Dragonfly(AbstractPlanner):
 		return value
 
 
-	def _build_dragonfly(self):
-		config_params = {"domain": self._param_space}
-		self.config = load_config(config_params)
+	def _build_smac(self):
+		af_map = {'ei': EI, 'lcb': LCB, 'pi': PI}
 
-		# pick function caller etc. based on the problem type
-		if self.problem_type == 'fully_continuous':
-			self.func_caller = EuclideanFunctionCaller(None, self.config.domain)
-			self.opt = gp_bandit.EuclideanGPBandit(self.func_caller, ask_tell_mode=True)
-
-		elif self.problem_type in ['fully_categorical', 'fully_discrete', 'mixed']:
-			self.func_caller = CPFunctionCaller(None, self.config.domain, domain_orderings=self.config.domain_orderings)
-			self.opt = gp_bandit.CPGPBandit(self.func_caller, ask_tell_mode=True)
-		else:
-			raise NotImplementedError
-
-		self.opt.initialise()
-		self._is_dragonfly_built = True
-
-
-	@daemon
-	def create_minimizer(self):
-		_ = minimise_function(
-			self._priv_evaluator, self.config.domain, 1e6, config=self.config,
-			opt_method=self.opt_method, num_workers=self.num_workers,
-			capital_type=self.captial_type, options=self.options,
+		# generate the scenario
+		self.scenario = Scenario(
+			{
+				"run_obj": "quality",
+				"runcount-limit": 1e6,
+				"cs": self.cs,
+				"deterministic": False
+			}
 		)
-		self.is_converged = True
+
+		self.smac = SMAC4AC(
+			scenario=self.scenario,
+			model_type=self.model_type,
+			rng=np.random.RandomState(self.random_seed),
+			acquisition_function=af_map[self.acquisition_function],
+			tae_runner=self._priv_evaluator
+			)
+
 
 
 	def _tell(self, observations):
 		self._params = observations.get_params(as_array=False)
 		self._values = observations.get_values(as_array=True, opposite=self.flip_measurements)
 
-		if not self._is_dragonfly_built:
-			self._build_dragonfly()
+		if not self._is_smac_built:
+			self._build_smac()
 
 		if len(self._values)>0:
 			self.RECEIVED_VALUES.append(self._values[-1])
 
 
-
 	def _ask(self):
-
 		if not self.has_minimizer:
 			self.create_minimizer()
 			self.has_minimizer = True
@@ -152,11 +157,12 @@ class Dragonfly(AbstractPlanner):
 
 
 
+
 #-----------
 # DEBUGGING
 #-----------
 if __name__ == '__main__':
-	PARAM_TYPE = 'mixed'
+	PARAM_TYPE = 'continuous'
 
 	NUM_RUNS = 40
 
@@ -178,7 +184,7 @@ if __name__ == '__main__':
 		param_0 = ParameterContinuous(name='param_0', low=0.0, high=1.0)
 		param_space.add(param_0)
 
-		planner = Dragonfly(goal='minimize')
+		planner = Smac(goal='minimize')
 		planner.set_param_space(param_space)
 
 		campaign = Campaign()
@@ -206,7 +212,7 @@ if __name__ == '__main__':
 		campaign = Campaign()
 		campaign.set_param_space(surface.param_space)
 
-		planner = Dragonfly(goal='minimize')
+		planner = Smac(goal='minimize')
 		planner.set_param_space(surface.param_space)
 
 		OPT = ['x10', 'x10']
@@ -253,7 +259,7 @@ if __name__ == '__main__':
 		campaign = Campaign()
 		campaign.set_param_space(param_space)
 
-		planner = Dragonfly(goal='minimize')
+		planner = Smac(goal='minimize')
 		planner.set_param_space(param_space)
 
 
@@ -267,5 +273,8 @@ if __name__ == '__main__':
 			measurement = surface(sample_arr)
 			print(f'ITER : {iter}\tSAMPLES : {samples}\t MEASUREMENT : {measurement}')
 			campaign.add_observation(sample_arr, measurement)
+
+
+
 
 
