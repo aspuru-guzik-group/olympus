@@ -1,6 +1,7 @@
 ## Olympus: a benchmarking framework for noisy optimization and experiment planning
 [![Build Status](https://travis-ci.com/FlorianHase/olympus.svg?token=bMWWqBdm3xytautMLsPK&branch=dev)](https://travis-ci.com/FlorianHase/olympus)
 [![codecov](https://codecov.io/gh/FlorianHase/olympus/branch/flo/graph/badge.svg?token=FyvePgBDQ5)](https://codecov.io/gh/FlorianHase/olympus)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 ``Olympus`` provides a consistent and easy-to-use **framework for benchmarking optimization algorithms**. With ``olympus`` you can:
 * Access a suite of **18 experiment planning algortihms** via a simple and consistent interface
