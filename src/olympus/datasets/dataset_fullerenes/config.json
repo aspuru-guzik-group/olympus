@@ -4,12 +4,12 @@
 			"measurements": "positive"
 		},
 	"parameters": [
-			{"name": "reaction_time", "low": 3.0,   "high": 31.0},
-			{"name": "sultine",       "low": 1.5,   "high": 6.0},
-			{"name": "temperature",   "low": 100.0, "high": 150.0}
+			{"name": "reaction_time", "type": "continuous", "low": 3.0,   "high": 31.0},
+			{"name": "sultine", "type": "continuous",  "low": 1.5,   "high": 6.0},
+			{"name": "temperature", "type": "continuous", "low": 100.0, "high": 150.0}
 		],
 	"measurements": [
-		{"name": "product","goal": "maximize"}
+		{"name": "product","goal": "maximize", "type": "continuous"}
 	],
     "default_goal": "maximize"
 }

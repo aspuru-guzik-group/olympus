@@ -6,6 +6,7 @@ from olympus.objects.object_config import Config
 
 class Slsqp(WrapperScipy):
 
+    PARAM_TYPES = ['continuous']
     METHOD = 'slsqp'
 
     # defaults are copied from scipy documentation

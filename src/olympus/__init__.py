@@ -27,7 +27,7 @@ del get_versions
 # ===============================================================================
 # this is where we can read in environment variables to modify
 # the behavior of the logger
-from .utils import MessageLogger
+from .utils.logger import MessageLogger
 
 Logger = MessageLogger()
 
@@ -35,7 +35,11 @@ Logger = MessageLogger()
 
 from .objects import Object
 from .objects import Parameter
-from .objects import ParameterContinuous
+from .objects import (
+    ParameterContinuous,
+    ParameterDiscrete,
+    ParameterCategorical,
+)
 from .objects import ParameterVector
 
 from .campaigns import Campaign

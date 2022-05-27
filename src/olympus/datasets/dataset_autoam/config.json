@@ -1,0 +1,16 @@
+{
+  "constraints": {
+		"parameters": "none",
+		"measurements": "positive"
+		},
+	"parameters": [
+			{"name": "prime_delay", "type": "continuous", "low": 0.0,  "high": 5.0},
+			{"name": "print_speed", "type": "continuous", "low": 0.1,  "high": 10.0},
+			{"name": "x_offset_correction", "type": "continuous", "low": -1.0,  "high": 1.0},
+			{"name": "y_offset_correction", "type": "continuous", "low": -1.0,  "high": 1.0}
+		],
+	"measurements": [
+		{"name": "shape_score", "type": "continuous"}
+	],
+    "default_goal": "maximize"
+}

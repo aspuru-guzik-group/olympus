@@ -6,6 +6,8 @@ from olympus.objects.object_config  import Config
 
 class Lbfgs(WrapperScipy):
 
+    PARAM_TYPES = ['continuous']
+
     METHOD       = 'L-BFGS-B'
     KNOWS_BOUNDS = True
 

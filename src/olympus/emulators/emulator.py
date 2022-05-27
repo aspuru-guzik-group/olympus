@@ -18,7 +18,7 @@ from olympus.datasets.dataset import Dataset
 from olympus.models.model import Model
 from olympus.models.abstract_model import AbstractModel
 from olympus.objects import Object, ParameterVector
-from olympus.utils.data_transformer import DataTransformer
+from olympus.utils.data_transformer import DataTransformer, cat_param_to_feat
 from olympus.utils.misc import r2_score
 from olympus.models.model import _validate_model_kind
 from olympus.datasets.dataset import _validate_dataset_args
@@ -72,6 +72,11 @@ class Emulator(Object):
             )
             self._load(f"{__emulator_path__}/emulator_{dataset}_{model}")
 
+            self.parameter_constriants = self.dataset.constraints['parameters']
+            self.aux_param_space = self.dataset.aux_param_space
+
+
+
         # -----------------------------------------
         # otherwise, assume it is a custom emulator
         # -----------------------------------------
@@ -98,9 +103,11 @@ class Emulator(Object):
                 transformations=self.target_transform
             )
 
+
         # create tmp dir to store model files
         # also if we are loading a model (the user could call 'train' again)
         self._scratch_dir = TemporaryDirectory(dir=f"{__scratch__}", prefix="emulator_")
+
 
     def __str__(self):
         if self.dataset is not None and self.model is not None:
@@ -167,6 +174,27 @@ class Emulator(Object):
         else:
             self.model.set_param_space(self.param_space)
 
+    
+    def transform_cat_params(self, params):
+        ''' transformed parameter space representation of categorical variables
+        to one-hot-encoded representation for emulator
+        '''
+
+        transformed_features = [] 
+        for param in params:
+            transformed_feature = []
+            for p, space in zip(param, self.param_space):
+                if space.type == 'categorical':
+                    element = cat_param_to_feat(space, p)
+                    transformed_feature.extend(element)
+                else:
+                    element = p
+                    transformed_feature.append(element)
+            transformed_features.append(transformed_feature)
+
+        return np.array(transformed_features)
+
+
     # =========================
     # Train and Predict Methods
     # =========================
@@ -216,11 +244,20 @@ class Emulator(Object):
             # NOTE: we keep the features as Dataset objects, as these are needed for possible periodic transformations
             # TODO: expend the above also to targets? Right now param_space does not describe what type of variable
             #  the targets are
+        
+
             train_features = Dataset(data=self.dataset.cross_val_sets_features[fold][0])
             train_features.set_param_space(self.dataset.param_space)
+            train_features = train_features.data.to_numpy()
             valid_features = self.dataset.cross_val_sets_features[fold][1].to_numpy()
-            train_targets = self.dataset.cross_val_sets_targets[fold][0].to_numpy()
-            valid_targets = self.dataset.cross_val_sets_targets[fold][1].to_numpy()
+            train_targets = self.dataset.cross_val_sets_targets[fold][0].to_numpy().astype(float)
+            valid_targets = self.dataset.cross_val_sets_targets[fold][1].to_numpy().astype(float)
+
+    
+            # transform categorical variables to one-hot-encoded vectors, if any exist
+            train_features = self.transform_cat_params(train_features)
+            valid_features = self.transform_cat_params(valid_features)
+
 
             feature_transformer.train(train_features)
             target_transformer.train(train_targets)
@@ -329,9 +366,14 @@ class Emulator(Object):
         #  the targets are
         train_features = Dataset(data=self.dataset.train_set_features)
         train_features.set_param_space(self.dataset.param_space)
+        train_features = train_features.data.to_numpy()
         test_features = self.dataset.test_set_features.to_numpy()
-        train_targets = self.dataset.train_set_targets.to_numpy()
-        test_targets = self.dataset.test_set_targets.to_numpy()
+        train_targets = self.dataset.train_set_targets.to_numpy().astype(float)
+        test_targets = self.dataset.test_set_targets.to_numpy().astype(float)
+
+        # transform categorical variables to one-hot-encoded vectors, if any exist
+        train_features = self.transform_cat_params(train_features)
+        test_features = self.transform_cat_params(test_features)
 
         # get scaled train/valid sets. These are also the DataTransformer objects we keep as they are needed in 'run'
         self.feature_transformer.train(train_features)
@@ -408,6 +450,8 @@ class Emulator(Object):
         }
         return self.model_scores
 
+
+
     def run(self, features, num_samples=1, return_paramvector=False):
         """Run the emulator and return a value given the features provided.
 
@@ -426,23 +470,52 @@ class Emulator(Object):
             message = "This emulator has not been trained yet. Please train the emulator before you can use it for prediction."
             Logger.log(message, "ERROR")
 
-        # check the inputs
-        if type(features) == list:
-            features = np.array(features)
-        if len(features.shape) == 1:
-            features = np.expand_dims(features, axis=0)
+        # check the type of features given and convert to a list of lists
+        # (# samples, # features) to be processed
 
-        # validate features
-        if not features.shape[1] == len(self.param_space):
+        if isinstance(features, np.ndarray):
+            if len(features.shape)==2: 
+                features = [list(feature) for feature in features] # multiple observations, convert to list
+            elif len(features.shape)==1:
+                features = [list(features)] # assume single sample
+            else:
+                message = f'You can pass either a 1d or 2d np.ndarray for argument features. You have passed a {len(features.shape)}d np.ndarray.'
+                Logger.log(message, 'ERROR')
+
+        elif isinstance(features, list):
+            if type(features[0]) in [str, int, float]:
+                # assume we have a single value passed
+                features = [features]
+            elif type(features[0]) in [list, np.ndarray]:
+                # assume multiple parameters are passed already in array form
+                features = [list(feature) for feature in features]
+            elif type(features[0]) == ParameterVector:
+                # list of ParamVectors, convert to list of arrays
+                features = [feature.to_list() for feature in features]
+
+        elif isinstance(features, ParameterVector):
+            # assuming single ParameterVector object, convert to lists
+            features = [features.to_list()]
+
+        else:
+            Logger.log('Features type not understood. Accepted types are: np.ndarray, list, and ParameterVector', 'FATAL')
+
+
+        # validate the provided features
+        if not np.all([len(feature)==len(self.param_space)] for feature in features):
             message = (
                 "Dimensions of provided features (%d) did not match expected dimension (%d)"
                 % (features.shape[1], len(self.param_space))
             )
             Logger.log(message, "ERROR")
+
         for feature in features:
             if not self.param_space.validate(feature):
                 message = "Not all parameters are within bounds"
                 Logger.log(message, "WARNING")
+
+        # convert categorical params to ohe vectors
+        features = self.transform_cat_params(features)
 
         # scale the features using the DataTransformer that was fit when training
         features_scaled = self.feature_transformer.transform(features)
@@ -472,6 +545,8 @@ class Emulator(Object):
             y_pred_objects.append(y_pred_object)
 
         return y_pred_objects
+
+        
 
     def save(self, path="./olympus_emulator", include_cv=False):
         """Save the emulator in a specified location. This will save the emulator object as a pickle file, and the
@@ -556,6 +631,7 @@ class Emulator(Object):
         self.__dict__.update(emulator.__dict__)
 
 
+
 # ===============
 # Other Functions
 # ===============
@@ -594,13 +670,16 @@ def load_emulator(emulator_folder):
 
     if emulator_to_load.is_trained is True:
         emulator_to_load.model._set_dims(
-            features_dim=emulator_to_load.dataset.features_dim,
+            features_dim=emulator_to_load.dataset.features_dim_ohe,
             targets_dim=emulator_to_load.dataset.targets_dim,
         )
         restored = emulator_to_load.model.restore(f"{emulator_folder}/Model")
         if restored is False:
             message = "failed to restore model"
             Logger.log(message, "ERROR")
+
+
+
 
     # NOTE: we are not leading any cross validation models for the moment. If CV was performed though, we still have
     # the data about the CV performance

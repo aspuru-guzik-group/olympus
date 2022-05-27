@@ -9,6 +9,8 @@ module  = 'SQSnobFit'
 link    = 'https://pypi.org/project/SQSnobFit/'
 check_planner_module(planner, module, link)
 
+param_types = ['continuous']
+
 #===============================================================================
 
 from .wrapper_snobfit import Snobfit

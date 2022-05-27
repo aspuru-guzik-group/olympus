@@ -5,7 +5,7 @@ from olympus.objects.abstract_object import Object
 from olympus.datasets.dataset import Dataset
 from olympus import Logger
 from functools import reduce
-
+from copy import deepcopy
 
 class DataTransformer(Object):
 
@@ -98,6 +98,18 @@ class DataTransformer(Object):
         self._min = np.amin(data, axis=0)
         self._max = np.amax(data, axis=0)
 
+        # replace instances with 0. stddev with 1.
+        self._stable_stddev = np.where(self._stddev==0., 1., self._stddev)
+
+        # replace instances where the denominator of minmax scaling is 0.
+        self._stable_min = deepcopy(self._min)
+        self._stable_max = deepcopy(self._max)
+        ixs = np.where(np.abs(self._max-self._min)<1e-10)[0]
+        if not ixs.size == 0:
+            self._stable_max[ixs] = np.ones_like(ixs)
+            self._stable_min[ixs] = np.zeros_like(ixs)
+
+
         self.trained = True
 
     def transform(self, data):
@@ -152,16 +164,16 @@ class DataTransformer(Object):
     # Private Methods
     # ===============
     def _forward_standardize(self, data):
-        return (data - self._mean) / self._stddev
+        return (data - self._mean) / self._stable_stddev
 
     def _backward_standardize(self, data):
-        return data * self._stddev + self._mean
+        return data * self._stable_stddev + self._mean
 
     def _forward_normalize(self, data):
-        return (data - self._min) / (self._max - self._min)
+        return (data - self._stable_min) / (self._stable_max - self._stable_min)
 
     def _backward_normalize(self, data):
-        return (self._max - self._min) * data + self._min
+        return (self._stable_max - self._stable_min) * data + self._stable_min
 
     def _forward_identity(self, data):
         return data
@@ -247,3 +259,96 @@ class DataTransformer(Object):
     def _compose_transformations(functions_list):
         # compose transformations as provided in the list
         return lambda x: reduce(lambda a, f: f(a), functions_list, x)
+
+
+
+
+#--------------------------------
+# CUBE-SIMLPEX TRANSFORMATION
+#--------------------------------/
+
+def cube_to_simpl(cubes):
+    '''
+    converts and n-cube (used for optimization) to an n+1 simplex (used
+    as features for emulator)
+    '''
+    features = []
+    for cube in cubes:
+        #cube = (1 - 2 * 1e-6) * np.squeeze(np.array([c for c in cube])) + 1e-6
+        cube = np.array(cube)
+    
+        simpl = np.zeros(len(cube)+1)
+        sums = np.sum(cube / (1 - cube))
+
+        alpha = 4.0
+        simpl[-1] = alpha / (alpha + sums)
+        for i in range(len(simpl)-1):
+            simpl[i] = (cube[i] / (1 - cube[i])) / (alpha + sums)
+        features.append(np.array(simpl))
+    return np.array(features)
+
+
+
+def simpl_to_cube(simpls):
+    '''
+    converts from an n+1 simplex (used as features for the emulator)
+    to an n-cube (used for optimization)
+    '''
+    features = []
+
+    for simpl in simpls:
+        alpha = 4.0
+        sums = (alpha*(simpl[-1] - 1)) / (simpl[-1])
+
+        cube = np.zeros(len(simpl)-1)
+
+        for i in range(len(cube)):
+            cube[i] = (simpl[i] * (sums-alpha)) / (simpl[i]*(sums-alpha)-1)
+
+        features.append(cube)
+
+    return np.array(features)
+
+#------------------------------------
+# CATEGORICAL PARAMS TO OHE FEATURES
+#------------------------------------
+
+
+def cat_param_to_feat(param, val):
+    ''' convert the option selection of a categorical variable to
+    a machine readable feature vector
+    Args:
+        param (object): the categorical olympus parameter
+        val (): the value of the chosen categorical option
+    '''
+    #print(param, val)
+    # get the index of the selected value amongst the options
+    arg_val = param.options.index(val)
+    if np.all([d==None for d in param.descriptors]):
+        # no provided descriptors, resort to one-hot encoding
+        #feat = np.array([arg_val])
+        feat = np.zeros(len(param.options))
+        feat[arg_val] += 1.
+    else:
+        # we have descriptors, use them as the features
+        feat = param.descriptors[arg_val]
+    return feat
+
+
+#-----------
+# DEBUGGING
+#-----------
+
+if __name__ == '__main__':
+
+    cubes = [[0.1, 0.5, 0.8], [0.5, 0.9, 0.04]]
+
+    print('CUBES : ', cubes)
+
+    simpls = cube_to_simpl(cubes)
+
+    print('SIMPLS : ', simpls)
+
+    cubes = simpl_to_cube(simpls)
+
+    print('CUBES : ', cubes)

@@ -1,0 +1,16 @@
+{
+  "constraints": {
+		"parameters": "none",
+		"measurements": "positive"
+		},
+	"parameters": [
+			{"name": "n", "type": "continuous", "low": 6.0,  "high": 12.0},
+			{"name": "theta", "type": "continuous", "low": 0.0,  "high": 200.0},
+			{"name": "r", "type": "continuous", "low": 1.5,  "high": 2.5},
+			{"name": "t", "type": "continuous", "low": 0.7,  "high": 1.4}
+		],
+	"measurements": [
+		{"name": "toughness", "type": "continuous"}
+	],
+    "default_goal": "maximize"
+}

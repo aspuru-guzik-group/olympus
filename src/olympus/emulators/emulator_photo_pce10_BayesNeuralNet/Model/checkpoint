@@ -1,2 +1,2 @@
-model_checkpoint_path: "/h/matteoa/projects/olympus/repo/src/olympus/.scratch/emulator_4nlbimda/Model/model.ckpt"
-all_model_checkpoint_paths: "/h/matteoa/projects/olympus/repo/src/olympus/.scratch/emulator_4nlbimda/Model/model.ckpt"
+model_checkpoint_path: "/home/riley/Research_Local/olympus/src/olympus/.scratch/emulator_5g_3peu_/Model/model.ckpt"
+all_model_checkpoint_paths: "/home/riley/Research_Local/olympus/src/olympus/.scratch/emulator_5g_3peu_/Model/model.ckpt"

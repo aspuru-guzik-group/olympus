@@ -1,0 +1,25 @@
+Silver nanoparticles flow synthesis. Optimization
+of the absorbance spectrum score. Reference:
+Flore Mekki-Berrada, Zekun Ren, Tan Huang,
+Wai Kuan Wong, Fang Zheng, Jiaxun Xie,
+Isaac Parker Siyu Tian, Senthilnath Jayavelu,
+Zackaria Mahfoud, Daniil Bash, et al.
+Two-step machine learning enables optimized
+nanoparticle synthesis. npj
+Computational Materials, 7(1):1–10, 2021.
+
+
+=========================================
+                Summary
+-----------------------------------------
+    Number of Samples             164
+    Dimensionality                 5
+    Features:
+        q_agno3              continuous
+        q_pva                continuous
+        q_tsc                continuous
+        q_seed               continuous
+        q_tot                continuous
+    Targets:
+        spectrum_score       continuous
+=========================================
