@@ -1,11 +1,13 @@
 #!/usr/bin/env python
 
+from copy import deepcopy
+
 import numpy as np
 from deap import base, creator, tools
-from olympus.planners import AbstractPlanner
-from olympus.objects import ParameterVector
+
 from olympus import Logger
-from copy import deepcopy
+from olympus.objects import ParameterVector
+from olympus.planners import AbstractPlanner
 
 
 # ==========
@@ -13,12 +15,24 @@ from copy import deepcopy
 # ==========
 class Genetic(AbstractPlanner):
 
-    PARAM_TYPES = ['continuous']
+    PARAM_TYPES = ["continuous"]
 
-    def __init__(self, goal='minimize', pop_size=10, cx_prob=0.5, mut_prob=0.2, verbose=False,
-                 mate_args={'function':tools.cxTwoPoint},
-                 mutate_args={'function':tools.mutGaussian, 'mu':0, 'sigma':0.2, 'indpb':0.2},
-                 select_args={'function':tools.selTournament, 'tournsize':3}):
+    def __init__(
+        self,
+        goal="minimize",
+        pop_size=10,
+        cx_prob=0.5,
+        mut_prob=0.2,
+        verbose=False,
+        mate_args={"function": tools.cxTwoPoint},
+        mutate_args={
+            "function": tools.mutGaussian,
+            "mu": 0,
+            "sigma": 0.2,
+            "indpb": 0.2,
+        },
+        select_args={"function": tools.selTournament, "tournsize": 3},
+    ):
         """Evolutionary Algorithm implemented using the DEAP library.
 
         We initialize the population using a uniform probability across the parameter space. We then evaluate
@@ -48,7 +62,9 @@ class Genetic(AbstractPlanner):
         AbstractPlanner.__init__(**locals())
 
         # define fitness function = minimize
-        creator.create("FitnessMin", base.Fitness, weights=(-1.0,))  # -1 for minimisation, +1 for maximisation
+        creator.create(
+            "FitnessMin", base.Fitness, weights=(-1.0,)
+        )  # -1 for minimisation, +1 for maximisation
         creator.create("Individual", list, fitness=creator.FitnessMin)
 
         # get Deap toolbox
@@ -58,7 +74,7 @@ class Genetic(AbstractPlanner):
         """Clears the current population so that a new optimization would start from a randomly initialised population
         again.
         """
-        if hasattr(self, 'pop'):
+        if hasattr(self, "pop"):
             # reset attributes
             self.num_generated = 0
             self.pop = []
@@ -97,7 +113,7 @@ class Genetic(AbstractPlanner):
         # ----------------------------------
         # decorate mate and mutate operations
         # -----------------------------------
-        bounds = [param['domain'] for param in self._param_space]
+        bounds = [param["domain"] for param in self._param_space]
         self.toolbox.decorate("mate", self.project_bounds(bounds))
         self.toolbox.decorate("mutate", self.project_bounds(bounds))
 
@@ -109,8 +125,12 @@ class Genetic(AbstractPlanner):
     def _set_param_space(self, param_space):
         self._param_space = []
         for param in param_space:
-            if param.type == 'continuous':
-                param_dict = {'name': param.name, 'type': param.type, 'domain': (param.low, param.high)}
+            if param.type == "continuous":
+                param_dict = {
+                    "name": param.name,
+                    "type": param.type,
+                    "domain": (param.low, param.high),
+                }
             self._param_space.append(param_dict)
 
         # register here as they depend on the param_space
@@ -118,20 +138,33 @@ class Genetic(AbstractPlanner):
 
     def _tell(self, observations):
         self._params = observations.get_params(as_array=False)
-        self._values = observations.get_values(as_array=True, opposite=self.flip_measurements)
+        self._values = observations.get_values(
+            as_array=True, opposite=self.flip_measurements
+        )
         # reshape the array so to have shape (num observations, num objectives)
         # WARNING: In this case we are sticking to 1 objective, multiple objective are not supported!
         # TODO: fix the following reshaping to allow multiple objectives
-        self._values = np.reshape(self._values, newshape=(np.shape(self._values)[0], 1))
+        self._values = np.reshape(
+            self._values, newshape=(np.shape(self._values)[0], 1)
+        )
 
     def _generate_first_population(self):
         if self.verbose is True:
-            Logger.log(f'Creating first population of size {self.pop_size}', 'INFO')
+            Logger.log(
+                f"Creating first population of size {self.pop_size}", "INFO"
+            )
 
         # Structure initializers
-        bounds = [param['domain'] for param in self._param_space]
-        self.toolbox.register("individual", self.initIndividual, icls=creator.Individual, bounds=bounds)
-        self.toolbox.register("population", tools.initRepeat, list, self.toolbox.individual)
+        bounds = [param["domain"] for param in self._param_space]
+        self.toolbox.register(
+            "individual",
+            self.initIndividual,
+            icls=creator.Individual,
+            bounds=bounds,
+        )
+        self.toolbox.register(
+            "population", tools.initRepeat, list, self.toolbox.individual
+        )
         self.pop = self.toolbox.population(n=self.pop_size)
         self.latest_pop_size = self.pop_size
 
@@ -142,7 +175,7 @@ class Genetic(AbstractPlanner):
     def _set_population_fitness(self):
 
         # assign evaluations to each offspring
-        offsprings_fitness = self._values[-self.latest_pop_size:, :]
+        offsprings_fitness = self._values[-self.latest_pop_size :, :]
         assert len(self.novel_offsprings) == len(offsprings_fitness)
 
         # Note we operate on self.novel_offsprings, but this will also update self.offsprings, which is the population
@@ -156,7 +189,7 @@ class Genetic(AbstractPlanner):
 
     def _generate_offsprings(self):
         if self.verbose is True:
-            Logger.log('Creating new offsprings...', 'INFO')
+            Logger.log("Creating new offsprings...", "INFO")
 
         # Select the next generation individuals
         self.offsprings = self.toolbox.select(self.pop, len(self.pop))
@@ -167,7 +200,7 @@ class Genetic(AbstractPlanner):
         for child1, child2 in zip(self.offsprings[::2], self.offsprings[1::2]):
             if np.random.uniform() < self.cx_prob:
                 if self.verbose is True:
-                    Logger.log('  Performing cross-over operation', 'INFO')
+                    Logger.log("  Performing cross-over operation", "INFO")
                 self.toolbox.mate(child1, child2)
                 del child1.fitness.values
                 del child2.fitness.values
@@ -176,15 +209,20 @@ class Genetic(AbstractPlanner):
         for mutant in self.offsprings:
             if np.random.uniform() < self.mut_prob:
                 if self.verbose is True:
-                    Logger.log('  Performing mutation operation', 'INFO')
+                    Logger.log("  Performing mutation operation", "INFO")
                 self.toolbox.mutate(mutant)
                 del mutant.fitness.values
 
         # Evaluate the individuals with an invalid fitness, i.e. those that have been mutated. The rest have not
         # changed ==> no need to re-evaluate them
-        self.novel_offsprings = [ind for ind in self.offsprings if not ind.fitness.valid]
+        self.novel_offsprings = [
+            ind for ind in self.offsprings if not ind.fitness.valid
+        ]
         if self.verbose is True:
-            Logger.log(f'  {len(self.novel_offsprings)} novel offsprings found', 'INFO')
+            Logger.log(
+                f"  {len(self.novel_offsprings)} novel offsprings found",
+                "INFO",
+            )
 
         # use only novel offsprings for evaluation
         # for the others we already know the outcome - no need to re-evaluate them
@@ -194,12 +232,16 @@ class Genetic(AbstractPlanner):
     def _ask(self):
 
         if self.num_generated == 0:
-            raise NotImplementedError('the attribute "num_generated" was not expected to ever be zero here!')
+            raise NotImplementedError(
+                'the attribute "num_generated" was not expected to ever be zero here!'
+            )
 
         # If it is the first generation (note num_generated index starts from 1) we initialize the population
         if self.num_generated < 2:
             self._generate_first_population()
-            self.offsprings = self.pop  # first iteration, so there is no offspring yet
+            self.offsprings = (
+                self.pop
+            )  # first iteration, so there is no offspring yet
             self.novel_offsprings = self.offsprings  # all offsprings are novel
             self.offsprings_to_be_evaluated = deepcopy(self.novel_offsprings)
         # otherwise select, mate and mutate population
@@ -226,6 +268,7 @@ class Genetic(AbstractPlanner):
         """DEAP decorator to project out of bounds parameters back onto the boundary.
         `bounds` looks like this: [(low, high), (low, high), (low, high)]
         """
+
         def decorator(func):
             def wrapper(*args, **kargs):
                 offspring = func(*args, **kargs)
@@ -237,124 +280,122 @@ class Genetic(AbstractPlanner):
                         elif child[i] < bounds[i][0]:
                             child[i] = bounds[i][0]
                 return offspring
+
             return wrapper
+
         return decorator
 
 
-
-
-#-----------
+# -----------
 # DEBUGGING
-#-----------
+# -----------
 
-PARAM_TYPE = 'continuous'
+PARAM_TYPE = "continuous"
 
 NUM_RUNS = 40
 
-from olympus.objects import (
-	ParameterContinuous,
-	ParameterDiscrete,
-	ParameterCategorical,
-)
 from olympus.campaigns import Campaign, ParameterSpace
+from olympus.objects import (
+    ParameterCategorical,
+    ParameterContinuous,
+    ParameterDiscrete,
+)
 from olympus.surfaces import Surface
 
 
-
 def surface(x):
-	return np.sin(8*x)
-
-if PARAM_TYPE == 'continuous':
-	param_space = ParameterSpace()
-	param_0 = ParameterContinuous(name='param_0', low=0.0, high=1.0)
-	param_space.add(param_0)
-
-	planner = Genetic(goal='minimize')
-	planner.set_param_space(param_space)
-
-	campaign = Campaign()
-	campaign.set_param_space(param_space)
-
-	BUDGET = 24
-
-	for num_iter in range(BUDGET):
-
-		samples = planner.recommend(campaign.observations)
-		print(f'ITER : {num_iter}\tSAMPLES : {samples}')
-		#for sample in samples:
-		sample_arr = samples.to_array()
-		measurement = surface(
-			sample_arr.reshape((1, sample_arr.shape[0]))
-		)
-		campaign.add_observation(sample_arr, measurement[0])
+    return np.sin(8 * x)
 
 
-elif PARAM_TYPE == 'categorical':
+if PARAM_TYPE == "continuous":
+    param_space = ParameterSpace()
+    param_0 = ParameterContinuous(name="param_0", low=0.0, high=1.0)
+    param_space.add(param_0)
 
-	surface_kind = 'CatDejong'
-	surface = Surface(kind=surface_kind, param_dim=2, num_opts=21)
+    planner = Genetic(goal="minimize")
+    planner.set_param_space(param_space)
 
-	campaign = Campaign()
-	campaign.set_param_space(surface.param_space)
+    campaign = Campaign()
+    campaign.set_param_space(param_space)
 
-	planner = Genetic(goal='minimize')
-	planner.set_param_space(surface.param_space)
+    BUDGET = 24
 
-	OPT = ['x10', 'x10']
+    for num_iter in range(BUDGET):
 
-	BUDGET = 442
-
-	for iter in range(BUDGET):
-
-		samples = planner.recommend(campaign.observations)
-		print(f'ITER : {iter}\tSAMPLES : {samples}')
-		#sample = samples[0]
-		sample_arr = samples.to_array()
-		measurement = np.array(surface.run(sample_arr))
-		campaign.add_observation(sample_arr, measurement[0])
-
-		if [sample_arr[0], sample_arr[1]] == OPT:
-			print(f'FOUND OPTIMUM AFTER {iter+1} ITERATIONS!')
-			break
+        samples = planner.recommend(campaign.observations)
+        print(f"ITER : {num_iter}\tSAMPLES : {samples}")
+        # for sample in samples:
+        sample_arr = samples.to_array()
+        measurement = surface(sample_arr.reshape((1, sample_arr.shape[0])))
+        campaign.add_observation(sample_arr, measurement[0])
 
 
-elif PARAM_TYPE == 'mixed':
+elif PARAM_TYPE == "categorical":
 
-	def surface(params):
-		return np.random.uniform()
+    surface_kind = "CatDejong"
+    surface = Surface(kind=surface_kind, param_dim=2, num_opts=21)
+
+    campaign = Campaign()
+    campaign.set_param_space(surface.param_space)
+
+    planner = Genetic(goal="minimize")
+    planner.set_param_space(surface.param_space)
+
+    OPT = ["x10", "x10"]
+
+    BUDGET = 442
+
+    for iter in range(BUDGET):
+
+        samples = planner.recommend(campaign.observations)
+        print(f"ITER : {iter}\tSAMPLES : {samples}")
+        # sample = samples[0]
+        sample_arr = samples.to_array()
+        measurement = np.array(surface.run(sample_arr))
+        campaign.add_observation(sample_arr, measurement[0])
+
+        if [sample_arr[0], sample_arr[1]] == OPT:
+            print(f"FOUND OPTIMUM AFTER {iter+1} ITERATIONS!")
+            break
 
 
-	param_space = ParameterSpace()
-	# continuous parameter 0
-	param_0 = ParameterContinuous(name='param_0', low=0.0, high=1.0)
-	param_space.add(param_0)
+elif PARAM_TYPE == "mixed":
 
-	# continuous parameter 1
-	param_1 = ParameterContinuous(name='param_1', low=0.0, high=1.0)
-	param_space.add(param_1)
+    def surface(params):
+        return np.random.uniform()
 
-	# categorical parameter 2
-	param_2 = ParameterCategorical(name='param_2', options=['a', 'b', 'c'])
-	param_space.add(param_2)
+    param_space = ParameterSpace()
+    # continuous parameter 0
+    param_0 = ParameterContinuous(name="param_0", low=0.0, high=1.0)
+    param_space.add(param_0)
 
-	# categorcial parameter 3
-	param_3 = ParameterCategorical(name='param_3', options=['x', 'y', 'z'])
-	param_space.add(param_3)
+    # continuous parameter 1
+    param_1 = ParameterContinuous(name="param_1", low=0.0, high=1.0)
+    param_space.add(param_1)
 
-	campaign = Campaign()
-	campaign.set_param_space(param_space)
+    # categorical parameter 2
+    param_2 = ParameterCategorical(name="param_2", options=["a", "b", "c"])
+    param_space.add(param_2)
 
-	planner = Genetic(goal='minimize')
-	planner.set_param_space(param_space)
+    # categorcial parameter 3
+    param_3 = ParameterCategorical(name="param_3", options=["x", "y", "z"])
+    param_space.add(param_3)
 
+    campaign = Campaign()
+    campaign.set_param_space(param_space)
 
-	BUDGET = 20
+    planner = Genetic(goal="minimize")
+    planner.set_param_space(param_space)
 
-	for iter in range(BUDGET):
+    BUDGET = 20
 
-		samples  = planner.recommend(campaign.observations)
-		#sample = samples[0]
-		sample_arr = samples.to_array()
-		measurement = surface(sample_arr)
-		print(f'ITER : {iter}\tSAMPLES : {samples}\t MEASUREMENT : {measurement}')
-		campaign.add_observation(sample_arr, measurement)
+    for iter in range(BUDGET):
+
+        samples = planner.recommend(campaign.observations)
+        # sample = samples[0]
+        sample_arr = samples.to_array()
+        measurement = surface(sample_arr)
+        print(
+            f"ITER : {iter}\tSAMPLES : {samples}\t MEASUREMENT : {measurement}"
+        )
+        campaign.add_observation(sample_arr, measurement)

@@ -2,12 +2,13 @@
 
 import os
 import time
+
 import numpy as np
 import silence_tensorflow
 
 silence_tensorflow.silence_tensorflow()
 import tensorflow as tf
-from sklearn.metrics import r2_score, mean_squared_error
+from sklearn.metrics import mean_squared_error, r2_score
 
 from olympus import Logger
 from olympus.models import AbstractModel
@@ -141,9 +142,10 @@ class WrapperTensorflowModel(AbstractModel):
                 _print_header()
                 for epoch in range(self.max_epochs):
 
-                    train_features_batch, train_targets_batch = self._generator(
-                        train_features, train_targets
-                    )
+                    (
+                        train_features_batch,
+                        train_targets_batch,
+                    ) = self._generator(train_features, train_targets)
                     __, loss = self.sess.run(
                         [self.train_op, self.loss],
                         feed_dict={
@@ -157,21 +159,31 @@ class WrapperTensorflowModel(AbstractModel):
 
                         # make a prediction on the validation set
                         valid_pred = self.predict(
-                            features=valid_features[valid_indices], num_samples=10
+                            features=valid_features[valid_indices],
+                            num_samples=10,
                         )
-                        valid_r2 = r2_score(valid_targets[valid_indices], valid_pred)
+                        valid_r2 = r2_score(
+                            valid_targets[valid_indices], valid_pred
+                        )
                         valid_rmsd = np.sqrt(
-                            mean_squared_error(valid_targets[valid_indices], valid_pred)
+                            mean_squared_error(
+                                valid_targets[valid_indices], valid_pred
+                            )
                         )
                         valid_errors.append([valid_r2, valid_rmsd])
 
                         # make a prediction on the train set
                         train_pred = self.predict(
-                            features=train_features[train_indices], num_samples=10
+                            features=train_features[train_indices],
+                            num_samples=10,
                         )
-                        train_r2 = r2_score(train_targets[train_indices], train_pred)
+                        train_r2 = r2_score(
+                            train_targets[train_indices], train_pred
+                        )
                         train_rmsd = np.sqrt(
-                            mean_squared_error(train_targets[train_indices], train_pred)
+                            mean_squared_error(
+                                train_targets[train_indices], train_pred
+                            )
                         )
                         train_errors.append([train_r2, train_rmsd])
 
@@ -194,23 +206,36 @@ class WrapperTensorflowModel(AbstractModel):
                                 color="#444444",
                             )
                             ax0.plot(
-                                plot_train_targets, plot_train_pred, marker="o", ls=""
+                                plot_train_targets,
+                                plot_train_pred,
+                                marker="o",
+                                ls="",
                             )
                             ax0.plot(
-                                plot_valid_targets, plot_valid_pred, marker="o", ls=""
+                                plot_valid_targets,
+                                plot_valid_pred,
+                                marker="o",
+                                ls="",
                             )
                             ax1.plot(np.array(train_errors)[:, 0])
                             ax1.plot(np.array(valid_errors)[:, 0])
                             plt.pause(0.05)
 
-                        min_rmsd_index = np.argmin(np.array(valid_errors)[:, 1])
-                        if len(valid_errors) - min_rmsd_index > self.es_patience:
+                        min_rmsd_index = np.argmin(
+                            np.array(valid_errors)[:, 1]
+                        )
+                        if (
+                            len(valid_errors) - min_rmsd_index
+                            > self.es_patience
+                        ):
                             break
 
                         newline = f"{epoch:>15}{train_r2:>15.3f}{train_rmsd:>15.3f}{valid_r2:>15.3f}{valid_rmsd:>15.3f}"
                         # the latest model is the best ==> save it and tag it on screen
                         if min_rmsd_index == len(valid_errors) - 1:
-                            self.saver.save(self.sess, f"{model_path}/model.ckpt")
+                            self.saver.save(
+                                self.sess, f"{model_path}/model.ckpt"
+                            )
                             newline += " *"
                         Logger.log(newline, "INFO")
 
@@ -244,7 +269,7 @@ class WrapperTensorflowModel(AbstractModel):
     def predict(self, features, num_samples=1):
         # features = self._project_features(features, feature_transformer)
         # make sure the dimensionality of the input matches that used for training
- 
+
         if features.shape[1] != self.features_dim:
             raise ValueError(
                 "dimensionality of input features provided does not match that of the training dataset"
@@ -270,7 +295,10 @@ class WrapperTensorflowModel(AbstractModel):
                             features[start:stop],
                             np.random.choice(
                                 features[:, 0],
-                                size=(self.batch_size - size, features.shape[1]),
+                                size=(
+                                    self.batch_size - size,
+                                    features.shape[1],
+                                ),
                             ),
                         ),
                         axis=0,

@@ -2,19 +2,17 @@
 
 import numpy as np
 
-
-from olympus.planners import AbstractPlanner
 from olympus.objects import ParameterVector
-
+from olympus.planners import AbstractPlanner
 
 
 class Entmoot(AbstractPlanner):
 
-    PARAM_TYPES = ['continuous', 'discrete', 'categorical']
+    PARAM_TYPES = ["continuous", "discrete", "categorical"]
 
     def __init__(
         self,
-        goal='minimize',
+        goal="minimize",
         random_seed=None,
     ):
 

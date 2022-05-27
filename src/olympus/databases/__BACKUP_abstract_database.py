@@ -4,8 +4,7 @@
 
 import os
 
-from olympus import __scratch__
-from olympus import Logger
+from olympus import Logger, __scratch__
 from olympus.objects import Object
 from olympus.utils import generate_id
 
@@ -14,11 +13,13 @@ from olympus.utils import generate_id
 
 class AbstractDatabase(Object):
 
-    """ bridge to specific databases; implements in-memory cache
-    """
+    """bridge to specific databases; implements in-memory cache"""
 
     ATT_KIND = {"type": "string", "default": "abstract"}
-    ATT_NAME = {"type": "string", "default": lambda: "olympus_{}".format(generate_id())}
+    ATT_NAME = {
+        "type": "string",
+        "default": lambda: "olympus_{}".format(generate_id()),
+    }
     ATT_PATH = {"type": "string", "default": __scratch__}
 
     def __init__(self, *args, **kwargs):
@@ -37,7 +38,9 @@ class AbstractDatabase(Object):
 
     @property
     def file_name(self):
-        return os.path.join(self.path, "{}.{}".format(self.name, self.file_type))
+        return os.path.join(
+            self.path, "{}.{}".format(self.name, self.file_type)
+        )
 
     @property
     def file_types(self):
@@ -51,7 +54,9 @@ class AbstractDatabase(Object):
     def from_file(self, file_name):
         self._from_file_name(file_name)
         if not self.db_exists:
-            Logger.log("Could not find database file {}".format(file_name), "ERROR")
+            Logger.log(
+                "Could not find database file {}".format(file_name), "ERROR"
+            )
             return None
         self._load_db()
 

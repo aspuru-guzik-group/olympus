@@ -1,16 +1,17 @@
 #!/usr/bin/env python
 
-import numpy as np
 from abc import abstractmethod
-from olympus import Logger
-from olympus.campaigns import Observations, Campaign
-from olympus.objects import Object, abstract_attribute, ABCMeta, Config
 
+import numpy as np
+
+from olympus import Logger
+from olympus.campaigns import Campaign, Observations
+from olympus.objects import ABCMeta, Config, Object, abstract_attribute
 from olympus.scalarizers import Scalarizer
 
 
 class AbstractPlanner(Object, metaclass=ABCMeta):
-    """ This class is intended to contain methods shared by all wrappers, as well as define abstract methods and
+    """This class is intended to contain methods shared by all wrappers, as well as define abstract methods and
     attributes that all planner wrappers need to implement. It is not meant to be exposed to the standard user,
     although more advanced users can use this class to create custom planner classes.
     """
@@ -22,10 +23,10 @@ class AbstractPlanner(Object, metaclass=ABCMeta):
         self._params = None
         self._values = None
         self.SUBMITTED_PARAMS = []
-        self.RECEIVED_VALUES  = []
+        self.RECEIVED_VALUES = []
 
         # rm all those vars in config that are not needed/used by ScipyWrapper
-        for var in ['goal', 'init_guess', 'random_seed']:
+        for var in ["goal", "init_guess", "random_seed"]:
             if var in kwargs:
                 del kwargs[var]
         self.config = Config(from_dict=kwargs)
@@ -33,19 +34,19 @@ class AbstractPlanner(Object, metaclass=ABCMeta):
         # self.goal is an abstract attribute that needs to be defined by the subclasses of AbstractPlanner
         # Since all planner wrappers are implemented in minimization mode, we flip the measurements if we want to
         # perform a maximization
-        if self.goal == 'minimize':
+        if self.goal == "minimize":
             self.flip_measurements = False
-        elif self.goal == 'maximize':
+        elif self.goal == "maximize":
             self.flip_measurements = True
         else:
             message = f'attribute `goal` can only be "minimize" or "maximize". "{self.goal}" is not a valid value'
-            Logger.log(message, 'ERROR')
+            Logger.log(message, "ERROR")
 
     def __repr__(self):
-        if not hasattr(self, 'param_space') or self.param_space is None:
-            param_space = 'undefined'
+        if not hasattr(self, "param_space") or self.param_space is None:
+            param_space = "undefined"
         else:
-            param_space = 'defined'
+            param_space = "defined"
         return f"<Planner (kind={self.kind}, param_space={param_space})>"
 
     @abstract_attribute
@@ -65,14 +66,12 @@ class AbstractPlanner(Object, metaclass=ABCMeta):
 
     @abstractmethod
     def _tell(self, *args, **kwargs):
-        """Method that returns all previous observations as required by a specific optimization library/wrapper.
-        """
+        """Method that returns all previous observations as required by a specific optimization library/wrapper."""
         pass
 
     @abstractmethod
     def _ask(self, *args, **kwargs):
-        """Method that returns the next query point based on all previous observations.
-        """
+        """Method that returns the next query point based on all previous observations."""
         pass
 
     def set_param_space(self, param_space):
@@ -85,7 +84,7 @@ class AbstractPlanner(Object, metaclass=ABCMeta):
         self._set_param_space(param_space)
 
     def ask(self, return_as=None):
-        """ suggest new set of parameters
+        """suggest new set of parameters
 
         Args:
             return_as (string): choose data type for returned parameters
@@ -103,9 +102,14 @@ class AbstractPlanner(Object, metaclass=ABCMeta):
 
         if return_as is not None:
             try:
-                param_vector = getattr(param_vector, 'to_{}'.format(return_as))()
+                param_vector = getattr(
+                    param_vector, "to_{}".format(return_as)
+                )()
             except AttributeError:
-                Logger.log('could not return param_vector as "{}"'.format(return_as), 'ERROR')
+                Logger.log(
+                    'could not return param_vector as "{}"'.format(return_as),
+                    "ERROR",
+                )
         return param_vector
 
     def tell(self, observations=Observations()):
@@ -139,7 +143,7 @@ class AbstractPlanner(Object, metaclass=ABCMeta):
         Args:
             emulator (object): Emulator, Dataset, or Surface instance to optimize over.
             num_iter (int): Maximum number of iterations allowed.
-            scalarizer (Scalarizer): 
+            scalarizer (Scalarizer):
             verbose (bool): Whether to print information to screen.
 
         Returns:
@@ -148,13 +152,19 @@ class AbstractPlanner(Object, metaclass=ABCMeta):
         """
 
         # update num_iter if needed by the specific wrapper
-        if hasattr(self, 'num_iter') and self.num_iter != num_iter:
-            Logger.log(f'Updating the number of sampling points of planner {type(self).__name__} to {num_iter}', 'INFO')
+        if hasattr(self, "num_iter") and self.num_iter != num_iter:
+            Logger.log(
+                f"Updating the number of sampling points of planner {type(self).__name__} to {num_iter}",
+                "INFO",
+            )
             self.num_iter = num_iter
 
         # same for budget
-        if hasattr(self, 'budget') and self.budget != num_iter:
-            Logger.log(f'Updating the number of sampling points of planner {type(self).__name__} to {num_iter}', 'INFO')
+        if hasattr(self, "budget") and self.budget != num_iter:
+            Logger.log(
+                f"Updating the number of sampling points of planner {type(self).__name__} to {num_iter}",
+                "INFO",
+            )
             self.budget = num_iter
 
         # reset planner if it has a 'reset' method. Assuming that if there is a 'reset' method it is needed here
@@ -169,8 +179,6 @@ class AbstractPlanner(Object, metaclass=ABCMeta):
         campaign.set_planner_specs(self)
         campaign.set_emulator_specs(emulator)
 
-    
-
         # provide the planner with the parameter space.
         # param space in emulator as it originates from dataset
         self.set_param_space(emulator.param_space)
@@ -179,15 +187,15 @@ class AbstractPlanner(Object, metaclass=ABCMeta):
         # Optimize: i.e. call the planner recommend method for max_iter times
         for i in range(num_iter):
             if verbose is True:
-                Logger.log(f'Optimize iteration {i+1}', 'INFO')
-                Logger.log(f'Obtaining parameters from planner...', 'INFO')
+                Logger.log(f"Optimize iteration {i+1}", "INFO")
+                Logger.log(f"Obtaining parameters from planner...", "INFO")
             # get new params from planner
             # NOTE: now we get 1 param at a time, a possible future expansion is to return batches
             params = self.recommend(observations=campaign.observations)
 
             # get measurement from emulator/surface
             if verbose is True:
-                Logger.log(f'Obtaining measurement from emulator...', 'INFO')
+                Logger.log(f"Obtaining measurement from emulator...", "INFO")
             values = emulator.run(params.to_array(), return_paramvector=True)
 
             # store parameter and measurement pair in campaign
@@ -198,17 +206,19 @@ class AbstractPlanner(Object, metaclass=ABCMeta):
     def _validate_paramvector(self, param_vector):
         for key, value in param_vector.to_dict().items():
             param = self.param_space.get_param(name=key)
-            if param['type'] in ('continuous', 'discrete'):
-                if not param['low'] <= np.float(value) <= param['high']:
-                    message = 'Proposed parameter {0} not within defined bounds ({1},{2})'.format(value, param['low'], param['high'])
-                    Logger.log(message, 'WARNING')
-            elif param['type'] == 'categorical':
-                if value not in param['options']:
+            if param["type"] in ("continuous", "discrete"):
+                if not param["low"] <= np.float(value) <= param["high"]:
+                    message = "Proposed parameter {0} not within defined bounds ({1},{2})".format(
+                        value, param["low"], param["high"]
+                    )
+                    Logger.log(message, "WARNING")
+            elif param["type"] == "categorical":
+                if value not in param["options"]:
                     message = f'Proposed parameter {key} with {value} is not defined within the param options: {param["options"]}'
-                    Logger.log(message, 'WARNING')
+                    Logger.log(message, "WARNING")
 
     def _project_into_domain(self, params):
         for _, bound in enumerate(self.param_space):
-            params[_] = np.maximum(bound['low'], params[_])
-            params[_] = np.minimum(bound['high'], params[_])
+            params[_] = np.maximum(bound["low"], params[_])
+            params[_] = np.minimum(bound["high"], params[_])
         return params

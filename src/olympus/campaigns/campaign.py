@@ -1,19 +1,19 @@
 #!/usr/bin/env python
 
 import numpy as np
-from olympus.emulators.emulator import Emulator
-from olympus.surfaces.surface import AbstractSurface
-from olympus.objects import Object, ParameterContinuous
+
+from olympus import Logger
+from olympus.campaigns import Observations, ParameterSpace
 from olympus.datasets import Dataset
+from olympus.emulators.emulator import Emulator
+from olympus.objects import Object, ParameterContinuous
+from olympus.surfaces.surface import AbstractSurface
 from olympus.utils import generate_id
 from olympus.utils.data_transformer import cube_to_simpl, simpl_to_cube
-from olympus.campaigns import ParameterSpace
-from olympus.campaigns import Observations
-from olympus import Logger
 
 
 class Campaign(Object):
-    """ stores information about a single optimization run
+    """stores information about a single optimization run
 
     This class logs all information about a single optimization run,
 
@@ -45,8 +45,10 @@ class Campaign(Object):
     ATT_PLANNER_KIND = {"type": "string", "default": "n/a"}
 
     ATT_IS_MOO = {"type": "bool", "default": False}
-    ATT_SCALARIZED_OBSERVATIONS = {"type": "Observations", "default": Observations}
-
+    ATT_SCALARIZED_OBSERVATIONS = {
+        "type": "Observations",
+        "default": Observations,
+    }
 
     def __repr__(self):
         repr_ = f"<Campaign (dataset={self.dataset_kind}, model={self.model_kind}, planner={self.planner_kind}, num_iter={len(self.params)})>"
@@ -66,9 +68,9 @@ class Campaign(Object):
 
     @property
     def best_values(self):
-        ''' returns an array of the best objective function values at each
+        """returns an array of the best objective function values at each
         iteration of the campaign
-        '''
+        """
         # check to see if we have a moo problem
         if self.is_moo:
             # multiobjective optimization, the minimum scalarized merit
@@ -80,8 +82,12 @@ class Campaign(Object):
                 return vals
             best_vals = [vals[0]]
             best_merit = scal_vals[0]
-            for idx, (scal_val, val) in enumerate(zip(scal_vals[1:], vals[1:])):
-                to_add = np.argmin([scal_val, best_merit])  # 0 means add current measurement, 1 means re-append previous best
+            for idx, (scal_val, val) in enumerate(
+                zip(scal_vals[1:], vals[1:])
+            ):
+                to_add = np.argmin(
+                    [scal_val, best_merit]
+                )  # 0 means add current measurement, 1 means re-append previous best
                 best_vals.append([val, best_vals[-1]][to_add])
             best_vals = np.array(best_vals)
             return best_vals
@@ -106,62 +112,59 @@ class Campaign(Object):
         # successively add observation, then scalarize the entire history
         # of objective measurements
         self.observations.add_observation(param, value)
-        self.scalarized_observations.add_observation(param, 1.) # dummy objective value
+        self.scalarized_observations.add_observation(
+            param, 1.0
+        )  # dummy objective value
 
         # compute the scalarized merits from the objective values
-        values = self.observations.get_values() # (# obs, # objs)
+        values = self.observations.get_values()  # (# obs, # objs)
         merits = scalarizer.scalarize(values)
 
         # update scalarized_observations
         self.reset_merit_history(merits)
 
-
     def observations_to_simpl(self):
-        ''' convert parameters for the current observations from cube 
+        """convert parameters for the current observations from cube
         to simplex
-        '''
+        """
         # do not need to make transformation if we have no observations yet,
         # leave the params attribute as None
         if self.observations.params is not None:
             cube_params = self.observations.get_params()
             simpl_params = cube_to_simpl(cube_params)
             self.observations.params = simpl_params
-            self.scalarized_observations.params = simpl_params 
+            self.scalarized_observations.params = simpl_params
         else:
-            message = f'No observations found. Skipping requested cube to simplex transformation on parameters.'
-            Logger.log(message, 'WARNING')
+            message = f"No observations found. Skipping requested cube to simplex transformation on parameters."
+            Logger.log(message, "WARNING")
 
-    
     def observations_to_cube(self):
-        ''' convert parameters for the current observations from simplex
+        """convert parameters for the current observations from simplex
         to cube
-        '''
+        """
         # do not need to make transformation if we have no observations yet,
         # leave the params attribute as None
-        if self.observations.params is not None: 
+        if self.observations.params is not None:
             simpl_params = self.observations.get_params()
             cube_params = simpl_to_cube(simpl_params)
             self.observations.params = cube_params
             self.scalarized_observations.params = cube_params
         else:
-            message = 'No observations found. Skipping requested simplex to cube transformation on parameters'
-
-
+            message = "No observations found. Skipping requested simplex to cube transformation on parameters"
 
     def reset_merit_history(self, merits):
-        ''' updates the scalarized_observation history with a 1d list or
+        """updates the scalarized_observation history with a 1d list or
         array of merits values
-        '''
-        if not len(merits)==len(self.observations.get_values()):
-            message = 'Length of provided merits does not match the number of current observations'
-            Logger.log(message, 'FATAL')
+        """
+        if not len(merits) == len(self.observations.get_values()):
+            message = "Length of provided merits does not match the number of current observations"
+            Logger.log(message, "FATAL")
         dim_merits = len(np.array(merits).shape)
-        if not dim_merits==1:
-            message = f'Merits must be a 1D list or array. You provided a {dim_merits}D array.'
-            Logger.log(message, 'FATAL')
+        if not dim_merits == 1:
+            message = f"Merits must be a 1D list or array. You provided a {dim_merits}D array."
+            Logger.log(message, "FATAL")
         # TODO: should we check here if the merits are bewteen 0 and 1? nessecary??
         self.scalarized_observations.values = merits
-
 
     def set_planner_specs(self, planner):
         self.set_planner_kind(planner.kind)
@@ -182,13 +185,12 @@ class Campaign(Object):
         self.scalarized_observations.set_value_space(
             ParameterSpace().add(
                 ParameterContinuous(
-                        name='merit',
-                        low=0.,
-                        high=1.,
-                    )
+                    name="merit",
+                    low=0.0,
+                    high=1.0,
                 )
             )
-
+        )
 
     def set_emulator_specs(self, emulator):
         """Store info about the Emulator (or Surface) into the campaign object.

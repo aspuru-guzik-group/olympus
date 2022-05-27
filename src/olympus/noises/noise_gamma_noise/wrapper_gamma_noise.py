@@ -2,11 +2,11 @@
 
 import numpy as np
 from scipy.stats import gamma
+
 from olympus.noises import AbstractNoise
 
 
 class GammaNoise(AbstractNoise):
-
     def __init__(self, scale=1, lower_bound=0):
         """Gamma-distributed noise parametrised by its standard deviation (``scale``) and its mode.
 
@@ -20,8 +20,8 @@ class GammaNoise(AbstractNoise):
     def _add_noise(self, value):
         # value = mode
         value = value - self.lower_bound
-        var = self.scale ** 2.
-        s = np.sqrt(var + (value ** 2.) / 4.) - value / 2.
-        k = value / s + 1.
+        var = self.scale**2.0
+        s = np.sqrt(var + (value**2.0) / 4.0) - value / 2.0
+        k = value / s + 1.0
         noisy_value = gamma.rvs(a=k, loc=self.lower_bound, scale=s)
         return noisy_value

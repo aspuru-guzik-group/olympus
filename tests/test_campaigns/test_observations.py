@@ -1,11 +1,15 @@
 #!/usr/bin/env python
 
 import numpy as np
-from olympus import Observations
-from olympus import ParameterVector
-from olympus import Campaign
+
+from olympus import (
+    Campaign,
+    Observations,
+    Parameter,
+    ParameterSpace,
+    ParameterVector,
+)
 from olympus.scalarizers import Scalarizer
-from olympus import ParameterSpace, Parameter
 
 
 def test_declaration():
@@ -16,7 +20,9 @@ def test_declaration():
     values = []
     for param_vect, value_vect in zip(param_vects, values_vects):
         params.append(
-            ParameterVector().from_dict({"p0": param_vect[0], "p1": param_vect[1]})
+            ParameterVector().from_dict(
+                {"p0": param_vect[0], "p1": param_vect[1]}
+            )
         )
         values.append(ParameterVector().from_dict({"obj0": value_vect[0]}))
 
@@ -38,7 +44,9 @@ def test_add_observation():
     values = []
     for param_vect, value_vect in zip(param_vects, values_vects):
         params.append(
-            ParameterVector().from_dict({"p0": param_vect[0], "p1": param_vect[1]})
+            ParameterVector().from_dict(
+                {"p0": param_vect[0], "p1": param_vect[1]}
+            )
         )
         values.append(ParameterVector().from_dict({"obj0": value_vect[0]}))
 
@@ -47,13 +55,15 @@ def test_add_observation():
 
     assert (
         np.linalg.norm(
-            np.array(obs.params) - np.array([param.to_array() for param in params])
+            np.array(obs.params)
+            - np.array([param.to_array() for param in params])
         )
         < 1e-7
     )
     assert (
         np.linalg.norm(
-            np.array(obs.values) - np.array([value.to_array() for value in values])
+            np.array(obs.values)
+            - np.array([value.to_array() for value in values])
         )
         < 1e-7
     )
@@ -67,7 +77,9 @@ def test_get_values():
     values = []
     for param_vect, value_vect in zip(param_vects, values_vects):
         params.append(
-            ParameterVector().from_dict({"p0": param_vect[0], "p1": param_vect[1]})
+            ParameterVector().from_dict(
+                {"p0": param_vect[0], "p1": param_vect[1]}
+            )
         )
         values.append(ParameterVector().from_dict({"obj0": value_vect[0]}))
 
@@ -90,7 +102,6 @@ def test_get_values():
             assert val == -1 * obs_vals[_][key]
 
 
-
 def test_observations_to_simpl():
     param_vects = np.random.uniform(low=0, high=1, size=(3, 2))
     values_vects = np.random.uniform(low=0, high=1, size=(3, 1))
@@ -101,7 +112,9 @@ def test_observations_to_simpl():
 
     for param_vect, value_vect in zip(param_vects, values_vects):
         params.append(
-            ParameterVector().from_dict({"p0": param_vect[0], "p1": param_vect[1]})
+            ParameterVector().from_dict(
+                {"p0": param_vect[0], "p1": param_vect[1]}
+            )
         )
         values.append(ParameterVector().from_dict({"obj0": value_vect[0]}))
 
@@ -123,7 +136,9 @@ def test_observations_to_cube():
 
     for param_vect, value_vect in zip(param_vects, values_vects):
         params.append(
-            ParameterVector().from_dict({"p0": param_vect[0], "p1": param_vect[1], "p2": param_vect[2]})
+            ParameterVector().from_dict(
+                {"p0": param_vect[0], "p1": param_vect[1], "p2": param_vect[2]}
+            )
         )
         values.append(ParameterVector().from_dict({"obj0": value_vect[0]}))
 
@@ -143,23 +158,28 @@ def test_add_and_scalarize():
 
     campaign = Campaign()
     value_space = ParameterSpace()
-    value_space.add(Parameter(name='obj0'))
-    value_space.add(Parameter(name='obj1'))
+    value_space.add(Parameter(name="obj0"))
+    value_space.add(Parameter(name="obj1"))
     campaign.set_value_space(value_space)
 
     for param_vect, value_vect in zip(param_vects, values_vects):
         params.append(
-            ParameterVector().from_dict({"p0": param_vect[0], "p1": param_vect[1]})
+            ParameterVector().from_dict(
+                {"p0": param_vect[0], "p1": param_vect[1]}
+            )
         )
-        values.append(ParameterVector().from_dict({"obj0": value_vect[0], "obj1": value_vect[1]}))
-
+        values.append(
+            ParameterVector().from_dict(
+                {"obj0": value_vect[0], "obj1": value_vect[1]}
+            )
+        )
 
     scalarizer = Scalarizer(
-        kind='Chimera', 
+        kind="Chimera",
         value_space=campaign.value_space,
-        goals=['min', 'min'],
+        goals=["min", "min"],
         tolerances=[0.5, 0.5],
-        absolutes=[False, False]
+        absolutes=[False, False],
     )
 
     campaign.add_observation(params, values)
@@ -173,8 +193,8 @@ def test_add_and_scalarize():
     scalarized_values = campaign.scalarized_observations.get_values()
     values = campaign.observations.get_values()
 
-    assert len(scalarized_values)==len(values)
-    assert all(scalarized_values >= 0.) and all(scalarized_values <= 1.)
+    assert len(scalarized_values) == len(values)
+    assert all(scalarized_values >= 0.0) and all(scalarized_values <= 1.0)
 
 
 def test_reset_history():
@@ -185,23 +205,28 @@ def test_reset_history():
 
     campaign = Campaign()
     value_space = ParameterSpace()
-    value_space.add(Parameter(name='obj0'))
-    value_space.add(Parameter(name='obj1'))
+    value_space.add(Parameter(name="obj0"))
+    value_space.add(Parameter(name="obj1"))
     campaign.set_value_space(value_space)
 
     for param_vect, value_vect in zip(param_vects, values_vects):
         params.append(
-            ParameterVector().from_dict({"p0": param_vect[0], "p1": param_vect[1]})
+            ParameterVector().from_dict(
+                {"p0": param_vect[0], "p1": param_vect[1]}
+            )
         )
-        values.append(ParameterVector().from_dict({"obj0": value_vect[0], "obj1": value_vect[1]}))
-
+        values.append(
+            ParameterVector().from_dict(
+                {"obj0": value_vect[0], "obj1": value_vect[1]}
+            )
+        )
 
     scalarizer = Scalarizer(
-        kind='Chimera', 
+        kind="Chimera",
         value_space=campaign.value_space,
-        goals=['min', 'min'],
+        goals=["min", "min"],
         tolerances=[0.5, 0.5],
-        absolutes=[False, False]
+        absolutes=[False, False],
     )
 
     campaign.add_observation(params, values)
@@ -209,16 +234,12 @@ def test_reset_history():
     merits = np.array([0.1, 0.0, 1.0])
 
     campaign.reset_merit_history(merits)
-    
+
     scalarized_values = campaign.scalarized_observations.get_values()
     values = campaign.observations.get_values()
 
-    assert len(scalarized_values)==len(values)
-    assert all(scalarized_values >= 0.) and all(scalarized_values <= 1.)
-
-
-
-
+    assert len(scalarized_values) == len(values)
+    assert all(scalarized_values >= 0.0) and all(scalarized_values <= 1.0)
 
 
 if __name__ == "__main__":

@@ -1,17 +1,15 @@
 #!/usr/bin/env python
 
-from olympus import Emulator, Surface, Logger
+from olympus import Emulator, Logger, Surface
 from olympus.campaigns import Campaign
-from olympus.objects   import Object
+from olympus.objects import Object, ParameterVector
 from olympus.scalarizers import Scalarizer
 from olympus.utils.data_transformer import cube_to_simpl
-from olympus.objects import ParameterVector
 
+# ===============================================================================
 
-#===============================================================================
 
 class Evaluator(Object):
-
     def __init__(
         self,
         planner,
@@ -21,7 +19,7 @@ class Evaluator(Object):
         scalarizer=None,
         database=None,
     ):
-        """ The Evaluator does higher level operations that Planners and
+        """The Evaluator does higher level operations that Planners and
         Emulators do not do on their own. For instance, communicating parameters
         and measurements to each other, keeping track of them ensuring they
         match, and storing these in a Campaign object. All this can also be done
@@ -44,53 +42,52 @@ class Evaluator(Object):
 
         if emulator is not None:
             assert surface is None
-            self.emulator_type = 'numerical'
+            self.emulator_type = "numerical"
         elif surface is not None:
             assert emulator is None
-            self.emulator_type = 'analytic'
+            self.emulator_type = "analytic"
             self.emulator = surface
         else:
-            Logger.log('One of emulator or surface needs to be provided', 'FATAL')
+            Logger.log(
+                "One of emulator or surface needs to be provided", "FATAL"
+            )
 
-#        if isinstance(self.emulator, Emulator):
-#            self.emulator_type = 'numerical'
-#        elif isinstance(self.emulator, Surface):
-#            self.emulator_type = 'analytic'
-
+        #        if isinstance(self.emulator, Emulator):
+        #            self.emulator_type = 'numerical'
+        #        elif isinstance(self.emulator, Surface):
+        #            self.emulator_type = 'analytic'
 
         # provide the planner with the parameter space.
         # NOTE: right now, outside of Evaluator, the param_space for a planner
         #       needs to be set "manually" by the user
-        if self.emulator.parameter_constriants == 'simplex':
+        if self.emulator.parameter_constriants == "simplex":
             # use auxillary parameter space if we have a simplex constraint on parameters
             self.planner.set_param_space(self.emulator.aux_param_space)
         else:
-            self.planner.set_param_space(self.emulator.param_space)  # param space in emulator as it originates from dataset
-
+            self.planner.set_param_space(
+                self.emulator.param_space
+            )  # param space in emulator as it originates from dataset
 
         # check for provision of scalarizing function if we have a MOO function
         # TODO: should we default here to a weighted sum with
         if self.campaign.is_moo:
 
             if self.scalarizer is None:
-                message = 'You must provided an instance of a Scalarizer for multiobjective optimization in Olympus'
-                Logger.log('FATAL')
+                message = "You must provided an instance of a Scalarizer for multiobjective optimization in Olympus"
+                Logger.log("FATAL")
 
             # make sure the goal of the planner/campaign is minimization (always minimization
             # for multi-objective problems, the individual optimization goals are specified in the
             # the scalarizer)
-            if not self.planner.goal == 'minimize':
+            if not self.planner.goal == "minimize":
                 message = 'For multiobjective optimization in Olympus, the overall optimization goal must be set to "minimize". Updating now ...'
-                Logger.log(message, 'WARNING')
-                self.planner.goal = 'minimize'
-                self.campaign.goal = 'minimize'
-
+                Logger.log(message, "WARNING")
+                self.planner.goal = "minimize"
+                self.campaign.goal = "minimize"
 
         if self.campaign is not None:
             self.campaign.set_planner_specs(planner)
             self.campaign.set_emulator_specs(emulator)
-
-
 
     def optimize(self, num_iter=1):
         """Optimizes an objective for a fixed number of iterations.
@@ -105,7 +102,7 @@ class Evaluator(Object):
             # NOTE: now we get 1 param at a time, a possible future expansion is
             #       to return batches
 
-            if self.emulator.parameter_constriants == 'simplex':
+            if self.emulator.parameter_constriants == "simplex":
                 # transform the campaign observations from simplex to cube (for planner)
                 self.campaign.observations_to_cube()
 
@@ -117,9 +114,11 @@ class Evaluator(Object):
             # get new params from planner
             params = self.planner.recommend(observations=planner_observations)
 
-            if self.emulator.parameter_constriants == 'simplex':
+            if self.emulator.parameter_constriants == "simplex":
                 params = cube_to_simpl([params.to_array()])
-                params = ParameterVector().from_array(params[0], self.emulator.param_space)
+                params = ParameterVector().from_array(
+                    params[0], self.emulator.param_space
+                )
                 self.campaign.observations_to_simpl()
 
             # get measurement from emulator/surface
@@ -129,7 +128,9 @@ class Evaluator(Object):
             # TODO: we probably do not need this check for NoneType Campaign here... consider removing
             if self.campaign is not None:
                 if self.campaign.is_moo:
-                    self.campaign.add_and_scalarize(params, values, self.scalarizer)
+                    self.campaign.add_and_scalarize(
+                        params, values, self.scalarizer
+                    )
                 else:
                     self.campaign.add_observation(params, values)
 

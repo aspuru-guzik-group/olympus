@@ -1,23 +1,23 @@
 #!/usr/bin/env python
 
-import time
 import itertools
 import random
+import time
+
 import numpy as np
 
-from olympus                           import Logger
-from olympus.objects                   import ParameterVector
+from olympus import Logger
+from olympus.objects import ParameterVector
 from olympus.planners.abstract_planner import AbstractPlanner
 
+# ===============================================================================
 
-
-#===============================================================================
 
 class RandomSearch(AbstractPlanner):
 
-    PARAM_TYPES = ['continuous', 'discrete', 'categorical']
+    PARAM_TYPES = ["continuous", "discrete", "categorical"]
 
-    def __init__(self, goal='minimize', seed=None):
+    def __init__(self, goal="minimize", seed=None):
         AbstractPlanner.__init__(**locals())
         if self.seed is None:
             self.seed = np.random.randint(1, int(1e7))
@@ -39,17 +39,17 @@ class RandomSearch(AbstractPlanner):
         self.has_cat_discr = False
 
         for param in self.param_space:
-            if param.type == 'continuous':
+            if param.type == "continuous":
                 self.has_continuous = True
-            elif param.type == 'categorical':
+            elif param.type == "categorical":
                 opts_.append(param.options)
                 self.has_cat_discr = True
-            elif param.type == 'discrete':
+            elif param.type == "discrete":
                 opts_.append(np.arange(param.low, param.high, param.stride))
                 self.has_cat_discr = True
             else:
                 raise NotImplementedError(
-                    f'Parameter type {param.type} for {param.name} not implemented'
+                    f"Parameter type {param.type} for {param.name} not implemented"
                 )
         if self.has_cat_discr:
             # generate set of possible categorcial and/or discrete options
@@ -67,7 +67,9 @@ class RandomSearch(AbstractPlanner):
                 # do not need to remove parameters, sample randomly with replacement
                 indices = np.arange(len(self.opts))
                 np.random.shuffle(indices)
-                cat_discr_vals = self.opts[indices[0]]#np.random.choice(self.opts)
+                cat_discr_vals = self.opts[
+                    indices[0]
+                ]  # np.random.choice(self.opts)
             else:
                 # fully categorical space, remove selected options to avoid
                 # iterate through by iteration nunber
@@ -77,28 +79,27 @@ class RandomSearch(AbstractPlanner):
 
         cat_discr_ind = 0
         for param in self.param_space:
-            if param.type == 'continuous':
+            if param.type == "continuous":
                 val = np.random.uniform(low=param.low, high=param.high)
-            elif param.type in ['categorical', 'discrete']:
+            elif param.type in ["categorical", "discrete"]:
                 val = cat_discr_vals[cat_discr_ind]
                 cat_discr_ind += 1
             else:
                 raise NotImplementedError
             vals.append(val)
-            
+
         return ParameterVector().from_list(vals, self.param_space)
 
 
-
 # DEBUG
-if  __name__ == '__main__':
+if __name__ == "__main__":
 
-    from olympus.datasets import Dataset
     from olympus import Campaign
+    from olympus.datasets import Dataset
 
-    d = Dataset(kind='cross_barrel')
+    d = Dataset(kind="cross_barrel")
 
-    planner = RandomSearch(goal='maximize')
+    planner = RandomSearch(goal="maximize")
     planner.set_param_space(d.param_space)
 
     campaign = Campaign()
@@ -106,12 +107,12 @@ if  __name__ == '__main__':
 
     BUDGET = 200
     for i in range(BUDGET):
-        print(f'ITERATION : ', i)
+        print(f"ITERATION : ", i)
 
         sample = planner.recommend(campaign.observations)
-        print('SAMPLE : ', sample)
+        print("SAMPLE : ", sample)
 
         measurement = d.run([sample], return_paramvector=False)[0]
-        print('MEASUREMENT : ', measurement)
+        print("MEASUREMENT : ", measurement)
 
         campaign.add_observation(sample, measurement)

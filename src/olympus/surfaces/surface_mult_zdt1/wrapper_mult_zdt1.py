@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 
 import numpy as np
+
 from olympus.surfaces import AbstractSurface
 
 
 class MultZdt1(AbstractSurface):
-
     def __init__(self, param_dim=2, noise=None):
-        """ Zitzler–Deb–Thiele's function N. 1
+        """Zitzler–Deb–Thiele's function N. 1
         Deb, Kalyan; Thiele, L.; Laumanns, Marco; Zitzler, Eckart (2002).
         "Scalable multi-objective optimization test problems". Proceedings
         of the 2002 IEEE Congress on Evolutionary Computation. Vol. 1. pp.
@@ -23,20 +23,19 @@ class MultZdt1(AbstractSurface):
     def minima(self):
         # TODO: implement me
         return None
-        #return [{'params': params, 'value': value}]
+        # return [{'params': params, 'value': value}]
 
     @property
     def maxima(self):
         # TODO: implement me
         return None
 
-
     def _run(self, params):
         params = np.array(params)
         obj_0 = params[0]
-        g = 1 + ((9/29)*np.sum(params))
-        h = 1 - np.sqrt(obj_0/g)
-        obj_1 = g*h
+        g = 1 + ((9 / 29) * np.sum(params))
+        h = 1 - np.sqrt(obj_0 / g)
+        obj_1 = g * h
 
         raw_results = [obj_0, obj_1]
 

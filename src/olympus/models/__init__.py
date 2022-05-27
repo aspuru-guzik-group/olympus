@@ -1,20 +1,22 @@
 #!/usr/bin/env python
 
-import os, sys, glob
+import glob
+import os
+import sys
+
 __home__ = os.path.dirname(os.path.abspath(__file__))
 
 
 class ModelLoader:
-
     def __init__(self, *args, **kwargs):
         for key, value in kwargs.items():
             setattr(self, key, value)
         self._find_models()
 
     def __getattr__(self, attr):
-        if attr in ['Model', 'AbstractModel'] or attr.startswith('Wrapper'):
+        if attr in ["Model", "AbstractModel"] or attr.startswith("Wrapper"):
             attr_file = ModelLoader.class_to_file(attr)
-            module = __import__(f'olympus.models.{attr_file}', fromlist=[attr])
+            module = __import__(f"olympus.models.{attr_file}", fromlist=[attr])
             _class = getattr(module, attr)
             setattr(self, attr, _class)
             return _class
@@ -28,7 +30,7 @@ class ModelLoader:
         file_name = class_name[0].lower()
         for character in class_name[1:]:
             if character.isupper():
-                file_name += f'_{character.lower()}'
+                file_name += f"_{character.lower()}"
             else:
                 file_name += character
         return file_name
@@ -38,7 +40,7 @@ class ModelLoader:
         class_name = file_name[0].upper()
         next_upper = False
         for character in file_name[1:]:
-            if character == '_':
+            if character == "_":
                 next_upper = True
                 continue
             if next_upper:
@@ -51,16 +53,18 @@ class ModelLoader:
     @staticmethod
     def import_model(attr):
         attr_file = ModelLoader.class_to_file(attr)
-        module = __import__(f'olympus.models.model_{attr_file}', fromlist=[attr])
+        module = __import__(
+            f"olympus.models.model_{attr_file}", fromlist=[attr]
+        )
         _class = getattr(module, attr)
         return _class
 
     def _find_models(self):
         self.model_files = []
         self.model_names = []
-        self.model_map  = {}
-        for dir_name in glob.glob(f'{__home__}/model_*'):
-            model_name = dir_name.split('/')[-1][6:]
+        self.model_map = {}
+        for dir_name in glob.glob(f"{__home__}/model_*"):
+            model_name = dir_name.split("/")[-1][6:]
             self.model_files.append(model_name)
             self.model_names.append(ModelLoader.file_to_class(model_name))
 

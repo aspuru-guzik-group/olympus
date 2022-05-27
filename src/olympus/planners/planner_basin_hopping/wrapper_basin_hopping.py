@@ -2,25 +2,39 @@
 
 import time
 
-from olympus.objects.object_config  import Config
-from olympus.objects                import ParameterVector
-from olympus.planners               import AbstractPlanner
-from olympus.planners.utils_planner import get_init_guess, get_bounds
-from olympus.utils                  import daemon
+from olympus.objects import ParameterVector
+from olympus.objects.object_config import Config
+from olympus.planners import AbstractPlanner
+from olympus.planners.utils_planner import get_bounds, get_init_guess
+from olympus.utils import daemon
 
+# ===============================================================================
 
-#===============================================================================
 
 class BasinHopping(AbstractPlanner):
 
-    PARAM_TYPES = ['continuous']
+    PARAM_TYPES = ["continuous"]
 
     # defaults are copied from scipy documentation
     # --> https://docs.scipy.org/doc/scipy-0.19.0/reference/generated/scipy.optimize.basinhopping.html
-    def __init__(self, goal='minimize', niter=100, T=1.0, stepsize=0.5, minimizer_kwargs=None,
-                 take_step=None, accept_test=None, callback=None, interval=50,
-                 disp=False, niter_success=None, seed=None,
-                 init_guess=None, init_guess_method='random', init_guess_seed=None):
+    def __init__(
+        self,
+        goal="minimize",
+        niter=100,
+        T=1.0,
+        stepsize=0.5,
+        minimizer_kwargs=None,
+        take_step=None,
+        accept_test=None,
+        callback=None,
+        interval=50,
+        disp=False,
+        niter_success=None,
+        seed=None,
+        init_guess=None,
+        init_guess_method="random",
+        init_guess_seed=None,
+    ):
         """
         Find the global minimum of a function using the basin-hopping algorithm
         Parameters
@@ -262,25 +276,36 @@ class BasinHopping(AbstractPlanner):
         """
 
         kwargs = locals().copy()
-        self.goal = kwargs['goal']
-        for attr in ['self', 'goal', 'init_guess', 'init_guess_method', 'init_guess_seed']:
+        self.goal = kwargs["goal"]
+        for attr in [
+            "self",
+            "goal",
+            "init_guess",
+            "init_guess_method",
+            "init_guess_seed",
+        ]:
             del kwargs[attr]
 
         self.kwargs = kwargs
         self.has_minimizer = False
-        self.is_converged  = False
+        self.is_converged = False
         AbstractPlanner.__init__(**locals())
-
 
     def _set_param_space(self, param_space):
         self.param_space = param_space
-        self.bounds      = get_bounds(param_space)
+        self.bounds = get_bounds(param_space)
         if self.init_guess is None:
-            self.init_guess  = get_init_guess(param_space, method=self.init_guess_method, random_seed=self.init_guess_seed)
+            self.init_guess = get_init_guess(
+                param_space,
+                method=self.init_guess_method,
+                random_seed=self.init_guess_seed,
+            )
 
     def _tell(self, observations):
         self._params = observations.get_params(as_array=False)
-        self._values = observations.get_values(as_array=True, opposite=self.flip_measurements)
+        self._values = observations.get_values(
+            as_array=True, opposite=self.flip_measurements
+        )
         if len(self._values) > 0:
             self.RECEIVED_VALUES.append(self._values[-1])
 
@@ -295,7 +320,10 @@ class BasinHopping(AbstractPlanner):
     @daemon
     def create_optimizer(self):
         from scipy.optimize import basinhopping
-        _ = basinhopping(self._priv_evaluator, x0=self.init_guess, **self.kwargs)
+
+        _ = basinhopping(
+            self._priv_evaluator, x0=self.init_guess, **self.kwargs
+        )
         self.is_converged = True
 
     def _ask(self):

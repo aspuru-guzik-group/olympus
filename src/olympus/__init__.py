@@ -4,7 +4,9 @@ import os
 from glob import glob
 
 olympus_home = os.path.dirname(os.path.abspath(__file__))
-olympus_scratch = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".scratch")
+olympus_scratch = os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), ".scratch"
+)
 __home__ = os.environ.get("OLYMPUS_HOME") or olympus_home
 __scratch__ = os.environ.get("OLYMPUS_SCRATCH") or olympus_scratch
 __emulator_path__ = os.environ.get("OLYMPUS_EMULATOR_PATH") or os.path.abspath(
@@ -33,37 +35,28 @@ Logger = MessageLogger()
 
 # ===============================================================================
 
-from .objects import Object
-from .objects import Parameter
+from .analyzer import Analyzer
+from .baseline import Baseline
+from .campaigns import Campaign, Observations, ParameterSpace
+from .databases import Database
+from .datasets import Dataset, list_datasets
+from .emulators import Emulator, list_trained_emulators
+from .models import Model
+from .noises import Noise
 from .objects import (
+    Object,
+    Parameter,
+    ParameterCategorical,
     ParameterContinuous,
     ParameterDiscrete,
-    ParameterCategorical,
+    ParameterVector,
 )
-from .objects import ParameterVector
-
-from .campaigns import Campaign
-from .campaigns import Observations
-from .campaigns import ParameterSpace
-
-from .analyzer import Analyzer
-from .databases import Database
-from .datasets import Dataset
-from .emulators import Emulator
-from .models import Model
-from .planners import Planner
+from .olympus import Olympus
+from .planners import Planner, list_planners
 from .plotter import Plotter
 from .surfaces import Surface
-from .noises import Noise
-
-from .olympus import Olympus
 
 # ===============================================================================
 
-from .datasets import list_datasets
-from .emulators import list_trained_emulators
-from .planners import list_planners
 
 # ===============================================================================
-
-from .baseline import Baseline

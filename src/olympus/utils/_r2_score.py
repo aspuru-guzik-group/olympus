@@ -1,7 +1,7 @@
 """Replacement r2_score function for when sklearn is not available."""
 import numpy as np
 
-#===============================================================================
+# ===============================================================================
 # BSD 3-Clause License
 
 # Copyright (c) 2007-2021 The scikit-learn developers.
@@ -31,6 +31,7 @@ import numpy as np
 # CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
 
 def r2_score(y_true, y_pred):
     """:math:`R^2` (coefficient of determination) regression score function.
@@ -73,19 +74,22 @@ def r2_score(y_true, y_pred):
         return np.nan
 
     if len(y_true.shape) == 1:
-        y_true = y_true.reshape((len(y_true), 1)) # unsqueeze
+        y_true = y_true.reshape((len(y_true), 1))  # unsqueeze
     if len(y_pred.shape) == 1:
-        y_pred = y_pred.reshape((len(y_true), 1)) # unsqueeze
+        y_pred = y_pred.reshape((len(y_true), 1))  # unsqueeze
 
     numerator = ((y_true - y_pred) ** 2).sum(axis=0, dtype=np.float64)
-    denominator = ((y_true - np.average( y_true, axis=0)) ** 2).sum(axis=0, dtype=np.float64)
+    denominator = ((y_true - np.average(y_true, axis=0)) ** 2).sum(
+        axis=0, dtype=np.float64
+    )
     nonzero_denominator = denominator != 0
     nonzero_numerator = numerator != 0
     valid_score = nonzero_denominator & nonzero_numerator
     output_scores = np.ones([y_true.shape[1]])
-    output_scores[valid_score] = 1 - (numerator[valid_score] /
-                                      denominator[valid_score])
+    output_scores[valid_score] = 1 - (
+        numerator[valid_score] / denominator[valid_score]
+    )
     # arbitrary set to zero to avoid -inf scores, having a constant
     # y_true is not interesting for scoring a regression anyway
-    output_scores[nonzero_numerator & ~nonzero_denominator] = 0.
+    output_scores[nonzero_numerator & ~nonzero_denominator] = 0.0
     return np.average(output_scores)

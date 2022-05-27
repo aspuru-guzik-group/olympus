@@ -1,27 +1,29 @@
 #!/usr/bin/env python
 
-import os 
-import sys
 import glob
+import os
+import sys
 
 __home__ = os.path.dirname(os.path.abspath(__file__))
 
-class ScalarizerLoader:
 
+class ScalarizerLoader:
     def __init__(self, *args, **kwargs):
         for key, value in kwargs.items():
             setattr(self, key, value)
         self._find_scalarizers()
 
     def __getattr__(self, attr):
-        if attr in ['Scalarizer', 'AbstractScalarizer']:
+        if attr in ["Scalarizer", "AbstractScalarizer"]:
             attr_file = ScalarizerLoader.class_to_file(attr)
-            module = __import__(f'olympus.scalarizers.{attr_file}', fromlist=[attr])
+            module = __import__(
+                f"olympus.scalarizers.{attr_file}", fromlist=[attr]
+            )
             _class = getattr(module, attr)
             setattr(self, attr, _class)
             return _class
         else:
-            scalarizer= ScalarizerLoader.import_scalarizer(attr)
+            scalarizer = ScalarizerLoader.import_scalarizer(attr)
             setattr(self, attr, scalarizer)
             return scalarizer
 
@@ -30,7 +32,7 @@ class ScalarizerLoader:
         file_name = class_name[0].lower()
         for character in class_name[1:]:
             if character.isupper():
-                file_name += f'_{character.lower()}'
+                file_name += f"_{character.lower()}"
             else:
                 file_name += character
         return file_name
@@ -40,7 +42,7 @@ class ScalarizerLoader:
         class_name = file_name[0].upper()
         next_upper = False
         for character in file_name[1:]:
-            if character == '_':
+            if character == "_":
                 next_upper = True
                 continue
             if next_upper:
@@ -53,23 +55,25 @@ class ScalarizerLoader:
     @staticmethod
     def import_scalarizer(attr):
         attr_file = ScalarizerLoader.class_to_file(attr)
-        module = __import__(f'olympus.scalarizers.scalarizer_{attr_file}', fromlist=[attr])
+        module = __import__(
+            f"olympus.scalarizers.scalarizer_{attr_file}", fromlist=[attr]
+        )
         _class = getattr(module, attr)
         return _class
 
     def _find_scalarizers(self):
         self.scalarizer_files = []
         self.scalarizer_names = []
-        self.scalarizer_map  = {}
-        for dir_name in glob.glob(f'{__home__}/scalarizer_*'):
-            scalarizer_name = dir_name.split('/')[-1][11:]
+        self.scalarizer_map = {}
+        for dir_name in glob.glob(f"{__home__}/scalarizer_*"):
+            scalarizer_name = dir_name.split("/")[-1][11:]
             self.scalarizer_files.append(scalarizer_name)
-            self.scalarizer_names.append(ScalarizerLoader.file_to_class(scalarizer_name))
-
+            self.scalarizer_names.append(
+                ScalarizerLoader.file_to_class(scalarizer_name)
+            )
 
     def get_scalarizers_list(self):
         return sorted(self.scalarizer_names)
 
 
 sys.modules[__name__] = ScalarizerLoader(**locals())
-

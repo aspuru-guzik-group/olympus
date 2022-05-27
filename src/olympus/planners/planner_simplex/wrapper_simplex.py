@@ -1,19 +1,31 @@
 #!/usr/bin/env python
 
-from olympus.planners.wrapper_scipy import WrapperScipy
 from olympus.objects.object_config import Config
+from olympus.planners.wrapper_scipy import WrapperScipy
 
 
 class Simplex(WrapperScipy):
 
-    PARAM_TYPES = ['continuous']
+    PARAM_TYPES = ["continuous"]
 
-    METHOD = 'Nelder-Mead'
+    METHOD = "Nelder-Mead"
 
     # defaults are copied from scipy documentation
     # --> https://docs.scipy.org/doc/scipy/reference/optimize.minimize-neldermead.html#optimize-minimize-neldermead
-    def __init__(self, goal='minimize', disp=False, maxiter=None, maxfev=None, initial_simplex=None, xatol=0.0001, fatol=0.0001,
-                 adaptive=False, init_guess=None, init_guess_method='random', init_guess_seed=None):
+    def __init__(
+        self,
+        goal="minimize",
+        disp=False,
+        maxiter=None,
+        maxfev=None,
+        initial_simplex=None,
+        xatol=0.0001,
+        fatol=0.0001,
+        adaptive=False,
+        init_guess=None,
+        init_guess_method="random",
+        init_guess_seed=None,
+    ):
         """
         Nelder-Mead simplex algorithm. Implementation from SciPy.
 

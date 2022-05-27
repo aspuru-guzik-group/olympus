@@ -45,12 +45,12 @@ class Observations:
         self.value_space = value.param_space
 
     def add_observation(self, param, value):
-        ''' this function expects to be given a list of ParameterVector
+        """this function expects to be given a list of ParameterVector
         objects, a single ParameterVector object, or an array like representation
         of the parameters (or a list of array-like for multiple observations at
         once)
 
-        '''
+        """
         if isinstance(param, list):
             for param_ in param:
                 if isinstance(param_, ParameterVector):
@@ -118,7 +118,9 @@ class Observations:
         elif as_array is False:
             if self._params_as_vectors is None:
                 self._construct_param_vectors()
-            return np.array([param.to_dict() for param in self._params_as_vectors])
+            return np.array(
+                [param.to_dict() for param in self._params_as_vectors]
+            )
         else:
             NotImplementedError
 
@@ -137,7 +139,9 @@ class Observations:
             if opposite is False:
                 return [value.to_dict() for value in self._values_as_vectors]
             elif opposite is True:
-                values_dict = [value.to_dict() for value in self._values_as_vectors]
+                values_dict = [
+                    value.to_dict() for value in self._values_as_vectors
+                ]
                 for value_dict in values_dict:
                     for key, value in value_dict.items():
                         value_dict[key] = -1 * value

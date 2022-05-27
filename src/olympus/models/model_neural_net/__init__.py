@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
 import traceback
-from olympus import Logger
 
+from olympus import Logger
 
 try:
     import silence_tensorflow

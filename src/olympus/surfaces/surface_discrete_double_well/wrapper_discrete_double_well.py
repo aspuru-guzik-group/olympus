@@ -1,13 +1,14 @@
 #!/usr/bin/env python
 
-import numpy as np
-from olympus.surfaces import AbstractSurface
 from itertools import product
+
+import numpy as np
+
 from olympus import Logger
+from olympus.surfaces import AbstractSurface
 
 
 class DiscreteDoubleWell(AbstractSurface):
-
     def __init__(self, param_dim=2, noise=None):
         """Discrete double well function.
 
@@ -22,19 +23,19 @@ class DiscreteDoubleWell(AbstractSurface):
     def minima(self):
         params = [0.16451863] * self.param_dim
         value = self._run(params)
-        return [{'params': params, 'value': value}]
+        return [{"params": params, "value": value}]
 
     @property
     def maxima(self):
-        message = 'DiscreteDoubleWell has an infinite number of maxima'
-        Logger.log(message, 'INFO')
+        message = "DiscreteDoubleWell has an infinite number of maxima"
+        Logger.log(message, "INFO")
         # some maxima
         maxima = []
         params = product([0, 1], repeat=self.param_dim)
         for param in params:
             param = list(param)
             value = self._run(param)
-            maxima.append({'params': param, 'value': value})
+            maxima.append({"params": param, "value": value})
         return maxima
 
     def _run(self, params):

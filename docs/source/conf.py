@@ -12,20 +12,22 @@
 
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../../examples'))
+
+sys.path.insert(0, os.path.abspath("../../examples"))
 
 
 # -- Project information -----------------------------------------------------
 
-project = 'Olympus'
-copyright = '2020, Matteo Aldeghi, Riley Hickman and Florian Häse'
-author = 'Matteo Aldeghi, Riley Hickman and Florian Häse'
+project = "Olympus"
+copyright = "2020, Matteo Aldeghi, Riley Hickman and Florian Häse"
+author = "Matteo Aldeghi, Riley Hickman and Florian Häse"
 
 # The short X.Y version.
 from olympus import _version
-version = ".".join(_version.get_versions()['version'].split('.')[:3])
+
+version = ".".join(_version.get_versions()["version"].split(".")[:3])
 # The full version, including alpha/beta/rc tags.
-release = _version.get_versions()['version']
+release = _version.get_versions()["version"]
 
 
 # -- General configuration ---------------------------------------------------
@@ -34,34 +36,32 @@ release = _version.get_versions()['version']
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-	'm2r2',
-	'nbsphinx',
-	'sphinx.ext.autodoc',
-	'sphinx.ext.autosummary',
-	'sphinx.ext.coverage',
-	'sphinx.ext.mathjax',
-	'sphinx.ext.napoleon',
-	'sphinx.ext.viewcode',
-	'sphinx.ext.githubpages',
+    "m2r2",
+    "nbsphinx",
+    "sphinx.ext.autodoc",
+    "sphinx.ext.autosummary",
+    "sphinx.ext.coverage",
+    "sphinx.ext.mathjax",
+    "sphinx.ext.napoleon",
+    "sphinx.ext.viewcode",
+    "sphinx.ext.githubpages",
 ]
 
-source_suffix = ['.rst', '.md']
+source_suffix = [".rst", ".md"]
 
 # The master toctree document.
-master_doc = 'index'
+master_doc = "index"
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
+templates_path = ["_templates"]
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = [
-	'_build', '**.ipynb_checkpoints'
-]
+exclude_patterns = ["_build", "**.ipynb_checkpoints"]
 
 # The name of the Pygments (syntax highlighting) style to use.
-pygments_style = 'sphinx'
+pygments_style = "sphinx"
 
 
 # -- Options for HTML output -------------------------------------------------
@@ -69,11 +69,14 @@ pygments_style = 'sphinx'
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 
-import sphinx_rtd_theme
 import msmb_theme  # this extends the sphinx theme
-html_theme_path = [msmb_theme.get_html_theme_path(),
-                   sphinx_rtd_theme.get_html_theme_path()]
-html_theme = 'msmb_theme'
+import sphinx_rtd_theme
+
+html_theme_path = [
+    msmb_theme.get_html_theme_path(),
+    sphinx_rtd_theme.get_html_theme_path(),
+]
+html_theme = "msmb_theme"
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -83,12 +86,12 @@ html_theme = 'msmb_theme'
 
 # The name of an image file (relative to this directory) to place at the top
 # of the sidebar.
-html_logo = '_static/logo2b.png'
+html_logo = "_static/logo2b.png"
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+html_static_path = ["_static"]
 
 # Custom sidebar templates, must be a dictionary that maps document names
 # to template names.
@@ -98,10 +101,17 @@ html_static_path = ['_static']
 # default: ``['localtoc.html', 'relations.html', 'sourcelink.html',
 # 'searchbox.html']``.
 #
-html_sidebars = {'**': ['globaltoc.html', 'relations.html', 'sourcelink.html', 'searchbox.html']}
+html_sidebars = {
+    "**": [
+        "globaltoc.html",
+        "relations.html",
+        "sourcelink.html",
+        "searchbox.html",
+    ]
+}
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'olympusdoc'
+htmlhelp_basename = "olympusdoc"
 
 
 # -- Options for LaTeX output ------------------------------------------------
@@ -110,15 +120,12 @@ latex_elements = {
     # The paper size ('letterpaper' or 'a4paper').
     #
     # 'papersize': 'letterpaper',
-
     # The font size ('10pt', '11pt' or '12pt').
     #
     # 'pointsize': '10pt',
-
     # Additional stuff for the LaTeX preamble.
     #
     # 'preamble': '',
-
     # Latex figure (float) alignment
     #
     # 'figure_align': 'htbp',
@@ -128,8 +135,13 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'olympus.tex', u'olympus Documentation',
-     u'Matteo Aldeghi, Riley Hickman and Florian Häse', 'manual'),
+    (
+        master_doc,
+        "olympus.tex",
+        "olympus Documentation",
+        "Matteo Aldeghi, Riley Hickman and Florian Häse",
+        "manual",
+    ),
 ]
 
 
@@ -137,10 +149,7 @@ latex_documents = [
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-man_pages = [
-    (master_doc, 'olympus', u'olympus Documentation',
-     [author], 1)
-]
+man_pages = [(master_doc, "olympus", "olympus Documentation", [author], 1)]
 
 
 # -- Options for Texinfo output ----------------------------------------------
@@ -149,42 +158,48 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'olympus', u'olympus Documentation',
-     author, 'olympus', 'One line description of project.',
-     'Miscellaneous'),
+    (
+        master_doc,
+        "olympus",
+        "olympus Documentation",
+        author,
+        "olympus",
+        "One line description of project.",
+        "Miscellaneous",
+    ),
 ]
 
 
 # concatenate and show class and __init__ docstrings
-autoclass_content = 'both'
+autoclass_content = "both"
 
 
 # -----------------------------------------------------------------------------
 # Autosummary
 # -----------------------------------------------------------------------------
 autosummary_generate = True
-autodoc_default_flags = ['members', 'inherited-members']
+autodoc_default_flags = ["members", "inherited-members"]
 
 # spell checking
-spelling_lang = 'en_US'
-spelling_word_list_filename = 'spelling_wordlist.txt'
+spelling_lang = "en_US"
+spelling_word_list_filename = "spelling_wordlist.txt"
 spelling_show_suggestions = True
 
 
 def setup(app):
-    app.add_stylesheet('custom.css')
+    app.add_stylesheet("custom.css")
     try:
-        from sphinx.ext.autosummary import Autosummary
-        from sphinx.ext.autosummary import get_documenter
-        from docutils.parsers.rst import directives
-        from sphinx.util.inspect import safe_getattr
         import re
+
+        from docutils.parsers.rst import directives
+        from sphinx.ext.autosummary import Autosummary, get_documenter
+        from sphinx.util.inspect import safe_getattr
 
         class AutoAutoSummary(Autosummary):
 
             option_spec = {
-                'methods': directives.unchanged,
-                'attributes': directives.unchanged
+                "methods": directives.unchanged,
+                "attributes": directives.unchanged,
             }
 
             required_arguments = 1
@@ -196,31 +211,48 @@ def setup(app):
                 items = []
                 for name in dir(obj):
                     try:
-                        documenter = get_documenter(safe_getattr(obj, name), obj)
+                        documenter = get_documenter(
+                            safe_getattr(obj, name), obj
+                        )
                     except AttributeError:
                         continue
                     if documenter.objtype == typ:
                         items.append(name)
-                public = [x for x in items if x in include_public or not x.startswith('_')]
+                public = [
+                    x
+                    for x in items
+                    if x in include_public or not x.startswith("_")
+                ]
                 return public, items
 
             def run(self):
                 clazz = self.arguments[0]
                 try:
-                    (module_name, class_name) = clazz.rsplit('.', 1)
-                    m = __import__(module_name, globals(), locals(), [class_name])
+                    (module_name, class_name) = clazz.rsplit(".", 1)
+                    m = __import__(
+                        module_name, globals(), locals(), [class_name]
+                    )
                     c = getattr(m, class_name)
-                    if 'methods' in self.options:
-                        _, methods = self.get_members(c, 'method', ['__init__'])
+                    if "methods" in self.options:
+                        _, methods = self.get_members(
+                            c, "method", ["__init__"]
+                        )
 
-                        self.content = ["~%s.%s" % (clazz, method) for method in methods if not method.startswith('_')]
-                    if 'attributes' in self.options:
-                        _, attribs = self.get_members(c, 'attribute')
-                        self.content = ["~%s.%s" % (clazz, attrib) for attrib in attribs if not attrib.startswith('_')]
+                        self.content = [
+                            "~%s.%s" % (clazz, method)
+                            for method in methods
+                            if not method.startswith("_")
+                        ]
+                    if "attributes" in self.options:
+                        _, attribs = self.get_members(c, "attribute")
+                        self.content = [
+                            "~%s.%s" % (clazz, attrib)
+                            for attrib in attribs
+                            if not attrib.startswith("_")
+                        ]
                 finally:
                     return super(AutoAutoSummary, self).run()
 
-        app.add_directive('autoautosummary', AutoAutoSummary)
+        app.add_directive("autoautosummary", AutoAutoSummary)
     except BaseException as e:
         raise e
-

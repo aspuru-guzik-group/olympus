@@ -2,38 +2,35 @@
 
 # ===============================================================================
 
+from . import Logger, __home__, __scratch__
 from .campaigns import Campaign
 from .databases import Database
 from .datasets import Dataset
 from .emulators import Emulator
 from .evaluators import Evaluator
 from .objects import Object
-from .plotter import Plotter
 from .planners import (
     Planner,
-    get_planners_list,
-    get_cont_planners_list,
     get_cat_planners_list,
+    get_cont_planners_list,
     get_disc_planners_list,
+    get_planners_list,
 )
+from .plotter import Plotter
+from .scalarizers import Scalarizer
 from .surfaces import (
     Surface,
-    list_surfaces,
     list_cat_surfaces,
     list_cont_surfaces,
+    list_surfaces,
 )
-from .scalarizers import Scalarizer
-from . import Logger
-
-from . import __home__, __scratch__
 
 # ===============================================================================
 
 
 class Olympus(Object):
 
-    """ Master class of the olympus package
-    """
+    """Master class of the olympus package"""
 
     def __init__(self, *args, **kwargs):
         Object.__init__(**locals())
@@ -43,9 +40,9 @@ class Olympus(Object):
 
     def _check_planner_param_type(self, planner, param_type):
         map_ = {
-            'continuous': get_cont_planners_list ,
-            'discrete': get_disc_planners_list,
-            'categorical': get_cat_planners_list,
+            "continuous": get_cont_planners_list,
+            "discrete": get_disc_planners_list,
+            "categorical": get_cat_planners_list,
         }
         return planner in map_[param_type]()
 
@@ -59,7 +56,7 @@ class Olympus(Object):
         campaign=Campaign(),
         database=Database(),
         num_iter=3,
-        ):
+    ):
         # check the dataset type
         # TODO: can we check this without creating the object here??
         dataset_obj = Dataset(kind=dataset)
@@ -70,7 +67,7 @@ class Olympus(Object):
             #     message = f'Planner {planner} cannot handle {param_type} parameters!'
             #     Logger.log(message, 'FATAL')
 
-        if 'continuous' in dataset_obj.param_types:
+        if "continuous" in dataset_obj.param_types:
             # we need a NN emulator
             emulator = Emulator(dataset=dataset, model=model)
         else:
@@ -108,30 +105,33 @@ class Olympus(Object):
         campaign=Campaign(),
         database=Database(),
         num_iter=3,
-        ):
+    ):
 
         self.planner = Planner(kind=planner, goal=goal)
         # check if surface is categorical, and check planner
         # param type compatibility
         if surface in list_cont_surfaces():
-            if not 'continuous' in self.planner.PARAM_TYPES:
-                message = f'Planner {planner} does not support continuous parameters'
-                Logger.log(message, 'FATAL')
+            if not "continuous" in self.planner.PARAM_TYPES:
+                message = (
+                    f"Planner {planner} does not support continuous parameters"
+                )
+                Logger.log(message, "FATAL")
         elif surface in list_cat_surfaces():
-            if not 'categorical'  in self.planner.PARAM_TYPES:
-                message = f'Planner {planner} does not support categorical parameters'
-                Logger.log(message, 'FATAL')
+            if not "categorical" in self.planner.PARAM_TYPES:
+                message = f"Planner {planner} does not support categorical parameters"
+                Logger.log(message, "FATAL")
 
-        self.surface = Surface(kind=surface, param_dim=param_dim, num_opts=num_opts)
+        self.surface = Surface(
+            kind=surface, param_dim=param_dim, num_opts=num_opts
+        )
 
         if len(self.surface.value_space) > 1 and not scalarizer:
-            message = f'You must pass a scalarizer instance for multiobjective optimization in Olympus'
-            Logger.log(message, 'FATAL')
+            message = f"You must pass a scalarizer instance for multiobjective optimization in Olympus"
+            Logger.log(message, "FATAL")
         elif len(self.surface.value_space) > 1 and scalarizer:
             self.scalarizer = scalarizer
         else:
             self.scalarizer = None
-        
 
         self.campaign = campaign
         self.database = database
@@ -150,8 +150,8 @@ class Olympus(Object):
         planners="all",
         database=Database(kind="sqlite"),
         num_ind_runs=5,
-        num_iter=3
-        ):
+        num_iter=3,
+    ):
         """
         Args:
             dataset (str): the dataset to use
@@ -166,9 +166,8 @@ class Olympus(Object):
                     dataset=dataset,
                     database=database,
                     campaign=Campaign(),
-                    num_iter=num_iter
+                    num_iter=num_iter,
                 )
-
 
 
 # *** Analysis ******************************************************************

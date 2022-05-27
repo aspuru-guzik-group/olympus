@@ -2,26 +2,32 @@
 
 import os
 
+from olympus import Logger, __home__
+
+from .connector_github import ConnectorGithub
+from .connector_server import ConnectorServer
+
 # ===============================================================================
 
-from olympus import __home__
-from olympus import Logger
-
-from .connector_server import ConnectorServer
-from .connector_github import ConnectorGithub
 
 # ===============================================================================
 
 
 class ParserDownload:
     def __init__(self, subparsers):
-        self.parser = subparsers.add_parser("download", help=">> help for download")
+        self.parser = subparsers.add_parser(
+            "download", help=">> help for download"
+        )
         self.group = self.parser.add_mutually_exclusive_group(required=True)
         self.group.add_argument(
-            "-n", "--name", action="store",
+            "-n",
+            "--name",
+            action="store",
         )
         self.group.add_argument(
-            "-l", "--list", action="store_true",
+            "-l",
+            "--list",
+            action="store_true",
         )
 
     @staticmethod

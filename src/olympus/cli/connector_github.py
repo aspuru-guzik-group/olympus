@@ -3,8 +3,7 @@
 import os
 import subprocess
 
-from olympus import __home__
-from olympus import Logger
+from olympus import Logger, __home__
 
 
 class ConnectorGithub:
@@ -25,13 +24,16 @@ class ConnectorGithub:
                 if not dataset_name in remote_datasets:
                     remote_datasets.append(dataset_name)
         os.remove(tmp_file)
-        remote_datasets = [remote_dataset[8:] for remote_dataset in remote_datasets]
+        remote_datasets = [
+            remote_dataset[8:] for remote_dataset in remote_datasets
+        ]
         return sorted(remote_datasets)
 
     def get_dataset(self, dataset_name):
         url = f"{self.URL}/datasets/dataset_{dataset_name}"
         subprocess.call(
-            f"svn export {url} {__home__}/datasets/dataset_{dataset_name}", shell=True
+            f"svn export {url} {__home__}/datasets/dataset_{dataset_name}",
+            shell=True,
         )
         # check if expected files exist
         expected_files = ["dataset.zip", "data.csv", "description.txt"]

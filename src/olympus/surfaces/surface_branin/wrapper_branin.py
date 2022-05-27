@@ -1,12 +1,13 @@
 #!/usr/bin/env python
 
-import numpy as np
-from olympus.surfaces import AbstractSurface
 from itertools import product
+
+import numpy as np
+
+from olympus.surfaces import AbstractSurface
 
 
 class Branin(AbstractSurface):
-
     def __init__(self, noise=None):
         """Branin function.
 
@@ -21,7 +22,9 @@ class Branin(AbstractSurface):
     @property
     def minima(self):
         # 3 global minima
-        x0 = (np.array([-np.pi, np.pi, 9.42478]) + 5) / 15  # rescale onto unit square
+        x0 = (
+            np.array([-np.pi, np.pi, 9.42478]) + 5
+        ) / 15  # rescale onto unit square
         x1 = np.array([12.275, 2.275, 2.475]) / 15  # rescale onto unit square
         params0 = np.array([x0[0], x1[0]])
         params1 = np.array([x0[1], x1[1]])
@@ -34,15 +37,17 @@ class Branin(AbstractSurface):
         np.testing.assert_almost_equal(value0, value1)
         np.testing.assert_almost_equal(value0, value2)
 
-        return [{'params': params0, 'value': value0},
-                {'params': params1, 'value': value1},
-                {'params': params2, 'value': value2}]
+        return [
+            {"params": params0, "value": value0},
+            {"params": params1, "value": value1},
+            {"params": params2, "value": value2},
+        ]
 
     @property
     def maxima(self):
-        params = [0., 0.]
+        params = [0.0, 0.0]
         value = self._run(params)
-        return {'params': params, 'value': value}
+        return {"params": params, "value": value}
 
     def _run(self, params):
         params = np.array(params)
@@ -52,13 +57,17 @@ class Branin(AbstractSurface):
 
         # Branin params
         a = 1
-        b = 5.1 / (4*np.pi**2)
-        c = 5/np.pi
+        b = 5.1 / (4 * np.pi**2)
+        c = 5 / np.pi
         r = 6
         s = 10
-        t = 1/(8*np.pi)
+        t = 1 / (8 * np.pi)
 
-        result = a * (x1 - b*(x0**2) + c*x0 - r) ** 2 + s * (1 - t) * np.cos(x0) + s
+        result = (
+            a * (x1 - b * (x0**2) + c * x0 - r) ** 2
+            + s * (1 - t) * np.cos(x0)
+            + s
+        )
 
         if self.noise is None:
             return result

@@ -4,6 +4,6 @@
 # Import Planner Wrapper
 # ------------------------
 
-param_types = ['continuous']
+param_types = ["continuous"]
 
 from .wrapper_steepest_descent import SteepestDescent

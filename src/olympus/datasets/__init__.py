@@ -41,6 +41,7 @@ for dir_name in glob.glob(f"{__home__}/dataset_*"):
 def list_datasets():
     return sorted(datasets_list).copy()
 
+
 def list_type_datasets(type_):
     type_datasets = []
     all_datasets = sorted(datasets_list).copy()
@@ -50,11 +51,14 @@ def list_type_datasets(type_):
             type_datasets.append(name)
     return type_datasets
 
+
 def list_full_cont_datasets():
-    return list_type_datasets(type_='full_cont')
+    return list_type_datasets(type_="full_cont")
+
 
 def list_full_cat_datasets():
-    return list_type_datasets(type_='full_cat')
+    return list_type_datasets(type_="full_cat")
+
 
 def list_mixed_datasets():
-    return list_type_datasets(type_='mixed')
+    return list_type_datasets(type_="mixed")

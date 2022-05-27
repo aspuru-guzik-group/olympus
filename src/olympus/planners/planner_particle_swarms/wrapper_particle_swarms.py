@@ -1,18 +1,25 @@
 #!/usr/bin/env python
 
 import time
-from olympus.objects  import ParameterVector
-from olympus.planners import AbstractPlanner
-from olympus.utils    import daemon
+
 import numpy as np
+
+from olympus.objects import ParameterVector
+from olympus.planners import AbstractPlanner
+from olympus.utils import daemon
 
 
 class ParticleSwarms(AbstractPlanner):
 
-    PARAM_TYPES = ['continuous']
+    PARAM_TYPES = ["continuous"]
 
-
-    def __init__(self, goal='minimize', max_iters=10**8, options={'c1': 0.5, 'c2': 0.3, 'w': 0.9}, particles=10):
+    def __init__(
+        self,
+        goal="minimize",
+        max_iters=10**8,
+        options={"c1": 0.5, "c2": 0.3, "w": 0.9},
+        particles=10,
+    ):
         """
         Particle swarm optimizer.
 
@@ -24,14 +31,16 @@ class ParticleSwarms(AbstractPlanner):
         """
         AbstractPlanner.__init__(**locals())
         self.has_optimizer = False
-        self.is_converged  = False
+        self.is_converged = False
 
     def _set_param_space(self, param_space):
         self.param_space = param_space
 
     def _tell(self, observations):
-        self._params = observations.get_params(as_array = False)
-        self._values = observations.get_values(as_array=True, opposite=self.flip_measurements)
+        self._params = observations.get_params(as_array=False)
+        self._values = observations.get_values(
+            as_array=True, opposite=self.flip_measurements
+        )
         if len(self._values) > 0:
             self.RECEIVED_VALUES.append(self._values[-1])
 
@@ -49,11 +58,15 @@ class ParticleSwarms(AbstractPlanner):
     @daemon
     def create_optimizer(self):
         from pyswarms.single import GlobalBestPSO
+
         self.optimizer = GlobalBestPSO(
-                n_particles=self.particles,
-                options=self.options,
-                dimensions=len(self.param_space))
-        cost, pos = self.optimizer.optimize(self._priv_evaluator, iters=self.max_iters)
+            n_particles=self.particles,
+            options=self.options,
+            dimensions=len(self.param_space),
+        )
+        cost, pos = self.optimizer.optimize(
+            self._priv_evaluator, iters=self.max_iters
+        )
         self.is_converged = True
 
     def _ask(self):
