@@ -13,6 +13,7 @@ class Everest(GaussianMixture):
             noise (Noise): Noise object that injects noise into the evaluations of the surface. Default is None.
         """
         peak = 8848
+        value_dim = 1
         GaussianMixture.__init__(self, param_dim=2, num_gauss=4, cov_scale=0.1, diagonal_cov=False,
                                  noise=noise, random_seed=peak)
 
@@ -29,5 +30,3 @@ class Everest(GaussianMixture):
         message = 'Unknown maxima: these need to be found numerically'
         Logger.log(message, 'WARNING')
         return None
-
-

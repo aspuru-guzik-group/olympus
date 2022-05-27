@@ -13,6 +13,7 @@ class Matterhorn(GaussianMixture):
             noise (Noise): Noise object that injects noise into the evaluations of the surface. Default is None.
         """
         peak = 4478
+        value_dim = 1
         GaussianMixture.__init__(self, param_dim=2, num_gauss=7, cov_scale=0.1, diagonal_cov=False,
                                  noise=noise, random_seed=peak)
 
@@ -29,5 +30,3 @@ class Matterhorn(GaussianMixture):
         message = 'Unknown maxima: these need to be found numerically'
         Logger.log(message, 'WARNING')
         return None
-
-

@@ -6,6 +6,8 @@ from olympus import Logger
 from olympus.campaigns import Observations, Campaign
 from olympus.objects import Object, abstract_attribute, ABCMeta, Config
 
+from olympus.scalarizers import Scalarizer
+
 
 class AbstractPlanner(Object, metaclass=ABCMeta):
     """ This class is intended to contain methods shared by all wrappers, as well as define abstract methods and
@@ -131,12 +133,13 @@ class AbstractPlanner(Object, metaclass=ABCMeta):
         self.tell(observations)
         return self.ask(return_as=return_as)
 
-    def optimize(self, emulator, num_iter=1, verbose=False):
+    def optimize(self, emulator, num_iter=1, scalarizer=None, verbose=False):
         """Optimizes a surface for a fixed number of iterations.
 
         Args:
-            emulator (object): Emulator or a Surface instance to optimize over.
+            emulator (object): Emulator, Dataset, or Surface instance to optimize over.
             num_iter (int): Maximum number of iterations allowed.
+            scalarizer (Scalarizer): 
             verbose (bool): Whether to print information to screen.
 
         Returns:
@@ -159,14 +162,19 @@ class AbstractPlanner(Object, metaclass=ABCMeta):
         if callable(getattr(self, "reset", None)):
             self.reset()
 
+        # TODO: add check to see if planner and emulator/dataset/surface are compatible
+
         # use campaign to store info, and then to be returned
         campaign = Campaign()
         campaign.set_planner_specs(self)
         campaign.set_emulator_specs(emulator)
 
+    
+
         # provide the planner with the parameter space.
         # param space in emulator as it originates from dataset
         self.set_param_space(emulator.param_space)
+        self.set_value_space(emulator.value_space)
 
         # Optimize: i.e. call the planner recommend method for max_iter times
         for i in range(num_iter):
@@ -190,9 +198,13 @@ class AbstractPlanner(Object, metaclass=ABCMeta):
     def _validate_paramvector(self, param_vector):
         for key, value in param_vector.to_dict().items():
             param = self.param_space.get_param(name=key)
-            if param['type'] == 'continuous':
-                if not param['low'] <= value <= param['high']:
+            if param['type'] in ('continuous', 'discrete'):
+                if not param['low'] <= np.float(value) <= param['high']:
                     message = 'Proposed parameter {0} not within defined bounds ({1},{2})'.format(value, param['low'], param['high'])
+                    Logger.log(message, 'WARNING')
+            elif param['type'] == 'categorical':
+                if value not in param['options']:
+                    message = f'Proposed parameter {key} with {value} is not defined within the param options: {param["options"]}'
                     Logger.log(message, 'WARNING')
 
     def _project_into_domain(self, params):

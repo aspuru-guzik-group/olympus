@@ -1,0 +1,19 @@
+{
+	"constraints": {
+			"parameters": "none",
+			"measurements": "positive"
+		},
+	"parameters": [
+			{"name": "ligand", "type": "categorical", 
+			"options": ["L0", "L1", "L2", "L3", "L4", "L5", "L6", "L7"],  
+			"descriptors": []},
+			{"name": "res_time", "type": "continuous", "low": 60.0,  "high": 600.0},
+			{"name": "temperature", "type": "continuous",  "low": 30.0,  "high": 110.0},
+			{"name": "catalyst_loading", "type": "continuous", "low": 0.499, "high": 2.513}
+		],
+	"measurements": [
+		{"name": "yield", "type": "continuous"},
+		{"name": "turnover", "type": "continuous"}
+	],
+    "default_goal": ["maximize", "maximize"]
+}

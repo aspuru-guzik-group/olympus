@@ -1,0 +1,18 @@
+Optimization of P3HT/CNT composite blends
+from drop casting. Objective is electrical
+conductivity.
+
+=========================================
+                Summary
+-----------------------------------------
+    Number of Samples             178
+    Dimensionality                 5
+    Features:
+        p3ht_content         continuous
+        d1_content           continuous
+        d2_content           continuous
+        d6_content           continuous
+        d8_content           continuous
+    Targets:
+        conductivity         continuous
+=========================================

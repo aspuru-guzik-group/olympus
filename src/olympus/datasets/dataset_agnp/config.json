@@ -1,0 +1,17 @@
+{
+  "constraints": {
+		"parameters": "none",
+		"measurements": "positive"
+		},
+	"parameters": [
+			{"name": "q_agno3", "type": "continuous", "low": 4.53,  "high": 42.80981595},
+			{"name": "q_pva", "type": "continuous", "low": 9.999518096000001,  "high": 40.00101474},
+			{"name": "q_tsc", "type": "continuous", "low": 0.5,  "high": 30.5},
+			{"name": "q_seed", "type": "continuous", "low": 0.498851653,  "high": 19.5},
+			{"name": "q_tot", "type": "continuous", "low": 200.0 , "high": 983.0}
+		],
+	"measurements": [
+		{"name": "spectrum_score", "type": "continuous"}
+	],
+    "default_goal": "maximize"
+}

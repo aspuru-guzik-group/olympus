@@ -15,6 +15,7 @@ class DiscreteDoubleWell(AbstractSurface):
             param_dim (int): Number of input dimensions. Default is 2.
             noise (Noise): Noise object that injects noise into the evaluations of the surface. Default is None.
         """
+        value_dim = 1
         AbstractSurface.__init__(**locals())
 
     @property

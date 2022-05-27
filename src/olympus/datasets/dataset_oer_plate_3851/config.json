@@ -1,0 +1,18 @@
+{
+  "constraints": {
+		"parameters": "simplex",
+		"measurements": "positive"
+		},
+	"parameters": [
+			{"name": "ni_load", "type": "continuous", "low": 0.0,  "high": 1.0},
+			{"name": "fe_load", "type": "continuous", "low": 0.0,  "high": 1.0},
+			{"name": "co_load", "type": "continuous", "low": 0.0,  "high": 1.0},
+			{"name": "ta_load", "type": "continuous", "low": 0.0,  "high": 1.0},
+      {"name": "mn_load", "type": "continuous", "low": 0.0,  "high": 1.0},
+			{"name": "cu_load", "type": "continuous", "low": 0.0,  "high": 1.0}
+		],
+	"measurements": [
+		{"name": "overpotential", "type": "continuous"}
+	],
+    "default_goal": "minimize"
+}

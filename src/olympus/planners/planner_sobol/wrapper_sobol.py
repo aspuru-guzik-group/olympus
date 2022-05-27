@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import time
-import numpy as np 
+import numpy as np
 
 from sobol_seq import i4_sobol
 
@@ -10,7 +10,9 @@ from olympus.planners.abstract_planner import AbstractPlanner
 
 #===============================================================================
 
-class Sobol(AbstractPlanner):    
+class Sobol(AbstractPlanner):
+
+    PARAM_TYPES = ['continuous']
 
     def __init__(self, goal='minimize', budget=None, seed=None):
         AbstractPlanner.__init__(**locals())
@@ -30,6 +32,3 @@ class Sobol(AbstractPlanner):
         for index, param in enumerate(self.param_space):
             vector[index] = (param.high - param.low) * vector[index] + param.low
         return ParameterVector().from_array(vector, self.param_space)
-
-
-

@@ -244,13 +244,14 @@ class WrapperTensorflowModel(AbstractModel):
     def predict(self, features, num_samples=1):
         # features = self._project_features(features, feature_transformer)
         # make sure the dimensionality of the input matches that used for training
+ 
         if features.shape[1] != self.features_dim:
             raise ValueError(
                 "dimensionality of input features provided does not match that of the training dataset"
             )
 
         with self.sess.as_default():
-            pred = np.empty((num_samples, len(features), 1))
+            pred = np.empty((num_samples, len(features), self.targets_dim))
             resolution = divmod(len(features), self.batch_size)
             res = [self.batch_size for i in range(resolution[0])]
             res.append(resolution[1])

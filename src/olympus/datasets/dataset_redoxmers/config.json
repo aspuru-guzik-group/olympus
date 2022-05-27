@@ -1,0 +1,38 @@
+{
+	"constraints": {
+		"parameters":   "none",
+		"measurements": "none"
+		},
+	"parameters": [
+			{
+				"name": "r1_label", 
+				"type": "categorical", 
+				"options": ["R1_0", "R1_1"], 
+				"descriptors": ["nHetero", "MW", "TopoPSA", "nHeavyAtom"]
+			},
+			{
+				"name": "r3_label", 
+				"type": "categorical", 
+				"options": ["R3_0", "R3_1", "R3_2", "R3_3", "R3_4", "R3_5", "R3_6", "R3_7"], 
+				"descriptors": ["nHetero", "MW", "TopoPSA", "nHeavyAtom", "apol", "FCSP3", "Diameter"]
+			},
+			{
+				"name": "r4_label", 
+				"type": "categorical", 
+				"options": ["R4_0", "R4_1", "R4_2", "R4_3", "R4_4", "R4_5", "R4_6", "R4_7"],  
+				"descriptors": ["nHetero", "MW", "TopoPSA", "nHeavyAtom", "apol", "FCSP3", "Diameter"]
+			},
+			{
+				"name": "r5_label", 
+				"type": "categorical", 
+				"options": ["R5_0", "R5_1", "R5_2", "R5_3", "R5_4", "R5_5", "R5_6", "R5_7", "R5_8", "R5_9", "R5_10"],  
+				"descriptors": ["nHetero", "MW", "TopoPSA", "nHeavyAtom", "apol", "FCSP3", "Diameter"]
+			}
+		],
+    "measurements": [
+			{"name": "abs_lam_diff", "type": "continuous"},
+			{"name": "ered", "type": "continuous"},
+			{"name": "gsol", "type": "continuous"}
+		],
+    "default_goal": ["minimize", "minimize", "minimize"]
+}

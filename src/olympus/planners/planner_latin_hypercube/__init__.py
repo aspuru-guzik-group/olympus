@@ -9,6 +9,8 @@ module  = 'pyDOE'
 link    = 'https://pythonhosted.org/pyDOE/'
 check_planner_module(planner, module, link)
 
+param_types = ['continuous']
+
 #===============================================================================
 
 from .wrapper_latin_hypercube import LatinHypercube

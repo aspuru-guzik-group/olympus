@@ -12,6 +12,8 @@ from olympus.utils    import daemon
 
 class Snobfit(AbstractPlanner):
 
+    PARAM_TYPES = ['continuous']
+
     SUBMITTED_PARAMS = []
     RECEIVED_VALUES  = []
 

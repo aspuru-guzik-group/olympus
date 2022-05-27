@@ -1,0 +1,15 @@
+{
+  "constraints": {
+		"parameters": "simplex",
+		"measurements": "positive"
+		},
+	"parameters": [
+			{"name": "CsPbI", "type": "continuous", "low": 0.0,  "high": 1.0},
+			{"name": "FAPbI", "type": "continuous", "low": 0.0,  "high": 1.0},
+			{"name": "MAPbI", "type": "continuous", "low": 0.0,  "high": 1.0}
+		],
+	"measurements": [
+		{"name": "instability_index", "type": "continuous"}
+	],
+    "default_goal": "minimize"
+}

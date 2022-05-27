@@ -11,7 +11,7 @@ from olympus.plotter import AbstractPlotter
 
 class PlotterMatplotlib(AbstractPlotter):
 
-    def _plot(self, emulators, planners, measurements, file_name = None, show = False):
+    def _plot_traces(self, emulators, planners, measurements, file_name = None, show = False):
         num_plots  = len(emulators)
         num_graphs = len(planners)
         fig = plt.figure(figsize = (6, 4 * num_plots))
@@ -51,3 +51,10 @@ class PlotterMatplotlib(AbstractPlotter):
             fig.savefig(file_name, bbox_inches = 'tight')
         if show is True:
             plt.show()
+
+    def _plot_traces_regret(self, emulators, planners, measurements, file_name = None, show = False):
+        pass
+
+
+    def _plot_traces_rank(self, emulators, planners, measurements, file_name = None, show = False):
+        pass

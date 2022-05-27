@@ -11,6 +11,9 @@ module  = 'scipy'
 link    = 'https://www.scipy.org/'
 check_planner_module(planner, module, link)
 
+
+param_types = ['continuous']
+
 # ------------------------
 # Import Planner Wrapper
 # ------------------------

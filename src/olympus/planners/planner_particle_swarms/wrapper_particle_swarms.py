@@ -9,6 +9,9 @@ import numpy as np
 
 class ParticleSwarms(AbstractPlanner):
 
+    PARAM_TYPES = ['continuous']
+
+
     def __init__(self, goal='minimize', max_iters=10**8, options={'c1': 0.5, 'c2': 0.3, 'w': 0.9}, particles=10):
         """
         Particle swarm optimizer.
@@ -39,6 +42,7 @@ class ParticleSwarms(AbstractPlanner):
         while len(self.RECEIVED_VALUES) < self.particles:
             time.sleep(0.1)
         measurements = np.array(self.RECEIVED_VALUES)
+        measurements = np.reshape(measurements, (len(measurements),))
         self.RECEIVED_VALUES = []
         return measurements
 

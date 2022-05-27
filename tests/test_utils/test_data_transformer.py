@@ -3,7 +3,11 @@
 import numpy as np
 
 from olympus.datasets import Dataset
-from olympus.utils.data_transformer import DataTransformer
+from olympus.utils.data_transformer import (
+    DataTransformer,
+    simpl_to_cube,
+    cube_to_simpl,
+)
 
 
 np.random.seed(100691)
@@ -75,6 +79,21 @@ def test_train_sqrt_mean_array():
 # 	transformed = data_transformer.transform(data)
 # 	assert data.shape[1] == 11
 # 	assert transformed.shape[1] == 15
+
+
+def test_simpl_to_cube():
+    simpls = np.array([[0.1, 0.3, 0.4, 0.2]])
+    cubes = simpl_to_cube(simpls)
+    assert cubes.shape[1] == simpls.shape[1]-1
+    assert cubes.shape[0] == 1
+
+def test_cube_to_simpl():
+    cubes = np.array([[0.8324, 0.1903, 0.6787]])
+    simpls = cube_to_simpl(cubes)
+    assert simpls.shape[1] == cubes.shape[1]+1
+    assert simpls.shape[0] == 1
+    assert np.isclose(np.sum(simpls), 1.,)
+
 
 
 if __name__ == "__main__":

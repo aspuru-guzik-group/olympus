@@ -10,6 +10,8 @@ from olympus.utils    import daemon
 
 class Cma(AbstractPlanner):
 
+    PARAM_TYPES = ['continuous']
+
     def __init__(self, goal='minimize', stddev=0.5, init_guess=None,
                  init_guess_method='random', init_guess_seed=None):
         """
@@ -31,7 +33,8 @@ class Cma(AbstractPlanner):
         self.param_space = param_space
         self.bounds      = np.transpose(get_bounds(param_space)).tolist()
         if self.init_guess is None:
-            self.init_guess = get_init_guess(param_space, method=self.init_guess_method, random_seed=self.init_guess_seed)
+            #self.init_guess = get_init_guess(param_space, method=self.init_guess_method, random_seed=self.init_guess_seed)
+            self.init_guess = np.random.uniform(low=0, high=1, size=(len(param_space,)))
 
     def _tell(self, observations):
         self._params = observations.get_params(as_array = False)
@@ -40,6 +43,7 @@ class Cma(AbstractPlanner):
             self.RECEIVED_VALUES.append(self._values[-1])
 
     def _priv_evaluator(self, params):
+        params = (self.param_space.param_uppers - self.param_space.param_lowers) * params + self.param_space.param_lowers
         params = self._project_into_domain(params)
         self.SUBMITTED_PARAMS.append(params)
         while len(self.RECEIVED_VALUES) == 0:
@@ -50,9 +54,8 @@ class Cma(AbstractPlanner):
     @daemon
     def create_optimizer(self):
         from cma import CMAEvolutionStrategy
-        opts = {'bounds': self.bounds}
-        stddevs = (self.param_space.param_uppers - self.param_space.param_lowers) * self.stddev + self.param_space.param_lowers
-        optimizer = CMAEvolutionStrategy(self.init_guess, np.amin(stddevs), inopts=opts)
+        opts = {'bounds':[list(np.full((len(self.param_space)), 0)), list(np.full((len(self.param_space)), 1))]}
+        optimizer = CMAEvolutionStrategy(self.init_guess, self.stddev, inopts=opts)
         _ = optimizer.optimize(self._priv_evaluator)
         self.is_converged = True
 
