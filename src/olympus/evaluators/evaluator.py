@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
-from olympus import Emulator, Logger, Surface
+from olympus import Logger
+from olympus.emulators import Emulator
+from olympus.surfaces import Surface
 from olympus.campaigns import Campaign
 from olympus.objects import Object, ParameterVector
 from olympus.scalarizers import Scalarizer

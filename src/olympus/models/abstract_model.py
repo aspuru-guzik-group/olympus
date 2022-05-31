@@ -2,7 +2,7 @@
 
 from abc import abstractmethod
 
-from olympus import Object
+from olympus.objects import Object
 
 
 class AbstractModel(Object):

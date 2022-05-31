@@ -3,7 +3,8 @@
 import numpy as np
 
 from olympus import Logger
-from olympus.campaigns import Observations, ParameterSpace
+from olympus.campaigns.observations import Observations
+from olympus.campaigns.param_space import ParameterSpace
 from olympus.datasets import Dataset
 from olympus.emulators.emulator import Emulator
 from olympus.objects import Object, ParameterContinuous

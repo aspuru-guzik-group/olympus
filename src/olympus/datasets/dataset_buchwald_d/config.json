@@ -1,0 +1,72 @@
+{
+	"constraints": {
+		"parameters":   "none",
+		"measurements": "none"
+		},
+	"parameters": [
+			{
+				"name": "aryl_halide", 
+				"type": "categorical", 
+				"options": [
+					"Clc1ccccn1", 
+					"Brc1ccccn1", 
+					"Ic1ccccn1"
+				], 
+				"descriptors": []
+			},
+			{
+				"name": "additive", 
+				"type": "categorical", 
+				"options": [
+					"o1nccc1c2ccccc2", 
+					"CCOC(=O)c1onc(C)c1", 
+					"CCOC(=O)c1cc(C)on1", 
+					"o1cc(cn1)c2ccccc2", 
+					"o1ccc(n1)c2ccccc2", 
+					"Cc1ccon1", 
+					"Cc1oncc1", 
+					"o1cc2ccccc2n1", 
+					"Cc1onc(C)c1", 
+					"COC(=O)c1oncc1", 
+					"CCOC(=O)c1ccon1", 
+					"CCOC(=O)c1cnoc1C", 
+					"CCOC(=O)c1conc1", 
+					"o1ncc2ccccc12", 
+					"CCOC(=O)c1onc(OC)c1", 
+					"Cc1cc(on1)c2ccccc2", 
+					"C(N(Cc1ccccc1)c2ccon2)c3ccccc3", 
+					"COC(=O)c1cc(on1)c2occc2", 
+					"Fc1cccc(F)c1c2oncc2", 
+					"C(N(Cc1ccccc1)c2oncc2)c3ccccc3", 
+					"Cc1onc(c1)n2cccc2", 
+					"COC(=O)c1cc(on1)c2sccc2"
+				], 
+				"descriptors": []
+			},
+			{
+				"name": "base",  
+				"type": "categorical", 
+				"options": [
+					"CN(C)P(N(C)C)(N(C)C)=NP(N(C)C)(N(C)C)=NCC", 
+					"CN(C)/C(N(C)C)=N\\C(C)(C)C", 
+					"CN1CCCN2CCCN=C12"
+				], 
+				"descriptors": []
+			},
+			{
+				"name": "ligand",  
+				"type": "categorical", 
+				"options": [
+					"CC(C)C1=CC(C(C)C)=CC(C(C)C)=C1C2=C(P(C3CCCCC3)C4CCCCC4)C=CC=C2",
+					"CC(C)C(C=C(C(C)C)C=C1C(C)C)=C1C2=CC=CC=C2P(C(C)(C)C)C(C)(C)C", 
+					"CC(C)C1=CC(C(C)C)=CC(C(C)C)=C1C2=C(P(C(C)(C)C)C(C)(C)C)C(OC)=CC=C2OC", 
+					"CC(C1=C(C2=C(OC)C=CC(OC)=C2P(C34CC5CC(C4)CC(C5)C3)C67CC8CC(C7)CC(C8)C6)C(C(C)C)=CC(C(C)C)=C1)C"
+				], 
+				"descriptors": []
+			}
+		],
+    "measurements": [
+			{"name": "yield", "type": "continuous"}
+		],
+    "default_goal": "maximize"
+}

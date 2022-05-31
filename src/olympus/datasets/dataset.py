@@ -8,7 +8,7 @@ import numpy as np
 from pandas import DataFrame, read_csv
 
 from olympus import Logger
-from olympus.campaigns import ParameterSpace
+from olympus.campaigns.param_space import ParameterSpace
 from olympus.objects import (
     Parameter,
     ParameterCategorical,

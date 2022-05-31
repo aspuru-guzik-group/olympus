@@ -1,0 +1,21 @@
+Buchwald-Hartwig reaction optimization case 
+"a", with Y=CH, Z=CH, R=CF_3. This dataset
+is taken from Ahneman, D. T., Estrada, J. G.,
+Lin, S., Dreher, S. D. & Doyle, A. G. 
+Predicting reaction performance in C–N 
+cross-coupling using machine learning. 
+Science 360, 186–190 (2018)
+
+=========================================
+                Summary
+-----------------------------------------
+    Number of Samples             792
+    Dimensionality                 4
+    Features:
+        aryl_halide     categorical (3 options)
+        additive        categorical (22 options)
+        base            categorical (3 options)
+        ligand          categorical (4 options)
+    Targets:
+        yield              continuous
+=========================================

@@ -1,0 +1,20 @@
+Suzuki reaction optimization dataset from:
+Perera, D. et al. A platform for automated 
+nanomole-scale reaction screening and 
+micromole-scale synthesis in flow. 
+Science 359, 429–434 (2018).
+
+=========================================
+                Summary
+-----------------------------------------
+    Number of Samples             3696
+    Dimensionality                 5
+    Features:
+        electrophile         categorical (4 options)
+        nucleophile          categorical (3 options)
+        base                 categorical (7 options)
+        ligand               categorical (11 options)
+        solvent              categorical (4 options)
+    Targets:
+        yield              continuous
+=========================================

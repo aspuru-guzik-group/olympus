@@ -8,7 +8,7 @@ import time
 import sqlalchemy as sql
 
 from olympus.campaigns import Campaign
-from olympus.databases.database_sqlite import (
+from olympus.databases.database_sqlite.sqlite_operations import (
     AddEntry,
     FetchEntries,
     UpdateEntries,

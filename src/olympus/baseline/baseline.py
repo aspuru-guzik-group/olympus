@@ -4,7 +4,10 @@ import glob
 import os
 import pickle
 
-from olympus import Database, Logger, Object, list_datasets
+from olympus.databases import Database
+from olympus import Logger
+from olympus.objects import Object
+from olympus.datasets import list_datasets
 
 __home__ = os.path.dirname(os.path.abspath(__file__))
 

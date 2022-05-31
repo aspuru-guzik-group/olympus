@@ -2,7 +2,7 @@
 
 import numpy as np
 
-from olympus import Object
+from olympus.objects import Object
 
 # ==============================================================================
 
