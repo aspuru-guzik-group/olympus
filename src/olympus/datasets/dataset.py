@@ -372,9 +372,7 @@ class Dataset:
                     val = round(
                         val, 5
                     )  # five should be max precision, but this may cause errors
-                print(name, space.name, val, type(val))
                 sub_df = sub_df.loc[(sub_df[name] == val), :]
-                # print(sub_df.head())
             if not sub_df.shape[0] == 1:
                 message = f"Could not find lookup value for parameter setting {param}"
                 Logger.log(message, "FATAL")

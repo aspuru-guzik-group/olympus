@@ -112,7 +112,6 @@ def propose_randomly(num_proposals, param_space):
         proposals.append(sample)
         raw_proposals.append(raw_sample)
     proposals = np.array(proposals)
-    raw_proposals = np.array(raw_proposals)
 
     return proposals, raw_proposals
 
@@ -127,14 +126,22 @@ def reverse_standardize(data, means, stds):
     return (data * stds) + means
 
 
-def forward_normalize(data, min, max):
+def forward_normalize(data, min_, max_):
     """forward normalize the data"""
-    return (data - min) / (max - min)
+    ixs = np.where(np.abs(max_ - min_) < 1e-10)[0]
+    if not ixs.size == 0:
+        max_[ixs] = np.ones_like(ixs)
+        min_[ixs] = np.zeros_like(ixs)
+    return (data - min_) / (max_ - min_)
 
 
-def reverse_normalize(data, min, max):
+def reverse_normalize(data, min_, max_):
     """un-normlaize the data"""
-    return data * (max - min) + min
+    ixs = np.where(np.abs(max_ - min_) < 1e-10)[0]
+    if not ixs.size == 0:
+        max_[ixs] = np.ones_like(ixs)
+        min_[ixs] = np.zeros_like(ixs)
+    return data * (max_ - min_) + min_
 
 
 def project_to_olymp(

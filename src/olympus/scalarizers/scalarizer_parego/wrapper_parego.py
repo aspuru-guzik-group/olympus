@@ -7,7 +7,7 @@ from olympus import Logger
 from olympus.scalarizers import AbstractScalarizer
 
 
-class ParEGO(AbstractScalarizer):
+class Parego(AbstractScalarizer):
     """ParEGO acheivement scalarizing function"""
 
     def __init__(self, value_space, goals, rho=0.05):

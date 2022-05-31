@@ -123,10 +123,10 @@ class Hyperopt(AbstractPlanner):
 
     def _ask(self):
 
-        print("TRIALS : ", self._trials)
+        # print("TRIALS : ", self._trials)
 
-        if self.num_generated > 1:
-            print("TRIALS MISC: ", self._trials.trials[-1]["misc"])
+        # if self.num_generated > 1:
+        #     print("TRIALS MISC: ", self._trials.trials[-1]["misc"])
 
         # NOTE: we pass a dummy function as we just ask for the new (+1) set of parameters
         _ = fmin(

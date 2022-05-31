@@ -67,7 +67,7 @@
 					"CO"
 				], 
 				"descriptors": []
-			},
+			}
 		],
     "measurements": [
 			{"name": "yield", "type": "continuous"}

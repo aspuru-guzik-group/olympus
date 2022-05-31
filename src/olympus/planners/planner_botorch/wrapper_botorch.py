@@ -315,6 +315,8 @@ class Botorch(AbstractPlanner):
                 )
 
             # project the sample back to Olympus format
+            print(self.has_descriptors)
+            print(choices_feat)
             sample = project_to_olymp(
                 results_np,
                 self.param_space,

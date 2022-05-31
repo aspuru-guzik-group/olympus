@@ -10,7 +10,7 @@ from dragonfly.exd.experiment_caller import (
     EuclideanFunctionCaller,
 )
 from dragonfly.opt import gp_bandit
-from dragonfly_utils import infer_problem_type
+from .dragonfly_utils import infer_problem_type
 
 from olympus.objects import ParameterVector
 from olympus.planners import AbstractPlanner
