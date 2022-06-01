@@ -75,8 +75,8 @@ for num_repeat in range(missing_repeats):
             kind='Chimera', 
             value_space=dataset.value_space,
             goals=['min', 'min', 'min'],
-            tolerances=[0.5, 0.5, 0.5],
-            absolutes=[False, False, False]
+            tolerances=[25., 2.04, 0.0],
+            absolutes=[True, True, False]
         )
 
         evaluator = Evaluator(
