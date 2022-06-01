@@ -21,6 +21,7 @@ class Parego(AbstractScalarizer):
         sum_theta = np.sum(theta)
         theta = theta / sum_theta
 
+        objectives = [obj if self.goals[idx] == 'min' else -obj for idx, obj in enumerate(objectives)]
         norm_objectives = self.normalize(objectives)
 
         theta_f = theta * norm_objectives
@@ -28,7 +29,11 @@ class Parego(AbstractScalarizer):
         rho_sum_theta_f = self.rho * np.sum(theta_f, axis=1)
         merit = max_k + rho_sum_theta_f
 
-        return merit
+        if merit.shape[0] > 1:
+            # normalize the merit (best value is 0., worst is 1.)
+            merit = self.normalize(merit.reshape(-1, 1))
+
+        return np.squeeze(merit)
 
     @staticmethod
     def normalize(vector):
