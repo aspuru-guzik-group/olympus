@@ -26,7 +26,7 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-conda activate feas
+conda activate olympus
 
 date >> olympus.log
 echo "" >> olympus.log
