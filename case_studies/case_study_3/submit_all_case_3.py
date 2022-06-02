@@ -3,9 +3,9 @@
 import os, sys
 import time
 
-planners = ['RandomSearch', 'Hyperopt', 'Gpyopt', 'Gryffin', 'Dragonfly', 'Botorch', 'Hebo']
+planners = ['RandomSearch', 'Hyperopt', 'Gpyopt', 'Gryffin', 'Botorch', 'Hebo'] # 'Dragonfly'
 
-scalarizers = ['Chimera', 'WeightedSum', 'Parego']
+scalarizers = ['Parego']#['Chimera'] #'WeightedSum', 'Parego']
 
 cwd = os.getcwd()
 
