@@ -18,12 +18,12 @@ class WeightedSum(AbstractScalarizer):
         # normalize the weight values such that their magnitudes
         # sum to 1
         self.norm_weights = self.softmax(self.weights)
-        self.norm_weights = [
-            weight if self.goals[idx] == "min" else -weight
-            for idx, weight in enumerate(self.norm_weights)
-        ]
 
     def scalarize(self, objectives):
+
+        signs = [1 if self.goals[idx]=='min' else -1 for idx in range(len(self.value_space))]
+        objectives = objectives*signs
+
         norm_objectives = self.normalize(objectives)
         merit = np.sum(norm_objectives * self.norm_weights, axis=1)
         # final normalization
