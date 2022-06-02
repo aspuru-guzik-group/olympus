@@ -21,7 +21,7 @@ class Parego(AbstractScalarizer):
         sum_theta = np.sum(theta)
         theta = theta / sum_theta
 
-        signs = np.array([1 if self.goals[idx]=='min' else -1 for idx in range(objectives.shape[1])])
+        signs = [1 if self.goals[idx]=='min' else -1 for idx in range(len(self.value_space))]
         objectives = objectives*signs
         norm_objectives = self.normalize(objectives)
 
