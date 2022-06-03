@@ -35,12 +35,13 @@ for num_repeat in range(missing_repeats):
     print(f'\nTESTING {planner_name} ON {dataset_name} REPEAT {num_repeat} ...\n')
     
     dataset = Dataset(kind=dataset_name)
-    planner = Planner(kind=planner_name)
+    planner = Planner(kind=planner_name, goal='maximize')
     planner.set_param_space(dataset.param_space)
     
     campaign = Campaign()
     campaign.set_param_space(dataset.param_space)
     campaign.set_value_space(dataset.value_space)
+    campaign.set_emulator_specs(dataset)
     
     evaluator = Evaluator(
         planner=planner, 

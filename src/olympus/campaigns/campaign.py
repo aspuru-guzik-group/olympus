@@ -211,6 +211,11 @@ class Campaign(Object):
             self.set_emulator_type("numeric")
             self.set_dataset_kind(emulator.kind)
             self.set_measurement_name(emulator.measurement_name)
+            # TODO: this is a messy hack
+            if isinstance(emulator.goal, str):
+                self.set_goal(emulator.goal)
+            else:
+                pass
             # self.set_model_kind(emulator.model.kind)
         elif isinstance(emulator, AbstractSurface):
             self.set_emulator_type("analytic")
@@ -218,6 +223,8 @@ class Campaign(Object):
 
         self.set_param_space(emulator.param_space)
         self.set_value_space(emulator.value_space)
+
+
 
     # def set_surface_specs(self, surface):
     # 	self.set_accepts('array')

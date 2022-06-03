@@ -22,6 +22,7 @@ from gpytorch.models import ExactGP
 
 from olympus.objects import ParameterVector
 from olympus.planners import AbstractPlanner
+from olympus import Logger
 
 from .botorch_utils import (  # TODO: sync up these normalize/standardize functions with the; data transformation within Olympus
     cat_param_to_feat,
@@ -82,6 +83,7 @@ class Botorch(AbstractPlanner):
     def __init__(
         self,
         goal="minimize",
+        use_descriptors=False,
         batch_size=1,
         random_seed=None,
         num_init_design=5,
@@ -117,6 +119,14 @@ class Botorch(AbstractPlanner):
         else:
             self.has_descriptors = False
 
+        # final check: if the user has overwritten the ability to use descriptors, then
+        # we set self.has_descriptors to False
+        if not self.use_descriptors and self.has_descriptors:
+            message = 'Current dataset has descriptors, but user has overidden their use'
+            Logger.log(message, 'WARNING')
+            self.has_descriptors = False
+
+
     def build_train_data(self):
         """build the training dataset at each iteration"""
         target_params = []
@@ -130,7 +140,7 @@ class Botorch(AbstractPlanner):
                 zip(self.param_space, targ_param)
             ):
                 if self.param_space[param_ix].type == "categorical":
-                    feat = cat_param_to_feat(space_true, element)
+                    feat = cat_param_to_feat(space_true, element, self.use_descriptors)
                     sample_x.extend(feat)
                 else:
                     sample_x.append(float(element))
@@ -193,11 +203,9 @@ class Botorch(AbstractPlanner):
             if param.type in ["continuous", "discrete"]:
                 dim += 1
             elif param.type == "categorical":
-                print("here")
                 num_opts = len(param.options)
                 cat_dims.extend(np.arange(dim, dim + num_opts))
                 dim += num_opts
-
         return cat_dims
 
     def _ask(self):
@@ -205,7 +213,7 @@ class Botorch(AbstractPlanner):
 
         if len(self._values) < self.num_init_design:
             # sample using initial design strategy
-            sample, raw_sample = propose_randomly(1, self.param_space)
+            sample, raw_sample = propose_randomly(1, self.param_space, self.use_descriptors)
             return_params = ParameterVector().from_array(
                 raw_sample[0], self.param_space
             )
@@ -278,7 +286,7 @@ class Botorch(AbstractPlanner):
                 # need to generate fully cartesian product space of possible
                 # choices
                 choices_feat, choices_cat = create_available_options(
-                    self.param_space, self._params
+                    self.param_space, self._params, self.use_descriptors
                 )
 
                 if self.has_descriptors:
@@ -315,8 +323,6 @@ class Botorch(AbstractPlanner):
                 )
 
             # project the sample back to Olympus format
-            print(self.has_descriptors)
-            print(choices_feat)
             sample = project_to_olymp(
                 results_np,
                 self.param_space,

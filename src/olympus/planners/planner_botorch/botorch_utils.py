@@ -25,7 +25,7 @@ def infer_problem_type(param_space):
     return problem_type
 
 
-def create_available_options(param_space, params):
+def create_available_options(param_space, params, use_descriptors):
     """build cartesian product space of options, then remove options
     which have already been measured. Returns an (num_options, num_dims)
     torch tensor with all possible options
@@ -48,7 +48,7 @@ def create_available_options(param_space, params):
             # convert to ohe and add to currently available options
             ohe = []
             for val, obj in zip(elem, param_space):
-                ohe.append(cat_param_to_feat(obj, val))
+                ohe.append(cat_param_to_feat(obj, val, use_descriptors))
             current_avail_feat.append(np.concatenate(ohe))
             current_avail_cat.append(elem)
     current_avail_feat = torch.tensor(np.array(current_avail_feat))
@@ -56,28 +56,29 @@ def create_available_options(param_space, params):
     return current_avail_feat, current_avail_cat
 
 
-def cat_param_to_feat(param, val):
+def cat_param_to_feat(param, val, use_descriptors):
     """convert the option selection of a categorical variable (usually encoded
     as a string) to a machine readable feature vector
 
     Args:
             param (object): the categorical olympus parameter
             val (str): the value of the chosen categorical option
+            use_descriptors (bool): use the descriptors in the representation
     """
     # get the index of the selected value amongst the options
     arg_val = param.options.index(val)
-    if np.all([d == None for d in param.descriptors]):
+    if np.all([d == None for d in param.descriptors]) or not use_descriptors:
         # no provided descriptors, resort to one-hot encoding
         # feat = np.array([arg_val])
         feat = np.zeros(len(param.options))
         feat[arg_val] += 1.0
     else:
-        # we have descriptors, use them as the features
+        # we have descriptors, the user wants to use them as the features
         feat = param.descriptors[arg_val]
     return feat
 
 
-def propose_randomly(num_proposals, param_space):
+def propose_randomly(num_proposals, param_space, use_descriptors):
     """Randomly generate num_proposals proposals. Returns the numerical
     representation of the proposals as well as the string based representation
     for the categorical variables
@@ -106,7 +107,7 @@ def propose_randomly(num_proposals, param_space):
             elif param.type == "categorical":
                 options = param.options
                 p = np.random.choice(options, size=None, replace=False)
-                feat = cat_param_to_feat(param, p)
+                feat = cat_param_to_feat(param, p, use_descriptors)
                 sample.extend(feat)  # extend because feat is vector
                 raw_sample.append(p)
         proposals.append(sample)
