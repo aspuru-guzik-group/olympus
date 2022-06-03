@@ -14,6 +14,7 @@ class Gryffin(AbstractPlanner):
         self,
         goal="minimize",
         num_cpus=4,
+        use_descriptors=True,
         auto_desc_gen=False,
         batches=1,
         sampling_strategies=[-1, 1],
@@ -115,10 +116,17 @@ class Gryffin(AbstractPlanner):
         # {'A':None, 'B':None}`` or ``{'A':[], 'B':[]}
         for param in params:
             if param["type"] == "categorical":
-                category_details = {
-                    str(param["options"][ix]): param["descriptors"][ix]
-                    for ix in range(len(param["options"]))
-                }
+                if self.use_descriptors:
+                    # user elects to use descriptors
+                    category_details = {
+                        str(param["options"][ix]): param["descriptors"][ix]
+                        for ix in range(len(param["options"]))
+                    }
+                else:
+                    # user overides the use of descriptors
+                    category_details = {
+                        str(param["options"][ix]): None for ix in range(len(param["options"]))
+                    }
                 param["category_details"] = category_details
                 del param["options"]
                 del param["descriptors"]

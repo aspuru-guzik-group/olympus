@@ -12,6 +12,8 @@ from olympus.campaigns import Campaign
 from olympus.planners import Planner
 from olympus.scalarizers import Scalarizer
 
+from olympus.planners.planner_gryffin import Gryffin
+
 
 sys.path.append('../../../')
 from utils import save_pkl_file, load_data_from_pkl_and_continue
@@ -64,7 +66,10 @@ for num_repeat in range(missing_repeats):
         # fully categorical, lookup table
         dataset = Dataset(kind=dataset_name)
 
-        planner = Planner(kind=planner_name)
+        if planner_name == 'Gryffin':
+            planner = Gryffin(use_descriptors=False)
+        else:
+            planner = Planner(kind=planner_name)
         planner.set_param_space(dataset.param_space)
 
         campaign = Campaign()
@@ -92,8 +97,5 @@ for num_repeat in range(missing_repeats):
 
     save_pkl_file(data_all_repeats)
 
-
-
-    
     print('Done!')
 

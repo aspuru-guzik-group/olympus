@@ -41,8 +41,8 @@ class Hypervolume(AbstractScalarizer):
 
 	@staticmethod
 	def normalize(vector):
-		min_ = np.amin(vector)
-		max_ = np.amax(vector)
+		min_ = np.amin(vector, axis=0)
+		max_ = np.amax(vector, axis=0)
 		ixs = np.where(np.abs(max_ - min_) < 1e-10)[0]
 		if not ixs.size == 0:
 			max_[ixs] = np.ones_like(ixs)

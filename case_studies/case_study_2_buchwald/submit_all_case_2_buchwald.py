@@ -3,7 +3,7 @@
 import os, sys
 import time
 
-planners = ['RandomSearch', 'Hyperopt', 'Gpyopt', 'Gryffin', 'Dragonfly', 'Botorch', 'Hebo']
+planners = ['RandomSearch', 'Gpyopt', 'Gryffin', 'Botorch']
 
 datasets = ['buchwald_a','buchwald_b','buchwald_c','buchwald_d','buchwald_e']
 
