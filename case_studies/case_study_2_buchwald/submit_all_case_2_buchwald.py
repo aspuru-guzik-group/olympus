@@ -16,6 +16,6 @@ for planner in planners:
 		os.system('pwd')
 		# submit job
 		os.system('sbatch submit.sh')
-		time.sleep(2)
+		time.sleep(5)
 
 		os.chdir(cwd)

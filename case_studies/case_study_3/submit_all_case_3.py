@@ -18,8 +18,8 @@ for planner in planners:
 			os.chdir(f'{planner}/{dataset}/{scalarizer}')
 			os.system('pwd')
 			# submit job
-			os.system('pwd')
-			#os.system('sbatch submit.sh')
-			#time.sleep(2)
+			#os.system('pwd')
+			os.system('sbatch submit.sh')
+			time.sleep(5)
 
 			os.chdir(cwd)
