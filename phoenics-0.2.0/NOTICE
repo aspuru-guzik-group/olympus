@@ -1,0 +1,18 @@
+
+
+Phoenics Bayesian optimizer
+Copyright 2018, Harvard University
+Copyright 2019, ChemOS Inc.
+
+This product includes software developed at ChemOS Inc. but is based on 
+certain software code developed at the Department of Chemistry and 
+Chemical Biology at Harvard University by the founders of ChemOS Inc.
+
+The product includes software code developed at the Department of 
+Chemistry and Chemical Biology at Harvard University. All of such code 
+developed at Harvard University ("Harvard Code") was released under the 
+Apache 2.0 license by Harvard University 
+(see https://github.com/aspuru-guzik-group/phoenics).
+ChemOS Inc. has rewritten much of the Harvard Code, has improved it and 
+has added new functionalities.
+

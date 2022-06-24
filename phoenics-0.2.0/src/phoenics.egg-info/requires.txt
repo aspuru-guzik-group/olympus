@@ -1,0 +1,5 @@
+numpy
+pyyaml>=5.1
+sqlalchemy>=1.3
+watchdog>=0.9
+wheel>=0.33

@@ -1,0 +1,5 @@
+graft src
+include README.md
+include LICENSE
+include NOTICE
+recursive-include /src/phoenics/BayesianNetwork *

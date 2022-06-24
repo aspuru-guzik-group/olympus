@@ -1,0 +1,15 @@
+phoenics
+phoenics/Acquisition
+phoenics/Acquisition/NumpyOptimizers
+phoenics/BayesianNetwork
+phoenics/BayesianNetwork/EdwardInterface
+phoenics/BayesianNetwork/TfprobInterface
+phoenics/DatabaseHandler
+phoenics/DatabaseHandler/JsonWriters
+phoenics/DatabaseHandler/PandasWriters
+phoenics/DatabaseHandler/PickleWriters
+phoenics/DatabaseHandler/SqliteInterface
+phoenics/ObservationProcessor
+phoenics/RandomSampler
+phoenics/SampleSelector
+phoenics/utilities

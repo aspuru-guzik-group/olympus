@@ -1,0 +1,7 @@
+silence-tensorflow
+pyDOE
+sobol_seq
+scikit-learn
+./phoenics-0.2.0
+olymp[all]
+streamlit
