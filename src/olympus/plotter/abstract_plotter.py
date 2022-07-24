@@ -11,6 +11,8 @@ from olympus.datasets import Dataset
 from olympus.emulators import Emulator
 from olympus.surfaces import Surface
 
+from olympus.utils.misc import get_hypervolume, get_pareto
+
 
 class AbstractPlotter(Object):
     @abc.abstractmethod
@@ -87,6 +89,31 @@ class AbstractPlotter(Object):
         is_cumulative,
         plot_file_name,
         *args,
+        **kwargs,
+    ):
+        pass
+
+
+    @abc.abstractmethod
+    def _plot_pareto_front(
+        self, 
+        emulators,
+        planners, 
+        measurements, 
+        plot_file_name,
+        *args, 
+        **kwargs,
+    ):
+        pass
+
+    @abc.abstractmethod
+    def _plot_hypervolume(
+        self,
+        emulators, 
+        planners, 
+        measurements,
+        plot_file_name, 
+        *args, 
         **kwargs,
     ):
         pass
@@ -224,6 +251,26 @@ class AbstractPlotter(Object):
                 is_cumulative,
                 plot_file_name,
                 *args,
+                **kwargs,
+            )
+        elif kind == "pareto_front":
+            emulators, planners, measurements = self._get_pareto_front(campaigns)
+            self._plot_pareto_front(
+                emulators,
+                planners,
+                measurements,
+                plot_file_name,
+                *args, 
+                **kwargs,
+            )
+        elif kind == 'hypervolume':
+            emulators, planners, measurements = self._get_hypervolume(campaigns)
+            self._plot_hypervolume(
+                emulators,
+                planners, 
+                measurements,
+                plot_file_name,
+                *args, 
                 **kwargs,
             )
         else:
@@ -430,7 +477,7 @@ class AbstractPlotter(Object):
 
     def _get_traces_fraction_top_k(
         self, campaigns, threshold, is_percent=False
-    ):
+        ):
 
         # quickly validate the threshold argument
         if not (isinstance(threshold, float) or isinstance(threshold, int)):
@@ -766,6 +813,146 @@ class AbstractPlotter(Object):
             pass
 
         return emulators, planners, measurements
+
+    def _get_pareto_front(self, campaigns):
+        emulators = []
+        planners = []
+        measurements = {}
+
+        # check that the dimensionality of the value_space is 2 (we 
+        # currently only support 2 objectives for this plot )
+        if not len(campaigns[0].value_space)==2:
+            message = 'Olympus currently supports Pareto front plots for 2 objectives'
+            Logger.log(message, 'FATAL')
+
+
+
+        for campaign in campaigns:
+            # get the global optimum objective value for the campaign
+            goal = campaign.goal
+
+            # parse emulator type
+            if (
+                campaign.emulator_type == "n/a"
+            ):  # this means campaign never got an Emulator or Surface
+                continue
+            emulator_type = campaign.get_emulator_type()
+            if emulator_type == "numeric":
+                # neural network based emulator or lookup table for fully categorical
+                camp_emulator = (
+                    f"{campaign.model_kind}_{campaign.dataset_kind}"
+                )
+            elif emulator_type == "analytic":
+                # analytic surface
+                camp_emulator = f"analytic_{campaign.surface_kind}"
+            # if emulator is None:
+            emulator = camp_emulator
+            if camp_emulator != emulator:
+                continue
+
+            # parse planner information
+            planner = campaign.get_planner_kind()
+            if camp_emulator not in emulators:
+                emulators.append(camp_emulator)
+                measurements[camp_emulator] = {}
+            if planner not in planners:
+                planners.append(planner)
+                measurements[camp_emulator][planner] = {
+                    "planner": [],
+                    "vals": [],
+                    "pareto_front": [],
+                }
+
+            values =  campaign.observations.get_values(as_array=True, opposite=True)
+            pareto_front = get_pareto(values)
+
+            measurements[camp_emulator][planner]["vals"].append(values)
+            measurements[camp_emulator][planner]["pareto_front"].append(pareto_front)
+            measurements[camp_emulator][planner]["planner"].append(planner)
+
+        for emulator in emulators:
+            for planner in planners:
+                try:
+                    # measurements[emulator][planner]['idxs'] = np.array(measurements[emulator][planner]['idxs'])
+                    measurements[emulator][planner]["vals"] = np.array(
+                        measurements[emulator][planner]["vals"]
+                    )
+                    measurements[emulator][planner]["pareto_front"] = np.array(
+                        measurements[emulator][planner]["pareto_front"]
+                    )
+                except KeyError:
+                    continue
+            pass
+
+        return emulators, planners, measurements
+
+    def _get_hypervolume(self, campaigns):
+
+        emulators = []
+        planners = []
+        measurements = {}
+
+        for campaign in campaigns:
+            # get the global optimum objective value for the campaign
+            goal = campaign.goal
+
+            # parse emulator type
+            if (
+                campaign.emulator_type == "n/a"
+            ):  # this means campaign never got an Emulator or Surface
+                continue
+            emulator_type = campaign.get_emulator_type()
+            if emulator_type == "numeric":
+                # neural network based emulator or lookup table for fully categorical
+                camp_emulator = (
+                    f"{campaign.model_kind}_{campaign.dataset_kind}"
+                )
+            elif emulator_type == "analytic":
+                # analytic surface
+                camp_emulator = f"analytic_{campaign.surface_kind}"
+            # if emulator is None:
+            emulator = camp_emulator
+            if camp_emulator != emulator:
+                continue
+
+            # parse planner information
+            planner = campaign.get_planner_kind()
+            if camp_emulator not in emulators:
+                emulators.append(camp_emulator)
+                measurements[camp_emulator] = {}
+            if planner not in planners:
+                planners.append(planner)
+                measurements[camp_emulator][planner] = {
+                    "planner": [],
+                    "vals": [],
+                }
+
+            values =  campaign.observations.get_values(as_array=True, opposite=True)
+            w_ref = np.amax(values, axis=0)
+
+            hypervolume = get_hypervolume(values, w_ref)
+
+            measurements[camp_emulator][planner]["vals"].append(hypervolume)
+            measurements[camp_emulator][planner]["planner"].append(planner)
+
+        for emulator in emulators:
+            for planner in planners:
+                try:
+                    # measurements[emulator][planner]['idxs'] = np.array(measurements[emulator][planner]['idxs'])
+                    measurements[emulator][planner]["vals"] = np.array(
+                        measurements[emulator][planner]["vals"]
+                    )
+                except KeyError:
+                    continue
+            pass
+
+        return emulators, planners, measurements
+
+
+
+    #----------------
+    # helper methods
+    #----------------
 
     def _validate_plot_kind(self, problem_type, kind):
         # check to see if the kind of plot is within the supported plot kinds

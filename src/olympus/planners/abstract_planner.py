@@ -6,6 +6,7 @@ import numpy as np
 
 from olympus import Logger
 from olympus.campaigns import Campaign, Observations
+from olympus.objects import ParameterVector
 from olympus.objects import ABCMeta, Config, Object, abstract_attribute
 from olympus.scalarizers import Scalarizer
 
@@ -98,7 +99,12 @@ class AbstractPlanner(Object, metaclass=ABCMeta):
         param_vector = self._ask()
 
         # check that the parameters suggested are within the bounds of our param_space
-        self._validate_paramvector(param_vector)
+        if isinstance(param_vector, list):
+            # batch of recommendations
+            for param_vec in param_vector:
+                self._validate_paramvector(param_vec)
+        elif isinstance(param_vector, ParameterVector):
+            self._validate_paramvector(param_vector)
 
         if return_as is not None:
             try:

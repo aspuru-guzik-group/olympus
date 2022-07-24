@@ -1,0 +1,18 @@
+{
+	"constraints": {
+			"parameters": "none",
+			"measurements": "positive"
+		},
+	"parameters": [
+			{"name": "drug_input", "type": "continuous", "low": 6.0,  "high": 48.0},
+			{"name": "solid_lipid", "type": "categorical", "options": ["Stearic_acid", "Compritol_888", "Glyceryl_monostearate"], "descriptors": []},
+			{"name": "solid_lipid_input", "type": "continuous", "low": 72.0,  "high": 120.0},
+			{"name": "liquid_lipid_input", "type": "continuous", "low": 0.0,  "high": 48.0},
+			{"name": "surfractant_input", "type": "continuous", "low": 0.0,  "high": 0.01}
+		],
+	"measurements": [
+		{"name": "particle_diameter", "type": "continuous"},
+		{"name": "drug_loading", "type": "continuous"}
+	],
+    "default_goal": ["minimize", "maximize"]
+}
