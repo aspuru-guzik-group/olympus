@@ -12,6 +12,12 @@
 *.db
 *.scratch/
 
+__dev_/lnp_emulator.ipynb
+olympus/src/olympus/datasets/dataset_lnp/
+olympus/src/olympus/emulators/emulator_lnp_BayesNeuralNet/
+
+
+
 ############
 ### LOGS ###
 ############

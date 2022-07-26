@@ -88,7 +88,10 @@ class RandomSearch(AbstractPlanner):
                 raise NotImplementedError
             vals.append(val)
 
-        return ParameterVector().from_list(vals, self.param_space)
+        return [
+            ParameterVector().from_list(vals, self.param_space),
+            ParameterVector().from_list(vals, self.param_space),
+        ]
 
 
 # DEBUG

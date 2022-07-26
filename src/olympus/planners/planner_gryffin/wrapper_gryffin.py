@@ -144,9 +144,10 @@ class Gryffin(AbstractPlanner):
                 "verbosity": self.verbosity,
             },
             "parameters": params,
-            "objectives": [{"name": "obj", "goal": self.goal[:3]}],
+            "objectives": [{"name": "obj", "goal": "min"}], # always minimization, 
         }
         self.gryffin = ActualGryffin(config_dict=config)
+
 
     def _ask(self):
 
