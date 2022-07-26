@@ -8,6 +8,7 @@ import numpy as np
 
 from olympus import Logger
 from olympus.objects import ParameterVector
+from olympus.campaigns import Observations
 from olympus.planners.abstract_planner import AbstractPlanner
 
 # ===============================================================================
@@ -27,10 +28,14 @@ class RandomSearch(AbstractPlanner):
         self.param_space = param_space
         self._treat_param_types()
 
-    def _tell(self, observations):
+    def _tell(self, observations=Observations(), iteration=None):
         # register iteration number
         # TODO: this will only work for a batch size of 1...
-        self.iteration = len(observations.get_values(as_array=True))
+        if not iteration:   
+            # TODO: this will only work for a batch size of 1...
+            self.iteration = len(observations.get_values(as_array=True))
+        elif isinstance(iteration, int):
+            self.iteration = iteration
         # random search is not informed by previous observations
 
     def _treat_param_types(self):
@@ -60,6 +65,7 @@ class RandomSearch(AbstractPlanner):
             self.num_opts = len(self.opts)
 
     def _ask(self):
+
         vals = []
         if self.has_cat_discr:
             # sample categorical and discrete parameters together

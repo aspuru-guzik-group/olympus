@@ -95,15 +95,19 @@ class AbstractPlanner(Object, metaclass=ABCMeta):
             ParameterVector: newly generated parameters
         """
 
-        self.num_generated += 1
         param_vector = self._ask()
+
+        print('param_vector : ', param_vector)
+        print('type param_vector : ', type(param_vector))
 
         # check that the parameters suggested are within the bounds of our param_space
         if isinstance(param_vector, list):
+            self.num_generated += len(param_vector)
             # batch of recommendations
             for param_vec in param_vector:
                 self._validate_paramvector(param_vec)
         elif isinstance(param_vector, ParameterVector):
+            self.num_generated += 1
             self._validate_paramvector(param_vector)
 
         if return_as is not None:
