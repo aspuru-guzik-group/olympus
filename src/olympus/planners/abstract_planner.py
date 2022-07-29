@@ -97,9 +97,6 @@ class AbstractPlanner(Object, metaclass=ABCMeta):
 
         param_vector = self._ask()
 
-        print('param_vector : ', param_vector)
-        print('type param_vector : ', type(param_vector))
-
         # check that the parameters suggested are within the bounds of our param_space
         if isinstance(param_vector, list):
             self.num_generated += len(param_vector)
@@ -120,6 +117,7 @@ class AbstractPlanner(Object, metaclass=ABCMeta):
                     'could not return param_vector as "{}"'.format(return_as),
                     "ERROR",
                 )
+        print('param vector : ', param_vector)
         return param_vector
 
     def tell(self, observations=Observations()):
