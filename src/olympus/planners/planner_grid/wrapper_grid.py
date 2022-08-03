@@ -173,18 +173,19 @@ class Grid(AbstractPlanner):
 
         param = self.samples.pop(0)
 
-        olymp_param = []
+        olymp_param = {}
         for param_ix, suggestion in enumerate(param):
-            if self.param_space[param_ix] in ["continuous", "discrete"]:
-                olymp_param.append(np.float(suggestion))
+            if self.param_space[param_ix].type in ["continuous", "discrete"]:
+                olymp_param[self.param_space[param_ix].name] = float(suggestion)
             else:
-                olymp_param.append(suggestion)
+                olymp_param[self.param_space[param_ix].name] = suggestion
+
 
         if len(self.samples) == 0:
             message = "Last parameter being provided - there will not be any more available samples in the grid."
             Logger.log(message, "INFO")
 
-        return ParameterVector(array=param, param_space=self.param_space)
+        return [ParameterVector().from_dict(olymp_param, self.param_space)]
 
 
 # DEBUG:

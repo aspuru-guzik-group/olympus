@@ -1,0 +1,19 @@
+{
+    "constraints": {
+        "parameters": "none",
+        "measurements": "positive"
+    },
+    "parameters": [
+            {"name": "src_flow", "type": "continuous", "low": 0.1, "high": 125},
+            {"name": "dst_flow", "type": "continuous", "low": 0.1, "high": 125},
+            {"name": "airgap", "type": "continuous", "low": 0.01, "high": 0.5},
+            {"name": "post_airgap", "type": "continuous", "low": 0.01, "high": 0.5},
+            {"name": "src_equib", "type": "continuous", "low": 0.0, "high": 10},
+            {"name": "dst_equib", "type": "continuous", "low": 0.0, "high": 10}
+    ],
+    "measurements": [
+        {"name": "error", "type": "continuous"},
+        {"name": "stdev", "type": "continuous"}
+    ],
+    "default_goal": ["minimize", "minimize"]
+}
