@@ -108,12 +108,12 @@ for dataset_name in dataset_names:
 
 	best_emulator.save(f'emulator_{current_dataset}_BayesNeuralNet')
 
-        best_scores[current_dataset] = {
-                'scores':all_cv_scores,
-                'emulators': all_emulators,
-                'params': all_params,
-                'losses': all_losses,
-        }
+	best_scores[current_dataset] = {
+				'scores':all_cv_scores,
+				'emulators': all_emulators,
+				'params': all_params,
+				'losses': all_losses,
+		}
 	pickle.dump(best_scores, open('best_scores.pkl', 'wb'))
 
 

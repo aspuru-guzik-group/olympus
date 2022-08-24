@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-#SBATCH -J cs_1
+#SBATCH -J cs1
 #SBATCH --ntasks=1
 #SBATCH --mem=4G
 #SBATCH --cpus-per-task 4
@@ -8,7 +8,7 @@
 #SBATCH --partition=cpu
 #SBATCH --qos=nopreemption
 #SBATCH --export=ALL
-#SBATCH --output=output.log
+#SBATCH --output=gryffin.log
 #SBATCH --gres=gpu:0
 
 # >>> conda initialize >>>
@@ -28,8 +28,8 @@ unset __conda_setup
 
 conda activate olympus
 
-date >> output.log
-echo "" >> output.log
+date >> olympus.log
+echo "" >> olympus.log
 python run.py
-echo "" >> output.log
-date >> output.log
+echo "" >> olympus.log
+date >> olympus.log
