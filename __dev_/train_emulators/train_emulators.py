@@ -16,48 +16,104 @@ from olympus.models import BayesNeuralNet
 from sklearn.metrics import r2_score, mean_squared_error
 
 
+search_space = {
+	'batch_size': hp.quniform('batch_size', 10, 50, 10),
+	'hidden_act': hp.choice('hidden_act', ['leaky_relu'] ),
+	'hidden_depth': hp.quniform('hidden_depth', 2, 5, 1),
+	'hidden_nodes': hp.quniform('hidden_nodes', 28, 68, 4),
+	'learning_rate': hp.uniform('learning_rate', 1e-5, 5e-3),
+	'reg': hp.uniform('reg', 0.001, 0.5)
+}
+int_params = ['batch_size', 'hidden_depth', 'hidden_nodes']
+
 
 
 def objective(params):
-    ''' average performance over cross-validation folds '''
-    # build emualtor
-    print('CURRENT DATASET : ', current_dataset)
-    # for param, val in params.items():
-    #     if param in int_params:
-    #         params[param] = int(val)
-    # model  = BayesNeuralNet(**params, out_act='linear')
-    # emulator = Emulator(
-    #     dataset='lnp', 
-    #     model=model,
-    #     feature_transform='standardize',
-    #     target_transform='normalize'
-    # )
+	# build emualtor
+	for param, val in params.items():
+		if param in int_params:
+			params[param] = int(val)
+	model  = BayesNeuralNet(**params, out_act=dataset_params[current_dataset]['out_act'])
+	emulator = Emulator(
+		dataset=current_dataset, 
+		model=model,
+		feature_transform=dataset_params[current_dataset]['feature_transform'],
+		target_transform=dataset_params[current_dataset]['target_transform']
+	)
 
-    # cv_scores = emulator.cross_validate()
-    # loss = np.mean(cv_scores['validate_rmsd'])
-    
-    # all_losses.append(loss)
-    # all_cv_scores.append(cv_scores)
-    # all_params.append(params)
-    # all_emulators.append(emulator)
-    
-    # return {'loss': loss, 'status': STATUS_OK}
-    return None
+	scores = emulator.train() 
+	loss = scores['test_rmsd']
+
+	all_losses.append(loss)
+	all_cv_scores.append(scores)
+	all_params.append(params)
+	all_emulators.append(emulator)
+	
+	return {'loss': loss, 'status': STATUS_OK}
 
 
 
 # datasets to emulate
 
 dataset_names = [
-	'oer_plate_a', 'oer_plate_b', 'oer_plate_c', 'oer_plate_d',
-	'p3ht', 'agnp', 'thin_films', 'crossed_barrel', 'autoam', 
+	'oer_plate_4098', 'oer_plate_3851', 'oer_plate_3860', 'oer_plate_3496',
+	'p3ht', 'agnp', 
+	'thin_film', 'crossed_barrel', 'autoam', 
 	'suzuki_i', 'suzuki_ii', 'suzuki_iii', 'suzuki_iv',
 ]
 
-dataset_params = { }
+dataset_params = { 
+		'oer_plate_4098': {'out_act': 'sigmoid', 'feature_transform': 'identity', 'target_transform': 'normalize'},
+		'oer_plate_3851': {'out_act': 'sigmoid', 'feature_transform': 'identity', 'target_transform': 'normalize'},
+		'oer_plate_3860': {'out_act': 'sigmoid', 'feature_transform': 'identity', 'target_transform': 'normalize'},
+		'oer_plate_3496': {'out_act': 'sigmoid', 'feature_transform': 'identity', 'target_transform': 'normalize'},
+		#
+		'p3ht': {'out_act': 'relu', 'feature_transform': 'standardize', 'target_transform': 'normalize'},
+		'thin_film': {'out_act': 'relu', 'feature_transform': 'identity', 'target_transform': 'normalize'},
+		'crossed_barrel': {'out_act': 'relu', 'feature_transform': 'standardize', 'target_transform': 'normalize'},
+		'autoam': {'out_act': 'sigmoid', 'feature_transform': 'standardize', 'target_transform': 'normalize'},
+		'agnp': {'out_act': 'sigmoid', 'feature_transform': 'standardize', 'target_transform': 'normalize'},
+		#
+		'suzuki_i': {'out_act': 'sigmoid', 'feature_transform': 'standardize', 'target_transform': 'normalize'},
+		'suzuki_ii': {'out_act': 'sigmoid', 'feature_transform': 'standardize', 'target_transform': 'normalize'},
+		'suzuki_iii': {'out_act': 'sigmoid', 'feature_transform': 'standardize', 'target_transform': 'normalize'},
+		'suzuki_iv': {'out_act': 'sigmoid', 'feature_transform': 'standardize', 'target_transform': 'normalize'},
+}
+
+
+best_scores = {}
 
 for dataset_name in dataset_names:
 
 	current_dataset = dataset_name
-	objective(params=None)
+	print('CURRENT DATASET : ', current_dataset)
+
+	all_emulators = []
+	all_losses = []
+	all_cv_scores = []
+	all_params = []
+
+	trials = Trials()
+
+	best = fmin(
+		fn=objective,
+		space=search_space, 
+		algo=tpe.suggest, 
+		max_evals=40,
+		trials=trials
+	)
+
+	best_idx = np.argmin(all_losses)
+	best_emulator = all_emulators[best_idx]
+
+	best_emulator.save(f'emulator_{current_dataset}_BayesNeuralNet')
+
+	best_scores[current_dataset] = all_cv_scores[best_idx]
+	pickle.dump(best_scores, open('best_scores.pkl', 'wb'))
+
+
+
+
+
+	
 
