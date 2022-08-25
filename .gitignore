@@ -27,7 +27,7 @@ olympus/src/olympus/emulators/emulator_lnp_BayesNeuralNet/
 #############
 # DEBUGGING #
 #############
-__DEV_/
+# __DEV_/
 rileys_tests/
 
 # Byte-compiled / optimized / DLL files

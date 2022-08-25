@@ -29,7 +29,8 @@ class MultViennet(AbstractSurface):
 
     def _run(self, params):
         params = np.array(params)
-        obj_0 = 0.5 * (params[0] ** 2 + params[1] ** 2) + np.sin(
+        params = (params * (3+3)) - 3
+        obj_0 = 0.5 * (params[0]** 2 + params[1]** 2) + np.sin(
             params[0] ** 2 + params[1] ** 2
         )
         obj_1 = (
