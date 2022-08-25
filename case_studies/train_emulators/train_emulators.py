@@ -44,10 +44,12 @@ def objective(params):
 	scores = emulator.train() 
 	loss = scores['test_rmsd']
 
+
 	all_losses.append(loss)
 	all_cv_scores.append(scores)
 	all_params.append(params)
 	all_emulators.append(emulator)
+	all_test_indices.append(emulator.dataset.test_indices)
 	
 	return {'loss': loss, 'status': STATUS_OK}
 
@@ -92,6 +94,8 @@ for dataset_name in dataset_names:
 	all_losses = []
 	all_cv_scores = []
 	all_params = []
+	all_test_indices = []
+
 
 	trials = Trials()
 
@@ -99,7 +103,7 @@ for dataset_name in dataset_names:
 		fn=objective,
 		space=search_space, 
 		algo=tpe.suggest, 
-		max_evals=50,
+		max_evals=3,
 		trials=trials
 	)
 
@@ -113,6 +117,7 @@ for dataset_name in dataset_names:
 				#'emulators': all_emulators,
 				'params': all_params,
 				'losses': all_losses,
+				'all_test_indices': all_test_indices,
 		}
 	pickle.dump(best_scores, open('best_scores.pkl', 'wb'))
 
