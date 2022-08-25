@@ -17,8 +17,8 @@ olymp.benchmark(
         dataset='suzuki_edbo',
         planners=planners,
         database=database,
-        num_ind_runs=2,
-        num_iter=10,
+        num_ind_runs=40,
+        num_iter=200,
 )
 
 

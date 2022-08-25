@@ -99,7 +99,7 @@ for dataset_name in dataset_names:
 		fn=objective,
 		space=search_space, 
 		algo=tpe.suggest, 
-		max_evals=40,
+		max_evals=50,
 		trials=trials
 	)
 
@@ -110,7 +110,7 @@ for dataset_name in dataset_names:
 
 	best_scores[current_dataset] = {
 				'scores':all_cv_scores,
-				'emulators': all_emulators,
+				#'emulators': all_emulators,
 				'params': all_params,
 				'losses': all_losses,
 		}
