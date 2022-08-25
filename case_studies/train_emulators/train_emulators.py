@@ -103,7 +103,7 @@ for dataset_name in dataset_names:
 		fn=objective,
 		space=search_space, 
 		algo=tpe.suggest, 
-		max_evals=3,
+		max_evals=40,
 		trials=trials
 	)
 
