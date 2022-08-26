@@ -28,7 +28,7 @@ class PlotterSeaborn(AbstractPlotter):
         show=False,
         *args,
         **kwargs,
-    ):
+        ):
 
         self._set_color_palette()
         num_plots = len(emulators)
@@ -87,7 +87,7 @@ class PlotterSeaborn(AbstractPlotter):
         show=False,
         *args,
         **kwargs,
-    ):
+        ):
 
         self._set_color_palette()
         num_plots = len(emulators)
@@ -147,7 +147,7 @@ class PlotterSeaborn(AbstractPlotter):
         show=False,
         *args,
         **kwargs,
-    ):
+        ):
 
         self._set_color_palette()
         num_plots = len(emulators)
@@ -209,7 +209,7 @@ class PlotterSeaborn(AbstractPlotter):
         show=False,
         *args,
         **kwargs,
-    ):
+        ):
 
         self._set_color_palette()
         num_plots = len(emulators)
@@ -272,7 +272,7 @@ class PlotterSeaborn(AbstractPlotter):
         show=False,
         *args,
         **kwargs,
-    ):
+        ):
 
         self._set_color_palette()
         num_plots = len(emulators)
@@ -342,7 +342,7 @@ class PlotterSeaborn(AbstractPlotter):
         show=False,
         *args,
         **kwargs,
-    ):
+        ):
 
         self._set_color_palette()
         num_plots = len(emulators)
@@ -411,15 +411,90 @@ class PlotterSeaborn(AbstractPlotter):
         show=False,
         *args, 
         **kwargs,
-    ):
-        # self._set_color_palette()
-        # num_plots = len(planners)#print(planners)
+        ):
+        self._set_color_palette()
+        num_plots = 1
+        num_graphs = len(planners)
+        fig = plt.figure(figsize=(6, 5 * num_plots))
+        axs = []
+        for plot_index in range(num_plots):
+            ax = plt.subplot2grid((num_plots, 1), (plot_index, 0))
+            axs.append(ax)
 
-        # axs = []
-        # for plot_index in range(num_plots):
-        #     ax = plt.subplot2grid((num_plots, 1), (plot_index, 0))
-        #     axs.append(ax)
-        pass
+        run_ix = 1
+
+
+        for plot_index, emulator in enumerate(emulators):
+            ax = axs[plot_index]
+            for planner_ix, planner in enumerate(planners):
+                vals = measurements[emulator][planner]["vals"] = np.squeeze(
+                    measurements[emulator][planner]["vals"]
+                )
+                pareto_front = measurements[emulator][planner]["pareto_front"][run_ix]
+                pareto_front_sorted = sorted(
+                    [[pareto_front[i,0], pareto_front[i,1]] for i in range(len(pareto_front))], reverse=False,
+                )
+                pareto_front_sorted = np.array(pareto_front_sorted)
+
+
+
+                # scatter on all the measurements
+                ax.scatter(
+                    vals[run_ix, :, 0],
+                    vals[run_ix, :, 1],
+                    c=self.line_palette[planner_ix],
+                    s=20,
+                    alpha=0.8
+                )
+
+
+                # scatter on pareto front
+                ax.scatter(
+                    pareto_front_sorted[:, 0],
+                    pareto_front_sorted[:, 1],
+                    c='k',
+                    s=48,
+                )
+
+                ax.scatter(
+                    pareto_front_sorted[:, 0],
+                    pareto_front_sorted[:, 1],
+                    c=self.line_palette[planner_ix],
+                    s=40,
+                    label=planner,
+                )
+
+                # plot pareto front line
+                
+                ax.plot(
+                    pareto_front_sorted[:, 0],
+                    pareto_front_sorted[:, 1],
+                    c=self.line_palette[planner_ix],
+                    lw=2,
+                    ls='-'
+                )
+
+
+
+
+
+
+            ax.grid(linestyle=":")
+            ax.set_title(f"{emulator.capitalize()}")
+
+            ax.set_xlabel('objective 0')
+            ax.set_ylabel('objective 1')
+
+        plt.legend(fontsize=12)
+        plt.tight_layout()
+
+        if file_name is not None:
+            plt.savefig(file_name, bbox_inches="tight")
+        if show is True:
+            plt.show()
+
+
+
     
 
 
@@ -432,7 +507,7 @@ class PlotterSeaborn(AbstractPlotter):
         show=False, 
         *args,
         **kwargs,
-    ):
+        ):
         self._set_color_palette()
         num_plots = len(emulators)
         num_graphs = len(planners)

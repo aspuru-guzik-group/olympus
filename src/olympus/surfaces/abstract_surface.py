@@ -112,7 +112,10 @@ class AbstractSurface(Object, metaclass=ABCMeta):
         if isinstance(params, float) or isinstance(params, int):
             params = np.array([params])
         elif type(params) == list:
-            params = np.array(params)
+            if isinstance(params[0], ParameterVector):
+                params = np.array([p.to_array() for p in params])
+            else:
+                params = np.array(params)
         elif isinstance(params, ParameterVector):
             params = np.array([params.to_array()])
         if len(params.shape) == 1:

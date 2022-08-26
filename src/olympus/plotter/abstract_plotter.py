@@ -863,7 +863,7 @@ class AbstractPlotter(Object):
                     "pareto_front": [],
                 }
 
-            values =  campaign.observations.get_values(as_array=True, opposite=True)
+            values =  campaign.observations.get_values(as_array=True, opposite=False)
             pareto_front = get_pareto(values)
 
             measurements[camp_emulator][planner]["vals"].append(values)
@@ -877,9 +877,9 @@ class AbstractPlotter(Object):
                     measurements[emulator][planner]["vals"] = np.array(
                         measurements[emulator][planner]["vals"]
                     )
-                    measurements[emulator][planner]["pareto_front"] = np.array(
-                        measurements[emulator][planner]["pareto_front"]
-                    )
+                    # measurements[emulator][planner]["pareto_front"] = np.array(
+                    #     measurements[emulator][planner]["pareto_front"]
+                    # )
                 except KeyError:
                     continue
             pass
