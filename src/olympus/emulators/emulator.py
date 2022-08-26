@@ -478,12 +478,19 @@ class Emulator(Object):
         Logger.log("Test  RMSD Score: {0:.4f}\n".format(test_rmse), "INFO")
 
         # save and return scores
+        # self.model_scores = {
+        #     "train_r2": mdl_train_r2,
+        #     "test_r2": mdl_test_r2,
+        #     "train_rmsd": mdl_train_rmsd,
+        #     "test_rmsd": mdl_test_rmsd,
+        # }
         self.model_scores = {
-            "train_r2": mdl_train_r2,
-            "test_r2": mdl_test_r2,
-            "train_rmsd": mdl_train_rmsd,
-            "test_rmsd": mdl_test_rmsd,
+            "train_r2": train_r2,
+            "test_r2": test_r2,
+            "train_rmsd": train_rmsd,
+            "test_rmsd": test_rmsd,
         }
+
         return self.model_scores
 
     def run(self, features, num_samples=1, return_paramvector=False):
