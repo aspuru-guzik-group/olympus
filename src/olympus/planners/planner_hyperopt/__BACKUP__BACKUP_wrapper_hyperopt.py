@@ -1,16 +1,18 @@
 #!/usr/bin/env python
-
-import numpy as np
-from hyperopt import fmin, tpe, hp, Trials, STATUS_OK, JOB_STATE_DONE
 from collections import OrderedDict
 
-from olympus.planners import AbstractPlanner
+import numpy as np
+from hyperopt import JOB_STATE_DONE, STATUS_OK, Trials, fmin, hp, tpe
+
 from olympus.objects import ParameterVector
+from olympus.planners import AbstractPlanner
 
 
 class Hyperopt(AbstractPlanner):
 
-    def __init__(self, goal='minimize', show_progressbar=False):
+    PARAM_TYPES = ["continuous", "discrete", "categorical"]
+
+    def __init__(self, goal="minimize", show_progressbar=False):
         """
         Tree of Parzen Estimators (TPE) as implemented in HyperOpt.
         Args:
@@ -18,21 +20,43 @@ class Hyperopt(AbstractPlanner):
             show_progressbar (bool): If True, show a progressbar.
         """
         AbstractPlanner.__init__(**locals())
-        self._trials   = Trials()  # these is a Hyperopt object that stores the search history
+        self._trials = (
+            Trials()
+        )  # these is a Hyperopt object that stores the search history
         self._hp_space = None  # these are the params in the Hyperopt format
 
     def _set_param_space(self, param_space):
         self._param_space = []
         for param in param_space:
-            if param.type == 'continuous':
-                param_dict = {'name': param.name, 'type': param.type, 'domain': (param.low, param.high)}
+            if param.type == "continuous":
+                param_dict = {
+                    "name": param.name,
+                    "type": param.type,
+                    "domain": (param.low, param.high),
+                }
+            elif param.type == "discrete":
+                param_dict = {
+                    "name": param.name,
+                    "type": param.type,
+                    "domain": (param.low, param.high, param.stirde),
+                }
+            elif param.type == "categorical":
+                param_dict = {
+                    "name": param.name,
+                    "type": param.type,
+                    "options": param.options,
+                }
             self._param_space.append(param_dict)
         # update hyperopt space accordingly
         self._set_hp_space()
 
     def _tell(self, observations):
         self._params = observations.get_params(as_array=False)
-        self._values = observations.get_values(as_array=True, opposite=self.flip_measurements)
+        self._values = observations.get_values(
+            as_array=True,
+            opposite=self.flip_measurements,
+        )
+
         # update hyperopt Trials accordingly
         self._set_hp_trials()
 
@@ -40,98 +64,100 @@ class Hyperopt(AbstractPlanner):
         space = []
         # go through all parameters we have defined and convert them to Hyperopt format
         for param in self._param_space:
-            if param['type'] == 'continuous':
-                space.append((param['name'], hp.uniform(param['name'], param['domain'][0], param['domain'][1])))
+            if param["type"] == "continuous":
+                space.append(
+                    (
+                        param["name"],
+                        hp.uniform(
+                            param["name"],
+                            param["domain"][0],
+                            param["domain"][1],
+                        ),
+                    )
+                )
+            elif param["type"] == "discrete":
+                space.append(
+                    (
+                        param["name"],
+                        hp.quniform(
+                            param["name"],
+                            param["domian"][0],
+                            param["domian"][1],
+                            param["domian"][2],
+                        ),
+                    )
+                )
+            elif param["type"] == "categorical":
+                space.append(
+                    (param["name"], hp.choice(param["name"], param["options"]))
+                )  # map to integers
+
         # update instance attribute that is the space input for Hyperopt fmin
         self._hp_space = OrderedDict(space)
 
     def _set_hp_trials(self):
         self._trials = Trials()
         if self._params is not None and len(self._params) > 0:
-            for tid, (param, loss) in enumerate(zip(self._params, self._values)):
+            for tid, (param, loss) in enumerate(
+                zip(self._params, self._values)
+            ):
                 idxs = {k: [tid] for k, v in param.items()}
                 vals = {k: [v] for k, v in param.items()}
                 hyperopt_trial = Trials().new_trial_docs(
-                                        tids=[tid],
-                                        specs=[None],
-                                        results=[{'loss': loss, 'status': STATUS_OK}],
-                                        miscs=[{'tid': tid,
-                                                'cmd': ('domain_attachment', 'FMinIter_Domain'),
-                                                'idxs': idxs,
-                                                'vals': vals,
-                                                'workdir': None}]
-                                        )
-                hyperopt_trial[0]['state'] = JOB_STATE_DONE
+                    tids=[tid],
+                    specs=[None],
+                    results=[{"loss": loss, "status": STATUS_OK}],
+                    miscs=[
+                        {
+                            "tid": tid,
+                            "cmd": ("domain_attachment", "FMinIter_Domain"),
+                            "idxs": idxs,
+                            "vals": vals,
+                            "workdir": None,
+                        }
+                    ],
+                )
+                hyperopt_trial[0]["state"] = JOB_STATE_DONE
                 self._trials.insert_trial_docs(hyperopt_trial)
                 self._trials.refresh()
 
     def _ask(self):
-        print(self._trials.trials)
+
+        # print("TRIALS : ", self._trials)
+
+        # if self.num_generated > 1:
+        #     print("TRIALS MISC: ", self._trials.trials[-1]["misc"])
+        def dummy(args):
+            return 0.
+
         # NOTE: we pass a dummy function as we just ask for the new (+1) set of parameters
-        if len(self._trials.trials) > 0: 
-            _ = fmin(
-                    fn=lambda x: 0,#params: {'loss': 0., 'status': STATUS_OK}, 
-                    space=self._hp_space, 
-                    algo=tpe.suggest, 
-                    max_evals=self.num_generated,
-                    trials=self._trials, 
-                    show_progressbar=self.show_progressbar,
-                    #return_argmin=False, 
-                )
+        _ = fmin(
+            fn=dummy,
+            space=self._hp_space,
+            algo=tpe.suggest,
+            max_evals=self.num_generated,
+            trials=self._trials,
+            show_progressbar=self.show_progressbar,
+        )
+        # make sure the number of parameters asked matches the number of Hyperopt iterations/trials
+        assert len(self._trials.trials) == self.num_generated
+        # get params from last dict in trials.trials
+        proposed_params = self._trials.trials[-1]["misc"]["vals"]
 
-      
-            # make sure the number of parameters asked matches the number of Hyperopt iterations/trials
-            assert len(self._trials.trials) == self.num_generated
-            # get params from last dict in trials.trials
-            proposed_params = self._trials.trials[-1]['misc']['vals']
-            for key, value in proposed_params.items():
-                proposed_params[key] = value[0]  # this is just to make value not a list
+        return_params = {}
+        # iterate through the olympus param space
+        for param_ix, param in enumerate(self._param_space):
+            value = proposed_params[param["name"]]
+            if param["type"] == "continuous":
+                return_params[param["name"]] = value[0]
+            elif param["type"] == "categorical":
+                return_params[param["name"]] = param["options"][
+                    value[0]
+                ]  # reference option
 
-        else:
-            _, proposed_params = self.propose_randomly(1, self.param_space, use_descriptors=False)
-            return [ParameterVector().from_array(proposed_params[0], self.param_space)]
-        #print('proposed params : ', proposed_params )
-
-        return [ParameterVector(dict=proposed_params, param_space=self.param_space)]
-
-    @staticmethod
-    def propose_randomly(num_proposals, param_space, use_descriptors):
-        """Randomly generate num_proposals proposals. Returns the numerical
-        representation of the proposals as well as the string based representation
-        for the categorical variables
-
-        Args:
-                num_proposals (int): the number of random proposals to generate
-        """
-        proposals = []
-        raw_proposals = []
-        for propsal_ix in range(num_proposals):
-            sample = []
-            raw_sample = []
-            for param_ix, param in enumerate(param_space):
-                if param.type == "continuous":
-                    p = np.random.uniform(param.low, param.high, size=None)
-                    sample.append(p)
-                    raw_sample.append(p)
-                elif param.type == "discrete":
-                    num_options = int(
-                        ((param.high - param.low) / param.stride) + 1
-                    )
-                    options = np.linspace(param.low, param.high, num_options)
-                    p = np.random.choice(options, size=None, replace=False)
-                    sample.append(p)
-                    raw_sample.append(p)
-                elif param.type == "categorical":
-                    options = param.options
-                    p = np.random.choice(options, size=None, replace=False)
-                    feat = cat_param_to_feat(param, p, use_descriptors)
-                    sample.extend(feat)  # extend because feat is vector
-                    raw_sample.append(p)
-            proposals.append(sample)
-            raw_proposals.append(raw_sample)
-        proposals = np.array(proposals)
-
-        return proposals, raw_proposals
+        return ParameterVector(
+            dict=return_params, param_space=self.param_space
+        )
 
 
 # -----------
@@ -173,10 +199,9 @@ if __name__ == '__main__':
             samples = planner.recommend(campaign.observations)
             print(f"ITER : {num_iter}\tSAMPLES : {samples}")
             # for sample in samples:
-            for sample in samples:
-                sample_arr = sample.to_array()
-                measurement = surface(sample_arr.reshape((1, sample_arr.shape[0])))
-                campaign.add_observation(sample_arr, measurement[0])
+            sample_arr = samples.to_array()
+            measurement = surface(sample_arr.reshape((1, sample_arr.shape[0])))
+            campaign.add_observation(sample_arr, measurement[0])
 
 
     elif PARAM_TYPE == "categorical":
