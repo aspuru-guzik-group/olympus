@@ -487,8 +487,8 @@ class Emulator(Object):
         self.model_scores = {
             "train_r2": train_r2,
             "test_r2": test_r2,
-            "train_rmsd": train_rmsd,
-            "test_rmsd": test_rmsd,
+            "train_rmsd": train_rmse,
+            "test_rmsd": test_rmse,
         }
 
         return self.model_scores
