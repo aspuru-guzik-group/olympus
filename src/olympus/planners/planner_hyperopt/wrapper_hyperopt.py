@@ -12,6 +12,7 @@ class Hyperopt(AbstractPlanner):
     def __init__(self, goal='minimize', show_progressbar=False):
         """
         Tree of Parzen Estimators (TPE) as implemented in HyperOpt.
+
         Args:
             goal (str): The optimization goal, either 'minimize' or 'maximize'. Default is 'minimize'.
             show_progressbar (bool): If True, show a progressbar.
@@ -78,59 +79,21 @@ class Hyperopt(AbstractPlanner):
 
         return ParameterVector(dict=proposed_params, param_space=self.param_space)
 
-    # @staticmethod
-    # def propose_randomly(num_proposals, param_space, use_descriptors):
-    #     """Randomly generate num_proposals proposals. Returns the numerical
-    #     representation of the proposals as well as the string based representation
-    #     for the categorical variables
-
-    #     Args:
-    #             num_proposals (int): the number of random proposals to generate
-    #     """
-    #     proposals = []
-    #     raw_proposals = []
-    #     for propsal_ix in range(num_proposals):
-    #         sample = []
-    #         raw_sample = []
-    #         for param_ix, param in enumerate(param_space):
-    #             if param.type == "continuous":
-    #                 p = np.random.uniform(param.low, param.high, size=None)
-    #                 sample.append(p)
-    #                 raw_sample.append(p)
-    #             elif param.type == "discrete":
-    #                 num_options = int(
-    #                     ((param.high - param.low) / param.stride) + 1
-    #                 )
-    #                 options = np.linspace(param.low, param.high, num_options)
-    #                 p = np.random.choice(options, size=None, replace=False)
-    #                 sample.append(p)
-    #                 raw_sample.append(p)
-    #             elif param.type == "categorical":
-    #                 options = param.options
-    #                 p = np.random.choice(options, size=None, replace=False)
-    #                 feat = cat_param_to_feat(param, p, use_descriptors)
-    #                 sample.extend(feat)  # extend because feat is vector
-    #                 raw_sample.append(p)
-    #         proposals.append(sample)
-    #         raw_proposals.append(raw_sample)
-    #     proposals = np.array(proposals)
-
-    #     return proposals, raw_proposals
-
 
 # -----------
 # DEBUGGING
 # -----------
 if __name__ == '__main__':
     PARAM_TYPE = "continuous"
+    import numpy as np
 
     NUM_RUNS = 40
 
     from olympus.campaigns import Campaign, ParameterSpace
     from olympus.objects import (
-        ParameterCategorical,
+        # ParameterCategorical,
         ParameterContinuous,
-        ParameterDiscrete,
+        # ParameterDiscrete,
     )
     from olympus.surfaces import Surface
 
@@ -157,10 +120,10 @@ if __name__ == '__main__':
             samples = planner.recommend(campaign.observations)
             print(f"ITER : {num_iter}\tSAMPLES : {samples}")
             # for sample in samples:
-            for sample in samples:
-                sample_arr = sample.to_array()
-                measurement = surface(sample_arr.reshape((1, sample_arr.shape[0])))
-                campaign.add_observation(sample_arr, measurement[0])
+            #for sample in samples:
+            sample_arr = samples.to_array()
+            measurement = surface(sample_arr.reshape((1, sample_arr.shape[0])))
+            campaign.add_observation(sample_arr, measurement[0])
 
 
     elif PARAM_TYPE == "categorical":
