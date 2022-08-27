@@ -282,12 +282,15 @@ class Genetic(AbstractPlanner):
 		# Clone the selected individuals
 		self.offsprings = list(map(self.toolbox.clone, self.offsprings))
 
+		print('offsprings : ', self.offsprings)
+		
 		# Apply crossover and on the offsprings
 		for child1, child2 in zip(self.offsprings[::2], self.offsprings[1::2]):
 			if np.random.uniform() < self.cx_prob:
 				if self.verbose is True:
 					Logger.log("  Performing cross-over operation", "INFO")
 				self.toolbox.mate(child1, child2) 
+
 				del child1.fitness.values
 				del child2.fitness.values
 

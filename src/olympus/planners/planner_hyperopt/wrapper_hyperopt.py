@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-import numpy as np
 from hyperopt import fmin, tpe, hp, Trials, STATUS_OK, JOB_STATE_DONE
 from collections import OrderedDict
 
@@ -66,72 +65,57 @@ class Hyperopt(AbstractPlanner):
                 self._trials.refresh()
 
     def _ask(self):
-        print(self._trials.trials)
         # NOTE: we pass a dummy function as we just ask for the new (+1) set of parameters
-        if len(self._trials.trials) > 0: 
-            _ = fmin(
-                    fn=lambda x: 0,#params: {'loss': 0., 'status': STATUS_OK}, 
-                    space=self._hp_space, 
-                    algo=tpe.suggest, 
-                    max_evals=self.num_generated,
-                    trials=self._trials, 
-                    show_progressbar=self.show_progressbar,
-                    #return_argmin=False, 
-                )
+        _ = fmin(fn=lambda x: 0, space=self._hp_space, algo=tpe.suggest, max_evals=self.num_generated,
+                 trials=self._trials, show_progressbar=self.show_progressbar)
 
-      
-            # make sure the number of parameters asked matches the number of Hyperopt iterations/trials
-            assert len(self._trials.trials) == self.num_generated
-            # get params from last dict in trials.trials
-            proposed_params = self._trials.trials[-1]['misc']['vals']
-            for key, value in proposed_params.items():
-                proposed_params[key] = value[0]  # this is just to make value not a list
+        # make sure the number of parameters asked matches the number of Hyperopt iterations/trials
+        assert len(self._trials.trials) == self.num_generated
+        # get params from last dict in trials.trials
+        proposed_params = self._trials.trials[-1]['misc']['vals']
+        for key, value in proposed_params.items():
+            proposed_params[key] = value[0]  # this is just to make value not a list
 
-        else:
-            _, proposed_params = self.propose_randomly(1, self.param_space, use_descriptors=False)
-            return [ParameterVector().from_array(proposed_params[0], self.param_space)]
-        #print('proposed params : ', proposed_params )
+        return ParameterVector(dict=proposed_params, param_space=self.param_space)
 
-        return [ParameterVector(dict=proposed_params, param_space=self.param_space)]
+    # @staticmethod
+    # def propose_randomly(num_proposals, param_space, use_descriptors):
+    #     """Randomly generate num_proposals proposals. Returns the numerical
+    #     representation of the proposals as well as the string based representation
+    #     for the categorical variables
 
-    @staticmethod
-    def propose_randomly(num_proposals, param_space, use_descriptors):
-        """Randomly generate num_proposals proposals. Returns the numerical
-        representation of the proposals as well as the string based representation
-        for the categorical variables
+    #     Args:
+    #             num_proposals (int): the number of random proposals to generate
+    #     """
+    #     proposals = []
+    #     raw_proposals = []
+    #     for propsal_ix in range(num_proposals):
+    #         sample = []
+    #         raw_sample = []
+    #         for param_ix, param in enumerate(param_space):
+    #             if param.type == "continuous":
+    #                 p = np.random.uniform(param.low, param.high, size=None)
+    #                 sample.append(p)
+    #                 raw_sample.append(p)
+    #             elif param.type == "discrete":
+    #                 num_options = int(
+    #                     ((param.high - param.low) / param.stride) + 1
+    #                 )
+    #                 options = np.linspace(param.low, param.high, num_options)
+    #                 p = np.random.choice(options, size=None, replace=False)
+    #                 sample.append(p)
+    #                 raw_sample.append(p)
+    #             elif param.type == "categorical":
+    #                 options = param.options
+    #                 p = np.random.choice(options, size=None, replace=False)
+    #                 feat = cat_param_to_feat(param, p, use_descriptors)
+    #                 sample.extend(feat)  # extend because feat is vector
+    #                 raw_sample.append(p)
+    #         proposals.append(sample)
+    #         raw_proposals.append(raw_sample)
+    #     proposals = np.array(proposals)
 
-        Args:
-                num_proposals (int): the number of random proposals to generate
-        """
-        proposals = []
-        raw_proposals = []
-        for propsal_ix in range(num_proposals):
-            sample = []
-            raw_sample = []
-            for param_ix, param in enumerate(param_space):
-                if param.type == "continuous":
-                    p = np.random.uniform(param.low, param.high, size=None)
-                    sample.append(p)
-                    raw_sample.append(p)
-                elif param.type == "discrete":
-                    num_options = int(
-                        ((param.high - param.low) / param.stride) + 1
-                    )
-                    options = np.linspace(param.low, param.high, num_options)
-                    p = np.random.choice(options, size=None, replace=False)
-                    sample.append(p)
-                    raw_sample.append(p)
-                elif param.type == "categorical":
-                    options = param.options
-                    p = np.random.choice(options, size=None, replace=False)
-                    feat = cat_param_to_feat(param, p, use_descriptors)
-                    sample.extend(feat)  # extend because feat is vector
-                    raw_sample.append(p)
-            proposals.append(sample)
-            raw_proposals.append(raw_sample)
-        proposals = np.array(proposals)
-
-        return proposals, raw_proposals
+    #     return proposals, raw_proposals
 
 
 # -----------

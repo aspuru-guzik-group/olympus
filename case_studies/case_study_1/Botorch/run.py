@@ -7,9 +7,7 @@ from olympus.databases import Database
 
 olymp = Olympus()
 planners = [
-    'RandomSearch',
-    #'Botorch', 'Gryffin',
-    # 'Hyperopt', 'Smac', 'Genetic'
+    'Botorch'
 ]
 database = Database(kind='sqlite')
 
