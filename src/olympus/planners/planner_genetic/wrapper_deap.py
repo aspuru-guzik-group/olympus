@@ -255,8 +255,8 @@ class Genetic(AbstractPlanner):
 		self.latest_pop_size = self.pop_size
 
 		# delete creator classes
-		#del creator.Individual
-		#del creator.FitnessMin
+		del creator.Individual
+		del creator.FitnessMin
 
 	def _set_population_fitness(self):
 
@@ -320,10 +320,10 @@ class Genetic(AbstractPlanner):
 
 	def _ask(self):
 
-		# if self.num_generated == 0:
-		# 	raise NotImplementedError(
-		# 		'the attribute "num_generated" was not expected to ever be zero here!'
-		# 	)
+		if self.num_generated == 0:
+			raise NotImplementedError(
+				'the attribute "num_generated" was not expected to ever be zero here!'
+			)
 
 		# If it is the first generation (note num_generated index starts from 1) we initialize the population
 		if self.num_generated < 2:
@@ -442,7 +442,7 @@ class Genetic(AbstractPlanner):
 # DEBUGGING
 # -----------
 if __name__ == '__main__':
-	PARAM_TYPE = "categorical"
+	PARAM_TYPE = "continuous"
 
 	NUM_RUNS = 40
 

@@ -84,6 +84,7 @@ class AbstractPlanner(Object, metaclass=ABCMeta):
         self.param_space = param_space
         self._set_param_space(param_space)
 
+
     def ask(self, return_as=None):
         """suggest new set of parameters
 
@@ -94,17 +95,16 @@ class AbstractPlanner(Object, metaclass=ABCMeta):
         Returns:
             ParameterVector: newly generated parameters
         """
-
+        # TODO: this will not work with batched optimization 
+        self.num_generated +=1
         param_vector = self._ask()
 
         # check that the parameters suggested are within the bounds of our param_space
         if isinstance(param_vector, list):
-            self.num_generated += len(param_vector)
             # batch of recommendations
             for param_vec in param_vector:
                 self._validate_paramvector(param_vec)
         elif isinstance(param_vector, ParameterVector):
-            self.num_generated += 1
             self._validate_paramvector(param_vector)
 
         if return_as is not None:
@@ -117,8 +117,8 @@ class AbstractPlanner(Object, metaclass=ABCMeta):
                     'could not return param_vector as "{}"'.format(return_as),
                     "ERROR",
                 )
-        print('param vector : ', param_vector)
         return param_vector
+
 
     def tell(self, observations=Observations()):
         """Provide the planner with all previous observations.
