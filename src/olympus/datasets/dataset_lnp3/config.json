@@ -4,16 +4,16 @@
 			"measurements": "positive"
 		},
 	"parameters": [
-			{"name": "drug_input", "type": "continuous", "low": 6.0,  "high": 48.0},
+			{"name": "drug_input", "type": "categorical", "options": ["6", "12", "24", "48"], "descriptors": [[6.0], [12.0], [24.0], [48.0]]},
 			{"name": "solid_lipid", "type": "categorical", "options": ["Stearic_acid", "Compritol_888", "Glyceryl_monostearate"], "descriptors": []},
-			{"name": "solid_lipid_input", "type": "continuous", "low": 72.0,  "high": 120.0},
-			{"name": "liquid_lipid_input", "type": "continuous", "low": 0.0,  "high": 48.0},
-			{"name": "surfractant_input", "type": "continuous", "low": 0.0,  "high": 0.01}
+			{"name": "solid_lipid_input", "type": "categorical", "options": ["120", "108",  "96",  "72"], "descriptors": [[120.0], [108.0],  [96.0],  [72.0]]},
+			{"name": "liquid_lipid_input", "type": "categorical", "options": ["0", "12", "24", "48"], "descriptors": [[0.0], [12.0], [24.0], [48.0]]},
+			{"name": "surfractant_input", "type": "categorical", "options": ["0.0", "0.0025", "0.005", "0.01"], "descriptors": [[0.0], [0.0025], [0.005], [0.01]]}
 		],
 	"measurements": [
 		{"name": "drug_loading", "type": "continuous"},
 		{"name": "encap_efficiency", "type": "continuous"},
 		{"name": "particle_diameter", "type": "continuous"}
 	],
-    "default_goal": ["minimize", "maximize"]
+    "default_goal": ["maximize", "maximize", "minimize"]
 }

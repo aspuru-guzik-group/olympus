@@ -129,7 +129,7 @@ class Gpyopt(AbstractPlanner):
             for _ in range(self.batch_size):
                 init_design_planner.tell(self.observations)
                 param = init_design_planner.ask(return_as=None)
-                params_return.append(param)
+                params_return.append(param[0])
 
         else:
             bo = self._get_bo_instance()
@@ -151,7 +151,7 @@ class Gpyopt(AbstractPlanner):
                 )
 
         # TODO: this is a hack returning the first list element
-        return params_return[0]
+        return [params_return[0]]
 
 
 # DEBUG:
