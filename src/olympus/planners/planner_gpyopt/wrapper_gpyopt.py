@@ -36,6 +36,11 @@ class Gpyopt(AbstractPlanner):
         AbstractPlanner.__init__(**locals())
         self.has_categorical = False
 
+    def _vect_to_ints(self, vec, precision=1e4):
+        vec = vec / np.amin(vec)
+        vec = np.around(vec*precision,0).astype(int)
+        return vec
+
     def _set_param_space(self, param_space):
         self._param_space = []
         for param in param_space:
@@ -58,15 +63,12 @@ class Gpyopt(AbstractPlanner):
                 self.has_categorical = True
             elif param.type == "discrete":
                 # make a map between discrete options and an array of integers that can be referenced later
-                # TODO: this is a bit of a hack, since it will only work if upper and lower bounds are actually
-                # included in the options
-                num_options = (param.high - param.low / param.stride) + 1
-                options = np.linspace(param.low, param.high, num_options)
-                print(num_options, options)
+                #options = self._vect_to_ints(param.options)
+
                 param_dict = {
                     "name": param.name,
                     "type": param.type,
-                    "domain": options,
+                    "domain": param.options,
                     "dimensionality": 1,
                 }
             else:
@@ -96,6 +98,9 @@ class Gpyopt(AbstractPlanner):
                 if param["type"] == "categorical":
                     ix = param["original"].index(obs[param_ix])
                     gpyopt_obs.append(int(ix))
+                # elif param["type"] == "discrete":
+                #     ix = param["original"].index(float(obs[param_ix]))
+                #     gpyopt_obs.append(int(ix))
                 else:
                     gpyopt_obs.append(obs[param_ix])
             self._gpyopt_params.append(gpyopt_obs)
@@ -144,6 +149,11 @@ class Gpyopt(AbstractPlanner):
                                 int(suggestion)
                             ]
                         )
+                    # elif self._param_space[param_ix]["type"] == "discrete":
+                    #     ix = list(self._param_space[param_ix]["domain"]).index(suggestion)
+                    #     array_olymp.append(
+                    #         self._param_space[param_ix]["original"][ix]
+                    #     )
                     else:
                         array_olymp.append(suggestion)
                 params_return.append(

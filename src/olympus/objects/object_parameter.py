@@ -96,9 +96,10 @@ class ObjectParameterDiscrete(ObjectParameter):
     ATT_LOW = {"type": "float", "default": 0.0}
     ATT_HIGH = {"type": "float", "default": 1.0}
     ATT_STRIDE = {"type": "float", "default": 0.1}
+    ATT_OPTIONS = {"type": "list", "default": []}
 
     def __str__(self):
-        return f"Discrete (name='{self.name}', low={self.low}, high={self.high}, stride={self.stride})"
+        return f"Discrete (name='{self.name}', low={self.low}, high={self.high}, stride={self.stride}, options={self.options})"
 
     def __contains__(self, val):
         contains = isinstance(val, int)
@@ -107,15 +108,25 @@ class ObjectParameterDiscrete(ObjectParameter):
         return contains
 
     def _validate(self):
-        return all(
-            [
-                self.low < self.high,
-                *[
-                    isinstance(_, float)
-                    for _ in (self.low, self.high, self.stride)
-                ],
-            ]
-        )
+        if len(self.options)!=0:
+            # if we have some options, forget about the stride parameter
+            return all(
+                [
+                    min(self.options) >= self.low,
+                    max(self.options) <= self.high,
+                ]
+            )
+        else:
+            # we have use the stride parameter set by the user
+            return all(
+                [
+                    self.low < self.high,
+                    *[
+                        isinstance(_, float)
+                        for _ in (self.low, self.high, self.stride)
+                    ],
+                ]
+            )
 
     @property
     def volume(self):

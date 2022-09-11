@@ -31,7 +31,7 @@ class RandomSearch(AbstractPlanner):
     def _tell(self, observations=Observations(), iteration=None):
         # register iteration number
         # TODO: this will only work for a batch size of 1...
-        if not iteration:   
+        if not iteration:
             # TODO: this will only work for a batch size of 1...
             self.iteration = len(observations.get_values(as_array=True))
         elif isinstance(iteration, int):
@@ -50,7 +50,10 @@ class RandomSearch(AbstractPlanner):
                 opts_.append(param.options)
                 self.has_cat_discr = True
             elif param.type == "discrete":
-                opts_.append(np.arange(param.low, param.high, param.stride))
+                if param.options!=[]:
+                    opts_.append(param.options)
+                else:
+                    opts_.append(np.arange(param.low, param.high, param.stride))
                 self.has_cat_discr = True
             else:
                 raise NotImplementedError(
@@ -88,7 +91,10 @@ class RandomSearch(AbstractPlanner):
             if param.type == "continuous":
                 val = np.random.uniform(low=param.low, high=param.high)
             elif param.type in ["categorical", "discrete"]:
-                val = cat_discr_vals[cat_discr_ind]
+                if param.type=='categorical':
+                    val = cat_discr_vals[cat_discr_ind]
+                elif param.type=='discrete':
+                    val = float(cat_discr_vals[cat_discr_ind])
                 cat_discr_ind += 1
             else:
                 raise NotImplementedError

@@ -122,6 +122,7 @@ class Gryffin(AbstractPlanner):
                         str(param["options"][ix]): param["descriptors"][ix]
                         for ix in range(len(param["options"]))
                     }
+                    print(category_details)
                 else:
                     # user overides the use of descriptors
                     category_details = {
@@ -144,7 +145,7 @@ class Gryffin(AbstractPlanner):
                 "verbosity": self.verbosity,
             },
             "parameters": params,
-            "objectives": [{"name": "obj", "goal": "min"}], # always minimization, 
+            "objectives": [{"name": "obj", "goal": "min"}], # always minimization,
         }
         self.gryffin = ActualGryffin(config_dict=config)
 
@@ -164,7 +165,7 @@ class Gryffin(AbstractPlanner):
         )
         param = params[0]
 
-        return ParameterVector().from_dict(param, self.param_space)
+        return [ParameterVector().from_dict(param, self.param_space)]
 
 
 # DEBUG:
