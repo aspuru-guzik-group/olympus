@@ -1,11 +1,9 @@
 #!/usr/bin/env python
 
-# ======================================================================
 
+import numpy as np
 from olympus import Logger
 from olympus.objects import Object
-
-# ======================================================================
 
 
 class ObjectParameter(Object):
@@ -13,7 +11,6 @@ class ObjectParameter(Object):
     ATT_NAME = {"type": "string", "default": "parameter"}
 
 
-# ======================================================================
 
 
 class ObjectParameterContinuous(ObjectParameter):
@@ -33,36 +30,6 @@ class ObjectParameterContinuous(ObjectParameter):
     def _validate(self):
         return self.low < self.high
 
-
-# ======================================================================
-
-
-class Parameter(ObjectParameter):
-
-    KINDS = {"continuous": ObjectParameterContinuous}
-
-    def __init__(self, kind="continuous", **kwargs):
-        if kind in self.KINDS:
-            self.kind = kind
-            for prop in dir(self.KINDS[kind]):
-                if prop.startswith("ATT_"):
-                    setattr(self, prop, getattr(self.KINDS[kind], prop))
-            self.KINDS[kind].__init__(self)
-            for key, value in kwargs.items():
-                if "ATT_{}".format(key.upper()) in dir(self):
-                    self.add(key, value)
-            if not self.KINDS[kind]._validate(self):
-                message = "Could not validate {}".format(str(self))
-                Logger.log(message, "WARNING")
-        else:
-            message = """Could not initialize parameter.
-            Parameter kind {} is unknown. Please choose from {}""".format(
-                kind, ",".join(list(self.KINDS.keys()))
-            )
-            Logger.log(message, "ERROR")
-
-    def __str__(self):
-        return self.KINDS[self.kind].__str__(self)
 
 
 class ObjectParameterCategorical(ObjectParameter):
@@ -131,6 +98,74 @@ class ObjectParameterDiscrete(ObjectParameter):
     @property
     def volume(self):
         return self.high - self.low
+
+
+class ObjectParameterOrdinal(ObjectParameter):
+
+    ''' Ordinal parameters are similar to categorical parameters, except that they
+    feature a clear ordering between the options. NOTE: Olympus currently only
+    supports ordinal parameters as target objectives.
+
+    Conventionally, when instantiating an ordinal parameter in Olympus we list the
+    options from least optimal to most optimal from left to right. For instance, assume
+    one was conducting an experiment targeting the formation of large crystals and the
+    experiment outcome options were "large_crystals", "fine_powder", "no_crystals"
+    and "small_crystals". One would define the ordinal parameter as
+
+    value0 = ParameterOrdinal(
+        name="my_value"
+        options=["no_crystals", "fine_powder", "small_crystals", "large_crystals"]
+    )
+    '''
+
+    ATT_TYPE = {
+        "type": "string",
+        "default": "ordinal",
+        "valid": ["ordinal"],
+    }
+    ATT_OPTIONS = {"type": "list", "default": []}
+
+    def __str__(self):
+        return f"Ordinal (name='{self.name}', num_opts: {len(self.options)}, options={self.options}, order={np.arange(len(self.options))+1})"
+
+    def _validate(self):
+        return len(self.options) > 0
+
+    @property
+    def volume(self):
+        return len(self.options)
+
+
+
+
+
+class Parameter(ObjectParameter):
+
+    KINDS = {"continuous": ObjectParameterContinuous}
+
+    def __init__(self, kind="continuous", **kwargs):
+        if kind in self.KINDS:
+            self.kind = kind
+            for prop in dir(self.KINDS[kind]):
+                if prop.startswith("ATT_"):
+                    setattr(self, prop, getattr(self.KINDS[kind], prop))
+            self.KINDS[kind].__init__(self)
+            for key, value in kwargs.items():
+                if "ATT_{}".format(key.upper()) in dir(self):
+                    self.add(key, value)
+            if not self.KINDS[kind]._validate(self):
+                message = "Could not validate {}".format(str(self))
+                Logger.log(message, "WARNING")
+        else:
+            message = """Could not initialize parameter.
+            Parameter kind {} is unknown. Please choose from {}""".format(
+                kind, ",".join(list(self.KINDS.keys()))
+            )
+            Logger.log(message, "ERROR")
+
+    def __str__(self):
+        return self.KINDS[self.kind].__str__(self)
+
 
 
 # ======================================================================

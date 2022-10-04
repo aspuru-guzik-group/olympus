@@ -15,6 +15,9 @@ from olympus.objects.object_parameter import (
 from olympus.objects.object_parameter import (
     ObjectParameterDiscrete as ParameterDiscrete,
 )
+from olympus.objects.object_parameter import (
+    ObjectParameterOrdinal as ParameterOrdinal
+)
 from olympus.objects.object_parameter import Parameter
 from olympus.objects.object_parameter_vector import (
     ObjectParameterVector as ParameterVector,
