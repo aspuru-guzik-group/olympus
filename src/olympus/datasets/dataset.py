@@ -95,6 +95,7 @@ class Dataset:
             self._create_param_space(_config)
             self._create_value_space(_config)
 
+
             # TODO: add full discrete to these types. Do we need mixed_cat_discrete, mixed_cont_cat etc..
             # level of specificity for the dataset types??
             # store the dataset type in an attribute ('full_cont', 'full_cat', 'mixed')
@@ -616,12 +617,11 @@ class Dataset:
 
     def _create_value_space(self, config):
         self.value_space = ParameterSpace()
-        self.value_space.add(
-            [
-                Parameter().from_dict(feature)
-                for feature in config["measurements"]
-            ]
-        )
+        for feature in config["measurements"]:
+            kind = feature["type"]
+            self.value_space.add(
+                    Parameter(kind=kind).from_dict(feature)
+            )
 
 
 # ===============

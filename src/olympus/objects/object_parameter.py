@@ -126,10 +126,12 @@ class ObjectParameterOrdinal(ObjectParameter):
     ATT_OPTIONS = {"type": "list", "default": []}
 
     def __str__(self):
-        return f"Ordinal (name='{self.name}', num_opts: {len(self.options)}, options={self.options}, order={np.arange(len(self.options))+1})"
+        return f"Ordinal (name='{self.name}', num_opts: {len(self.options)}, options={self.options}, order={np.arange(len(self.options))})"
 
     def _validate(self):
-        return len(self.options) > 0
+        # TODO: this is a hack
+        return len(self.options) >= 0
+
 
     @property
     def volume(self):
@@ -137,11 +139,12 @@ class ObjectParameterOrdinal(ObjectParameter):
 
 
 
-
-
 class Parameter(ObjectParameter):
 
-    KINDS = {"continuous": ObjectParameterContinuous}
+    KINDS = {
+        "continuous": ObjectParameterContinuous,
+        "ordinal": ObjectParameterOrdinal,
+    }
 
     def __init__(self, kind="continuous", **kwargs):
         if kind in self.KINDS:
@@ -162,6 +165,7 @@ class Parameter(ObjectParameter):
                 kind, ",".join(list(self.KINDS.keys()))
             )
             Logger.log(message, "ERROR")
+
 
     def __str__(self):
         return self.KINDS[self.kind].__str__(self)
