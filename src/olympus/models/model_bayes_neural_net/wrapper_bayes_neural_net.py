@@ -16,10 +16,16 @@ tfd = tfp.distributions
 class BayesNeuralNet(WrapperTensorflowModel):
 
     ATT_KIND = {"type": "string", "default": "BayesNeuralNet"}
+    ATT_TASK = {
+        "type": "string",
+        "default": "regression",
+        "valid": ["regression", "classification"],
+    }
 
     def __init__(
         self,
         scope="model",
+        task="regression",
         hidden_depth=3,
         hidden_nodes=48,
         hidden_act="leaky_relu",
@@ -34,7 +40,9 @@ class BayesNeuralNet(WrapperTensorflowModel):
         """Bayesian Neural Network model.
 
         Args:
-            scope (str): TenforFlow scope.
+            scope (str): TensorFlow scope.
+            tasks (str): Predictive task, classification (ordinal objectives)
+                or regression (continuous objectives)
             hidden_depth (int): Number of hidden layers.
             hidden_nodes (int): Number of hidden nodes per layer.
             hidden_act (str): Hidden activation function. Available options are 'linear', 'leaky_relu', 'relu',
