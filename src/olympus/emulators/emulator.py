@@ -94,9 +94,16 @@ class Emulator(Object):
             self.cv_scores = None
             self.model_scores = None
             self.emulator_to_save = None
+
+
             self.feature_transformer = DataTransformer(
                 transformations=self.feature_transform
             )
+            # if we have ordinal targets, force the traget transform to be 'identity'
+            if self.task=='ordinal' and target_transform!='identity' :
+                message = 'Setting "target_transform" to "identity" for ordinal targets'
+                Logger.log(message, 'WARNING')
+                self.target_transform = 'identity'
             self.target_transformer = DataTransformer(
                 transformations=self.target_transform
             )
@@ -169,8 +176,24 @@ class Emulator(Object):
         # self.param_space is taken from self.dataset.param_space, so...
         if self.dataset is None:
             self.model.set_param_space(None)
+            self.model.set_value_space(None)
         else:
             self.model.set_param_space(self.param_space)
+            self.model.set_value_space(self.value_space)
+
+        # set and check the compatibility between value space and emulator params
+        if np.all([v.type=='continuous' for v in self.value_space]):
+            # if continuous-valued targets, do regression
+            self.task = 'regression'
+        elif np.all([v.type=='ordinal' for v in self.value_space]):
+            # if ordinal-valued targets, do ordinal regression like https://arxiv.org/pdf/0704.1028.pdf
+            self.task = 'ordinal'
+        else:
+            # if mixed-valued targets, complain --> we dont support this yet
+            message = 'We currently do not support emulation of mixed continuous-ordinal objective spaces'
+            Logger.log(messgae, 'FATAL')
+
+
 
     def transform_cat_params(self, params):
         """transformed parameter space representation of categorical variables
@@ -190,6 +213,19 @@ class Emulator(Object):
             transformed_features.append(transformed_feature)
 
         return np.array(transformed_features)
+
+
+    def transform_ordinal_targets(self, targets):
+        # NOTE: this will only support single target ordinal parameters
+        options = self.value_space[0].options
+        transformed_targets = np.zeros( (targets.shape[0], len(options)) )
+        int_list = [options.index(t[0]) for t in targets]
+
+        for ix, target in enumerate(int_list):
+            transformed_targets[ix, 0:target+1] = 1
+
+        return transformed_targets
+
 
     # =========================
     # Train and Predict Methods
@@ -220,10 +256,16 @@ class Emulator(Object):
             )
             Logger.log(message, "FATAL")
 
-        training_r2_scores = np.empty(self.dataset.num_folds)
-        valid_r2_scores = np.empty(self.dataset.num_folds)
-        training_rmsd_scores = np.empty(self.dataset.num_folds)
-        valid_rmsd_scores = np.empty(self.dataset.num_folds)
+
+        # if we have a regression problem, use r2 and rmsd
+        # if we have an ordinal problem, use accuracy and TODO: decide on the second metric
+        
+        training_metric1_scores = np.empty(self.dataset.num_folds)
+        valid_metric1_scores = np.empty(self.dataset.num_folds)
+        training_metric2_scores = np.empty(self.dataset.num_folds)
+        valid_metric2_scores = np.empty(self.dataset.num_folds)
+
+
 
         # get scaled train/valid sets
         # NOTE: we do not want to use the self.transformers, because for 'run' we want to use the transformers
@@ -232,9 +274,11 @@ class Emulator(Object):
         feature_transformer = DataTransformer(
             transformations=self.feature_transform
         )
+        # if we have an ordinal problem, make sure the 
         target_transformer = DataTransformer(
             transformations=self.target_transform
         )
+
 
         # ---------------------------------------
         # Iterate over the cross validation folds
@@ -253,16 +297,23 @@ class Emulator(Object):
             valid_features = self.dataset.cross_val_sets_features[fold][
                 1
             ].to_numpy()
-            train_targets = (
-                self.dataset.cross_val_sets_targets[fold][0]
-                .to_numpy()
-                .astype(float)
-            )
-            valid_targets = (
-                self.dataset.cross_val_sets_targets[fold][1]
-                .to_numpy()
-                .astype(float)
-            )
+
+            if self.task == 'regression':
+                train_targets = (
+                    self.dataset.cross_val_sets_targets[fold][0]
+                    .to_numpy()
+                    .astype(float)
+                )
+                valid_targets = (
+                    self.dataset.cross_val_sets_targets[fold][1]
+                    .to_numpy()
+                    .astype(float)
+                )
+            elif self.task == 'ordinal':
+                # convert the ordinal targets to the proper form
+                train_targets = self.transform_ordinal_targets( self.dataset.cross_val_sets_targets[fold][0].values )
+                valid_targets = self.transform_ordinal_targets( self.dataset.cross_val_sets_targets[fold][1].values )
+
 
             # transform categorical variables to one-hot-encoded vectors, if any exist
             train_features = self.transform_cat_params(train_features)
@@ -280,6 +331,8 @@ class Emulator(Object):
             train_targets_scaled = target_transformer.transform(train_targets)
             valid_targets_scaled = target_transformer.transform(valid_targets)
 
+            quit()
+
             # define scope and make a copy of the model for the cross validation
             model_fold = deepcopy(
                 self._ghost_model
@@ -291,12 +344,13 @@ class Emulator(Object):
             if not os.path.exists(model_path):
                 os.makedirs(model_path)
 
+
             Logger.log(f">>> Training model on fold #{fold}...", "INFO")
             (
-                mdl_train_r2,
-                mdl_valid_r2,
-                mdl_train_rmsd,
-                mdl_test_rmsd,
+                mdl_train_metric1,
+                mdl_valid_metric1,
+                mdl_train_metric2,
+                mdl_test_metric2,
             ) = model_fold.train(
                 train_features=train_features_scaled,
                 train_targets=train_targets_scaled,
@@ -307,16 +361,22 @@ class Emulator(Object):
             )
 
             # store performance of fold
-            training_r2_scores[fold] = mdl_train_r2
-            valid_r2_scores[fold] = mdl_valid_r2
-            training_rmsd_scores[fold] = mdl_train_rmsd
-            valid_rmsd_scores[fold] = mdl_test_rmsd
+            training_metric1_scores[fold] = mdl_train_metric1
+            valid_metric1_scores[fold] = mdl_valid_metric1
+            training_metric2_scores[fold] = mdl_train_metric2
+            valid_metric2_scores[fold] = mdl_test_metric2
             # write file to indicate training is complete and add R2 in there
             with open(f"{model_path}/training_completed.info", "w") as content:
-                content.write(
-                    f"Train R2={mdl_train_r2}\nValidation R2={mdl_valid_r2}\n"
-                    f"Train RMSD={mdl_train_rmsd}\nValidation RMSD={mdl_test_rmsd}\n"
-                )
+                if self.task == 'regression':
+                    content.write(
+                        f"Train R2={mdl_train_metric1}\nValidation R2={mdl_valid_metric1}\n"
+                        f"Train RMSD={mdl_train_metric2}\nValidation RMSD={mdl_test_metric2}\n"
+                    )
+                elif self.task == 'ordinal':
+                    content.write(
+                        f"Train ACC={mdl_train_metric1}\nValidation ACC={mdl_valid_metric1}\n"
+                        f"Train ROCAUC={mdl_train_metric2}\nValidation ROCAUC={mdl_test_metric2}\n"
+                    )
 
         # print some info to screen
         Logger.log(
@@ -324,34 +384,57 @@ class Emulator(Object):
             f"[{self.feature_transform}, {self.target_transform}]:",
             "INFO",
         )
-        cv_r2_score_mean = np.mean(valid_r2_scores)
-        cv_r2_score_stderr = np.std(valid_r2_scores) / np.sqrt(
-            (len(valid_r2_scores) - 1)
+        cv_metric1_score_mean = np.mean(valid_metric1_scores)
+        cv_metric1_score_stderr = np.std(valid_metric1_scores) / np.sqrt(
+            (len(valid_metric1_scores) - 1)
         )
-        cv_rmsd_score_mean = np.mean(valid_rmsd_scores)
-        cv_rmsd_score_stderr = np.std(valid_rmsd_scores) / np.sqrt(
-            (len(valid_rmsd_scores) - 1)
-        )
-        Logger.log(
-            "Validation   R2: {0:.4f} +/- {1:.4f}".format(
-                cv_r2_score_mean, cv_r2_score_stderr
-            ),
-            "INFO",
-        )
-        Logger.log(
-            "Validation RSMD: {0:.4f} +/- {1:.4f}".format(
-                cv_rmsd_score_mean, cv_rmsd_score_stderr
-            ),
-            "INFO",
+        cv_metric2_score_mean = np.mean(valid_metric2_scores)
+        cv_metric2_score_stderr = np.std(valid_metric2_scores) / np.sqrt(
+            (len(valid_metric2_scores) - 1)
         )
 
-        self.cross_val_performed = True
-        self.cv_scores = {
-            "train_r2": training_r2_scores,
-            "validate_r2": valid_r2_scores,
-            "train_rmsd": training_rmsd_scores,
-            "validate_rmsd": valid_rmsd_scores,
-        }
+        if self.task == 'regression':
+            Logger.log(
+                "Validation   R2: {0:.4f} +/- {1:.4f}".format(
+                    cv_r2_score_mean, cv_r2_score_stderr
+                ),
+                "INFO",
+            )
+            Logger.log(
+                "Validation RSMD: {0:.4f} +/- {1:.4f}".format(
+                    cv_rmsd_score_mean, cv_rmsd_score_stderr
+                ),
+                "INFO",
+            )
+
+            self.cross_val_performed = True
+            self.cv_scores = {
+                "train_r2": training_r2_scores,
+                "validate_r2": valid_r2_scores,
+                "train_rmsd": training_rmsd_scores,
+                "validate_rmsd": valid_rmsd_scores,
+            }
+        elif self.task == 'ordinal':
+            Logger.log(
+                "Validation   R2: {0:.4f} +/- {1:.4f}".format(
+                    cv_r2_score_mean, cv_r2_score_stderr
+                ),
+                "INFO",
+            )
+            Logger.log(
+                "Validation RSMD: {0:.4f} +/- {1:.4f}".format(
+                    cv_rmsd_score_mean, cv_rmsd_score_stderr
+                ),
+                "INFO",
+            )
+
+            self.cross_val_performed = True
+            self.cv_scores = {
+                "train_r2": training_r2_scores,
+                "validate_r2": valid_r2_scores,
+                "train_rmsd": training_rmsd_scores,
+                "validate_rmsd": valid_rmsd_scores,
+            }
         return self.cv_scores
 
     def train(self, plot=False, retrain=False):

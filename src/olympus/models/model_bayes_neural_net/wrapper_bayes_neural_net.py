@@ -19,13 +19,13 @@ class BayesNeuralNet(WrapperTensorflowModel):
     ATT_TASK = {
         "type": "string",
         "default": "regression",
-        "valid": ["regression", "classification"],
+        "valid": ["regression", "ordinal"],
     }
 
     def __init__(
         self,
         scope="model",
-        task="regression",
+        task="ordinal",
         hidden_depth=3,
         hidden_nodes=48,
         hidden_act="leaky_relu",
@@ -41,7 +41,7 @@ class BayesNeuralNet(WrapperTensorflowModel):
 
         Args:
             scope (str): TensorFlow scope.
-            tasks (str): Predictive task, classification (ordinal objectives)
+            task (str): Predictive task, classification (ordinal objectives)
                 or regression (continuous objectives)
             hidden_depth (int): Number of hidden layers.
             hidden_nodes (int): Number of hidden nodes per layer.

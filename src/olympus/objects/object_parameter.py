@@ -126,7 +126,7 @@ class ObjectParameterOrdinal(ObjectParameter):
     ATT_OPTIONS = {"type": "list", "default": []}
 
     def __str__(self):
-        return f"Ordinal (name='{self.name}', num_opts: {len(self.options)}, options={self.options}, order={np.arange(len(self.options))})"
+        return f"Ordinal (name='{self.name}', num_opts={len(self.options)}, options={self.options}, order={np.arange(len(self.options))})"
 
     def _validate(self):
         # TODO: this is a hack
