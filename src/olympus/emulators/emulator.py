@@ -185,9 +185,11 @@ class Emulator(Object):
         if np.all([v.type=='continuous' for v in self.value_space]):
             # if continuous-valued targets, do regression
             self.task = 'regression'
+            self.metric_names = ['r2', 'rmsd']
         elif np.all([v.type=='ordinal' for v in self.value_space]):
             # if ordinal-valued targets, do ordinal regression like https://arxiv.org/pdf/0704.1028.pdf
             self.task = 'ordinal'
+            self.metric_names = ['acc', 'roc_auc']
         else:
             # if mixed-valued targets, complain --> we dont support this yet
             message = 'We currently do not support emulation of mixed continuous-ordinal objective spaces'
@@ -259,7 +261,7 @@ class Emulator(Object):
 
         # if we have a regression problem, use r2 and rmsd
         # if we have an ordinal problem, use accuracy and TODO: decide on the second metric
-        
+
         training_metric1_scores = np.empty(self.dataset.num_folds)
         valid_metric1_scores = np.empty(self.dataset.num_folds)
         training_metric2_scores = np.empty(self.dataset.num_folds)
@@ -274,7 +276,7 @@ class Emulator(Object):
         feature_transformer = DataTransformer(
             transformations=self.feature_transform
         )
-        # if we have an ordinal problem, make sure the 
+        # if we have an ordinal problem, make sure the
         target_transformer = DataTransformer(
             transformations=self.target_transform
         )
@@ -331,7 +333,6 @@ class Emulator(Object):
             train_targets_scaled = target_transformer.transform(train_targets)
             valid_targets_scaled = target_transformer.transform(valid_targets)
 
-            quit()
 
             # define scope and make a copy of the model for the cross validation
             model_fold = deepcopy(
@@ -367,74 +368,49 @@ class Emulator(Object):
             valid_metric2_scores[fold] = mdl_test_metric2
             # write file to indicate training is complete and add R2 in there
             with open(f"{model_path}/training_completed.info", "w") as content:
-                if self.task == 'regression':
-                    content.write(
-                        f"Train R2={mdl_train_metric1}\nValidation R2={mdl_valid_metric1}\n"
-                        f"Train RMSD={mdl_train_metric2}\nValidation RMSD={mdl_test_metric2}\n"
-                    )
-                elif self.task == 'ordinal':
-                    content.write(
-                        f"Train ACC={mdl_train_metric1}\nValidation ACC={mdl_valid_metric1}\n"
-                        f"Train ROCAUC={mdl_train_metric2}\nValidation ROCAUC={mdl_test_metric2}\n"
-                    )
+                content.write(
+                    f"Train {self.metric_names[0].upper()}={mdl_train_metric1}\nValidation {self.metric_names[0].upper()}={mdl_valid_metric1}\n"
+                    f"Train {self.metric_names[1].upper()}={mdl_train_metric2}\nValidation {self.metric_names[1].upper()}={mdl_test_metric2}\n"
+                )
 
-        # print some info to screen
+
+            # print some info to screen
+            Logger.log(
+                f"Performance statistics based on transformed data "
+                f"[{self.feature_transform}, {self.target_transform}]:",
+                "INFO",
+            )
+            cv_metric1_score_mean = np.mean(valid_metric1_scores)
+            cv_metric1_score_stderr = np.std(valid_metric1_scores) / np.sqrt(
+                (len(valid_metric1_scores) - 1)
+            )
+            cv_metric2_score_mean = np.mean(valid_metric2_scores)
+            cv_metric2_score_stderr = np.std(valid_metric2_scores) / np.sqrt(
+                (len(valid_metric2_scores) - 1)
+            )
+
+
         Logger.log(
-            f"Performance statistics based on transformed data "
-            f"[{self.feature_transform}, {self.target_transform}]:",
+            "Validation {}: {0:.4f} +/- {1:.4f}".format(
+                self.metrics_names[0].upper(), cv_metric1_score_mean, cv_metric1_score_stderr
+            ),
             "INFO",
         )
-        cv_metric1_score_mean = np.mean(valid_metric1_scores)
-        cv_metric1_score_stderr = np.std(valid_metric1_scores) / np.sqrt(
-            (len(valid_metric1_scores) - 1)
-        )
-        cv_metric2_score_mean = np.mean(valid_metric2_scores)
-        cv_metric2_score_stderr = np.std(valid_metric2_scores) / np.sqrt(
-            (len(valid_metric2_scores) - 1)
+        Logger.log(
+            "Validation {}: {0:.4f} +/- {1:.4f}".format(
+                self.metrics_names[1].upper(), cv_rmsd_score_mean, cv_rmsd_score_stderr
+            ),
+            "INFO",
         )
 
-        if self.task == 'regression':
-            Logger.log(
-                "Validation   R2: {0:.4f} +/- {1:.4f}".format(
-                    cv_r2_score_mean, cv_r2_score_stderr
-                ),
-                "INFO",
-            )
-            Logger.log(
-                "Validation RSMD: {0:.4f} +/- {1:.4f}".format(
-                    cv_rmsd_score_mean, cv_rmsd_score_stderr
-                ),
-                "INFO",
-            )
+        self.cross_val_performed = True
+        self.cv_scores = {
+            f"train_{self.metric_names[0]}": training_metric1_scores,
+            f"validate_{self.metric_names[0]}": valid_metric1_scores,
+            f"train_{self.metric_names[1]}": training_metric2_scores,
+            f"validate_{self.metric_names[1]}": valid_metric2_scores,
+        }
 
-            self.cross_val_performed = True
-            self.cv_scores = {
-                "train_r2": training_r2_scores,
-                "validate_r2": valid_r2_scores,
-                "train_rmsd": training_rmsd_scores,
-                "validate_rmsd": valid_rmsd_scores,
-            }
-        elif self.task == 'ordinal':
-            Logger.log(
-                "Validation   R2: {0:.4f} +/- {1:.4f}".format(
-                    cv_r2_score_mean, cv_r2_score_stderr
-                ),
-                "INFO",
-            )
-            Logger.log(
-                "Validation RSMD: {0:.4f} +/- {1:.4f}".format(
-                    cv_rmsd_score_mean, cv_rmsd_score_stderr
-                ),
-                "INFO",
-            )
-
-            self.cross_val_performed = True
-            self.cv_scores = {
-                "train_r2": training_r2_scores,
-                "validate_r2": valid_r2_scores,
-                "train_rmsd": training_rmsd_scores,
-                "validate_rmsd": valid_rmsd_scores,
-            }
         return self.cv_scores
 
     def train(self, plot=False, retrain=False):
