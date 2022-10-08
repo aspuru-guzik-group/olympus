@@ -1,0 +1,24 @@
+This dataset reports a vapor diffusion
+crystallization experiment in which the
+outcome is an ordinal measurement of the
+crystallization called the crystal score
+
+=========================================
+                Summary
+-----------------------------------------
+    Number of Samples             918
+    Dimensionality                 10
+    Features:
+        organic                  categorical (17 options)
+        organic_molarity         continuous
+        solvent                  categorical (3 options)
+        solvent_molarity         continuous
+        inorganic_molarity       continuous
+        acid_molarity            continuous
+        alpha_vial_volume        continuous
+        beta_vial_volume         continuous
+        reaction_time            discrete
+        reaction_temperature     discrete
+    Targets:
+        crystal_score            ordinal (max)
+=========================================
