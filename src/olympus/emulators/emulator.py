@@ -75,6 +75,8 @@ class Emulator(Object):
             self.parameter_constriants = self.dataset.constraints["parameters"]
             self.aux_param_space = self.dataset.aux_param_space
 
+
+
         # -----------------------------------------
         # otherwise, assume it is a custom emulator
         # -----------------------------------------
@@ -114,6 +116,7 @@ class Emulator(Object):
             dir=f"{__scratch__}", prefix="emulator_"
         )
 
+
     def __str__(self):
         if self.dataset is not None and self.model is not None:
             return f"<Emulator ({self.dataset}, model={self.model})>"
@@ -145,7 +148,7 @@ class Emulator(Object):
     def value_space(self):
         return self.dataset.value_space
 
-    @property 
+    @property
     def task(self):
         return self.dataset.task
 
@@ -533,7 +536,7 @@ class Emulator(Object):
            features=self.dataset.test_set_features.to_numpy(), num_samples=10, return_ordinal_label=False
         )
 
-        if self.task == 'regression':   
+        if self.task == 'regression':
             train_metric1 = r2_score(train_targets, y_train_pred)
             train_metric2 = np.sqrt(
                 np.mean((train_targets.flatten() - y_train_pred.flatten()) ** 2)
@@ -542,7 +545,7 @@ class Emulator(Object):
             test_metric2 = np.sqrt(
                 np.mean((test_targets.flatten() - y_test_pred.flatten()) ** 2)
             )
- 
+
         elif self.task == 'ordinal':
             # TODO: implement these stats properly
             train_metric1 = self.compute_acc_ordinal(train_targets, y_train_pred)
@@ -569,7 +572,7 @@ class Emulator(Object):
             f"train_{self.metric_names[1]}": train_metric2,
             f"test_{self.metric_names[1]}": test_metric2,
         }
-        
+
 
         return self.model_scores
 
@@ -666,11 +669,11 @@ class Emulator(Object):
         )  # this is a 2d array
 
         if self.task=='ordinal' and return_ordinal_label:
-            # if ordinal parameter, convert it back to its predicted label 
+            # if ordinal parameter, convert it back to its predicted label
             # NOTE: need to inflate dims here, this is kind of a hack
             y_preds = [ (y_preds>0.5).cumprod(axis=1).sum(axis=1)-1 ]
 
-    
+
 
         # if we are not asking for a ParamVector, we can just return y_preds
         if return_paramvector is False:
@@ -817,14 +820,23 @@ def load_emulator(emulator_folder):
             Logger.log(message, "WARNING")
 
     if emulator_to_load.is_trained is True:
+        # if we have an ordinal regression task, we must adjust the target
+        # dimensionality accordingly
+        if emulator_to_load.task == 'regression':
+            targets_dim = emulator_to_load.dataset.targets_dim
+        elif emulator_to_load.task == 'ordinal':
+            targets_dim = len(emulator_to_load.dataset.value_space[0]['options'])
+
         emulator_to_load.model._set_dims(
             features_dim=emulator_to_load.dataset.features_dim_ohe,
-            targets_dim=emulator_to_load.dataset.targets_dim,
+            targets_dim=targets_dim,
         )
         restored = emulator_to_load.model.restore(f"{emulator_folder}/Model")
         if restored is False:
             message = "failed to restore model"
             Logger.log(message, "ERROR")
+
+
 
     # NOTE: we are not leading any cross validation models for the moment. If CV was performed though, we still have
     # the data about the CV performance

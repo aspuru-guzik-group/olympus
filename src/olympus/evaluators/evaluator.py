@@ -104,6 +104,11 @@ class Evaluator(Object):
             # NOTE: now we get 1 param at a time, a possible future expansion is
             #       to return batches
 
+            # if we have ordinal objectives, transform the string-representation to
+            # integer for interaction with planners
+            if self.emulator.task == 'ordinal':
+                self.campaign.observations_to_int()
+
             if self.emulator.parameter_constriants == "simplex":
                 # transform the campaign observations from simplex to cube (for planner)
                 self.campaign.observations_to_cube()
@@ -122,6 +127,10 @@ class Evaluator(Object):
                     params[0], self.emulator.param_space
                 )
                 self.campaign.observations_to_simpl()
+
+            # transform back to string representation]
+            if self.emulator.task == 'ordinal':
+                self.campaign.observations_to_str()
 
             # get measurement from emulator/surface
             values = self.emulator.run(params, return_paramvector=True)

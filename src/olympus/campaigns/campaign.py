@@ -153,6 +153,45 @@ class Campaign(Object):
         else:
             message = "No observations found. Skipping requested simplex to cube transformation on parameters"
 
+    def observations_to_int(self):
+        """ convert ordinal targets in string representation to their integer indices
+        """
+        # quick check if we have the proper value space for this method
+        if not np.all([v.type=='ordinal' for v in self.value_space]):
+            message = '"observations_to_int" method reserved for use with ordinal objectives only'
+            Logger.log(mesage, 'FATAL')
+        if self.observations.values is not None:
+            str_values = self.observations.get_values()
+            int_values = []
+            for str_value in str_values:
+                int_value = []
+                for value_ix, value in enumerate(self.value_space):
+                    int_value.append(value['options'].index(str_value[value_ix]))
+                int_values.append(int_value)
+            self.observations.values = np.array(int_values)
+        else:
+            pass
+
+    def observations_to_str(self):
+        """ convert ordinal targets in integer representation to their string descriptions
+        """
+        if not np.all([v.type=='ordinal' for v in self.value_space]):
+            message = '"observations_to_str" method reserved for use with ordinal objectives only'
+            Logger.log(mesage, 'FATAL')
+        if self.observations.values is not None:
+            int_values = self.observations.get_values()
+            str_values = []
+            for int_value in int_values:
+                str_value = []
+                for value_ix, value in enumerate(self.value_space):
+                    str_value.append(value['options'][int_value[value_ix]])
+                str_values.append(str_value)
+            self.observations.values = np.array(str_values)
+        else:
+            pass
+
+
+
     def reset_merit_history(self, merits):
         """updates the scalarized_observation history with a 1d list or
         array of merits values

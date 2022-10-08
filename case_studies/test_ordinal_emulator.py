@@ -13,6 +13,7 @@ from olympus.datasets import Dataset
 from olympus.emulators import Emulator
 from olympus.planners import Planner
 from olympus.models import BayesNeuralNet
+from olympus.evaluators import Evaluator
 
 from olympus.objects import (
     ParameterContinuous,
@@ -61,8 +62,8 @@ print(dataset.task)
 # print(params)
 
 # pred = emulator.run(
-# 	params, 
-# 	return_paramvector=True, 
+# 	params,
+# 	return_paramvector=True,
 # 	return_ordinal_label=True,
 # )
 
@@ -74,20 +75,169 @@ print(dataset.task)
 #-------------------------
 
 
-emulator = Emulator(dataset='mock_ordinal_emulator', model='BayesNeuralNet')
-#emulator = Emulator(dataset='suzuki', model='BayesNeuralNet')
 
-planner = Planner(kind='RandomSearch', goal='maximize')
+#----------------------
+# TEST RANDOM SAMPLING
+#----------------------
+
+# emulator = Emulator(dataset='mock_ordinal_emulator', model='BayesNeuralNet')
+# #emulator = Emulator(dataset='suzuki', model='BayesNeuralNet')
+# print(emulator)
+#
+#
+# planner = Planner(kind='RandomSearch', goal='maximize')
+# planner.set_param_space(dataset.param_space)
+#
+# campaign = Campaign()
+# campaign.set_param_space(dataset.param_space)
+# campaign.set_value_space(dataset.value_space)
+#
+
+# BUDGET = 10
+#
+# print('\n\n')
+#
+# while len(campaign.observations.get_values()) < BUDGET:
+#
+#     # switch the string-based ordinal values to integer-based
+#     campaign.observations_to_int()
+#
+#     params = planner.recommend(campaign.observations)
+#     print('params : ', params)
+#
+#     # switch back to string-based rep
+#     campaign.observations_to_str()
+#
+#     # # returning the integer label only
+#     # measurement = emulator.run(params)[0][0]
+#     # print('integer measurement : ', measurement)
+#
+#     # returning the string label as parameter vector
+#     measurement = emulator.run(
+#         params,
+#         return_paramvector=True,
+#     )
+#     print('str measurement : ', measurement)
+#
+#
+#     campaign.add_observation(params[0], measurement)
+#
+#
+# print('\n\nparams')
+# print(campaign.observations.get_params())
+#
+# print('\n\nvalues')
+# print(campaign.observations.get_values())
+#
+# # switch to integer representation
+# campaign.observations_to_int()
+#
+# print('\n\nvalues')
+# print(campaign.observations.get_values())
+# print(campaign.observations.get_values().dtype)
+#
+# # switch back to string representation
+# campaign.observations_to_str()
+#
+# print('\n\nvalues')
+# print(campaign.observations.get_values())
+#
+
+
+
+# ------------------------
+# TEST BAYESIAN OPTIMIZER
+# ------------------------
+
+
+# emulator = Emulator(dataset='mock_ordinal_emulator', model='BayesNeuralNet')
+# #emulator = Emulator(dataset='suzuki', model='BayesNeuralNet')
+# print(emulator)
+#
+#
+# planner = Planner(kind='Botorch', goal='minimize')
+# planner.set_param_space(dataset.param_space)
+#
+# campaign = Campaign()
+# campaign.set_param_space(dataset.param_space)
+# campaign.set_value_space(dataset.value_space)
+#
+#
+#
+# BUDGET = 25
+#
+# print('\n\n')
+#
+# while len(campaign.observations.get_values()) < BUDGET:
+#
+#     # switch the string-based ordinal values to integer-based
+#     campaign.observations_to_int()
+#
+#     params = planner.recommend(campaign.observations)
+#     print('params : ', params)
+#
+#     # switch back to string-based rep
+#     campaign.observations_to_str()
+#
+#     # # returning the integer label only
+#     # measurement = emulator.run(params)[0][0]
+#     # print('integer measurement : ', measurement)
+#
+#     # returning the string label as parameter vector
+#     measurement = emulator.run(
+#         params,
+#         return_paramvector=True,
+#     )
+#     print('str measurement : ', measurement)
+#
+#
+#     campaign.add_observation(params, measurement)
+#
+#
+# print('\n\nparams')
+# print(campaign.observations.get_params())
+#
+# print('\n\nvalues')
+# print(campaign.observations.get_values())
+#
+# # switch to integer representation
+# campaign.observations_to_int()
+#
+# print('\n\nvalues')
+# print(campaign.observations.get_values())
+# print(campaign.observations.get_values().dtype)
+#
+# # switch back to string representation
+# campaign.observations_to_str()
+#
+# print('\n\nvalues')
+# print(campaign.observations.get_values())
+
+
+
+#-------------------------------------
+# TEST HIGH-LEVEL EVALUATOR INTERFACE
+#-------------------------------------
+
+
+emulator = Emulator(dataset='mock_ordinal_emulator', model='BayesNeuralNet')
+print(emulator)
+
+planner = Planner(kind='Botorch', goal='minimize')
 planner.set_param_space(dataset.param_space)
 
 campaign = Campaign()
 campaign.set_param_space(dataset.param_space)
 campaign.set_value_space(dataset.value_space)
 
+evaluator = Evaluator(planner=planner, emulator=emulator, campaign=campaign)
 
+BUDGET = 10
 
-params = planner.recommend(campaign.observations)
-print('params : ', params)
+evaluator.optimize(num_iter=BUDGET)
 
-measurement = emulator.run(params) 
-print('measurement : ', measurement)
+print('\n\nparams')
+print(campaign.observations.get_params())
+
+print('\n\nvalues')
+print(campaign.observations.get_values())
