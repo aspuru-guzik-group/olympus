@@ -10,7 +10,7 @@ from tempfile import TemporaryDirectory
 import numpy as np
 
 try:
-    from sklearn.metrics import r2_score
+    from sklearn.metrics import r2_score, accuracy_score
 except ModuleNotFoundError:
     # import minimal version
     from olympus.utils.misc import r2_score
@@ -100,10 +100,10 @@ class Emulator(Object):
                 transformations=self.feature_transform
             )
             # if we have ordinal targets, force the traget transform to be 'identity'
-            if self.task=='ordinal' and target_transform!='identity' :
-                message = 'Setting "target_transform" to "identity" for ordinal targets'
-                Logger.log(message, 'WARNING')
-                self.target_transform = 'identity'
+            # if self.task=='ordinal' and target_transform!='identity' :
+            #     message = 'Setting "target_transform" to "identity" for ordinal targets'
+            #     Logger.log(message, 'WARNING')
+            #     self.target_transform = 'identity'
             self.target_transformer = DataTransformer(
                 transformations=self.target_transform
             )
@@ -125,6 +125,15 @@ class Emulator(Object):
             return f"<Emulator (unspecified)>"
 
     @property
+    def task(self):
+        return self.dataset.task
+
+    @property
+    def metric_names(self):
+        return self.dataset.metric_names
+
+
+    @property
     def goal(self):
         return self.dataset.goal
 
@@ -135,6 +144,10 @@ class Emulator(Object):
     @property
     def value_space(self):
         return self.dataset.value_space
+
+    @property 
+    def task(self):
+        return self.dataset.task
 
     # ===========
     # Set Methods
@@ -180,20 +193,6 @@ class Emulator(Object):
         else:
             self.model.set_param_space(self.param_space)
             self.model.set_value_space(self.value_space)
-
-        # set and check the compatibility between value space and emulator params
-        if np.all([v.type=='continuous' for v in self.value_space]):
-            # if continuous-valued targets, do regression
-            self.task = 'regression'
-            self.metric_names = ['r2', 'rmsd']
-        elif np.all([v.type=='ordinal' for v in self.value_space]):
-            # if ordinal-valued targets, do ordinal regression like https://arxiv.org/pdf/0704.1028.pdf
-            self.task = 'ordinal'
-            self.metric_names = ['acc', 'roc_auc']
-        else:
-            # if mixed-valued targets, complain --> we dont support this yet
-            message = 'We currently do not support emulation of mixed continuous-ordinal objective spaces'
-            Logger.log(messgae, 'FATAL')
 
 
 
@@ -347,6 +346,7 @@ class Emulator(Object):
 
 
             Logger.log(f">>> Training model on fold #{fold}...", "INFO")
+            # this call to train is the neural network model method, not the emulator
             (
                 mdl_train_metric1,
                 mdl_valid_metric1,
@@ -443,8 +443,18 @@ class Emulator(Object):
         train_features.set_param_space(self.dataset.param_space)
         train_features = train_features.data.to_numpy()
         test_features = self.dataset.test_set_features.to_numpy()
-        train_targets = self.dataset.train_set_targets.to_numpy().astype(float)
-        test_targets = self.dataset.test_set_targets.to_numpy().astype(float)
+
+        if self.task == 'regression':
+            # continuous-valued targets
+            train_targets = self.dataset.train_set_targets.to_numpy().astype(float)
+            test_targets = self.dataset.test_set_targets.to_numpy().astype(float)
+
+        elif self.task == 'ordinal':
+            # ordinal-valued targets
+            # convert the ordinal targets to the proper form
+            train_targets = self.transform_ordinal_targets( self.dataset.train_set_targets.to_numpy() )
+            test_targets = self.transform_ordinal_targets( self.dataset.test_set_targets.to_numpy() )
+
 
         # transform categorical variables to one-hot-encoded vectors, if any exist
         train_features = self.transform_cat_params(train_features)
@@ -478,10 +488,10 @@ class Emulator(Object):
             "INFO",
         )
         (
-            mdl_train_r2,
-            mdl_test_r2,
-            mdl_train_rmsd,
-            mdl_test_rmsd,
+            mdl_train_metric1,
+            mdl_test_metric1,
+            mdl_train_metric2,
+            mdl_test_metric2,
         ) = self.model.train(
             train_features=train_features_scaled,
             train_targets=train_targets_scaled,
@@ -494,8 +504,8 @@ class Emulator(Object):
         # write file to indicate training is complete and add R2 in there
         with open(f"{model_path}/training_completed.info", "w") as content:
             content.write(
-                f"Train R2={mdl_train_r2}\nValidation R2={mdl_test_r2}\n"
-                f"Train RMSD={mdl_train_rmsd}\nValidation RMSD={mdl_test_rmsd}\n"
+                f"Train {self.metric_names[0].upper()}={mdl_train_metric1}\nValidation {self.metric_names[0].upper()}={mdl_test_metric1}\n"
+                f"Train {self.metric_names[1].upper()}={mdl_train_metric2}\nValidation {self.metric_names[1].upper()}={mdl_test_metric2}\n"
             )
 
         Logger.log(
@@ -503,56 +513,75 @@ class Emulator(Object):
             f"[{self.feature_transform}, {self.target_transform}]:",
             "INFO",
         )
-        Logger.log("Train R2   Score: {0:.4f}".format(mdl_train_r2), "INFO")
-        Logger.log("Test  R2   Score: {0:.4f}".format(mdl_test_r2), "INFO")
-        Logger.log("Train RMSD Score: {0:.4f}".format(mdl_train_rmsd), "INFO")
-        Logger.log("Test  RMSD Score: {0:.4f}\n".format(mdl_test_rmsd), "INFO")
+        Logger.log(f"Train {self.metric_names[0].upper()} "+"  Score: {0:.4f}".format(mdl_train_metric1), "INFO")
+        Logger.log(f"Test  {self.metric_names[0].upper()} "+"  Score: {0:.4f}".format(mdl_test_metric1), "INFO")
+        Logger.log(f"Train {self.metric_names[1].upper()} "+"  Score: {0:.4f}".format(mdl_train_metric2), "INFO")
+        Logger.log(f"Test  {self.metric_names[1].upper()} "+"  Score: {0:.4f}\n".format(mdl_test_metric2), "INFO")
 
         # set is_trained to True
         self.is_trained = True
 
         # show stats on untransformed samples
         # -----------------------------------
-        y_train = self.dataset.train_set_targets.to_numpy()
+        #y_train = self.dataset.train_set_targets.to_numpy()
         y_train_pred = self.run(
-            features=self.dataset.train_set_features.to_numpy(), num_samples=10
+           features=self.dataset.train_set_features.to_numpy(), num_samples=10, return_ordinal_label=False
         )
-        y_test = self.dataset.test_set_targets.to_numpy()
+
+        #y_test = self.dataset.test_set_targets.to_numpy()
         y_test_pred = self.run(
-            features=self.dataset.test_set_features.to_numpy(), num_samples=10
+           features=self.dataset.test_set_features.to_numpy(), num_samples=10, return_ordinal_label=False
         )
-        train_r2 = r2_score(y_train, y_train_pred)
-        train_rmse = np.sqrt(
-            np.mean((y_train.flatten() - y_train_pred.flatten()) ** 2)
-        )
-        test_r2 = r2_score(y_test, y_test_pred)
-        test_rmse = np.sqrt(
-            np.mean((y_test.flatten() - y_test_pred.flatten()) ** 2)
-        )
+
+        if self.task == 'regression':   
+            train_metric1 = r2_score(train_targets, y_train_pred)
+            train_metric2 = np.sqrt(
+                np.mean((train_targets.flatten() - y_train_pred.flatten()) ** 2)
+            )
+            test_metric1 = r2_score(test_targets, y_test_pred)
+            test_metric2 = np.sqrt(
+                np.mean((test_targets.flatten() - y_test_pred.flatten()) ** 2)
+            )
+ 
+        elif self.task == 'ordinal':
+            # TODO: implement these stats properly
+            train_metric1 = self.compute_acc_ordinal(train_targets, y_train_pred)
+            train_metric2 = np.sqrt(
+                np.mean((train_targets.flatten() - y_train_pred.flatten()) ** 2)
+            )
+            test_metric1 = self.compute_acc_ordinal(test_targets, y_test_pred)
+            test_metric2 = np.sqrt(
+                            np.mean((test_targets.flatten() - y_test_pred.flatten()) ** 2)
+                        )
+
 
         Logger.log(f"Performance statistics based on original data:", "INFO")
-        Logger.log("Train R2   Score: {0:.4f}".format(train_r2), "INFO")
-        Logger.log("Test  R2   Score: {0:.4f}".format(test_r2), "INFO")
-        Logger.log("Train RMSD Score: {0:.4f}".format(train_rmse), "INFO")
-        Logger.log("Test  RMSD Score: {0:.4f}\n".format(test_rmse), "INFO")
+        Logger.log(f"Train {self.metric_names[0].upper()} "+"  Score: {0:.4f}".format(train_metric1), "INFO")
+        Logger.log(f"Test  {self.metric_names[0].upper()} "+"  Score: {0:.4f}".format(test_metric1), "INFO")
+        Logger.log(f"Train {self.metric_names[1].upper()} "+"  Score: {0:.4f}".format(train_metric2), "INFO")
+        Logger.log(f"Test  {self.metric_names[1].upper()} "+"  Score: {0:.4f}\n".format(test_metric2), "INFO")
 
         # save and return scores
-        # self.model_scores = {
-        #     "train_r2": mdl_train_r2,
-        #     "test_r2": mdl_test_r2,
-        #     "train_rmsd": mdl_train_rmsd,
-        #     "test_rmsd": mdl_test_rmsd,
-        # }
+
         self.model_scores = {
-            "train_r2": train_r2,
-            "test_r2": test_r2,
-            "train_rmsd": train_rmse,
-            "test_rmsd": test_rmse,
+            f"train_{self.metric_names[0]}": train_metric1,
+            f"test_{self.metric_names[0]}": test_metric1,
+            f"train_{self.metric_names[1]}": train_metric2,
+            f"test_{self.metric_names[1]}": test_metric2,
         }
+        
 
         return self.model_scores
 
-    def run(self, features, num_samples=1, return_paramvector=False):
+    @staticmethod
+    def compute_acc_ordinal(y_true, y_pred):
+        true_labels = (y_true>0.5).cumprod(axis=1).sum(axis=1)-1.
+        pred_labels = (y_pred>0.5).cumprod(axis=1).sum(axis=1)-1.
+
+        return accuracy_score(true_labels, pred_labels)
+
+
+    def run(self, features, num_samples=1, return_paramvector=False, return_ordinal_label=True):
         """Run the emulator and return a value given the features provided.
 
         Args:
@@ -636,6 +665,13 @@ class Emulator(Object):
             y_pred_scaled
         )  # this is a 2d array
 
+        if self.task=='ordinal' and return_ordinal_label:
+            # if ordinal parameter, convert it back to its predicted label 
+            # NOTE: need to inflate dims here, this is kind of a hack
+            y_preds = [ (y_preds>0.5).cumprod(axis=1).sum(axis=1)-1 ]
+
+    
+
         # if we are not asking for a ParamVector, we can just return y_preds
         if return_paramvector is False:
             return y_preds
@@ -649,8 +685,13 @@ class Emulator(Object):
         for y_pred in y_preds:
             y_pred_object = ParameterVector()
             # iterate over all objectives/targets
-            for target_name, y in zip(self.dataset.target_names, y_pred):
-                y_pred_object.from_dict({target_name: y})
+            for ix, (target_name, y) in enumerate(zip(self.dataset.target_names, y_pred)):
+                if self.task == 'ordinal':
+                    # return the ordinal variable option in the string representation
+                    str_option = self.dataset.value_space[ix]['options'][y] # index of the predicted label
+                    y_pred_object.from_dict({target_name:str_option})
+                else:
+                    y_pred_object.from_dict({target_name: y})
             # append object to list
             y_pred_objects.append(y_pred_object)
 

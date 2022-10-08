@@ -119,6 +119,22 @@ class Dataset:
                 set([param["type"] for param in self.param_space])
             )
 
+            # check the type of predictive task associated with the dataset
+            if np.all([v.type=='continuous' for v in self.value_space]):
+                # if continuous-valued targets, do regression
+                self.task = 'regression'
+                self.metric_names = ['r2', 'rmsd']
+            elif np.all([v.type=='ordinal' for v in self.value_space]):
+                # if ordinal-valued targets, do ordinal regression like https://arxiv.org/pdf/0704.1028.pdf
+                self.task = 'ordinal'
+                self.metric_names = ['acc', 'rmsd']
+            else:
+                # if mixed-valued targets, complain --> we dont support this yet
+                message = 'We currently do not support emulation of mixed continuous-ordinal objective spaces'
+                Logger.log(messgae, 'FATAL')
+
+
+
             # define attributes of interest - done here so to avoid calling load_dataset again
             self.constraints = _config["constraints"]
 
@@ -143,6 +159,8 @@ class Dataset:
 
         # create dataset splits
         self.create_train_validate_test_splits()
+
+
 
     @property
     def goal(self):

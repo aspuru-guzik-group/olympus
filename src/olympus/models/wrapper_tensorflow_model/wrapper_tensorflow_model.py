@@ -8,7 +8,7 @@ import silence_tensorflow
 
 silence_tensorflow.silence_tensorflow()
 import tensorflow as tf
-from sklearn.metrics import mean_squared_error, r2_score
+from sklearn.metrics import mean_squared_error, r2_score, accuracy_score
 
 from olympus import Logger
 from olympus.models import AbstractModel
@@ -139,7 +139,7 @@ class WrapperTensorflowModel(AbstractModel):
                     train_indices = np.arange(len(train_targets))
 
                 # print out info
-                _print_header()
+                _print_header(self.task)
                 for epoch in range(self.max_epochs):
 
                     (
@@ -162,30 +162,60 @@ class WrapperTensorflowModel(AbstractModel):
                             features=valid_features[valid_indices],
                             num_samples=10,
                         )
-                        valid_r2 = r2_score(
-                            valid_targets[valid_indices], valid_pred
-                        )
-                        valid_rmsd = np.sqrt(
-                            mean_squared_error(
+                        if self.task == 'regression':   
+                            valid_r2 = r2_score(
                                 valid_targets[valid_indices], valid_pred
                             )
-                        )
-                        valid_errors.append([valid_r2, valid_rmsd])
+                            valid_rmsd = np.sqrt(
+                                mean_squared_error(
+                                    valid_targets[valid_indices], valid_pred
+                                )
+                            )
+                            valid_errors.append([valid_r2, valid_rmsd])
+                        elif self.task == 'ordinal':
+                            # accuracy
+                            valid_true_labels = (valid_targets[valid_indices]>0.5).cumprod(axis=1).sum(axis=1)-1.
+                            valid_pred_labels = (valid_pred>0.5).cumprod(axis=1).sum(axis=1)-1.
+
+                            valid_acc = accuracy_score(valid_true_labels, valid_pred_labels)
+
+                            valid_rmsd = np.sqrt(
+                                mean_squared_error(
+                                    valid_targets[valid_indices], valid_pred
+                                )
+                            )
+                            valid_errors.append([valid_acc, valid_rmsd])
+
 
                         # make a prediction on the train set
                         train_pred = self.predict(
                             features=train_features[train_indices],
                             num_samples=10,
                         )
-                        train_r2 = r2_score(
-                            train_targets[train_indices], train_pred
-                        )
-                        train_rmsd = np.sqrt(
-                            mean_squared_error(
+                        if self.task == 'regression':
+                            train_r2 = r2_score(
                                 train_targets[train_indices], train_pred
                             )
-                        )
-                        train_errors.append([train_r2, train_rmsd])
+                            train_rmsd = np.sqrt(
+                                mean_squared_error(
+                                    train_targets[train_indices], train_pred
+                                )
+                            )
+                            train_errors.append([train_r2, train_rmsd])
+                        
+                        elif self.task == 'ordinal':
+                            # accuracy
+                            train_true_labels = (train_targets[train_indices]>0.5).cumprod(axis=1).sum(axis=1)-1.
+                            train_pred_labels = (train_pred>0.5).cumprod(axis=1).sum(axis=1)-1.
+
+                            train_acc = accuracy_score(train_true_labels, train_pred_labels)
+
+                            train_rmsd = np.sqrt(
+                                mean_squared_error(
+                                    train_targets[train_indices], train_pred
+                                )
+                            )
+                            train_errors.append([train_acc, train_rmsd])
 
                         if plot:
                             for ax in axs:
@@ -221,6 +251,7 @@ class WrapperTensorflowModel(AbstractModel):
                             ax1.plot(np.array(valid_errors)[:, 0])
                             plt.pause(0.05)
 
+
                         min_rmsd_index = np.argmin(
                             np.array(valid_errors)[:, 1]
                         )
@@ -230,7 +261,10 @@ class WrapperTensorflowModel(AbstractModel):
                         ):
                             break
 
-                        newline = f"{epoch:>15}{train_r2:>15.3f}{train_rmsd:>15.3f}{valid_r2:>15.3f}{valid_rmsd:>15.3f}"
+                        if self.task == 'regression':
+                            newline = f"{epoch:>15}{train_r2:>15.3f}{train_rmsd:>15.3f}{valid_r2:>15.3f}{valid_rmsd:>15.3f}"
+                        elif self.task == 'ordinal':
+                            newline = f"{epoch:>15}{train_acc:>15.3f}{train_rmsd:>15.3f}{valid_acc:>15.3f}{valid_rmsd:>15.3f}"
                         # the latest model is the best ==> save it and tag it on screen
                         if min_rmsd_index == len(valid_errors) - 1:
                             self.saver.save(
@@ -241,17 +275,17 @@ class WrapperTensorflowModel(AbstractModel):
 
                 # report the train and valid performance of the model we saved
                 # Note we saved the best model based on the lowest RMSE
-                mdl_train_r2 = np.array(train_errors)[min_rmsd_index, 0]
-                mdl_valid_r2 = np.array(valid_errors)[min_rmsd_index, 0]
-                mdl_train_rmsd = np.array(train_errors)[min_rmsd_index, 1]
-                mdl_valid_rmsd = np.array(valid_errors)[min_rmsd_index, 1]
+                mdl_train_metric1 = np.array(train_errors)[min_rmsd_index, 0]
+                mdl_valid_metric1 = np.array(valid_errors)[min_rmsd_index, 0]
+                mdl_train_metric2 = np.array(train_errors)[min_rmsd_index, 1]
+                mdl_valid_metric2 = np.array(valid_errors)[min_rmsd_index, 1]
 
         Logger.log(
             f"Training completed in {round(time.time() - start_time, 2)} seconds.",
             "INFO",
         )
         Logger.log("=" * 75 + "\n", "INFO")
-        return mdl_train_r2, mdl_valid_r2, mdl_train_rmsd, mdl_valid_rmsd
+        return mdl_train_metric1, mdl_valid_metric1, mdl_train_metric2, mdl_valid_metric2
 
     def restore(self, model_path):
         if not self.is_graph_constructed:
@@ -314,16 +348,24 @@ class WrapperTensorflowModel(AbstractModel):
             return pred  # return the scaled prediction (Emulator will back-transform)
 
 
-def _print_header():
+def _print_header(task):
     Logger.log(
         "    =======================================================================",
         "INFO",
     )
-    Logger.log(
-        "{0:>15}{1:>15}{2:>15}{3:>15}{4:>15}".format(
-            "Epoch", "Train R2", "Train RMSD", "Test R2", "Test RMSD"
-        ),
-        "INFO",
+    if task == 'regression':
+        Logger.log(
+            "{0:>15}{1:>15}{2:>15}{3:>15}{4:>15}".format(
+                "Epoch", "Train R2", "Train RMSD", "Test R2", "Test RMSD"
+            ),
+            "INFO",
+        )
+    elif task == 'ordinal':
+        Logger.log(
+            "{0:>15}{1:>15}{2:>15}{3:>15}{4:>15}".format(
+                "Epoch", "Train ACC", "Train RMSD", "Test ACC", "Test RMSD"
+            ),
+            "INFO",
     )
     Logger.log(
         "    =======================================================================",
