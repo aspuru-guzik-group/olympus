@@ -45,6 +45,7 @@ class GaussianMixture(AbstractSurface):
             param_dim, num_gauss, means, covariances
         )
         value_dim = 1
+        task = 'regression'
         AbstractSurface.__init__(**locals())
         np.random.seed(self.random_seed)  # set random seed
         self._create_gaussian_mixture()

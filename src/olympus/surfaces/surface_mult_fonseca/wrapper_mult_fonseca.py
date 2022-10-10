@@ -16,6 +16,7 @@ class MultFonseca(AbstractSurface):
         """
         param_dim = 2
         value_dim = 2
+        task = 'regression'
         AbstractSurface.__init__(**locals())
 
     @property

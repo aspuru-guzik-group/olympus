@@ -19,6 +19,7 @@ class CatDejong(AbstractSurface):
         For these surfaces, the same descriptors are used for each dimension
         """
         value_dim = 1
+        task = 'regression'
         AbstractSurface.__init__(param_type="categorical", **locals())
 
     @property
