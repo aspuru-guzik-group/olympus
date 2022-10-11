@@ -409,7 +409,7 @@ class PlotterSeaborn(AbstractPlotter):
         measurements,
         file_name=None,
         show=False,
-        *args, 
+        *args,
         **kwargs,
         ):
         self._set_color_palette()
@@ -421,7 +421,7 @@ class PlotterSeaborn(AbstractPlotter):
             ax = plt.subplot2grid((num_plots, 1), (plot_index, 0))
             axs.append(ax)
 
-        run_ix = 1
+        run_ix = 7
 
 
         for plot_index, emulator in enumerate(emulators):
@@ -465,7 +465,7 @@ class PlotterSeaborn(AbstractPlotter):
                 )
 
                 # plot pareto front line
-                
+
                 ax.plot(
                     pareto_front_sorted[:, 0],
                     pareto_front_sorted[:, 1],
@@ -495,16 +495,16 @@ class PlotterSeaborn(AbstractPlotter):
 
 
 
-    
+
 
 
     def _plot_hypervolume(
-        self, 
+        self,
         emulators,
-        planners, 
-        measurements, 
+        planners,
+        measurements,
         file_name=None,
-        show=False, 
+        show=False,
         *args,
         **kwargs,
         ):
