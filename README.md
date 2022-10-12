@@ -50,6 +50,16 @@ The installation only requires:
 
 Additional libraries are required to use specific modules and objects. ``Olympus`` will alert you about these requirements as you try access the related functionality.
 
+### Use cases
+The following projects have used ``Olympus`` to streamline the benchmarking of optimization algorithms.
+
+* [Bayesian optimization with known experimental and design constraints for chemistry applications](https://pubs.rsc.org/en/content/articlelanding/2022/dd/d2dd00028h)
+* [Golem: an algorithm for robust experiment and process optimization](https://pubs.rsc.org/en/content/articlelanding/2021/sc/d1sc01545a)
+* [Equipping data-driven experiment planning for Self-driving Laboratories with semantic memory: case studies of transfer learning in chemical reaction optimization](https://chemrxiv.org/engage/chemrxiv/article-details/6276f20987d01f0f03dcbe10)
+
+
+
+
 ###  Citation
 ``Olympus`` is research software. If you make use of it in scientific publications, please cite the following article:
 

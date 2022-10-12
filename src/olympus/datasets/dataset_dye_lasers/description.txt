@@ -12,7 +12,7 @@ merit for applications as organic dye lasers.
         frag_b           categorical (13 options)
         frag_c           categorical (19 options)
     Targets:
-        peak_score           continuous (min)
+        peak_score           continuous (max)
         spectral_overlap     continuous (min)
-        fluo_rate            continuous (min)
+        fluo_rate            continuous (max)
 =========================================
