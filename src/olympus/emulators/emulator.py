@@ -184,7 +184,7 @@ class Emulator(Object):
             model (str): name of available model, or a model object
         """
         if type(model) == str:
-            self.model = Model(kind=model)
+            self.model = Model(kind=model, task=self.task)
         elif isinstance(model, AbstractModel):
             self.model = model
         else:

@@ -8,11 +8,11 @@
 				"name": "organic",
 				"type": "categorical",
 				"options": [
-						"Ethylammonium Iodide", "Phenethylammonium iodide ", "Acetamidinium iodide", "N,N-Diethylpropane-1,3-diammonium iodide",
-						"1,4-Benzene diammonium iodide", "4-Trifluoromethyl-Benzylammonium iodide", "2-Pyrrolidin-1-ium-1-ylethylammonium iodide",
-						"N,N-Dimethylethane-1,2-diammonium iodide", "Morpholinium Iodide", "Cyclohexylmethylammonium iodide", "Dimethylammonium iodide",
+						"Ethylammonium Iodide", "Phenethylammonium iodide", "Acetamidinium iodide", "NN-Diethylpropane-13-diammonium iodide",
+						"14-Benzene diammonium iodide", "4-Trifluoromethyl-Benzylammonium iodide", "2-Pyrrolidin-1-ium-1-ylethylammonium iodide",
+						"NN-Dimethylethane-12-diammonium iodide", "Morpholinium Iodide", "Cyclohexylmethylammonium iodide", "Dimethylammonium iodide",
 						"Diethylammonium iodide", "Di-isopropylammonium iodide", "4-methoxy-phenethylammonium-iodide",
-						"2,2-dimethylpropane-1,3-diammonium iodide", "2-Thiophenemethylammonium iodide", "4-Methoxy-Phenylammonium iodide"
+						"22-dimethylpropane-13-diammonium iodide", "2-Thiophenemethylammonium iodide", "4-Methoxy-Phenylammonium iodide"
 				],
 				"descriptors": [
 					"accsitecount_std", "aliphaticatomcount_std", "aliphaticringcount_std", "aromaticatomcount_std", "aromaticringcount_std",
@@ -23,7 +23,7 @@
 		 			"heteroaromaticringcount_std", "hyperwienerindex_std", "largestringsize_std", "maximalprojectionarea_std",
 					"maximalprojectionradius_std", "maximalprojectionsize_std", "minimalprojectionarea_std", "minimalprojectionradius_std",
 		 			"minimalprojectionsize_std", "molpol_std", "organoammoniummolecularweight_std", "protpsa_std", "refractivity_std", "ringatomcount_std",
-		 			"rotatablebondcount_std", "saltmolecularweight", "smallestringsize_std", "vanderwaalsvolume_std", "wienerindex_std", "wienerpolarity_std",
+		 			"rotatablebondcount_std", "saltmolecularweight", "smallestringsize_std", "vanderwaalsvolume_std", "wienerindex_std", "wienerpolarity_std"
 				]
 			},
 			{
