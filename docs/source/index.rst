@@ -43,8 +43,10 @@ datasets (:ref:`datasets`) from across the natural sciences, including examples 
    classes/datasets/index
    classes/models/index
    classes/emulators
+   classes/scalarizers/index
    classes/surfaces/index
    classes/noises/index
+   classes/plotter/index
 
 
 .. toctree::
@@ -53,6 +55,7 @@ datasets (:ref:`datasets`) from across the natural sciences, including examples 
 
    custom_emulators
    custom_planners
+   custom_scalarizers
 
 
 .. toctree::

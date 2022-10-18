@@ -34,6 +34,11 @@ points can be defined, leading to the balanced exploration and exploitation of t
    gpyopt
    hyperopt
    phoenics
+   gryffin
+   smac
+   dragonfly
+   botorch
+   hebo
 
 Evolutionary Algorithms
 -----------------------
@@ -98,6 +103,66 @@ These are algorithms the do not easily fit the categories above.
    simplex
    snobfit
    basin_hopping
+
+
+Planner Compatibilities
+------------------------
+
+The follwing table summarizes the compatibilities of the different **Olympus** experiment planners
+with batched recommendations, different parameter types, descriptors, and multi-objective optimization via achievement scalarizing functions. 
+
+
+
+
+============================== ===============  ==============================================  ==============================================  ==============================================  ==============================================  ==============================================  ==============================================
+Planner                        Class            Batched                                         Discrete                                        Categorical                                     Mixed                                           Multi-objective                                 Descriptors
+============================== ===============  ==============================================  ==============================================  ==============================================  ==============================================  ==============================================  ==============================================
+:ref:`random`                  Grid-Like        :octicon:`check-circle;1em;sd-text-info`        :octicon:`check-circle;1em;sd-text-info`        :octicon:`check-circle;1em;sd-text-info`        :octicon:`check-circle;1em;sd-text-info`        :octicon:`check-circle;1em;sd-text-info`        :octicon:`x-circle;1em;sd-text-info`
+
+:ref:`sobol`                   Grid-Like        :octicon:`check-circle;1em;sd-text-info`        :octicon:`x-circle;1em;sd-text-info`            :octicon:`x-circle;1em;sd-text-info`            :octicon:`x-circle;1em;sd-text-info`            :octicon:`check-circle;1em;sd-text-info`        N/A
+
+:ref:`grid`                    Grid-Like        :octicon:`check-circle;1em;sd-text-info`        :octicon:`check-circle;1em;sd-text-info`        :octicon:`check-circle;1em;sd-text-info`        :octicon:`check-circle;1em;sd-text-info`        :octicon:`check-circle;1em;sd-text-info`        :octicon:`x-circle;1em;sd-text-info`
+ 
+:ref:`latin_hypercube`         Grid-like        :octicon:`check-circle;1em;sd-text-info`        :octicon:`check-circle;1em;sd-text-info`        :octicon:`x-circle;1em;sd-text-info`            :octicon:`x-circle;1em;sd-text-info`            :octicon:`check-circle;1em;sd-text-info`        N/A
+
+:ref:`conjugate_gradient`      Gradient-based   :octicon:`x-circle;1em;sd-text-info`            :octicon:`x-circle;1em;sd-text-info`            :octicon:`x-circle;1em;sd-text-info`            :octicon:`x-circle;1em;sd-text-info`            :octicon:`x-circle;1em;sd-text-info`            N/A
+
+:ref:`steepest_descent`        Gradient-based   :octicon:`x-circle;1em;sd-text-info`            :octicon:`x-circle;1em;sd-text-info`            :octicon:`x-circle;1em;sd-text-info`            :octicon:`x-circle;1em;sd-text-info`            :octicon:`x-circle;1em;sd-text-info`            N/A
+ 
+:ref:`lbfgs`                   Gradient-based   :octicon:`x-circle;1em;sd-text-info`            :octicon:`x-circle;1em;sd-text-info`            :octicon:`x-circle;1em;sd-text-info`            :octicon:`x-circle;1em;sd-text-info`            :octicon:`x-circle;1em;sd-text-info`            N/A
+
+:ref:`slsqp`                   Gradient-based   :octicon:`x-circle;1em;sd-text-info`            :octicon:`x-circle;1em;sd-text-info`            :octicon:`x-circle;1em;sd-text-info`            :octicon:`x-circle;1em;sd-text-info`            :octicon:`x-circle;1em;sd-text-info`            N/A
+   
+:ref:`snobfit`                 Heuristic        :octicon:`x-circle;1em;sd-text-info`            :octicon:`x-circle;1em;sd-text-info`            :octicon:`x-circle;1em;sd-text-info`            :octicon:`x-circle;1em;sd-text-info`            :octicon:`x-circle;1em;sd-text-info`            N/A
+
+:ref:`basin_hopping`           Heuristic        :octicon:`x-circle;1em;sd-text-info`            :octicon:`x-circle;1em;sd-text-info`            :octicon:`x-circle;1em;sd-text-info`            :octicon:`x-circle;1em;sd-text-info`            :octicon:`x-circle;1em;sd-text-info`            N/A
+
+:ref:`simplex`                 Heuristic        :octicon:`x-circle;1em;sd-text-info`            :octicon:`x-circle;1em;sd-text-info`            :octicon:`x-circle;1em;sd-text-info`            :octicon:`x-circle;1em;sd-text-info`            :octicon:`x-circle;1em;sd-text-info`            N/A
+
+:ref:`deap`                    Evolutionary     :octicon:`check-circle;1em;sd-text-info`        :octicon:`check-circle;1em;sd-text-info`        :octicon:`check-circle;1em;sd-text-info`        :octicon:`check-circle;1em;sd-text-info`        :octicon:`check-circle;1em;sd-text-info`        :octicon:`x-circle;1em;sd-text-info`
+
+:ref:`cma`                     Evolutionary     :octicon:`check-circle;1em;sd-text-info`        :octicon:`check-circle;1em;sd-text-info`        ??                                              ??                                              ??                                              :octicon:`x-circle;1em;sd-text-info` 
+ 
+:ref:`particle_swarms`         Evolutionary     :octicon:`check-circle;1em;sd-text-info`        :octicon:`check-circle;1em;sd-text-info`        ??                                              ??                                              ??                                              :octicon:`x-circle;1em;sd-text-info`
+
+:ref:`differential_evolution`  Evolutionary     :octicon:`check-circle;1em;sd-text-info`        :octicon:`check-circle;1em;sd-text-info`        ??                                              ??                                              ??                                              :octicon:`x-circle;1em;sd-text-info`
+
+:ref:`gpyopt`                  Bayesian         :octicon:`check-circle;1em;sd-text-info`        :octicon:`check-circle;1em;sd-text-info`        :octicon:`check-circle;1em;sd-text-info`        :octicon:`check-circle;1em;sd-text-info`        :octicon:`check-circle;1em;sd-text-info`        :octicon:`x-circle;1em;sd-text-info`
+
+:ref:`hyperopt`                Bayesian         :octicon:`check-circle;1em;sd-text-info`        :octicon:`check-circle;1em;sd-text-info`        :octicon:`check-circle;1em;sd-text-info`        :octicon:`check-circle;1em;sd-text-info`        :octicon:`check-circle;1em;sd-text-info`        :octicon:`x-circle;1em;sd-text-info`
+
+:ref:`pheonics`                Bayesian         :octicon:`check-circle;1em;sd-text-info`        :octicon:`check-circle;1em;sd-text-info`        :octicon:`x-circle;1em;sd-text-info`            :octicon:`x-circle;1em;sd-text-info`            :octicon:`check-circle;1em;sd-text-info`        N/A
+
+:ref:`gryffin`                 Bayesian         :octicon:`check-circle;1em;sd-text-info`        :octicon:`check-circle;1em;sd-text-info`        :octicon:`check-circle;1em;sd-text-info`        :octicon:`check-circle;1em;sd-text-info`        :octicon:`check-circle;1em;sd-text-info`        :octicon:`check-circle;1em;sd-text-info`
+
+:ref:`smac`                    Bayesian         :octicon:`check-circle;1em;sd-text-info`        :octicon:`check-circle;1em;sd-text-info`        :octicon:`check-circle;1em;sd-text-info`        :octicon:`check-circle;1em;sd-text-info`        ??                                              ??
+
+:ref:`dragonfly`               Bayesian         :octicon:`check-circle;1em;sd-text-info`        :octicon:`check-circle;1em;sd-text-info`        :octicon:`check-circle;1em;sd-text-info`        :octicon:`check-circle;1em;sd-text-info`        :octicon:`x-circle;1em;sd-text-info`            :octicon:`x-circle;1em;sd-text-info`
+
+:ref:`botorch`                 Bayesian         :octicon:`check-circle;1em;sd-text-info`        :octicon:`check-circle;1em;sd-text-info`        :octicon:`check-circle;1em;sd-text-info`        :octicon:`check-circle;1em;sd-text-info`        :octicon:`check-circle;1em;sd-text-info`        :octicon:`check-circle;1em;sd-text-info`
+
+:ref:`hebo`                    Bayesian         :octicon:`check-circle;1em;sd-text-info`        :octicon:`check-circle;1em;sd-text-info`        :octicon:`check-circle;1em;sd-text-info`        :octicon:`check-circle;1em;sd-text-info`        :octicon:`check-circle;1em;sd-text-info`         :octicon:`check-circle;1em;sd-text-info`
+============================== ===============  ==============================================  ==============================================  ==============================================  ==============================================  ==============================================  ==============================================
 
 
 Planner Function

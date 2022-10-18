@@ -10,9 +10,14 @@ Core developers
 * Florian Häse
 * Matteo Aldeghi
 * Riley Hickman
+* Prianysh Parakh
+* Austin Cheng
 
 Dataset contributors
 --------------------
 
 * Melodie Christensen
 * Elena Liles
+* Jason E. Hein
+* Qianxiang Ai
+* Joshua Schrier
