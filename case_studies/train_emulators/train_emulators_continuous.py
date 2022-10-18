@@ -19,10 +19,10 @@ from sklearn.metrics import r2_score, mean_squared_error
 search_space = {
 	'batch_size': hp.quniform('batch_size', 10, 100, 10),
 	'hidden_act': hp.choice('hidden_act', ['leaky_relu'] ),
-	'hidden_depth': hp.quniform('hidden_depth', 2, 5, 1),
-	'hidden_nodes': hp.quniform('hidden_nodes', 28, 96, 4),
+	'hidden_depth': hp.quniform('hidden_depth', 2, 6, 1),
+	'hidden_nodes': hp.quniform('hidden_nodes', 28, 104, 4),
 	'learning_rate': hp.uniform('learning_rate', 1e-5, 5e-3),
-	'reg': hp.uniform('reg', 0.0001, 0.5)
+	'reg': hp.uniform('reg', 0.00001, 0.5)
 }
 int_params = ['batch_size', 'hidden_depth', 'hidden_nodes']
 
@@ -68,21 +68,21 @@ dataset_names = [
 #         'p3ht', 'suzuki_i', 'suzuki_ii', 'suzuki_iii', 'suzuki_iv']
 
 dataset_params = {
-		'oer_plate_4098': {'out_act': 'relu', 'feature_transform': 'standardize', 'target_transform': 'normalize'},
-		'oer_plate_3851': {'out_act': 'relu', 'feature_transform': 'standardize', 'target_transform': 'normalize'},
-		'oer_plate_3860': {'out_act': 'relu', 'feature_transform': 'standardize', 'target_transform': 'normalize'},
-		'oer_plate_3496': {'out_act': 'relu', 'feature_transform': 'standardize', 'target_transform': 'normalize'},
+		'oer_plate_4098': {'out_act': 'relu', 'feature_transform': 'standardize', 'target_transform': 'mean'},
+		'oer_plate_3851': {'out_act': 'relu', 'feature_transform': 'standardize', 'target_transform': 'mean'},
+		'oer_plate_3860': {'out_act': 'relu', 'feature_transform': 'standardize', 'target_transform': 'mean'},
+		'oer_plate_3496': {'out_act': 'relu', 'feature_transform': 'standardize', 'target_transform': 'mean'},
 		#
-		'p3ht': {'out_act': 'relu', 'feature_transform': 'standardize', 'target_transform': 'normalize'},
-		'thin_film': {'out_act': 'relu', 'feature_transform': 'identity', 'target_transform': 'normalize'},
-		'crossed_barrel': {'out_act': 'relu', 'feature_transform': 'standardize', 'target_transform': 'normalize'},
-		'autoam': {'out_act': 'sigmoid', 'feature_transform': 'standardize', 'target_transform': 'normalize'},
-		'agnp': {'out_act': 'sigmoid', 'feature_transform': 'standardize', 'target_transform': 'normalize'},
+		'p3ht': {'out_act': 'relu', 'feature_transform': 'standardize', 'target_transform': 'mean'},
+		'thin_film': {'out_act': 'relu', 'feature_transform': 'identity', 'target_transform': 'mean'},
+		'crossed_barrel': {'out_act': 'relu', 'feature_transform': 'standardize', 'target_transform': 'mean'},
+		'autoam': {'out_act': 'relu', 'feature_transform': 'standardize', 'target_transform': 'mean'},
+		'agnp': {'out_act': 'relu', 'feature_transform': 'standardize', 'target_transform': 'mean'},
 		#
-		'suzuki_i': {'out_act': 'relu', 'feature_transform': 'standardize', 'target_transform': 'normalize'},
-		'suzuki_ii': {'out_act': 'relu', 'feature_transform': 'standardize', 'target_transform': 'normalize'},
-		'suzuki_iii': {'out_act': 'relu', 'feature_transform': 'standardize', 'target_transform': 'normalize'},
-		'suzuki_iv': {'out_act': 'relu', 'feature_transform': 'standardize', 'target_transform': 'normalize'},
+		'suzuki_i': {'out_act': 'relu', 'feature_transform': 'standardize', 'target_transform': 'mean'},
+		'suzuki_ii': {'out_act': 'relu', 'feature_transform': 'standardize', 'target_transform': 'mean'},
+		'suzuki_iii': {'out_act': 'relu', 'feature_transform': 'standardize', 'target_transform': 'mean'},
+		'suzuki_iv': {'out_act': 'relu', 'feature_transform': 'standardize', 'target_transform': 'mean'},
 }
 
 

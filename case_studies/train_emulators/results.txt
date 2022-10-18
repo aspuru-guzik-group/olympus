@@ -1,0 +1,46 @@
+
+params = {
+		'batch_size': 50,
+		'hidden_act': 'leaky_relu',
+		'hidden_depth': 5,
+		'hidden_nodes': 96,
+		'learning_rate': 1e-4,
+		'reg': 0.0001,
+		'out_act': 'sigmoid',
+}
+
+[INFO] Performance statistics based on transformed data [standardize, identity]:
+[INFO] Train ACC   Score: 0.8600
+[INFO] Test  ACC   Score: 0.7600
+[INFO] Train RMSD   Score: 0.1892
+[INFO] Test  RMSD   Score: 0.2530
+
+[INFO] Performance statistics based on original data:
+[INFO] Train ACC   Score: 0.8896
+[INFO] Test  ACC   Score: 0.7663
+[INFO] Train RMSD   Score: 0.1914
+[INFO] Test  RMSD   Score: 0.2796
+
+--------------------------------------------------------------------------------
+
+params = {
+		'batch_size': 50,
+		'hidden_act': 'leaky_relu',
+		'hidden_depth': 5,
+		'hidden_nodes': 48,
+		'learning_rate': 1e-4,
+		'reg': 0.0001,
+		'out_act': 'sigmoid',
+}
+
+[INFO] Performance statistics based on transformed data [standardize, identity]:
+[INFO] Train ACC   Score: 0.9400
+[INFO] Test  ACC   Score: 0.9000
+[INFO] Train RMSD   Score: 0.1239
+[INFO] Test  RMSD   Score: 0.2258
+
+[INFO] Performance statistics based on original data:
+[INFO] Train ACC   Score: 0.9223
+[INFO] Test  ACC   Score: 0.7065
+[INFO] Train RMSD   Score: 0.1597
+[INFO] Test  RMSD   Score: 0.3216

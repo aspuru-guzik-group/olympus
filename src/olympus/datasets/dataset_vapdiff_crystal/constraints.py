@@ -17,16 +17,16 @@ df_hull = pd.read_csv(f'{__home__}/datasets/dataset_vapdiff_crystal/convex_hull_
 
 def known_constraints(param_vec):
 
-    organic = param_vec['organic']
-    organic_molarity = param_vec['organic_molarity']
-    solvent = param_vec['solvent']
-    solvent_molarity = param_vec['solvent_molarity']
-    inorganic_molarity = param_vec['inorganic_molarity']
-    acid_molarity = param_vec['acid_molarity']
-    alpha_vial_volume = param_vec['alpha_vial_volume']
-    beta_vial_volume = param_vec['beta_vial_volume']
-    reaction_time = param_vec['reaction_time']
-    reaction_temperature = param_vec['reaction_temperature']
+    organic = param_vec[0]
+    organic_molarity = param_vec[1]
+    solvent = param_vec[2]
+    solvent_molarity = param_vec[3]
+    inorganic_molarity = param_vec[4]
+    acid_molarity = param_vec[5]
+    alpha_vial_volume = param_vec[6]
+    beta_vial_volume = param_vec[7]
+    reaction_time = param_vec[8]
+    reaction_temperature = param_vec[9]
 
     # check max molarity constraints first
     if organic_molarity > max_mol_constr['organic_molarity_max'][organic]:

@@ -86,14 +86,14 @@ for dataset_name in dataset_names:
 		fn=objective,
 		space=search_space,
 		algo=tpe.suggest,
-		max_evals=45,
+		max_evals=1,#45,
 		trials=trials
 	)
 
 	best_idx = np.argmin(all_losses)
 	best_emulator = all_emulators[best_idx]
 
-	best_emulator.save(f'emulator_{current_dataset}_BayesNeuralNet')
+	best_emulator.save(f'emulators_ordinal/emulator_{current_dataset}_BayesNeuralNet')
 
 	best_scores[current_dataset] = {
 				'scores':all_cv_scores,
@@ -102,4 +102,4 @@ for dataset_name in dataset_names:
 				'losses': all_losses,
 				'all_test_indices': all_test_indices,
 		}
-	pickle.dump(best_scores, open('best_scores.pkl', 'wb'))
+	pickle.dump(best_scores, open('emulators_ordinal/best_scores.pkl', 'wb'))

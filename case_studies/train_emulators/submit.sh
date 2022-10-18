@@ -30,6 +30,6 @@ conda activate olympus
 
 date >> output.log
 echo "" >> output.log
-python train_emulators.py
+python train_emulators_continuous.py
 echo "" >> output.log
 date >> output.log

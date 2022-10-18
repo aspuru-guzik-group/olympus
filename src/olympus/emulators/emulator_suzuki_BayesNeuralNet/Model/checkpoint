@@ -1,2 +1,2 @@
-model_checkpoint_path: "/home/riley/Research_Local/olympus/src/olympus/.scratch/emulator_tx5_opis/Model/model.ckpt"
-all_model_checkpoint_paths: "/home/riley/Research_Local/olympus/src/olympus/.scratch/emulator_tx5_opis/Model/model.ckpt"
+model_checkpoint_path: "/home/riley/Research_Local/olympus/src/olympus/.scratch/emulator_gteidgtp/Model/model.ckpt"
+all_model_checkpoint_paths: "/home/riley/Research_Local/olympus/src/olympus/.scratch/emulator_gteidgtp/Model/model.ckpt"

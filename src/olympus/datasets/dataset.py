@@ -79,7 +79,7 @@ class Dataset:
         # Case 2: Olympus dataset loaded
         # ------------------------------
         elif kind is not None:
-            _data, _config, self._description, _descriptors, self.constraints_module = load_dataset(
+            _data, _config, self._description, _descriptors, self.known_constraints = load_dataset(
                 kind
             )
             self._targets = [t["name"] for t in _config["measurements"]]
@@ -455,7 +455,11 @@ class Dataset:
             if param.type in ["continuous", "discrete"]:
                 dim += 1
             elif param.type == "categorical":
-                dim += len(param.options)
+                if np.all([d==None for d in param.descriptors]):
+                    dim += len(param.options)
+                else:
+                    # should have same num descriptors for each option
+                    dim += len(param.descriptors[0])
         return dim
 
     @property
@@ -697,20 +701,21 @@ def load_dataset(kind):
 
     # load constraints
     if config['constraints']['known'] == 'yes':
-        print('here')
         # we should have some known constraints defined in a file called constraints.py
-        sys.path.insert(0, f'{datasets_path}/dataset_{kind}/')
+        sys.path.insert(0, f'{__home__}/datasets/dataset_{kind}/')
         try:
             constraints_module = __import__('constraints')
             if not 'known_constraints' in dir(constraints_module):
                 msg = f'Known constraints module must include function "known_constraints"'
                 Logger.log(msg, 'FATAL')
+            else:
+                known_constraints = constraints_module.known_constraints
         except ModuleNotFoundError:
             Logger.log(f'No constraints module found for dataset {kind}', 'FATAL')
     else:
-        constraints_module = None
+        known_constraints = None
 
-    return data, config, description, descriptors, constraints_module
+    return data, config, description, descriptors, known_constraints
 
 
 def _validate_dataset_args(kind, data, columns, target_names):

@@ -194,9 +194,18 @@ class ParameterSpace:
         is_valid = True
         for param_ix, param_val in enumerate(param_vector):
             param = self[param_ix]
-            if param.type in ["continuous", "discrete"]:
+            if param.type == "continuous":
                 is_valid = is_valid and param.low <= param_val
                 is_valid = is_valid and param.high >= param_val
+            elif param.type == 'discrete':
+                if len(param.options)!=0:
+                    # we have options set by the user
+                    is_valid = param_val in param.options
+                else:
+                    # we should have low, high, and stride set
+                    is_valid = is_valid and param.low <= param_val
+                    is_valid = is_valid and param.high >= param_val
+                    # TODO: add validation for stride parameter
             elif param.type == "categorical":
                 is_valid = param_val in param.options
         if is_valid is False:

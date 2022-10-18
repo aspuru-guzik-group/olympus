@@ -162,7 +162,7 @@ class WrapperTensorflowModel(AbstractModel):
                             features=valid_features[valid_indices],
                             num_samples=10,
                         )
-                        if self.task == 'regression':   
+                        if self.task == 'regression':
                             valid_r2 = r2_score(
                                 valid_targets[valid_indices], valid_pred
                             )
@@ -202,7 +202,7 @@ class WrapperTensorflowModel(AbstractModel):
                                 )
                             )
                             train_errors.append([train_r2, train_rmsd])
-                        
+
                         elif self.task == 'ordinal':
                             # accuracy
                             train_true_labels = (train_targets[train_indices]>0.5).cumprod(axis=1).sum(axis=1)-1.

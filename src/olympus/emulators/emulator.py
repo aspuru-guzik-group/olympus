@@ -198,7 +198,6 @@ class Emulator(Object):
             self.model.set_value_space(self.value_space)
 
 
-
     def transform_cat_params(self, params):
         """transformed parameter space representation of categorical variables
         to one-hot-encoded representation for emulator
@@ -463,6 +462,7 @@ class Emulator(Object):
         train_features = self.transform_cat_params(train_features)
         test_features = self.transform_cat_params(test_features)
 
+
         # get scaled train/valid sets. These are also the DataTransformer objects we keep as they are needed in 'run'
         self.feature_transformer.train(train_features)
         self.target_transformer.train(train_targets)
@@ -602,6 +602,7 @@ class Emulator(Object):
             message = "This emulator has not been trained yet. Please train the emulator before you can use it for prediction."
             Logger.log(message, "ERROR")
 
+
         # check the type of features given and convert to a list of lists
         # (# samples, # features) to be processed
 
@@ -652,6 +653,13 @@ class Emulator(Object):
                 message = "Not all parameters are within bounds"
                 Logger.log(message, "WARNING")
 
+        if callable(self.dataset.known_constraints):
+            is_feasible = []
+            # check the known constraints (NOTE: for now this is only for the vapdiff_crystal
+            # dataset)
+            for feature in features:
+                is_feasible.append(self.dataset.known_constraints(feature))
+
         # convert categorical params to ohe vectors
         features = self.transform_cat_params(features)
 
@@ -673,8 +681,6 @@ class Emulator(Object):
             # NOTE: need to inflate dims here, this is kind of a hack
             y_preds = [ (y_preds>0.5).cumprod(axis=1).sum(axis=1)-1 ]
 
-
-
         # if we are not asking for a ParamVector, we can just return y_preds
         if return_paramvector is False:
             return y_preds
@@ -685,7 +691,7 @@ class Emulator(Object):
             []
         )  # list of ParamVectors with all samples and objectives
         # iterate over all samples (if we returned a batch of predictions)
-        for y_pred in y_preds:
+        for pred_ix, y_pred in enumerate(y_preds):
             y_pred_object = ParameterVector()
             # iterate over all objectives/targets
             for ix, (target_name, y) in enumerate(zip(self.dataset.target_names, y_pred)):
@@ -695,8 +701,21 @@ class Emulator(Object):
                     y_pred_object.from_dict({target_name:str_option})
                 else:
                     y_pred_object.from_dict({target_name: y})
-            # append object to list
-            y_pred_objects.append(y_pred_object)
+
+            # check known constraints
+            if callable(self.dataset.known_constraints):
+                if is_feasible[pred_ix]:
+                    y_pred_objects.append(y_pred_object)
+                else:
+                    # overwrite with appropriate value if th constraint is not satisfied
+                    # NOTE: this only applies to the vapdiff_crystal dataset for now
+                    # and is therefore hardcoded, should make more general in future
+                    y_pred_objects.append(
+                        ParameterVector().from_dict({'crystal_score': 'clear_solution'})
+                    )
+            else:
+                # append object to list
+                y_pred_objects.append(y_pred_object)
 
         return y_pred_objects
 
