@@ -1,12 +1,13 @@
 {
 	"constraints": {
 		"parameters":   "none",
-		"measurements": "none"
+		"measurements": "none",
+		"known": "no"
 		},
 	"parameters": [
 			{
-				"name": "frag_a", 
-				"type": "categorical", 
+				"name": "frag_a",
+				"type": "categorical",
 				"options": [
 						"OB(O)c1ccnc(F)c1",
 						"OB(O)c1cc(F)cc(F)c1",
@@ -22,12 +23,12 @@
 						"OB(O)c1ccc(-n2c3ccccc3c3ccccc32)c2ccccc12",
 						"OB(O)c1nccs1",
 						"OB(O)c1ccnc(-n2c3ccccc3c3ccccc32)c1"
-					], 
+					],
 				"descriptors": []
 			},
 			{
-				"name": "frag_b", 
-				"type": "categorical", 
+				"name": "frag_b",
+				"type": "categorical",
 				"options": [
 					"C[N+]12CC(=O)O[B-]1(c1cccc(Br)c1-n1c3ccccc3c3ccccc31)OC(=O)C2",
 					"C[N+]12CC(=O)O[B-]1(c1ccc(Br)cc1)OC(=O)C2",
@@ -42,12 +43,12 @@
 					"C[N+]12CC(=O)O[B-]1(c1ccc(Br)s1)OC(=O)C2",
 					"C[N+]12CC(=O)O[B-]1(c1c(Br)cccc1-n1c3ccccc3c3ccccc31)OC(=O)C2",
 					"C[N+]12CC(=O)O[B-]1(c1cccnc1Br)OC(=O)C2"
-				], 
+				],
 				"descriptors": []
 			},
 			{
-				"name": "frag_c", 
-				"type": "categorical", 
+				"name": "frag_c",
+				"type": "categorical",
 				"options": [
 					"Brc1cc(Br)c2ccccc2c1",
 					"Clc1cc(Br)sc1Br",
@@ -68,10 +69,10 @@
 					"C[Si](C)(c1ccccc1Br)c1ccccc1Br",
 					"Brc1ccc(Br)nc1",
 					"Brc1cc(-n2c3ccccc3c3ccccc32)c(Br)cc1-n1c2ccccc2c2ccccc21"
-				], 
+				],
 				"descriptors": []
 			}
-			
+
 		],
     "measurements": [
 			{"name": "peak_score", "type": "continuous"},

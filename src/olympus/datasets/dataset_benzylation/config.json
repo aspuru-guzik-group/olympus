@@ -1,7 +1,8 @@
 {
 	"constraints":    {
 			"parameters":  "none",
-			"measurements": "positive"
+			"measurements": "positive",
+			"known": "no"
 		},
 	"parameters": [
 			{"name": "flow_rate", "type": "continuous", "low": 0.2,   "high": 0.4},

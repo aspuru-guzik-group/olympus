@@ -1,7 +1,8 @@
 {
   "constraints": {
 		"parameters": "none",
-		"measurements": "positive"
+		"measurements": "positive",
+    "known": "no"
 		},
 	"parameters": [
 			{"name": "p3ht_content", "type": "continuous", "low": 15.0,  "high": 96.27},

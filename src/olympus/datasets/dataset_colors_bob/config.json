@@ -1,7 +1,8 @@
 {
 	"constraints": {
 		"parameters":   "simplex",
-		"measurements": "simplex"
+		"measurements": "simplex",
+		"known": "no"
 		},
 	"parameters": [
 			{"name": "red",    "type": "continuous", "low": 0.0, "high": 1.0},

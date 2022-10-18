@@ -1,7 +1,8 @@
 {
 	"constraints": {
 			"parameters":   "none",
-			"measurements": "positive"
+			"measurements": "positive",
+			"known": "no"
 		},
 	"parameters": [
 			{"name": "temperature", "type": "continuous", "low": 75.0, "high": 90.0},

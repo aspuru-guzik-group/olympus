@@ -1,7 +1,8 @@
 {
 	"constraints": {
 		"parameters":   "none",
-		"measurements": "none"
+		"measurements": "none",
+		"known": "no"
 		},
 	"parameters": [
 			{"name": "organic", "type": "categorical", "options": ["ethylammonium", "propylammonium", "butylammonium", "isopropylammonium",

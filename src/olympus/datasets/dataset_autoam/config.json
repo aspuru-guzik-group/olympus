@@ -1,7 +1,8 @@
 {
   "constraints": {
 		"parameters": "none",
-		"measurements": "positive"
+		"measurements": "positive",
+    "known": "no"
 		},
 	"parameters": [
 			{"name": "prime_delay", "type": "continuous", "low": 0.0,  "high": 5.0},

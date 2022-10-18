@@ -1,7 +1,8 @@
 {
   "constraints": {
 		"parameters": "simplex",
-		"measurements": "positive"
+		"measurements": "positive",
+    "known": "no"
 		},
 	"parameters": [
 			{"name": "sn_load", "type": "continuous", "low": 0.0,  "high": 1.0},

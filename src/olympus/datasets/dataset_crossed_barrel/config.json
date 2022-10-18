@@ -1,7 +1,8 @@
 {
   "constraints": {
 		"parameters": "none",
-		"measurements": "positive"
+		"measurements": "positive",
+    "known": "no"
 		},
 	"parameters": [
 			{"name": "n", "type": "continuous", "low": 6.0,  "high": 12.0},

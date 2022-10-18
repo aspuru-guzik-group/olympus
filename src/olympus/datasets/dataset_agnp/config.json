@@ -1,7 +1,8 @@
 {
   "constraints": {
 		"parameters": "none",
-		"measurements": "positive"
+		"measurements": "positive",
+    "known": "no"
 		},
 	"parameters": [
 			{"name": "q_agno3", "type": "continuous", "low": 4.53,  "high": 42.80981595},

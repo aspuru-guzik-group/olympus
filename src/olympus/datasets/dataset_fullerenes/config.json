@@ -1,7 +1,8 @@
 {
 	"constraints":    {
 			"parameters":  "none",
-			"measurements": "positive"
+			"measurements": "positive",
+			"known": "no"
 		},
 	"parameters": [
 			{"name": "reaction_time", "type": "continuous", "low": 3.0,   "high": 31.0},

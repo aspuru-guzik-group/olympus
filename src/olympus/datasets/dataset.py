@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 
 import json
-import os
+import os, sys
 from glob import glob
 
 import numpy as np
 from pandas import DataFrame, read_csv
 
-from olympus import Logger
+from olympus import __home__, Logger
 from olympus.campaigns.param_space import ParameterSpace
 from olympus.objects import (
     Parameter,
@@ -79,7 +79,7 @@ class Dataset:
         # Case 2: Olympus dataset loaded
         # ------------------------------
         elif kind is not None:
-            _data, _config, self._description, _descriptors = load_dataset(
+            _data, _config, self._description, _descriptors, self.constraints_module = load_dataset(
                 kind
             )
             self._targets = [t["name"] for t in _config["measurements"]]
@@ -165,14 +165,14 @@ class Dataset:
     @property
     def goal(self):
         if not "_goal" in self.__dict__:
-            _data, _config, _description, _ = load_dataset(self.kind)
+            _data, _config, _description, _, __ = load_dataset(self.kind)
             self._goal = _config["default_goal"]
         return self._goal
 
     @property
     def measurement_name(self):
         if not "_measurement_name" in self.__dict__:
-            _data, _config, _description, _ = load_dataset(self.kind)
+            _data, _config, _description, _, __ = load_dataset(self.kind)
             self._measurement_name = _config["measurements"][0]["name"]
         return self._measurement_name
 
@@ -695,7 +695,22 @@ def load_dataset(kind):
     else:
         descriptors = None
 
-    return data, config, description, descriptors
+    # load constraints
+    if config['constraints']['known'] == 'yes':
+        print('here')
+        # we should have some known constraints defined in a file called constraints.py
+        sys.path.insert(0, f'{datasets_path}/dataset_{kind}/')
+        try:
+            constraints_module = __import__('constraints')
+            if not 'known_constraints' in dir(constraints_module):
+                msg = f'Known constraints module must include function "known_constraints"'
+                Logger.log(msg, 'FATAL')
+        except ModuleNotFoundError:
+            Logger.log(f'No constraints module found for dataset {kind}', 'FATAL')
+    else:
+        constraints_module = None
+
+    return data, config, description, descriptors, constraints_module
 
 
 def _validate_dataset_args(kind, data, columns, target_names):
