@@ -158,7 +158,7 @@ class WrapperTensorflowModel(AbstractModel):
                     if epoch % self.pred_int == 0:
 
                         # make a prediction on the validation set
-                        valid_pred = self.predict(
+                        valid_pred, _, __ = self.predict(
                             features=valid_features[valid_indices],
                             num_samples=10,
                         )
@@ -188,7 +188,7 @@ class WrapperTensorflowModel(AbstractModel):
 
 
                         # make a prediction on the train set
-                        train_pred = self.predict(
+                        train_pred, _, __ = self.predict(
                             features=train_features[train_indices],
                             num_samples=10,
                         )
@@ -311,6 +311,7 @@ class WrapperTensorflowModel(AbstractModel):
 
         with self.sess.as_default():
             pred = np.empty((num_samples, len(features), self.targets_dim))
+            scale = np.empty((num_samples, len(features), self.targets_dim))
             resolution = divmod(len(features), self.batch_size)
             res = [self.batch_size for i in range(resolution[0])]
             res.append(resolution[1])
@@ -339,13 +340,17 @@ class WrapperTensorflowModel(AbstractModel):
                     )
 
                 for _ in range(num_samples):
-                    predic = self.sess.run(
-                        self.y_pred, feed_dict={self.tf_x: X_test_batch}
+                    y_pred, y_scale = self.sess.run(
+                        (self.y_pred, self.scale), feed_dict={self.tf_x: X_test_batch}
                     )
-                    pred[_, start:stop] = predic[:size]
+                    pred[_, start:stop] = y_pred[:size]
+                    scale[_, start:stop] = y_scale[:size]
 
-            pred = np.mean(pred, axis=0)
-            return pred  # return the scaled prediction (Emulator will back-transform)
+            mu = np.mean(pred, axis=0)
+            sigma_ep = np.std(pred, axis=0)
+            sigma_al = np.mean(scale, axis=0)
+
+            return mu, sigma_ep, sigma_al  # return the scaled prediction (Emulator will back-transform)
 
 
 def _print_header(task):

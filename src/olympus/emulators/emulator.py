@@ -476,6 +476,7 @@ class Emulator(Object):
         train_targets_scaled = self.target_transformer.transform(train_targets)
         test_targets_scaled = self.target_transformer.transform(test_targets)
 
+
         # define path where to store model
         model_path = f"{self._scratch_dir.name}/Model"
         # TODO/QUESTION: in case we are overwriting the output of a previous call, should we first remove the folder
@@ -527,12 +528,12 @@ class Emulator(Object):
         # show stats on untransformed samples
         # -----------------------------------
         #y_train = self.dataset.train_set_targets.to_numpy()
-        y_train_pred = self.run(
+        y_train_pred, _, __ = self.run(
            features=self.dataset.train_set_features.to_numpy(), num_samples=10, return_ordinal_label=False
         )
 
         #y_test = self.dataset.test_set_targets.to_numpy()
-        y_test_pred = self.run(
+        y_test_pred, _, __ = self.run(
            features=self.dataset.test_set_features.to_numpy(), num_samples=10, return_ordinal_label=False
         )
 
@@ -667,7 +668,7 @@ class Emulator(Object):
         features_scaled = self.feature_transformer.transform(features)
 
         # predict, drawing a certain amount of samples
-        y_pred_scaled = self.model.predict(
+        y_pred_scaled, y_pred_std_ep, y_pred_std_al = self.model.predict(
             features_scaled, num_samples=num_samples
         )
 
@@ -676,6 +677,7 @@ class Emulator(Object):
             y_pred_scaled
         )  # this is a 2d array
 
+
         if self.task=='ordinal' and return_ordinal_label:
             # if ordinal parameter, convert it back to its predicted label
             # NOTE: need to inflate dims here, this is kind of a hack
@@ -683,7 +685,7 @@ class Emulator(Object):
 
         # if we are not asking for a ParamVector, we can just return y_preds
         if return_paramvector is False:
-            return y_preds
+            return y_preds, y_pred_std_ep, y_pred_std_al
 
         # NOTE: while we do not allow batches or multiple objectives yet, this code is supposed to be able to support
         #  those
@@ -717,7 +719,7 @@ class Emulator(Object):
                 # append object to list
                 y_pred_objects.append(y_pred_object)
 
-        return y_pred_objects
+        return y_pred_objects, y_pred_std_ep, y_pred_std_al
 
     def save(self, path="./olympus_emulator", include_cv=False):
         """Save the emulator in a specified location. This will save the emulator object as a pickle file, and the
