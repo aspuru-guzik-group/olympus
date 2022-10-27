@@ -79,5 +79,5 @@
 			{"name": "spectral_overlap", "type": "continuous"},
 			{"name": "fluo_rate", "type": "continuous"}
 		],
-    "default_goal": ["maximize", "minimize", "maximize"]
+    "default_goal": ["maximize", "minimize", "maximize"],
 }

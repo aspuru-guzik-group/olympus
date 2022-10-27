@@ -341,7 +341,6 @@ def simpl_to_cube(simpls):
 # CATEGORICAL PARAMS TO OHE FEATURES
 # ------------------------------------
 
-
 def cat_param_to_feat(param, val):
     """convert the option selection of a categorical variable to
     a machine readable feature vector

@@ -5,10 +5,12 @@ import os, sys
 from glob import glob
 
 import numpy as np
+import pandas as pd
 from pandas import DataFrame, read_csv
 
 from olympus import __home__, Logger
 from olympus.campaigns.param_space import ParameterSpace
+from olympus.noises import GaussianNoise
 from olympus.objects import (
     Parameter,
     ParameterCategorical,
@@ -95,11 +97,11 @@ class Dataset:
             self._create_param_space(_config)
             self._create_value_space(_config)
 
-
             # TODO: add full discrete to these types. Do we need mixed_cat_discrete, mixed_cont_cat etc..
             # level of specificity for the dataset types??
             # store the dataset type in an attribute ('full_cont', 'full_cat', 'mixed')
             # TODO: for now, full_cont could include continous or discrete parameters, should we change this?
+            self.scales = None
             if np.all(
                 [
                     param["type"] in ["categorical", "discrete"]
@@ -107,6 +109,14 @@ class Dataset:
                 ]
             ):
                 self.dataset_type = "full_cat"
+                # load scales
+                datasets_path = os.path.dirname(os.path.abspath(__file__))
+                csv_file = "".join(f"{datasets_path}/dataset_{kind}/scales.csv")
+                try:
+                    self.scales = read_csv(csv_file, header=None, names=[f'scales_{i}' for i in range(len(self.value_space))]) #.to_numpy()
+                except FileNotFoundError:
+                    Logger.log(f"Could not find scales.csv for dataset {kind}, resorting to noiseless measurements", "WARNING")
+
             elif np.all(
                 [param["type"] in ["continuous"] for param in self.param_space]
             ):
@@ -132,7 +142,6 @@ class Dataset:
                 # if mixed-valued targets, complain --> we dont support this yet
                 message = 'We currently do not support emulation of mixed continuous-ordinal objective spaces'
                 Logger.log(messgae, 'FATAL')
-
 
 
             # define attributes of interest - done here so to avoid calling load_dataset again
@@ -326,7 +335,8 @@ class Dataset:
 
         self._description = "\n".join(_description)
 
-    def run(self, params, return_paramvector=False):
+
+    def run(self, params, return_paramvector=False, noiseless=False):
         """run method to allow lookup of target values for fully categorical
         parameter spaces. This method is named run to make it interchangable with
         the emulator and surface objects within Olympus, such that it can be used in the
@@ -383,7 +393,9 @@ class Dataset:
 
         values = []
         for param in params:
-            sub_df = self.data.copy()
+            # join scales and dataset
+            sub_df = pd.concat((self.data, self.scales), axis=1)
+
             for name, space, val in zip(
                 self.feature_names, self.param_space, param
             ):
@@ -398,8 +410,18 @@ class Dataset:
 
             value_objs = []
             # iterate over all objectives/targets
-            for target_name in self.target_names:
-                val = sub_df[target_name].tolist()[0]
+            for target_ix, target_name in enumerate(self.target_names):
+                mu = sub_df[target_name].tolist()[0]
+
+                scale = sub_df[f'scales_{target_ix}'].tolist()[0]
+                if not noiseless:
+                    # sample measurement from distribution
+                    _noise = GaussianNoise(scale=scale)
+                    val = _noise._add_noise(value=mu)
+
+                else:
+                    # return the mean value
+                    val = mu
                 # if return_paramvector:
                 #     value_obj = ParameterVector().from_dict({target_name: val})
                 # else:
