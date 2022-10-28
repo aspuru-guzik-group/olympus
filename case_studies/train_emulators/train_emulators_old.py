@@ -60,26 +60,26 @@ for dataset_name in dataset_names:
 	print(emulator_params)
 
 	# # make a new emulator model
-	# model  = BayesNeuralNet(task='regression', **model_params)
-	# emulator = Emulator(
-	# 	dataset=current_dataset,
-	# 	model=model,
-	# 	feature_transform=emulator_params['feature_transform'],
-	# 	target_transform=emulator_params['target_transform']
-	# )
-	#
-	# print(emulator.task)
-	# print(emulator.model.task)
-	#
-	# scores = emulator.train()
-	#
-	# emulator.save(f'emulators_old/emulator_{current_dataset}_BayesNeuralNet')
-	#
-	# best_scores[current_dataset] = {
-	# 			'scores':scores,
-	# 			'old_scores': old_model_scores
-	# 	}
-	# pickle.dump(best_scores, open('emulators_old/best_scores.pkl', 'wb'))
+	model  = BayesNeuralNet(task='regression', **model_params)
+	emulator = Emulator(
+	 	dataset=current_dataset,
+	 	model=model,
+	 	feature_transform=emulator_params['feature_transform'],
+	 	target_transform=emulator_params['target_transform']
+	)
+	
+	print(emulator.task)
+	print(emulator.model.task)
+	
+	scores = emulator.train()
+	
+	emulator.save(f'emulators_old/emulator_{current_dataset}_BayesNeuralNet')
+	
+	best_scores[current_dataset] = {
+				'scores':scores,
+	 			'old_scores': old_model_scores
+	 	}
+	pickle.dump(best_scores, open('emulators_old/best_scores.pkl', 'wb'))
 
 
 	print('\n\n')

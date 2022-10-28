@@ -1,0 +1,2 @@
+model_checkpoint_path: "/ssd003/home/rhickman/sw/olympus/src/olympus/.scratch/emulator_zkaxqzpy/Model/model.ckpt"
+all_model_checkpoint_paths: "/ssd003/home/rhickman/sw/olympus/src/olympus/.scratch/emulator_zkaxqzpy/Model/model.ckpt"

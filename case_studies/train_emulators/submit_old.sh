@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-#SBATCH -J train_emulators
+#SBATCH -J old_emulators
 #SBATCH --ntasks=1
 #SBATCH --mem=4G
 #SBATCH --cpus-per-task 4
@@ -8,7 +8,7 @@
 #SBATCH --partition=cpu
 #SBATCH --qos=nopreemption
 #SBATCH --export=ALL
-#SBATCH --output=output.log
+#SBATCH --output=output_old.log
 #SBATCH --gres=gpu:0
 
 # >>> conda initialize >>>
@@ -28,8 +28,8 @@ unset __conda_setup
 
 conda activate olympus
 
-date >> output.log
-echo "" >> output.log
-python train_emulators_continuous.py
-echo "" >> output.log
-date >> output.log
+date >> output_old.log
+echo "" >> output_old.log
+python train_emulators_old.py
+echo "" >> output_old.log
+date >> output_old.log
