@@ -22,15 +22,11 @@ from sklearn.metrics import r2_score, mean_squared_error
 
 # datasets to emulate
 
-# dataset_names = [
-# 	'alkox', 'benzylation', 'colors_bob', 'colors_n9', 'fullerenes', 'hplc',
-# 	'photo_pce10', 'photo_wf3', 'snar', 'suzuki',
-# ]
-
 dataset_names = [
-	'alkox', 'colors_bob', 'colors_n9', 'hplc',
-	'photo_pce10', 'photo_wf3', 'suzuki'
+	'alkox', 'benzylation', 'colors_bob', 'colors_n9', 'fullerenes', 'hplc',
+	'photo_pce10', 'photo_wf3', 'snar', 'suzuki',
 ]
+
 
 model_param_attrs = ['hidden_depth', 'hidden_act', 'out_act', 'learning_rate', 'pred_int', 'reg', 'es_patience', 'max_epochs', 'batch_size']
 emulator_param_attrs = ['feature_transform', 'target_transform']
