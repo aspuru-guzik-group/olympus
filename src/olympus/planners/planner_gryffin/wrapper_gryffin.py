@@ -17,6 +17,7 @@ class Gryffin(AbstractPlanner):
         use_descriptors=True,
         auto_desc_gen=False,
         batches=1,
+        batch_size=1, 
         sampling_strategies=[-1, 1],
         boosted=False,
         random_seed=None,
@@ -122,7 +123,7 @@ class Gryffin(AbstractPlanner):
                         str(param["options"][ix]): param["descriptors"][ix]
                         for ix in range(len(param["options"]))
                     }
-                    print(category_details)
+            
                 else:
                     # user overides the use of descriptors
                     category_details = {
@@ -137,7 +138,7 @@ class Gryffin(AbstractPlanner):
                 "num_cpus": self.num_cpus,
                 "auto_desc_gen": self.auto_desc_gen,
                 "batches": self.batches,
-                "sampling_strategies": self.batches,
+                "sampling_strategies": self.sampling_strategies,
                 "boosted": self.boosted,
                 "caching": True,
                 "random_seed": self.random_seed,
@@ -156,16 +157,17 @@ class Gryffin(AbstractPlanner):
 
         # check which params to return - select alternating sampling strategy
         select_ix = len(self._values) % len(self.sampling_strategies)
-        sampling_strategy = self.sampling_strategies[select_ix]
+        sampling_strats = np.tile(self.sampling_strategies, 10)[select_ix:select_ix+self.batch_size]
+
 
         # query for new parameters
         params = self.gryffin.recommend(
             observations=self._observations,
-            sampling_strategies=[sampling_strategy],
+            sampling_strategies=sampling_strats,
         )
-        param = params[0]
+        
 
-        return [ParameterVector().from_dict(param, self.param_space)]
+        return [ParameterVector().from_dict(param, self.param_space) for param in params]
 
 
 # DEBUG:
