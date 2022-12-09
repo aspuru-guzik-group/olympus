@@ -3,26 +3,25 @@
 Redoxmers
 ==========
 
-This dataset reports the yield of undesired product (impurity) in an N-benzylation reaction. Four conditions of this reaction
-performed in a flow reactor can be controlled to minimize the yield of impurity. [#f1]_
+The ``redoxmers`` dataset reports maximum absorption wavelengths, reduction potentials against a Li/Li+ referenceelectrode, and solvation free energies computed using DFT for a dataset of 1408 benzothiadiazole derivatives. The molecules in this dataset are screened as candidates for self-reporting redox-active materials for non-aqeuous redox flow batteries. We provide simple physicochemical descriptors for each of the substituents [#f1]_
 
-The dataset includes 73 samples with four parameters and one objective.
+=============== =========== ============== ========================================
+Feature         Kind        Settings       Description
+=============== =========== ============== ========================================
+R1 substituent  categorical 2              substituted group at R1
+R2 substituent  categorical 8              substituted group at R2
+R3 substituent  categorical 8              substituted group at R3
+R4 substituent  categorical 11             substituted group at R4
+=============== =========== ============== ========================================
 
-=============== ========== ============== ========================================
-Feature         Kind       Settings       Description
-=============== ========== ============== ========================================
-flow rate       continuous [ 0.2, 0.4]    flow rate [mL/min]
-ratio           continuous [   1,   5]    benzyl bromide equivalents
-solvent         continuous [ 0.5, 1.0]    solvent equivalents
-temperature     continuous [ 110, 150]    reaction temperature [Celsius]
-=============== ========== ============== ========================================
-
-================= ========== ========
-Objective         Kind       Goal
-================= ========== ========
-yield of impurity continuous minimize
-================= ========== ========
+========================= ========== ========
+Objective           	  Kind       Goal
+========================= ========== ========
+max absorption difference continuous minimize
+reduction potential       continuous minimize
+solvation free energy     continuous minimize
+========================= ========== ========
 
 .. rubric:: Reference
 
-.. [#f1] A.M. Schweidtmann, A.D. Clayton, N. Holmes, E. Bradford, R.A. Bourne, A.A. Lapkin. Machine learning meets continuous flow chemistry: Automated optimization towards the Pareto front of multiple objectives. Chem. Eng. J. 352 (2018) 277-282.
+.. [#f1] G. Agarwal, H. A. Doan, L. A. Robertson, L. Zhang, and R. S. Assary. Discovery of Energy Storage Molecular Materials Using Quantum Chemistry-Guided Multiobjective Bayesian Optimization. Chemistry of Materials. 33 (2021) 8133–8144.

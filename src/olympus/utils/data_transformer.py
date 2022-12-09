@@ -293,7 +293,7 @@ class DataTransformer(Object):
 # --------------------------------/
 
 
-def cube_to_simpl(cubes):
+def cube_to_simpl(cubes, alpha=4.):
     """
     converts and n-cube (used for optimization) to an n+1 simplex (used
     as features for emulator)
@@ -306,7 +306,7 @@ def cube_to_simpl(cubes):
         simpl = np.zeros(len(cube) + 1)
         sums = np.sum(cube / (1 - cube))
 
-        alpha = 4.0
+        # alpha = 4.0
         simpl[-1] = alpha / (alpha + sums)
         for i in range(len(simpl) - 1):
             simpl[i] = (cube[i] / (1 - cube[i])) / (alpha + sums)

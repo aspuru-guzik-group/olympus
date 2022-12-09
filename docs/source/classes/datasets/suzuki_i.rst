@@ -3,26 +3,27 @@
 Suzuki I
 =========
 
-This dataset reports the yield of undesired product (impurity) in an N-benzylation reaction. Four conditions of this reaction
-performed in a flow reactor can be controlled to minimize the yield of impurity. [#f1]_
+The datasets ``suzuki_i−suzuki_iv`` report yeild and catalyst turnover number for flow-based Suzuki-Miyaura
+cross-coupling reactions with varying substrates. There are three continous parameters (temperature, residence
+time, and catalyst loading) and one categorical parameter (Pd catalyst ligand). The objective is to simultaneously
+maximize both the yield and catalyst turnover number. [#f1]_
 
-The dataset includes 73 samples with four parameters and one objective.
-
-=============== ========== ============== ========================================
-Feature         Kind       Settings       Description
-=============== ========== ============== ========================================
-flow rate       continuous [ 0.2, 0.4]    flow rate [mL/min]
-ratio           continuous [   1,   5]    benzyl bromide equivalents
-solvent         continuous [ 0.5, 1.0]    solvent equivalents
-temperature     continuous [ 110, 150]    reaction temperature [Celsius]
-=============== ========== ============== ========================================
+================ =========== =============== ========================================
+Feature          Kind        Settings        Description
+================ =========== =============== ========================================
+ligand           categorical 8 				 Pd catalyst ligand 
+res time         continuous  [60.0 − 600.0]  reaction residence time [s] 
+temperature      continuous  [30.0 − 110.0]  reaction temperature [◦C]
+catalyst loading continuous  [0.498 − 2.515] catalyst loading fraction [a.u.] 
+================ =========== =============== =======================================
 
 ================= ========== ========
 Objective         Kind       Goal
 ================= ========== ========
-yield of impurity continuous minimize
+yield 			  continuous maximize
+turnover		  continuous maximize
 ================= ========== ========
 
 .. rubric:: Reference
 
-.. [#f1] A.M. Schweidtmann, A.D. Clayton, N. Holmes, E. Bradford, R.A. Bourne, A.A. Lapkin. Machine learning meets continuous flow chemistry: Automated optimization towards the Pareto front of multiple objectives. Chem. Eng. J. 352 (2018) 277-282.
+.. [#f1] B. J. Reizman, Y.-M. Wang, S. L. Buchwald, and K. F. Jensen,. Suzuki–miyaura cross-coupling optimization enabled by automated feedback. Reaction chemistry & engineering. 1 (2016), 658–666.
