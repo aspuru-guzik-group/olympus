@@ -1,0 +1,25 @@
+{
+	"constraints": {
+		"parameters":   "none",
+		"measurements": "none",
+		"known": "no"
+		},
+	"parameters": [
+			{
+				"name": "DB_block",
+				"type": "categorical",
+				"options": ["DB_01", "DB_02", "DB_03", "DB_04", "DB_05", "DB_06", "DB_07", "DB_08", "DB_09", "DB_10", "DB_11", "DB_12", "DB_13", "DB_14", "DB_15", "DB_16", "DB_17", "DB_18", "DB_19", "DB_20", "DB_21", "DB_22"],
+				"descriptors": ["HOMO(eV)", "LUMO(eV)", "PrimeExcite(eV)", "PrimeExcite(osc_strength)", "DipoleMoment(Debye)", "SurfaceCharge", "ChargeCorrection", "Asphericity", "CorrectedMass", "HBondAcceptors"]
+			},
+			{
+				"name": "A_block",
+				"type": "categorical",
+				"options": ["A_001", "A_002", "A_003", "A_004", "A_005", "A_006", "A_007", "A_008", "A_009", "A_010", "A_011", "A_012", "A_013", "A_014", "A_015", "A_016", "A_017", "A_018", "A_019", "A_020", "A_021", "A_022", "A_023", "A_024", "A_025", "A_026", "A_027", "A_028", "A_029", "A_030", "A_031", "A_032", "A_033", "A_034", "A_035", "A_036", "A_037", "A_038", "A_039", "A_040", "A_041", "A_042", "A_043", "A_044", "A_045", "A_046", "A_047", "A_048", "A_049", "A_050", "A_051", "A_052", "A_053", "A_054", "A_055", "A_056", "A_057", "A_058", "A_059", "A_060", "A_061", "A_062", "A_063", "A_064", "A_065", "A_066", "A_067", "A_068", "A_069", "A_070", "A_071", "A_072", "A_073", "A_074", "A_075", "A_076", "A_077", "A_078", "A_079", "A_080", "A_081", "A_082", "A_083", "A_084", "A_085", "A_086", "A_087", "A_088", "A_089", "A_090", "A_091", "A_092", "A_093", "A_094", "A_095", "A_096", "A_097", "A_098", "A_099", "A_100"],
+				"descriptors": ["HOMO(eV)", "LUMO(eV)", "PrimeExcite(eV)", "PrimeExcite(osc_strength)", "DipoleMoment(Debye)", "SurfaceCharge", "ChargeCorrection", "Asphericity", "CorrectedMass", "HBondAcceptors"]
+			}
+		],
+    "measurements": [
+			{"name": "PredictedSO", "type": "continuous"}
+		],
+    "default_goal": "maximize"
+}

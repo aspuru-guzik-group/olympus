@@ -1,0 +1,15 @@
+MMLI Thrust 4 Organic photovoltaics
+DFT calculations made by David Friday
+Spectral overlap is predicted using DFT
+
+=========================================
+                Summary
+-----------------------------------------
+    Number of Samples             2200
+    Dimensionality                 2
+    Features:
+        DB_block         categorical (22 options)
+        A_block          categorical (100 options)
+    Targets:
+        PredictedSO          continuous (max)
+=========================================

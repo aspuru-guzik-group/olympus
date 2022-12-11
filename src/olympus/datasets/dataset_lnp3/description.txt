@@ -1,0 +1,21 @@
+This dataset reports the particle size and 
+drug loading capacity for formualtions of
+lipid nanoparticles for the drug CBD
+
+=========================================
+                Summary
+-----------------------------------------
+    Number of Samples             768
+    Dimensionality                 5
+    Features:
+        drug_input             discrete (4 options)
+        solid_lipid            categorical (3 options)
+        solid_lipid_input      discrete (4 options)
+        liquid_lipid_input     discrete (4 options)
+        surfractant_input      discrete (4 options)
+    Targets:
+        drug_loading          continuous (max)
+        encap_efficiency      continuous (max)     
+        particle_diameter     continuous (min)
+
+=========================================
