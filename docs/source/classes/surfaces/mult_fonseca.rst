@@ -1,7 +1,7 @@
 MultFonseca
 --------------
 
-.. image:: ./hyper_ellipsoid.png
+.. image:: ./multfonseca_doc_fig.png
    :align: center
 
 .. currentmodule:: olympus.surfaces

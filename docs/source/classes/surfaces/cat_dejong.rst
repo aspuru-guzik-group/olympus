@@ -1,7 +1,7 @@
 CatDejong
 --------------
 
-.. image:: ./hyper_ellipsoid.png
+.. image:: ./catdejong_doc_fig.png
    :align: center
 
 .. currentmodule:: olympus.surfaces

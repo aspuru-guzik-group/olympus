@@ -1,7 +1,7 @@
 CatCamel
 --------------
 
-.. image:: ./hyper_ellipsoid.png
+.. image:: ./catcamel_doc_fig.png
    :align: center
 
 .. currentmodule:: olympus.surfaces

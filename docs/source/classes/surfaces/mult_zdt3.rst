@@ -1,7 +1,7 @@
 MultZdt3
 --------------
 
-.. image:: ./hyper_ellipsoid.png
+.. image:: ./multzdt3_doc_fig.png
    :align: center
 
 .. currentmodule:: olympus.surfaces

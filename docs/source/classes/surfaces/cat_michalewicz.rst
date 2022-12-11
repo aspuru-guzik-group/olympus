@@ -1,7 +1,7 @@
 CatMichalewicz
 --------------
 
-.. image:: ./hyper_ellipsoid.png
+.. image:: ./catmichalewicz_doc_fig.png
    :align: center
 
 .. currentmodule:: olympus.surfaces

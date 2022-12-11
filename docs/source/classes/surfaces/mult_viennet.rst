@@ -1,7 +1,7 @@
 MultViennet
 --------------
 
-.. image:: ./hyper_ellipsoid.png
+.. image:: ./multviennet_doc_fig.png
    :align: center
 
 .. currentmodule:: olympus.surfaces
