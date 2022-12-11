@@ -26,7 +26,7 @@ def run_experiment(ind):
     params = []
     for ix, p in enumerate(dataset.param_space):
         params.append(p.options[ind[ix]])
-    return dataset.run(params)
+    return dataset.run(params, noiseless=True)
 
 
 def eval_merit(ind):
@@ -62,10 +62,6 @@ def load_data_from_pkl_and_continue(N):
 
     return data_all_repeats, missing_N
 
-
-# --------------
-# DEAP Functions
-# --------------
 # --------------
 # DEAP Functions
 # --------------

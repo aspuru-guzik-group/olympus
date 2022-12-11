@@ -37,8 +37,6 @@ Once a surface instance is defined, it can be evaluated as follows::
 Traditional Surfaces
 --------------------
 
-Ablabl
-
 .. toctree::
    :maxdepth: 1
 
@@ -56,7 +54,6 @@ Ablabl
 
 Discrete Surfaces
 -----------------
-Ablabl
 
 .. toctree::
    :maxdepth: 1
@@ -69,7 +66,6 @@ Ablabl
 
 Gaussian Mixture Surfaces
 -------------------------
-Ablabl
 
 .. toctree::
    :maxdepth: 1
@@ -82,13 +78,53 @@ Ablabl
    matterhorn
    mont_blanc
 
+
+Categorical Surfaces
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+   cat_camel
+   cat_michalewicz
+   cat_dejong
+   cat_slope
+   cat_ackley
+
+
+Multi-objective surfaces
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+   mult_fonseca
+   mult_viennet
+   mult_zdt1
+   mult_zdt2
+   mult_zdt3
+
+
 Plots
 -----
 
-Here below is an image that summarises all the analytical surfaces available in **Olympus**.
+Below is an image that summarises all the continous, single-objective analytical surfaces available in **Olympus**.
 
 .. image:: ../../_static/all_surfaces.png
    :align: center
+
+
+Below is an image that summarises all the categorcial, single-objective analytical surfaces available in **Olympus**.
+
+.. image:: ../../_static/categorical_synthetic_functions.png
+   :align: center
+
+
+Below is an image that summarises all the continuous, multi-objective analytical surfaces available in **Olympus**.
+
+.. image:: ../../_static/moo_synthetic_functions.png
+   :align: center
+
 
 
 Surface Function

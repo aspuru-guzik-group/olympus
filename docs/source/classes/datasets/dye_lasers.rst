@@ -3,26 +3,25 @@
 Dye Lasers
 ===========
 
-This dataset reports the yield of undesired product (impurity) in an N-benzylation reaction. Four conditions of this reaction
-performed in a flow reactor can be controlled to minimize the yield of impurity. [#f1]_
+The dye lasers dataset reports computed photophysical properties for 3458 organic molecules synthesized from three groups of molecular building blocks – A, B, and C (resulting in A-B-C-B-A pentamers).4 Three syntheses are used: iterative Suzuki-Miyaura cross-couling reactions, nucleophilic aromatic substitutions and Buchwald-Hartwig animations. Each molecule was subjected to a computational protocol consisting of cheminformatic, semi-empirical and ab initio quantum chemical steps to compute absorption and emission spectra and fluorescence rates. The objectives of this dataset, in order of decreasing importance are i) the peak score, which is a dimensionless quantity given by the fraction of the fluorescence power spectral density that falls within the 400 − 460 nm region, ii) the spectral overlap of the absorption and emission spectra, and iii) the fluorescence rate. [#f1]_
 
-The dataset includes 73 samples with four parameters and one objective.
 
-=============== ========== ============== ========================================
-Feature         Kind       Settings       Description
-=============== ========== ============== ========================================
-flow rate       continuous [ 0.2, 0.4]    flow rate [mL/min]
-ratio           continuous [   1,   5]    benzyl bromide equivalents
-solvent         continuous [ 0.5, 1.0]    solvent equivalents
-temperature     continuous [ 110, 150]    reaction temperature [Celsius]
-=============== ========== ============== ========================================
+=============== =========== ============== ========================================
+Feature         Kind        Settings       Description
+=============== =========== ============== ========================================
+A fragment      categorical 14             terminal fragment 
+B fragment      categorical 13             bridge fragment 
+C fragment      categorical 19             core fragment 
+=============== =========== ============== ========================================
 
 ================= ========== ========
 Objective         Kind       Goal
 ================= ========== ========
-yield of impurity continuous minimize
+peak score        continuous maximize
+spectral overlap  continuous minimize
+fluorescence rate continuous maximize
 ================= ========== ========
 
 .. rubric:: Reference
 
-.. [#f1] A.M. Schweidtmann, A.D. Clayton, N. Holmes, E. Bradford, R.A. Bourne, A.A. Lapkin. Machine learning meets continuous flow chemistry: Automated optimization towards the Pareto front of multiple objectives. Chem. Eng. J. 352 (2018) 277-282.
+.. [#f1] M. Seifrid, R. J. Hickman, A. Aguilar-Granda, C. Lavigne, J. Vestfrid, T. C. Wu, T. Gaudin, E. J. Hopkins, and A. Aspuru-Guzik. Routescore: Punching the ticket to more efficient materials development. ACS Central Science, 8 (2022) 122–131.
