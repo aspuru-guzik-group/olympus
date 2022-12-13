@@ -351,7 +351,7 @@ class Dataset:
             values (ParamVector): output value referenced from the lookup table. Returns
                 a list of num samples elements.
         """
-        if self.dataset_type is not "full_cat":
+        if self.dataset_type != "full_cat":
             message = f"Value lookup only supported for fully categorical/discrete parameter spaces"
             Logger.log(message, "FATAL")
 
