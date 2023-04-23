@@ -2,7 +2,7 @@
 
 
 from olympus import Logger
-from olympus.campaigns import ParameterSpace
+from olympus.campaigns.param_space import ParameterSpace
 
 from . import AbstractScalarizer, get_scalarizers_list, import_scalarizer
 

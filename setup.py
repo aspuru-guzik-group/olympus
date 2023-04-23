@@ -61,7 +61,7 @@ setup(
     package_dir={"": "src"},
     zip_safe=False,
     tests_require=["pytest"],
-    install_requires=["numpy", "pandas", "gurobipy", "scikit-learn",
+    install_requires=["numpy", "pandas", "scikit-learn",
                       "matplotlib", "seaborn", "SQLAlchemy"],
     python_requires=">=3.6",
     extras_require=get_extra_requires("extra_requirements.txt"),

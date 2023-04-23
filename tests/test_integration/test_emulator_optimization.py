@@ -124,3 +124,8 @@ def test_bnn_emulators_optimization(planner, dataset):
 #     dset = Dataset(kind=dataset)
 #     planner = Planner(kind=planner, goal='minimize')
 #     campaign = planner.optimize(emulator=emulator, num_iter=3)
+
+
+if __name__ == '__main__':
+
+    pass

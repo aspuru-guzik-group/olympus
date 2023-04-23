@@ -123,7 +123,7 @@ class Hyperopt(AbstractPlanner):
 
     def _ask(self):
 
-        print("TRIALS : ", self._trials.trials)
+        #print("TRIALS : ", self._trials.trials)
 
         # if self.num_generated > 1:
         #     print("TRIALS MISC: ", self._trials.trials[-1]["misc"])

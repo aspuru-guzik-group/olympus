@@ -2,10 +2,12 @@
 
 import numpy as np
 
+import olympus
 from olympus import Logger
 from olympus.campaigns.observations import Observations
 from olympus.campaigns.param_space import ParameterSpace
 from olympus.datasets import Dataset
+from olympus.scalarizers.scalarizer import Scalarizer
 from olympus.emulators.emulator import Emulator
 from olympus.objects import Object, ParameterContinuous
 from olympus.surfaces.surface import AbstractSurface
@@ -44,6 +46,8 @@ class Campaign(Object):
     ATT_PARAM_SPACE = {"type": "ParameterSpace", "default": ParameterSpace}
     ATT_VALUE_SPACE = {"type": "ParameterSpace", "default": ParameterSpace}
     ATT_PLANNER_KIND = {"type": "string", "default": "n/a"}
+
+    ATT_SCALARIZER = {"type": "Scalarizer", "default": "n/a"}
 
     ATT_IS_MOO = {"type": "bool", "default": False}
     ATT_SCALARIZED_OBSERVATIONS = {
@@ -112,6 +116,8 @@ class Campaign(Object):
     def add_and_scalarize(self, param, value, scalarizer):
         # successively add observation, then scalarize the entire history
         # of objective measurements
+        setattr(self, 'scalarizer', scalarizer)
+
         self.observations.add_observation(param, value)
         self.scalarized_observations.add_observation(
             param, 1.0
