@@ -186,8 +186,9 @@ class Botorch(AbstractPlanner):
         self._params = (
             observations.get_params()
         )  # string encodings of categorical params
+        # TODO: taking not of flip_measurements is a hack - why is this needed? 
         self._values = observations.get_values(
-            as_array=True, opposite=self.flip_measurements
+            as_array=True, opposite=np.logical_not(self.flip_measurements)
         )
         # make values 2d if they are not already
         if len(np.array(self._values).shape) == 1:
@@ -249,7 +250,7 @@ class Botorch(AbstractPlanner):
 
             # fit the GP
             mll = ExactMarginalLogLikelihood(model.likelihood, model)
-            fit_gpytorch_model(mll)
+            fit_gpytorch_mll(mll)
 
             # get the incumbent point
             f_best_argmin = torch.argmin(self.train_y_scaled)

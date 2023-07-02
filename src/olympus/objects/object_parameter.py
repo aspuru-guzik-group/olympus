@@ -77,12 +77,12 @@ class ObjectParameterDiscrete(ObjectParameter):
     def _validate(self):
         if len(self.options)!=0:
             # if we have some options, forget about the stride parameter
-            return all(
-                [
-                    min(self.options) >= self.low,
-                    max(self.options) <= self.high,
-                ]
-            )
+            # just make sure options are in order
+            # reset bounds based on the options
+            self.low = np.amin(self.options)
+            self.high = np.amax(self.options)
+            return self.options == sorted(self.options)
+            
         else:
             # we have use the stride parameter set by the user
             return all(
