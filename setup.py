@@ -62,7 +62,7 @@ setup(
     zip_safe=False,
     tests_require=["pytest"],
     install_requires=["numpy", "pandas", "scikit-learn",
-                      "matplotlib", "seaborn", "SQLAlchemy"],
+                      "matplotlib", "seaborn", "SQLAlchemy==1.4.45"],
     python_requires=">=3.6",
     extras_require=get_extra_requires("extra_requirements.txt"),
     entry_points={
