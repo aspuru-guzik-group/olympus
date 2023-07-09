@@ -40,7 +40,6 @@ Citation
 		year = {2021}
 	}
 
-
 	@article{hickman_olympus_2023,
 		author = {Hickman, Riley J. and Parakh, Priyansh and Cheng, Austin and Ai, Qianxiang and Schrier, Joshua and Aldeghi, Matteo, and Aspuru-Guzik, Al{\'a}n},
 		doi = {},

@@ -61,7 +61,7 @@ The following projects have used ``Olympus`` to streamline the benchmarking of o
 
 
 ###  Citation
-``Olympus`` is research software. If you make use of it in scientific publications, please cite the following article:
+``Olympus`` is an academinc research software. If you make use of it in scientific publications, please cite the following articles:
 
 ```
 @article{hase_olympus_2021,
@@ -75,6 +75,18 @@ The following projects have used ``Olympus`` to streamline the benchmarking of o
       title = {Olympus: a benchmarking framework for noisy optimization and experiment planning},
       volume = {2},
       year = {2021}
+}
+
+@misc{hickman_olympus_2023,
+	author = {Hickman, Riley and Parakh, Priyansh and Cheng, Austin and Ai, Qianxiang and Schrier, Joshua and Aldeghi, Matteo and Aspuru-Guzik, Al{\'a}n},
+	doi = {10.26434/chemrxiv-2023-74w8d},
+	language = {en},
+	month = may,
+	publisher = {ChemRxiv},
+	shorttitle = {Olympus, enhanced},
+	title = {Olympus, enhanced: benchmarking mixed-parameter and multi-objective optimization in chemistry and materials science},
+	urldate = {2023-06-21},
+	year = {2023},
 }
 ```
 
