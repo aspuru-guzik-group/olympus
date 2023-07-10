@@ -1,0 +1,15 @@
+Electrochemical SDL dataset.
+
+=========================================
+                Summary
+-----------------------------------------
+    Number of Samples            30
+    Dimensionality               4
+    Features:
+        ligand                  categorical (3 options)
+        metal                   categorical (2 options)
+        num_mixings             discrete (10 options)
+        ligand_metal_ratio      continuous 
+    Targets:
+        Voltage            continuous (max)
+=========================================
