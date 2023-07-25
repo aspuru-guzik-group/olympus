@@ -1,0 +1,39 @@
+{
+    "constraints": {
+          "parameters": "none",
+          "measurements": "none",
+          "known": "no"
+    },
+      "parameters": [
+              {
+                "name": "ligand", 
+                "type": "categorical", 
+                "options": ["H20", "Pyridine", "Ethylenediamine"], 
+                "descriptors": []
+            },
+              {
+                "name": "metal", 
+                "type": "categorical",  
+                "options": ["Silver(I)", "Copper(II)"], 
+                "descriptors": []
+            },
+              {
+                "name": "num_mixing", 
+                "type": "discrete", 
+                "low": 1.0,
+                "high": 10.0,
+                "options": [1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0]
+              },
+              {
+                "name": "ligand_metal_ratio", 
+                "type": "continuous", 
+                "low": 1.0,  
+                "high": 9.0
+            }
+          ],
+      "measurements": [
+          {"name": "voltage", "type": "continuous"}
+      ],
+      "default_goal": "maximize"
+  }
+  

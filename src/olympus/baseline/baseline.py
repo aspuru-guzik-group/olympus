@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 
-import os
 import glob
+import os
 import pickle
 
-from olympus import Object
-from olympus import Database
+from olympus.databases import Database
 from olympus import Logger
-from olympus import list_datasets
+from olympus.objects import Object
+from olympus.datasets import list_datasets
 
 __home__ = os.path.dirname(os.path.abspath(__file__))
 
@@ -34,10 +34,13 @@ class Baseline(Object):
                 datasets.remove(dataset)
             else:
                 Logger.log(
-                    f"found summary for not reported dataset: {dataset}", "WARNING"
+                    f"found summary for not reported dataset: {dataset}",
+                    "WARNING",
                 )
         for dataset in datasets:
-            Logger.log(f"could not find summary for dataset: {dataset}", "WARNING")
+            Logger.log(
+                f"could not find summary for dataset: {dataset}", "WARNING"
+            )
 
     def _register_dbs(self, datasets_):
         # only register complete baselines
@@ -56,7 +59,8 @@ class Baseline(Object):
                 )
         for dataset in datasets:
             Logger.log(
-                f"could not find complete baseline for dataset: {dataset}", "WARNING"
+                f"could not find complete baseline for dataset: {dataset}",
+                "WARNING",
             )
 
     def _load_baseline_db(self, dataset):
@@ -77,7 +81,9 @@ class Baseline(Object):
         if dataset in self.baseline_summaries.keys():
             return self.baseline_summaries[dataset]
         else:
-            Logger.log(f"could not find summary for dataset: {dataset}", "ERROR")
+            Logger.log(
+                f"could not find summary for dataset: {dataset}", "ERROR"
+            )
 
     def get_db(self, dataset):
         if dataset in self.baseline_dbs.keys():
@@ -86,7 +92,9 @@ class Baseline(Object):
             self._load_baseline_db(dataset)
             return self.baseline_dbs[dataset]
         else:
-            Logger.log(f"could not find baseline db for dataset: {dataset}", "ERROR")
+            Logger.log(
+                f"could not find baseline db for dataset: {dataset}", "ERROR"
+            )
 
     def get_campaigns(self, dataset):
         if dataset in self.baseline_dbs.keys():
@@ -95,10 +103,12 @@ class Baseline(Object):
             self._load_baseline_db(dataset)
             return [campaign for campaign in self.baseline_dbs[dataset]]
         else:
-            Logger.log(f"could not find baseline db for dataset: {dataset}", "ERROR")
+            Logger.log(
+                f"could not find baseline db for dataset: {dataset}", "ERROR"
+            )
 
     def get(self, dataset, kind="summary"):
-        """ Retrieves baseline for a given dataset
+        """Retrieves baseline for a given dataset
 
         Args:
             dataset (str): name of the dataset for which baseline should be retrieved

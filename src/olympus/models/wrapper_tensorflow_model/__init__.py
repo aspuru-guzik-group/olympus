@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import traceback
+
 from olympus import Logger
 
 try:

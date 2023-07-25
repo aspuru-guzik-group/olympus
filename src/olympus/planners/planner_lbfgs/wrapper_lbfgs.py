@@ -1,19 +1,33 @@
 #!/usr/bin/env python
 
+from olympus.objects.object_config import Config
 from olympus.planners.wrapper_scipy import WrapperScipy
-from olympus.objects.object_config  import Config
 
 
 class Lbfgs(WrapperScipy):
 
-    METHOD       = 'L-BFGS-B'
+    PARAM_TYPES = ["continuous"]
+
+    METHOD = "L-BFGS-B"
     KNOWS_BOUNDS = True
 
     # defaults are copied from scipy documentation
     # --> https://docs.scipy.org/doc/scipy/reference/optimize.minimize-lbfgsb.html#optimize-minimize-lbfgsb
-    def __init__(self, goal='minimize', disp=None, eps=1e-8, ftol=2.220446049250313e-9, gtol=1e-5,
-                 maxcor=10, maxfun=15000, maxiter=15000, maxls=20,
-                 init_guess=None, init_guess_method='random', init_guess_seed=None):
+    def __init__(
+        self,
+        goal="minimize",
+        disp=None,
+        eps=1e-8,
+        ftol=2.220446049250313e-9,
+        gtol=1e-5,
+        maxcor=10,
+        maxfun=15000,
+        maxiter=15000,
+        maxls=20,
+        init_guess=None,
+        init_guess_method="random",
+        init_guess_seed=None,
+    ):
         """
         L-BFGS-B optimizer based on the SciPy implementation.
 

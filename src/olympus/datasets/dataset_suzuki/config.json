@@ -1,13 +1,14 @@
 {
 	"constraints": {
 			"parameters":   "none",
-			"measurements": "positive"
+			"measurements": "positive",
+			"known": "no"
 		},
 	"parameters": [
-			{"name": "temperature", "low": 75.0, "high": 90.0},
-			{"name": "pd_mol",      "low":  0.5, "high":  5.0},
-			{"name": "arbpin",      "low":  1.0, "high":  1.8},
-			{"name": "k3po4",       "low":  1.5, "high":  3.0}
+			{"name": "temperature", "type": "continuous", "low": 75.0, "high": 90.0},
+			{"name": "pd_mol", "type": "continuous", "low":  0.5, "high":  5.0},
+			{"name": "arbpin", "type": "continuous",  "low":  1.0, "high":  1.8},
+			{"name": "k3po4", "type": "continuous", "low":  1.5, "high":  3.0}
 		],
 	"measurements": [
 		{"name": "yield", "type": "continuous"}

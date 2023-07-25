@@ -1,15 +1,17 @@
 #!/usr/bin/env python
 
-import numpy as np
-from olympus.objects.abstract_object import Object
-from olympus.datasets.dataset import Dataset
-from olympus import Logger
+from copy import deepcopy
 from functools import reduce
+
+import numpy as np
+
+from olympus import Logger
+from olympus.datasets.dataset import Dataset
+from olympus.objects.abstract_object import Object
 
 
 class DataTransformer(Object):
-
-    def __init__(self, transformations='identity'):
+    def __init__(self, transformations="identity"):
         """Applies transformations to the columns of a 2d array.
 
         Args:
@@ -34,15 +36,23 @@ class DataTransformer(Object):
         # select transformations
         # note that we select the back transformations in reversed order
         self.transformations = transformations
-        self._transforms      = [getattr(self, f'_forward_{trans}') for trans in self.transformations]
-        self._back_transforms = [getattr(self, f'_backward_{trans}') for trans in reversed(self.transformations)]
+        self._transforms = [
+            getattr(self, f"_forward_{trans}")
+            for trans in self.transformations
+        ]
+        self._back_transforms = [
+            getattr(self, f"_backward_{trans}")
+            for trans in reversed(self.transformations)
+        ]
 
         # the stats we will need
         self._mean = None
         self._stddev = None
         self._min = None
         self._max = None
-        self._periodic_info = {}  # each key is a column index, each value is low/high
+        self._periodic_info = (
+            {}
+        )  # each key is a column index, each value is low/high
 
         # other info
         self.trained = False
@@ -65,10 +75,10 @@ class DataTransformer(Object):
 
         # for splitting periodic variables we need a dataset, so that we can check which variables are periodic
         # and that are their lower/upper bounds
-        if 'periodic' in self.transformations:
+        if "periodic" in self.transformations:
             if isinstance(data, Dataset) is False:
-                message = 'in order to transform periodic variables you need to provide a Dataset object as the data argument'
-                Logger.log(message, 'ERROR')
+                message = "in order to transform periodic variables you need to provide a Dataset object as the data argument"
+                Logger.log(message, "ERROR")
 
             # remember the input dimensions
             self._dims = np.shape(data.data)[1]
@@ -98,6 +108,17 @@ class DataTransformer(Object):
         self._min = np.amin(data, axis=0)
         self._max = np.amax(data, axis=0)
 
+        # replace instances with 0. stddev with 1.
+        self._stable_stddev = np.where(self._stddev == 0.0, 1.0, self._stddev)
+
+        # replace instances where the denominator of minmax scaling is 0.
+        self._stable_min = deepcopy(self._min)
+        self._stable_max = deepcopy(self._max)
+        ixs = np.where(np.abs(self._max - self._min) < 1e-10)[0]
+        if not ixs.size == 0:
+            self._stable_max[ixs] = np.ones_like(ixs)
+            self._stable_min[ixs] = np.zeros_like(ixs)
+
         self.trained = True
 
     def transform(self, data):
@@ -117,9 +138,11 @@ class DataTransformer(Object):
             data = np.array(data)
         self._validate_data(data)
 
-        if self.trained is False and self.transformation != 'identity':
-            raise ValueError(f'DataTransformer needs to be trained before the transformation {self.transformation} '
-                             f'can be applied.')
+        if self.trained is False and self.transformation != "identity":
+            raise ValueError(
+                f"DataTransformer needs to be trained before the transformation {self.transformation} "
+                f"can be applied."
+            )
 
         pipeline = self._compose_transformations(self._transforms)
         return pipeline(data)
@@ -141,9 +164,11 @@ class DataTransformer(Object):
             data = np.array(data)
         self._validate_data(data)
 
-        if self.trained is False and self.transformation != 'identity':
-            raise ValueError(f'DataTransformer needs to be trained before the transformation {self.transformation} '
-                             f'can be applied.')
+        if self.trained is False and self.transformation != "identity":
+            raise ValueError(
+                f"DataTransformer needs to be trained before the transformation {self.transformation} "
+                f"can be applied."
+            )
 
         pipeline = self._compose_transformations(self._back_transforms)
         return pipeline(data)
@@ -152,16 +177,18 @@ class DataTransformer(Object):
     # Private Methods
     # ===============
     def _forward_standardize(self, data):
-        return (data - self._mean) / self._stddev
+        return (data - self._mean) / self._stable_stddev
 
     def _backward_standardize(self, data):
-        return data * self._stddev + self._mean
+        return data * self._stable_stddev + self._mean
 
     def _forward_normalize(self, data):
-        return (data - self._min) / (self._max - self._min)
+        return (data - self._stable_min) / (
+            self._stable_max - self._stable_min
+        )
 
     def _backward_normalize(self, data):
-        return (self._max - self._min) * data + self._min
+        return (self._stable_max - self._stable_min) * data + self._stable_min
 
     def _forward_identity(self, data):
         return data
@@ -219,31 +246,136 @@ class DataTransformer(Object):
     def _validate_data(self, data):
         # check a 2-dimensional object is provided
         if data.ndim != 2:
-            raise ValueError('Incorrect data format provided. Please provide a 2-dimensional array where each row is '
-                             'a sample and each column a feature. `numpy.shape(data)` should return (num_samples, '
-                             'num_features)')
+            raise ValueError(
+                "Incorrect data format provided. Please provide a 2-dimensional array where each row is "
+                "a sample and each column a feature. `numpy.shape(data)` should return (num_samples, "
+                "num_features)"
+            )
 
         # check we have the same number of features as before
         if self._dims is not None:
             if np.shape(data)[1] != self._dims:
-                if 'periodic' in self.transformations:
-                    raise AssertionError('periodic back transformations are not yet supported')
+                if "periodic" in self.transformations:
+                    raise AssertionError(
+                        "periodic back transformations are not yet supported"
+                    )
                 else:
-                    raise AssertionError('dimensionality mismatch')
+                    raise AssertionError("dimensionality mismatch")
 
     @staticmethod
     def _validate_args(transformations):
         # check validity of transformation argument
         for transformation in transformations:
-            if not (hasattr(DataTransformer, f'_forward_{transformation}') and hasattr(DataTransformer, f'_backward_{transformation}')):
-                raise NotImplementedError(f'transformation {transformation} not implemented. Please select one of the '
-                                          f'available transformation.')
+            if not (
+                hasattr(DataTransformer, f"_forward_{transformation}")
+                and hasattr(DataTransformer, f"_backward_{transformation}")
+            ):
+                raise NotImplementedError(
+                    f"transformation {transformation} not implemented. Please select one of the "
+                    f"available transformation."
+                )
 
-        if 'periodic' in transformations and transformations.index('periodic') != 0:
-            message = 'periodic transform is allowed only as the first transformation'
-            Logger.log(message, 'ERROR')
+        if (
+            "periodic" in transformations
+            and transformations.index("periodic") != 0
+        ):
+            message = "periodic transform is allowed only as the first transformation"
+            Logger.log(message, "ERROR")
 
     @staticmethod
     def _compose_transformations(functions_list):
         # compose transformations as provided in the list
         return lambda x: reduce(lambda a, f: f(a), functions_list, x)
+
+
+# --------------------------------
+# CUBE-SIMLPEX TRANSFORMATION
+# --------------------------------/
+
+
+def cube_to_simpl(cubes, alpha=4.):
+    """
+    converts and n-cube (used for optimization) to an n+1 simplex (used
+    as features for emulator)
+    """
+    features = []
+    for cube in cubes:
+        # cube = (1 - 2 * 1e-6) * np.squeeze(np.array([c for c in cube])) + 1e-6
+        cube = np.array(cube)
+
+        simpl = np.zeros(len(cube) + 1)
+        sums = np.sum(cube / (1 - cube))
+
+        # alpha = 4.0
+        simpl[-1] = alpha / (alpha + sums)
+        for i in range(len(simpl) - 1):
+            simpl[i] = (cube[i] / (1 - cube[i])) / (alpha + sums)
+        features.append(np.array(simpl))
+    return np.array(features)
+
+
+def simpl_to_cube(simpls):
+    """
+    converts from an n+1 simplex (used as features for the emulator)
+    to an n-cube (used for optimization)
+    """
+    features = []
+
+    for simpl in simpls:
+        alpha = 4.0
+        sums = (alpha * (simpl[-1] - 1)) / (simpl[-1])
+
+        cube = np.zeros(len(simpl) - 1)
+
+        for i in range(len(cube)):
+            cube[i] = (simpl[i] * (sums - alpha)) / (
+                simpl[i] * (sums - alpha) - 1
+            )
+
+        features.append(cube)
+
+    return np.array(features)
+
+
+# ------------------------------------
+# CATEGORICAL PARAMS TO OHE FEATURES
+# ------------------------------------
+
+def cat_param_to_feat(param, val):
+    """convert the option selection of a categorical variable to
+    a machine readable feature vector
+    Args:
+        param (object): the categorical olympus parameter
+        val (): the value of the chosen categorical option
+    """
+    # print(param, val)
+    # get the index of the selected value amongst the options
+    arg_val = param.options.index(val)
+    if np.all([d == None for d in param.descriptors]):
+        # no provided descriptors, resort to one-hot encoding
+        # feat = np.array([arg_val])
+        feat = np.zeros(len(param.options))
+        feat[arg_val] += 1.0
+    else:
+        # we have descriptors, use them as the features
+        feat = param.descriptors[arg_val]
+    return feat
+
+
+# -----------
+# DEBUGGING
+# -----------
+
+if __name__ == "__main__":
+
+    cubes = [[0.1, 0.5, 0.8], [0.5, 0.9, 0.04]]
+
+    print("CUBES : ", cubes)
+
+    simpls = cube_to_simpl(cubes)
+
+    print("SIMPLS : ", simpls)
+
+    cubes = simpl_to_cube(simpls)
+
+    print("CUBES : ", cubes)

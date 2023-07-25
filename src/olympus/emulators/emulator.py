@@ -1,29 +1,34 @@
 #!/usr/bin/env python
 
 import os
-import numpy as np
 import pickle
 import shutil
-from glob import glob
 from copy import deepcopy
+from glob import glob
 from tempfile import TemporaryDirectory
-from sklearn.metrics import r2_score
 
-from olympus import __emulator_path__, __scratch__, __version__, Logger
-from olympus.datasets.dataset import Dataset
-from olympus.models.model import Model
+import numpy as np
+
+try:
+    from sklearn.metrics import r2_score, accuracy_score
+except ModuleNotFoundError:
+    # import minimal version
+    from olympus.utils.misc import r2_score
+
+from olympus import Logger, __emulator_path__, __scratch__, __version__
+from olympus.datasets.dataset import Dataset, _validate_dataset_args
 from olympus.models.abstract_model import AbstractModel
+from olympus.models.model import Model, _validate_model_kind
 from olympus.objects import Object, ParameterVector
-from olympus.utils.data_transformer import DataTransformer
-from olympus.models.model import _validate_model_kind
-from olympus.datasets.dataset import _validate_dataset_args
+from olympus.utils.data_transformer import DataTransformer, cat_param_to_feat
+from olympus.utils.misc import r2_score
 
 
 # =========================
 # Main Class of This Module
 # =========================
 class Emulator(Object):
-    """ generic experiment emulator
+    """generic experiment emulator
 
     This class is intended to provide the interface to the user.
 
@@ -67,6 +72,11 @@ class Emulator(Object):
             )
             self._load(f"{__emulator_path__}/emulator_{dataset}_{model}")
 
+            self.parameter_constriants = self.dataset.constraints["parameters"]
+            self.aux_param_space = self.dataset.aux_param_space
+
+
+
         # -----------------------------------------
         # otherwise, assume it is a custom emulator
         # -----------------------------------------
@@ -86,16 +96,26 @@ class Emulator(Object):
             self.cv_scores = None
             self.model_scores = None
             self.emulator_to_save = None
+
+
             self.feature_transformer = DataTransformer(
                 transformations=self.feature_transform
             )
+            # if we have ordinal targets, force the traget transform to be 'identity'
+            # if self.task=='ordinal' and target_transform!='identity' :
+            #     message = 'Setting "target_transform" to "identity" for ordinal targets'
+            #     Logger.log(message, 'WARNING')
+            #     self.target_transform = 'identity'
             self.target_transformer = DataTransformer(
                 transformations=self.target_transform
             )
 
         # create tmp dir to store model files
         # also if we are loading a model (the user could call 'train' again)
-        self._scratch_dir = TemporaryDirectory(dir=f"{__scratch__}", prefix="emulator_")
+        self._scratch_dir = TemporaryDirectory(
+            dir=f"{__scratch__}", prefix="emulator_"
+        )
+
 
     def __str__(self):
         if self.dataset is not None and self.model is not None:
@@ -106,6 +126,15 @@ class Emulator(Object):
             return f"<Emulator (model={self.model})>"
         else:
             return f"<Emulator (unspecified)>"
+
+    @property
+    def task(self):
+        return self.dataset.task
+
+    @property
+    def metric_names(self):
+        return self.dataset.metric_names
+
 
     @property
     def goal(self):
@@ -119,11 +148,15 @@ class Emulator(Object):
     def value_space(self):
         return self.dataset.value_space
 
+    @property
+    def task(self):
+        return self.dataset.task
+
     # ===========
     # Set Methods
     # ===========
     def _set_dataset(self, dataset):
-        """ registers a dataset for emulator
+        """registers a dataset for emulator
 
         Args:
             dataset (str): name of available dataset, or Dataset object.
@@ -145,13 +178,13 @@ class Emulator(Object):
             Logger.log(message, "ERROR")
 
     def _set_model(self, model):
-        """ registers a model for emulator
+        """registers a model for emulator
 
         Args:
             model (str): name of available model, or a model object
         """
         if type(model) == str:
-            self.model = Model(kind=model)
+            self.model = Model(kind=model, task=self.task)
         elif isinstance(model, AbstractModel):
             self.model = model
         else:
@@ -159,8 +192,43 @@ class Emulator(Object):
         # self.param_space is taken from self.dataset.param_space, so...
         if self.dataset is None:
             self.model.set_param_space(None)
+            self.model.set_value_space(None)
         else:
             self.model.set_param_space(self.param_space)
+            self.model.set_value_space(self.value_space)
+
+
+    def transform_cat_params(self, params):
+        """transformed parameter space representation of categorical variables
+        to one-hot-encoded representation for emulator
+        """
+
+        transformed_features = []
+        for param in params:
+            transformed_feature = []
+            for p, space in zip(param, self.param_space):
+                if space.type == "categorical":
+                    element = cat_param_to_feat(space, p)
+                    transformed_feature.extend(element)
+                else:
+                    element = p
+                    transformed_feature.append(element)
+            transformed_features.append(transformed_feature)
+
+        return np.array(transformed_features)
+
+
+    def transform_ordinal_targets(self, targets):
+        # NOTE: this will only support single target ordinal parameters
+        options = self.value_space[0].options
+        transformed_targets = np.zeros( (targets.shape[0], len(options)) )
+        int_list = [options.index(t[0]) for t in targets]
+
+        for ix, target in enumerate(int_list):
+            transformed_targets[ix, 0:target+1] = 1
+
+        return transformed_targets
+
 
     # =========================
     # Train and Predict Methods
@@ -191,17 +259,29 @@ class Emulator(Object):
             )
             Logger.log(message, "FATAL")
 
-        training_r2_scores = np.empty(self.dataset.num_folds)
-        valid_r2_scores = np.empty(self.dataset.num_folds)
-        training_rmsd_scores = np.empty(self.dataset.num_folds)
-        valid_rmsd_scores = np.empty(self.dataset.num_folds)
+
+        # if we have a regression problem, use r2 and rmsd
+        # if we have an ordinal problem, use accuracy and TODO: decide on the second metric
+
+        training_metric1_scores = np.empty(self.dataset.num_folds)
+        valid_metric1_scores = np.empty(self.dataset.num_folds)
+        training_metric2_scores = np.empty(self.dataset.num_folds)
+        valid_metric2_scores = np.empty(self.dataset.num_folds)
+
+
 
         # get scaled train/valid sets
         # NOTE: we do not want to use the self.transformers, because for 'run' we want to use the transformers
         # trained in 'train'. If we reset the Transformers here, then if a user calls 'cross_validate' after 'train'
         # we end up using the wrong transformers in 'run'
-        feature_transformer = DataTransformer(transformations=self.feature_transform)
-        target_transformer = DataTransformer(transformations=self.target_transform)
+        feature_transformer = DataTransformer(
+            transformations=self.feature_transform
+        )
+        # if we have an ordinal problem, make sure the
+        target_transformer = DataTransformer(
+            transformations=self.target_transform
+        )
+
 
         # ---------------------------------------
         # Iterate over the cross validation folds
@@ -211,19 +291,49 @@ class Emulator(Object):
             # NOTE: we keep the features as Dataset objects, as these are needed for possible periodic transformations
             # TODO: expend the above also to targets? Right now param_space does not describe what type of variable
             #  the targets are
-            train_features = Dataset(data=self.dataset.cross_val_sets_features[fold][0])
+
+            train_features = Dataset(
+                data=self.dataset.cross_val_sets_features[fold][0]
+            )
             train_features.set_param_space(self.dataset.param_space)
-            valid_features = self.dataset.cross_val_sets_features[fold][1].to_numpy()
-            train_targets = self.dataset.cross_val_sets_targets[fold][0].to_numpy()
-            valid_targets = self.dataset.cross_val_sets_targets[fold][1].to_numpy()
+            train_features = train_features.data.to_numpy()
+            valid_features = self.dataset.cross_val_sets_features[fold][
+                1
+            ].to_numpy()
+
+            if self.task == 'regression':
+                train_targets = (
+                    self.dataset.cross_val_sets_targets[fold][0]
+                    .to_numpy()
+                    .astype(float)
+                )
+                valid_targets = (
+                    self.dataset.cross_val_sets_targets[fold][1]
+                    .to_numpy()
+                    .astype(float)
+                )
+            elif self.task == 'ordinal':
+                # convert the ordinal targets to the proper form
+                train_targets = self.transform_ordinal_targets( self.dataset.cross_val_sets_targets[fold][0].values )
+                valid_targets = self.transform_ordinal_targets( self.dataset.cross_val_sets_targets[fold][1].values )
+
+
+            # transform categorical variables to one-hot-encoded vectors, if any exist
+            train_features = self.transform_cat_params(train_features)
+            valid_features = self.transform_cat_params(valid_features)
 
             feature_transformer.train(train_features)
             target_transformer.train(train_targets)
 
-            train_features_scaled = feature_transformer.transform(train_features)
-            valid_features_scaled = feature_transformer.transform(valid_features)
+            train_features_scaled = feature_transformer.transform(
+                train_features
+            )
+            valid_features_scaled = feature_transformer.transform(
+                valid_features
+            )
             train_targets_scaled = target_transformer.transform(train_targets)
             valid_targets_scaled = target_transformer.transform(valid_targets)
+
 
             # define scope and make a copy of the model for the cross validation
             model_fold = deepcopy(
@@ -236,12 +346,14 @@ class Emulator(Object):
             if not os.path.exists(model_path):
                 os.makedirs(model_path)
 
+
             Logger.log(f">>> Training model on fold #{fold}...", "INFO")
+            # this call to train is the neural network model method, not the emulator
             (
-                mdl_train_r2,
-                mdl_valid_r2,
-                mdl_train_rmsd,
-                mdl_test_rmsd,
+                mdl_train_metric1,
+                mdl_valid_metric1,
+                mdl_train_metric2,
+                mdl_test_metric2,
             ) = model_fold.train(
                 train_features=train_features_scaled,
                 train_targets=train_targets_scaled,
@@ -252,48 +364,55 @@ class Emulator(Object):
             )
 
             # store performance of fold
-            training_r2_scores[fold] = mdl_train_r2
-            valid_r2_scores[fold] = mdl_valid_r2
-            training_rmsd_scores[fold] = mdl_train_rmsd
-            valid_rmsd_scores[fold] = mdl_test_rmsd
+            training_metric1_scores[fold] = mdl_train_metric1
+            valid_metric1_scores[fold] = mdl_valid_metric1
+            training_metric2_scores[fold] = mdl_train_metric2
+            valid_metric2_scores[fold] = mdl_test_metric2
             # write file to indicate training is complete and add R2 in there
             with open(f"{model_path}/training_completed.info", "w") as content:
                 content.write(
-                    f"Train R2={mdl_train_r2}\nValidation R2={mdl_valid_r2}\n"
-                    f"Train RMSD={mdl_train_rmsd}\nValidation RMSD={mdl_test_rmsd}\n"
+                    f"Train {self.metric_names[0].upper()}={mdl_train_metric1}\nValidation {self.metric_names[0].upper()}={mdl_valid_metric1}\n"
+                    f"Train {self.metric_names[1].upper()}={mdl_train_metric2}\nValidation {self.metric_names[1].upper()}={mdl_test_metric2}\n"
                 )
 
-        # print some info to screen
-        Logger.log(f"Performance statistics based on transformed data "
-                   f"[{self.feature_transform}, {self.target_transform}]:", "INFO")
-        cv_r2_score_mean = np.mean(valid_r2_scores)
-        cv_r2_score_stderr = np.std(valid_r2_scores) / np.sqrt(
-            (len(valid_r2_scores) - 1)
-        )
-        cv_rmsd_score_mean = np.mean(valid_rmsd_scores)
-        cv_rmsd_score_stderr = np.std(valid_rmsd_scores) / np.sqrt(
-            (len(valid_rmsd_scores) - 1)
-        )
+
+            # print some info to screen
+            Logger.log(
+                f"Performance statistics based on transformed data "
+                f"[{self.feature_transform}, {self.target_transform}]:",
+                "INFO",
+            )
+            cv_metric1_score_mean = np.mean(valid_metric1_scores)
+            cv_metric1_score_stderr = np.std(valid_metric1_scores) / np.sqrt(
+                (len(valid_metric1_scores) - 1)
+            )
+            cv_metric2_score_mean = np.mean(valid_metric2_scores)
+            cv_metric2_score_stderr = np.std(valid_metric2_scores) / np.sqrt(
+                (len(valid_metric2_scores) - 1)
+            )
+
+
         Logger.log(
-            "Validation   R2: {0:.4f} +/- {1:.4f}".format(
-                cv_r2_score_mean, cv_r2_score_stderr
+            "Validation {}: {0:.4f} +/- {1:.4f}".format(
+                self.metrics_names[0].upper(), cv_metric1_score_mean, cv_metric1_score_stderr
             ),
             "INFO",
         )
         Logger.log(
-            "Validation RSMD: {0:.4f} +/- {1:.4f}".format(
-                cv_rmsd_score_mean, cv_rmsd_score_stderr
+            "Validation {}: {0:.4f} +/- {1:.4f}".format(
+                self.metrics_names[1].upper(), cv_rmsd_score_mean, cv_rmsd_score_stderr
             ),
             "INFO",
         )
 
         self.cross_val_performed = True
         self.cv_scores = {
-            "train_r2": training_r2_scores,
-            "validate_r2": valid_r2_scores,
-            "train_rmsd": training_rmsd_scores,
-            "validate_rmsd": valid_rmsd_scores,
+            f"train_{self.metric_names[0]}": training_metric1_scores,
+            f"validate_{self.metric_names[0]}": valid_metric1_scores,
+            f"train_{self.metric_names[1]}": training_metric2_scores,
+            f"validate_{self.metric_names[1]}": valid_metric2_scores,
         }
+
         return self.cv_scores
 
     def train(self, plot=False, retrain=False):
@@ -324,18 +443,39 @@ class Emulator(Object):
         #  the targets are
         train_features = Dataset(data=self.dataset.train_set_features)
         train_features.set_param_space(self.dataset.param_space)
+        train_features = train_features.data.to_numpy()
         test_features = self.dataset.test_set_features.to_numpy()
-        train_targets = self.dataset.train_set_targets.to_numpy()
-        test_targets = self.dataset.test_set_targets.to_numpy()
+
+        if self.task == 'regression':
+            # continuous-valued targets
+            train_targets = self.dataset.train_set_targets.to_numpy().astype(float)
+            test_targets = self.dataset.test_set_targets.to_numpy().astype(float)
+
+        elif self.task == 'ordinal':
+            # ordinal-valued targets
+            # convert the ordinal targets to the proper form
+            train_targets = self.transform_ordinal_targets( self.dataset.train_set_targets.to_numpy() )
+            test_targets = self.transform_ordinal_targets( self.dataset.test_set_targets.to_numpy() )
+
+
+        # transform categorical variables to one-hot-encoded vectors, if any exist
+        train_features = self.transform_cat_params(train_features)
+        test_features = self.transform_cat_params(test_features)
+
 
         # get scaled train/valid sets. These are also the DataTransformer objects we keep as they are needed in 'run'
         self.feature_transformer.train(train_features)
         self.target_transformer.train(train_targets)
 
-        train_features_scaled = self.feature_transformer.transform(train_features)
-        test_features_scaled = self.feature_transformer.transform(test_features)
+        train_features_scaled = self.feature_transformer.transform(
+            train_features
+        )
+        test_features_scaled = self.feature_transformer.transform(
+            test_features
+        )
         train_targets_scaled = self.target_transformer.transform(train_targets)
         test_targets_scaled = self.target_transformer.transform(test_targets)
+
 
         # define path where to store model
         model_path = f"{self._scratch_dir.name}/Model"
@@ -351,7 +491,12 @@ class Emulator(Object):
             ),
             "INFO",
         )
-        mdl_train_r2, mdl_test_r2, mdl_train_rmsd, mdl_test_rmsd = self.model.train(
+        (
+            mdl_train_metric1,
+            mdl_test_metric1,
+            mdl_train_metric2,
+            mdl_test_metric2,
+        ) = self.model.train(
             train_features=train_features_scaled,
             train_targets=train_targets_scaled,
             valid_features=test_features_scaled,
@@ -363,47 +508,84 @@ class Emulator(Object):
         # write file to indicate training is complete and add R2 in there
         with open(f"{model_path}/training_completed.info", "w") as content:
             content.write(
-                f"Train R2={mdl_train_r2}\nValidation R2={mdl_test_r2}\n"
-                f"Train RMSD={mdl_train_rmsd}\nValidation RMSD={mdl_test_rmsd}\n"
+                f"Train {self.metric_names[0].upper()}={mdl_train_metric1}\nValidation {self.metric_names[0].upper()}={mdl_test_metric1}\n"
+                f"Train {self.metric_names[1].upper()}={mdl_train_metric2}\nValidation {self.metric_names[1].upper()}={mdl_test_metric2}\n"
             )
 
-        Logger.log(f"Performance statistics based on transformed data "
-                   f"[{self.feature_transform}, {self.target_transform}]:", "INFO")
-        Logger.log("Train R2   Score: {0:.4f}".format(mdl_train_r2), "INFO")
-        Logger.log("Test  R2   Score: {0:.4f}".format(mdl_test_r2), "INFO")
-        Logger.log("Train RMSD Score: {0:.4f}".format(mdl_train_rmsd), "INFO")
-        Logger.log("Test  RMSD Score: {0:.4f}\n".format(mdl_test_rmsd), "INFO")
+        Logger.log(
+            f"Performance statistics based on transformed data "
+            f"[{self.feature_transform}, {self.target_transform}]:",
+            "INFO",
+        )
+        Logger.log(f"Train {self.metric_names[0].upper()} "+"  Score: {0:.4f}".format(mdl_train_metric1), "INFO")
+        Logger.log(f"Test  {self.metric_names[0].upper()} "+"  Score: {0:.4f}".format(mdl_test_metric1), "INFO")
+        Logger.log(f"Train {self.metric_names[1].upper()} "+"  Score: {0:.4f}".format(mdl_train_metric2), "INFO")
+        Logger.log(f"Test  {self.metric_names[1].upper()} "+"  Score: {0:.4f}\n".format(mdl_test_metric2), "INFO")
 
         # set is_trained to True
         self.is_trained = True
 
         # show stats on untransformed samples
         # -----------------------------------
-        y_train = self.dataset.train_set_targets.to_numpy()
-        y_train_pred = self.run(features=self.dataset.train_set_features.to_numpy(), num_samples=10)
-        y_test = self.dataset.test_set_targets.to_numpy()
-        y_test_pred = self.run(features=self.dataset.test_set_features.to_numpy(), num_samples=10)
-        train_r2 = r2_score(y_train, y_train_pred)
-        train_rmse = np.sqrt(np.mean((y_train.flatten() - y_train_pred.flatten()) ** 2))
-        test_r2 = r2_score(y_test, y_test_pred)
-        test_rmse = np.sqrt(np.mean((y_test.flatten() - y_test_pred.flatten()) ** 2))
+        #y_train = self.dataset.train_set_targets.to_numpy()
+        y_train_pred, _, __ = self.run(
+           features=self.dataset.train_set_features.to_numpy(), num_samples=10, return_ordinal_label=False
+        )
+
+        #y_test = self.dataset.test_set_targets.to_numpy()
+        y_test_pred, _, __ = self.run(
+           features=self.dataset.test_set_features.to_numpy(), num_samples=10, return_ordinal_label=False
+        )
+
+        if self.task == 'regression':
+            train_metric1 = r2_score(train_targets, y_train_pred)
+            train_metric2 = np.sqrt(
+                np.mean((train_targets.flatten() - y_train_pred.flatten()) ** 2)
+            )
+            test_metric1 = r2_score(test_targets, y_test_pred)
+            test_metric2 = np.sqrt(
+                np.mean((test_targets.flatten() - y_test_pred.flatten()) ** 2)
+            )
+
+        elif self.task == 'ordinal':
+            # TODO: implement these stats properly
+            train_metric1 = self.compute_acc_ordinal(train_targets, y_train_pred)
+            train_metric2 = np.sqrt(
+                np.mean((train_targets.flatten() - y_train_pred.flatten()) ** 2)
+            )
+            test_metric1 = self.compute_acc_ordinal(test_targets, y_test_pred)
+            test_metric2 = np.sqrt(
+                            np.mean((test_targets.flatten() - y_test_pred.flatten()) ** 2)
+                        )
+
 
         Logger.log(f"Performance statistics based on original data:", "INFO")
-        Logger.log("Train R2   Score: {0:.4f}".format(train_r2), "INFO")
-        Logger.log("Test  R2   Score: {0:.4f}".format(test_r2), "INFO")
-        Logger.log("Train RMSD Score: {0:.4f}".format(train_rmse), "INFO")
-        Logger.log("Test  RMSD Score: {0:.4f}\n".format(test_rmse), "INFO")
+        Logger.log(f"Train {self.metric_names[0].upper()} "+"  Score: {0:.4f}".format(train_metric1), "INFO")
+        Logger.log(f"Test  {self.metric_names[0].upper()} "+"  Score: {0:.4f}".format(test_metric1), "INFO")
+        Logger.log(f"Train {self.metric_names[1].upper()} "+"  Score: {0:.4f}".format(train_metric2), "INFO")
+        Logger.log(f"Test  {self.metric_names[1].upper()} "+"  Score: {0:.4f}\n".format(test_metric2), "INFO")
 
         # save and return scores
+
         self.model_scores = {
-            "train_r2": mdl_train_r2,
-            "test_r2": mdl_test_r2,
-            "train_rmsd": mdl_train_rmsd,
-            "test_rmsd": mdl_test_rmsd,
+            f"train_{self.metric_names[0]}": train_metric1,
+            f"test_{self.metric_names[0]}": test_metric1,
+            f"train_{self.metric_names[1]}": train_metric2,
+            f"test_{self.metric_names[1]}": test_metric2,
         }
+
+
         return self.model_scores
 
-    def run(self, features, num_samples=1, return_paramvector=False):
+    @staticmethod
+    def compute_acc_ordinal(y_true, y_pred):
+        true_labels = (y_true>0.5).cumprod(axis=1).sum(axis=1)-1.
+        pred_labels = (y_pred>0.5).cumprod(axis=1).sum(axis=1)-1.
+
+        return accuracy_score(true_labels, pred_labels)
+
+
+    def run(self, features, num_samples=1, return_paramvector=False, return_ordinal_label=True):
         """Run the emulator and return a value given the features provided.
 
         Args:
@@ -421,52 +603,123 @@ class Emulator(Object):
             message = "This emulator has not been trained yet. Please train the emulator before you can use it for prediction."
             Logger.log(message, "ERROR")
 
-        # check the inputs
-        if type(features) == list:
-            features = np.array(features)
-        if len(features.shape) == 1:
-            features = np.expand_dims(features, axis=0)
 
-        # validate features
-        if not features.shape[1] == len(self.param_space):
+        # check the type of features given and convert to a list of lists
+        # (# samples, # features) to be processed
+
+        if isinstance(features, np.ndarray):
+            if len(features.shape) == 2:
+                features = [
+                    list(feature) for feature in features
+                ]  # multiple observations, convert to list
+            elif len(features.shape) == 1:
+                features = [list(features)]  # assume single sample
+            else:
+                message = f"You can pass either a 1d or 2d np.ndarray for argument features. You have passed a {len(features.shape)}d np.ndarray."
+                Logger.log(message, "ERROR")
+
+        elif isinstance(features, list):
+            if type(features[0]) in [str, int, float]:
+                # assume we have a single value passed
+                features = [features]
+            elif type(features[0]) in [list, np.ndarray]:
+                # assume multiple parameters are passed already in array form
+                features = [list(feature) for feature in features]
+            elif type(features[0]) == ParameterVector:
+                # list of ParamVectors, convert to list of arrays
+                features = [feature.to_list() for feature in features]
+
+        elif isinstance(features, ParameterVector):
+            # assuming single ParameterVector object, convert to lists
+            features = [features.to_list()]
+
+        else:
+            Logger.log(
+                "Features type not understood. Accepted types are: np.ndarray, list, and ParameterVector",
+                "FATAL",
+            )
+
+        # validate the provided features
+        if not np.all(
+            [len(feature) == len(self.param_space)] for feature in features
+        ):
             message = (
                 "Dimensions of provided features (%d) did not match expected dimension (%d)"
                 % (features.shape[1], len(self.param_space))
             )
             Logger.log(message, "ERROR")
+
         for feature in features:
             if not self.param_space.validate(feature):
                 message = "Not all parameters are within bounds"
                 Logger.log(message, "WARNING")
 
+        if callable(self.dataset.known_constraints):
+            is_feasible = []
+            # check the known constraints (NOTE: for now this is only for the vapdiff_crystal
+            # dataset)
+            for feature in features:
+                is_feasible.append(self.dataset.known_constraints(feature))
+
+        # convert categorical params to ohe vectors
+        features = self.transform_cat_params(features)
+
         # scale the features using the DataTransformer that was fit when training
         features_scaled = self.feature_transformer.transform(features)
 
         # predict, drawing a certain amount of samples
-        y_pred_scaled = self.model.predict(features_scaled, num_samples=num_samples)
+        y_pred_scaled, y_pred_std_ep, y_pred_std_al = self.model.predict(
+            features_scaled, num_samples=num_samples
+        )
 
         # return the prediction after inverting the transform
         y_preds = self.target_transformer.back_transform(
             y_pred_scaled
         )  # this is a 2d array
 
+
+        if self.task=='ordinal' and return_ordinal_label:
+            # if ordinal parameter, convert it back to its predicted label
+            # NOTE: need to inflate dims here, this is kind of a hack
+            y_preds = [ (y_preds>0.5).cumprod(axis=1).sum(axis=1)-1 ]
+
         # if we are not asking for a ParamVector, we can just return y_preds
         if return_paramvector is False:
-            return y_preds
+            return y_preds, y_pred_std_ep, y_pred_std_al
 
         # NOTE: while we do not allow batches or multiple objectives yet, this code is supposed to be able to support
         #  those
-        y_pred_objects = []  # list of ParamVectors with all samples and objectives
+        y_pred_objects = (
+            []
+        )  # list of ParamVectors with all samples and objectives
         # iterate over all samples (if we returned a batch of predictions)
-        for y_pred in y_preds:
+        for pred_ix, y_pred in enumerate(y_preds):
             y_pred_object = ParameterVector()
             # iterate over all objectives/targets
-            for target_name, y in zip(self.dataset.target_names, y_pred):
-                y_pred_object.from_dict({target_name: y})
-            # append object to list
-            y_pred_objects.append(y_pred_object)
+            for ix, (target_name, y) in enumerate(zip(self.dataset.target_names, y_pred)):
+                if self.task == 'ordinal':
+                    # return the ordinal variable option in the string representation
+                    str_option = self.dataset.value_space[ix]['options'][y] # index of the predicted label
+                    y_pred_object.from_dict({target_name:str_option})
+                else:
+                    y_pred_object.from_dict({target_name: y})
 
-        return y_pred_objects
+            # check known constraints
+            if callable(self.dataset.known_constraints):
+                if is_feasible[pred_ix]:
+                    y_pred_objects.append(y_pred_object)
+                else:
+                    # overwrite with appropriate value if th constraint is not satisfied
+                    # NOTE: this only applies to the vapdiff_crystal dataset for now
+                    # and is therefore hardcoded, should make more general in future
+                    y_pred_objects.append(
+                        ParameterVector().from_dict({'crystal_score': 'clear_solution'})
+                    )
+            else:
+                # append object to list
+                y_pred_objects.append(y_pred_object)
+
+        return y_pred_objects, y_pred_std_ep, y_pred_std_al
 
     def save(self, path="./olympus_emulator", include_cv=False):
         """Save the emulator in a specified location. This will save the emulator object as a pickle file, and the
@@ -490,29 +743,29 @@ class Emulator(Object):
 
         self.emulator_to_save = Emulator()
         for key in self.__dict__:
-#            skip = [
-                #                'me',
-                #                'indent',
-                #                'props',
-                #                'attrs',
-                #                'max_prop_len',
-                #                'dataset',
-                #                'model',
-                #                'feature_transform',
-                #                'target_transform',
-                #                '_version',
-                #                '_ghost_model',
-                #                'is_trained',
-                #                'cross_val_performed',
-                #                'cv_scores',
-                #                'model_scores',
-                #                'emulator_to_save',
-                #                'feature_transformer',
-                #                'target_transformer',
-                #                '_scratch_dir']
-#            ]
-#            if key in skip:
-#                continue
+            #            skip = [
+            #                'me',
+            #                'indent',
+            #                'props',
+            #                'attrs',
+            #                'max_prop_len',
+            #                'dataset',
+            #                'model',
+            #                'feature_transform',
+            #                'target_transform',
+            #                '_version',
+            #                '_ghost_model',
+            #                'is_trained',
+            #                'cross_val_performed',
+            #                'cv_scores',
+            #                'model_scores',
+            #                'emulator_to_save',
+            #                'feature_transformer',
+            #                'target_transformer',
+            #                '_scratch_dir']
+            #            ]
+            #            if key in skip:
+            #                continue
 
             if key == "model":
                 setattr(self.emulator_to_save, key, self._ghost_model)
@@ -588,14 +841,23 @@ def load_emulator(emulator_folder):
             Logger.log(message, "WARNING")
 
     if emulator_to_load.is_trained is True:
+        # if we have an ordinal regression task, we must adjust the target
+        # dimensionality accordingly
+        if emulator_to_load.task == 'regression':
+            targets_dim = emulator_to_load.dataset.targets_dim
+        elif emulator_to_load.task == 'ordinal':
+            targets_dim = len(emulator_to_load.dataset.value_space[0]['options'])
+
         emulator_to_load.model._set_dims(
-            features_dim=emulator_to_load.dataset.features_dim,
-            targets_dim=emulator_to_load.dataset.targets_dim,
+            features_dim=emulator_to_load.dataset.features_dim_ohe,
+            targets_dim=targets_dim,
         )
         restored = emulator_to_load.model.restore(f"{emulator_folder}/Model")
         if restored is False:
             message = "failed to restore model"
             Logger.log(message, "ERROR")
+
+
 
     # NOTE: we are not leading any cross validation models for the moment. If CV was performed though, we still have
     # the data about the CV performance

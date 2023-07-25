@@ -2,8 +2,7 @@
 
 import numpy as np
 
-from olympus import Object
-from olympus.objects import ParameterVector
+from olympus.objects import Object, ParameterVector
 
 
 # ==========
@@ -45,6 +44,12 @@ class Observations:
         self.value_space = value.param_space
 
     def add_observation(self, param, value):
+        """this function expects to be given a list of ParameterVector
+        objects, a single ParameterVector object, or an array like representation
+        of the parameters (or a list of array-like for multiple observations at
+        once)
+
+        """
         if isinstance(param, list):
             for param_ in param:
                 if isinstance(param_, ParameterVector):
@@ -112,7 +117,9 @@ class Observations:
         elif as_array is False:
             if self._params_as_vectors is None:
                 self._construct_param_vectors()
-            return np.array([param.to_dict() for param in self._params_as_vectors])
+            return np.array(
+                [param.to_dict() for param in self._params_as_vectors]
+            )
         else:
             NotImplementedError
 
@@ -131,84 +138,9 @@ class Observations:
             if opposite is False:
                 return [value.to_dict() for value in self._values_as_vectors]
             elif opposite is True:
-                values_dict = [value.to_dict() for value in self._values_as_vectors]
-                for value_dict in values_dict:
-                    for key, value in value_dict.items():
-                        value_dict[key] = -1 * value
-                return np.array(values_dict)
-
-    def __OLD__init__(self):
-        """ Class that contains all parameters and measurements collected from planners and emulators, i.e. `observed`
-        parameters and measurements.
-        """
-        self.params = []  # expected to be a list of ParamVector objects
-        self.values = []  # expected to be a list of ParamVector objects
-
-    def __OLD_add_observation(self, param, value):
-        """
-
-        Args:
-            param:
-            value:
-
-        Returns:
-
-        """
-        if isinstance(param, list):
-            self.params.extend(param)
-        elif isinstance(param, ParameterVector):
-            self.params.append(param)
-
-        if isinstance(value, list):
-            self.values.extend(value)
-        elif isinstance(param, ParameterVector):
-            self.values.append(value)
-        else:
-            raise NotImplementedError
-
-    def __OLD_get_params(self, as_array=True):
-        """
-
-        Args:
-            as_array:
-
-        Returns:
-
-        """
-        if as_array is True:
-            return np.array([param.to_array() for param in self.params])
-        elif as_array is False:
-            return np.array([param.to_dict() for param in self.params])
-
-    def __OLD_get_values(self, as_array=True, opposite=False):
-        """
-
-        Args:
-            as_array (bool): Whether to return the values as an array.
-            opposite (bool): Whether to return the opposite of the values. Default is False.
-
-        Returns:
-
-        """
-
-        # NOTE: we use flipped values for the measurements to allow maximization in the planners!
-
-        # return as array
-        if as_array is True:
-            # return normal values
-            if opposite is False:
-                return np.array([value.to_array() for value in self.values])
-            # return flipped values
-            elif opposite is True:
-                return np.array([-1 * value.to_array() for value in self.values])
-        # return as dict
-        elif as_array is False:
-            # return normal values
-            if opposite is False:
-                return np.array([value.to_dict() for value in self.values])
-            # return flipped values
-            elif opposite is True:
-                values_dict = [value.to_dict() for value in self.values]
+                values_dict = [
+                    value.to_dict() for value in self._values_as_vectors
+                ]
                 for value_dict in values_dict:
                     for key, value in value_dict.items():
                         value_dict[key] = -1 * value

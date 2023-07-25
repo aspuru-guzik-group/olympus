@@ -1,0 +1,940 @@
+organic,Ethylammonium Iodide,accsitecount_std,0.0
+organic,Ethylammonium Iodide,aliphaticatomcount_std,3.0
+organic,Ethylammonium Iodide,aliphaticringcount_std,0.0
+organic,Ethylammonium Iodide,aromaticatomcount_std,0.0
+organic,Ethylammonium Iodide,aromaticringcount_std,0.0
+organic,Ethylammonium Iodide,asa+_std,154.04
+organic,Ethylammonium Iodide,asa-_std,61.53
+organic,Ethylammonium Iodide,asa_std,215.57
+organic,Ethylammonium Iodide,asah_std,164.65
+organic,Ethylammonium Iodide,asap_std,50.92
+organic,Ethylammonium Iodide,asavdwp_std,112.02
+organic,Ethylammonium Iodide,atomcount_c_std,2.0
+organic,Ethylammonium Iodide,atomcount_n_std,1.0
+organic,Ethylammonium Iodide,avgpol_std,6.09
+organic,Ethylammonium Iodide,balabanindex_std,1.63
+organic,Ethylammonium Iodide,bondcount_std,10.0
+organic,Ethylammonium Iodide,carboaliphaticringcount_std,0.0
+organic,Ethylammonium Iodide,carboaromaticringcount_std,0.0
+organic,Ethylammonium Iodide,carboringcount_std,0.0
+organic,Ethylammonium Iodide,chainatomcount_std,3.0
+organic,Ethylammonium Iodide,cyclomaticnumber_std,0.0
+organic,Ethylammonium Iodide,donsitecount_std,3.0
+organic,Ethylammonium Iodide,fr_amidine,0.0
+organic,Ethylammonium Iodide,fr_halogen,1.0
+organic,Ethylammonium Iodide,fr_nh0,0.0
+organic,Ethylammonium Iodide,fr_nh1,0.0
+organic,Ethylammonium Iodide,fr_nh2,0.0
+organic,Ethylammonium Iodide,fr_piperzine,0.0
+organic,Ethylammonium Iodide,fr_pyridine,0.0
+organic,Ethylammonium Iodide,fr_quatn,1.0
+organic,Ethylammonium Iodide,hacceptorcount_std,0.0
+organic,Ethylammonium Iodide,hdonorcount_std,1.0
+organic,Ethylammonium Iodide,heteroaliphaticringcount_std,0.0
+organic,Ethylammonium Iodide,heteroaromaticringcount_std,0.0
+organic,Ethylammonium Iodide,hyperwienerindex_std,5.0
+organic,Ethylammonium Iodide,largestringsize_std,0.0
+organic,Ethylammonium Iodide,maximalprojectionarea_std,22.85
+organic,Ethylammonium Iodide,maximalprojectionradius_std,3.3
+organic,Ethylammonium Iodide,maximalprojectionsize_std,5.17
+organic,Ethylammonium Iodide,minimalprojectionarea_std,17.09
+organic,Ethylammonium Iodide,minimalprojectionradius_std,2.59
+organic,Ethylammonium Iodide,minimalprojectionsize_std,6.59
+organic,Ethylammonium Iodide,molpol_std,5.88
+organic,Ethylammonium Iodide,organoammoniummolecularweight_std,46.092
+organic,Ethylammonium Iodide,protpsa_std,27.64
+organic,Ethylammonium Iodide,refractivity_std,25.96
+organic,Ethylammonium Iodide,ringatomcount_std,0.0
+organic,Ethylammonium Iodide,rotatablebondcount_std,0.0
+organic,Ethylammonium Iodide,saltmolecularweight,172.997
+organic,Ethylammonium Iodide,smallestringsize_std,0.0
+organic,Ethylammonium Iodide,vanderwaalsvolume_std,59.49
+organic,Ethylammonium Iodide,wienerindex_std,4.0
+organic,Ethylammonium Iodide,wienerpolarity_std,0.0
+solvent,Gamma-Butyrolactone,asavdwp,139.79
+solvent,Gamma-Butyrolactone,avgpol,8.23
+solvent,Gamma-Butyrolactone,hacceptorcount,1.0
+solvent,Gamma-Butyrolactone,hansentriple_volume_amount,76.5
+solvent,Gamma-Butyrolactone,hansentriple_deltad_amount,18.0
+solvent,Gamma-Butyrolactone,hansentriple_deltah_amount,7.4
+solvent,Gamma-Butyrolactone,hansentriple_deltap_amount,16.6
+solvent,Gamma-Butyrolactone,hansentriple_deltat_amount,25.579679435051567
+solvent,Gamma-Butyrolactone,maximalprojectionsize,5.63
+solvent,Gamma-Butyrolactone,minimalprojectionsize,6.7
+solvent,Gamma-Butyrolactone,refractivity,20.31
+solvent,Gamma-Butyrolactone,solventmolecularweight,86.09
+solvent,Gamma-Butyrolactone,vanderwaalsvolume,78.72
+organic,Phenethylammonium iodide,accsitecount_std,0.0
+organic,Phenethylammonium iodide,aliphaticatomcount_std,3.0
+organic,Phenethylammonium iodide,aliphaticringcount_std,0.0
+organic,Phenethylammonium iodide,aromaticatomcount_std,6.0
+organic,Phenethylammonium iodide,aromaticringcount_std,1.0
+organic,Phenethylammonium iodide,asa+_std,218.15
+organic,Phenethylammonium iodide,asa-_std,86.4
+organic,Phenethylammonium iodide,asa_std,304.55
+organic,Phenethylammonium iodide,asah_std,256.14
+organic,Phenethylammonium iodide,asap_std,48.41
+organic,Phenethylammonium iodide,asavdwp_std,217.67
+organic,Phenethylammonium iodide,atomcount_c_std,8.0
+organic,Phenethylammonium iodide,atomcount_n_std,1.0
+organic,Phenethylammonium iodide,avgpol_std,14.69
+organic,Phenethylammonium iodide,balabanindex_std,1.85
+organic,Phenethylammonium iodide,bondcount_std,21.0
+organic,Phenethylammonium iodide,carboaliphaticringcount_std,0.0
+organic,Phenethylammonium iodide,carboaromaticringcount_std,1.0
+organic,Phenethylammonium iodide,carboringcount_std,1.0
+organic,Phenethylammonium iodide,chainatomcount_std,3.0
+organic,Phenethylammonium iodide,cyclomaticnumber_std,1.0
+organic,Phenethylammonium iodide,donsitecount_std,3.0
+organic,Phenethylammonium iodide,fr_amidine,0.0
+organic,Phenethylammonium iodide,fr_halogen,1.0
+organic,Phenethylammonium iodide,fr_nh0,0.0
+organic,Phenethylammonium iodide,fr_nh1,0.0
+organic,Phenethylammonium iodide,fr_nh2,0.0
+organic,Phenethylammonium iodide,fr_piperzine,0.0
+organic,Phenethylammonium iodide,fr_pyridine,0.0
+organic,Phenethylammonium iodide,fr_quatn,1.0
+organic,Phenethylammonium iodide,hacceptorcount_std,0.0
+organic,Phenethylammonium iodide,hdonorcount_std,1.0
+organic,Phenethylammonium iodide,heteroaliphaticringcount_std,0.0
+organic,Phenethylammonium iodide,heteroaromaticringcount_std,0.0
+organic,Phenethylammonium iodide,hyperwienerindex_std,203.0
+organic,Phenethylammonium iodide,largestringsize_std,6.0
+organic,Phenethylammonium iodide,maximalprojectionarea_std,46.76
+organic,Phenethylammonium iodide,maximalprojectionradius_std,5.03
+organic,Phenethylammonium iodide,maximalprojectionsize_std,5.96
+organic,Phenethylammonium iodide,minimalprojectionarea_std,24.96
+organic,Phenethylammonium iodide,minimalprojectionradius_std,3.37
+organic,Phenethylammonium iodide,minimalprojectionsize_std,10.13
+organic,Phenethylammonium iodide,molpol_std,15.43
+organic,Phenethylammonium iodide,organoammoniummolecularweight_std,122.19
+organic,Phenethylammonium iodide,protpsa_std,27.64
+organic,Phenethylammonium iodide,refractivity_std,50.58
+organic,Phenethylammonium iodide,ringatomcount_std,6.0
+organic,Phenethylammonium iodide,rotatablebondcount_std,2.0
+organic,Phenethylammonium iodide,saltmolecularweight,249.095
+organic,Phenethylammonium iodide,smallestringsize_std,6.0
+organic,Phenethylammonium iodide,vanderwaalsvolume_std,130.2
+organic,Phenethylammonium iodide,wienerindex_std,94.0
+organic,Phenethylammonium iodide,wienerpolarity_std,8.0
+organic,Acetamidinium iodide,accsitecount_std,1.0
+organic,Acetamidinium iodide,aliphaticatomcount_std,4.0
+organic,Acetamidinium iodide,aliphaticringcount_std,0.0
+organic,Acetamidinium iodide,aromaticatomcount_std,0.0
+organic,Acetamidinium iodide,aromaticringcount_std,0.0
+organic,Acetamidinium iodide,asa+_std,172.93
+organic,Acetamidinium iodide,asa-_std,39.44
+organic,Acetamidinium iodide,asa_std,212.36
+organic,Acetamidinium iodide,asah_std,139.66
+organic,Acetamidinium iodide,asap_std,72.7
+organic,Acetamidinium iodide,asavdwp_std,110.9
+organic,Acetamidinium iodide,atomcount_c_std,2.0
+organic,Acetamidinium iodide,atomcount_n_std,2.0
+organic,Acetamidinium iodide,avgpol_std,6.58
+organic,Acetamidinium iodide,balabanindex_std,2.32
+organic,Acetamidinium iodide,bondcount_std,10.0
+organic,Acetamidinium iodide,carboaliphaticringcount_std,0.0
+organic,Acetamidinium iodide,carboaromaticringcount_std,0.0
+organic,Acetamidinium iodide,carboringcount_std,0.0
+organic,Acetamidinium iodide,chainatomcount_std,4.0
+organic,Acetamidinium iodide,cyclomaticnumber_std,0.0
+organic,Acetamidinium iodide,donsitecount_std,4.0
+organic,Acetamidinium iodide,fr_amidine,1.0
+organic,Acetamidinium iodide,fr_halogen,1.0
+organic,Acetamidinium iodide,fr_nh0,0.0
+organic,Acetamidinium iodide,fr_nh1,0.0
+organic,Acetamidinium iodide,fr_nh2,2.0
+organic,Acetamidinium iodide,fr_piperzine,0.0
+organic,Acetamidinium iodide,fr_pyridine,0.0
+organic,Acetamidinium iodide,fr_quatn,0.0
+organic,Acetamidinium iodide,hacceptorcount_std,1.0
+organic,Acetamidinium iodide,hdonorcount_std,2.0
+organic,Acetamidinium iodide,heteroaliphaticringcount_std,0.0
+organic,Acetamidinium iodide,heteroaromaticringcount_std,0.0
+organic,Acetamidinium iodide,hyperwienerindex_std,12.0
+organic,Acetamidinium iodide,largestringsize_std,0.0
+organic,Acetamidinium iodide,maximalprojectionarea_std,26.37
+organic,Acetamidinium iodide,maximalprojectionradius_std,3.23
+organic,Acetamidinium iodide,maximalprojectionsize_std,4.26
+organic,Acetamidinium iodide,minimalprojectionarea_std,17.01
+organic,Acetamidinium iodide,minimalprojectionradius_std,3.14
+organic,Acetamidinium iodide,minimalprojectionsize_std,6.02
+organic,Acetamidinium iodide,molpol_std,6.57
+organic,Acetamidinium iodide,organoammoniummolecularweight_std,59.091
+organic,Acetamidinium iodide,protpsa_std,51.61
+organic,Acetamidinium iodide,refractivity_std,27.86
+organic,Acetamidinium iodide,ringatomcount_std,0.0
+organic,Acetamidinium iodide,rotatablebondcount_std,0.0
+organic,Acetamidinium iodide,saltmolecularweight,185.996
+organic,Acetamidinium iodide,smallestringsize_std,0.0
+organic,Acetamidinium iodide,vanderwaalsvolume_std,62.84
+organic,Acetamidinium iodide,wienerindex_std,9.0
+organic,Acetamidinium iodide,wienerpolarity_std,0.0
+solvent,Dimethylformamide,asavdwp,137.48
+solvent,Dimethylformamide,avgpol,7.69
+solvent,Dimethylformamide,hacceptorcount,1.0
+solvent,Dimethylformamide,hansentriple_volume_amount,77.0
+solvent,Dimethylformamide,hansentriple_deltad_amount,17.4
+solvent,Dimethylformamide,hansentriple_deltah_amount,11.3
+solvent,Dimethylformamide,hansentriple_deltap_amount,13.7
+solvent,Dimethylformamide,hansentriple_deltat_amount,24.8
+solvent,Dimethylformamide,maximalprojectionsize,5.23
+solvent,Dimethylformamide,minimalprojectionsize,7.04
+solvent,Dimethylformamide,refractivity,19.77
+solvent,Dimethylformamide,solventmolecularweight,73.095
+solvent,Dimethylformamide,vanderwaalsvolume,76.8
+organic,NN-Diethylpropane-13-diammonium iodide,accsitecount_std,0.0
+organic,NN-Diethylpropane-13-diammonium iodide,aliphaticatomcount_std,9.0
+organic,NN-Diethylpropane-13-diammonium iodide,aliphaticringcount_std,0.0
+organic,NN-Diethylpropane-13-diammonium iodide,aromaticatomcount_std,0.0
+organic,NN-Diethylpropane-13-diammonium iodide,aromaticringcount_std,0.0
+organic,NN-Diethylpropane-13-diammonium iodide,asa+_std,285.85
+organic,NN-Diethylpropane-13-diammonium iodide,asa-_std,73.58
+organic,NN-Diethylpropane-13-diammonium iodide,asa_std,359.43
+organic,NN-Diethylpropane-13-diammonium iodide,asah_std,304.69
+organic,NN-Diethylpropane-13-diammonium iodide,asap_std,54.74
+organic,NN-Diethylpropane-13-diammonium iodide,asavdwp_std,294.02
+organic,NN-Diethylpropane-13-diammonium iodide,atomcount_c_std,7.0
+organic,NN-Diethylpropane-13-diammonium iodide,atomcount_n_std,2.0
+organic,NN-Diethylpropane-13-diammonium iodide,avgpol_std,17.53
+organic,NN-Diethylpropane-13-diammonium iodide,balabanindex_std,3.09
+organic,NN-Diethylpropane-13-diammonium iodide,bondcount_std,28.0
+organic,NN-Diethylpropane-13-diammonium iodide,carboaliphaticringcount_std,0.0
+organic,NN-Diethylpropane-13-diammonium iodide,carboaromaticringcount_std,0.0
+organic,NN-Diethylpropane-13-diammonium iodide,carboringcount_std,0.0
+organic,NN-Diethylpropane-13-diammonium iodide,chainatomcount_std,9.0
+organic,NN-Diethylpropane-13-diammonium iodide,cyclomaticnumber_std,0.0
+organic,NN-Diethylpropane-13-diammonium iodide,donsitecount_std,4.0
+organic,NN-Diethylpropane-13-diammonium iodide,fr_amidine,0.0
+organic,NN-Diethylpropane-13-diammonium iodide,fr_halogen,2.0
+organic,NN-Diethylpropane-13-diammonium iodide,fr_nh0,0.0
+organic,NN-Diethylpropane-13-diammonium iodide,fr_nh1,1.0
+organic,NN-Diethylpropane-13-diammonium iodide,fr_nh2,0.0
+organic,NN-Diethylpropane-13-diammonium iodide,fr_piperzine,0.0
+organic,NN-Diethylpropane-13-diammonium iodide,fr_pyridine,0.0
+organic,NN-Diethylpropane-13-diammonium iodide,fr_quatn,2.0
+organic,NN-Diethylpropane-13-diammonium iodide,hacceptorcount_std,0.0
+organic,NN-Diethylpropane-13-diammonium iodide,hdonorcount_std,2.0
+organic,NN-Diethylpropane-13-diammonium iodide,heteroaliphaticringcount_std,0.0
+organic,NN-Diethylpropane-13-diammonium iodide,heteroaromaticringcount_std,0.0
+organic,NN-Diethylpropane-13-diammonium iodide,hyperwienerindex_std,242.0
+organic,NN-Diethylpropane-13-diammonium iodide,largestringsize_std,0.0
+organic,NN-Diethylpropane-13-diammonium iodide,maximalprojectionarea_std,55.8
+organic,NN-Diethylpropane-13-diammonium iodide,maximalprojectionradius_std,5.42
+organic,NN-Diethylpropane-13-diammonium iodide,maximalprojectionsize_std,6.0
+organic,NN-Diethylpropane-13-diammonium iodide,minimalprojectionarea_std,34.16
+organic,NN-Diethylpropane-13-diammonium iodide,minimalprojectionradius_std,4.32
+organic,NN-Diethylpropane-13-diammonium iodide,minimalprojectionsize_std,10.69
+organic,NN-Diethylpropane-13-diammonium iodide,molpol_std,16.56
+organic,NN-Diethylpropane-13-diammonium iodide,organoammoniummolecularweight_std,132.25
+organic,NN-Diethylpropane-13-diammonium iodide,protpsa_std,32.08
+organic,NN-Diethylpropane-13-diammonium iodide,refractivity_std,64.61
+organic,NN-Diethylpropane-13-diammonium iodide,ringatomcount_std,0.0
+organic,NN-Diethylpropane-13-diammonium iodide,rotatablebondcount_std,5.0
+organic,NN-Diethylpropane-13-diammonium iodide,saltmolecularweight,386.06
+organic,NN-Diethylpropane-13-diammonium iodide,smallestringsize_std,0.0
+organic,NN-Diethylpropane-13-diammonium iodide,vanderwaalsvolume_std,160.34
+organic,NN-Diethylpropane-13-diammonium iodide,wienerindex_std,104.0
+organic,NN-Diethylpropane-13-diammonium iodide,wienerpolarity_std,8.0
+organic,14-Benzene diammonium iodide,accsitecount_std,0.0
+organic,14-Benzene diammonium iodide,aliphaticatomcount_std,2.0
+organic,14-Benzene diammonium iodide,aliphaticringcount_std,0.0
+organic,14-Benzene diammonium iodide,aromaticatomcount_std,6.0
+organic,14-Benzene diammonium iodide,aromaticringcount_std,1.0
+organic,14-Benzene diammonium iodide,asa+_std,256.81
+organic,14-Benzene diammonium iodide,asa-_std,0.0
+organic,14-Benzene diammonium iodide,asa_std,256.81
+organic,14-Benzene diammonium iodide,asah_std,153.29
+organic,14-Benzene diammonium iodide,asap_std,103.52
+organic,14-Benzene diammonium iodide,asavdwp_std,176.15
+organic,14-Benzene diammonium iodide,atomcount_c_std,6.0
+organic,14-Benzene diammonium iodide,atomcount_n_std,2.0
+organic,14-Benzene diammonium iodide,avgpol_std,12.61
+organic,14-Benzene diammonium iodide,balabanindex_std,2.19
+organic,14-Benzene diammonium iodide,bondcount_std,18.0
+organic,14-Benzene diammonium iodide,carboaliphaticringcount_std,0.0
+organic,14-Benzene diammonium iodide,carboaromaticringcount_std,1.0
+organic,14-Benzene diammonium iodide,carboringcount_std,1.0
+organic,14-Benzene diammonium iodide,chainatomcount_std,2.0
+organic,14-Benzene diammonium iodide,cyclomaticnumber_std,1.0
+organic,14-Benzene diammonium iodide,donsitecount_std,6.0
+organic,14-Benzene diammonium iodide,fr_amidine,0.0
+organic,14-Benzene diammonium iodide,fr_halogen,2.0
+organic,14-Benzene diammonium iodide,fr_nh0,0.0
+organic,14-Benzene diammonium iodide,fr_nh1,0.0
+organic,14-Benzene diammonium iodide,fr_nh2,0.0
+organic,14-Benzene diammonium iodide,fr_piperzine,0.0
+organic,14-Benzene diammonium iodide,fr_pyridine,0.0
+organic,14-Benzene diammonium iodide,fr_quatn,2.0
+organic,14-Benzene diammonium iodide,hacceptorcount_std,0.0
+organic,14-Benzene diammonium iodide,hdonorcount_std,2.0
+organic,14-Benzene diammonium iodide,heteroaliphaticringcount_std,0.0
+organic,14-Benzene diammonium iodide,heteroaromaticringcount_std,0.0
+organic,14-Benzene diammonium iodide,hyperwienerindex_std,115.0
+organic,14-Benzene diammonium iodide,largestringsize_std,6.0
+organic,14-Benzene diammonium iodide,maximalprojectionarea_std,42.74
+organic,14-Benzene diammonium iodide,maximalprojectionradius_std,4.46
+organic,14-Benzene diammonium iodide,maximalprojectionsize_std,4.31
+organic,14-Benzene diammonium iodide,minimalprojectionarea_std,22.02
+organic,14-Benzene diammonium iodide,minimalprojectionradius_std,3.5
+organic,14-Benzene diammonium iodide,minimalprojectionsize_std,8.86
+organic,14-Benzene diammonium iodide,molpol_std,13.2
+organic,14-Benzene diammonium iodide,organoammoniummolecularweight_std,110.159
+organic,14-Benzene diammonium iodide,protpsa_std,55.28
+organic,14-Benzene diammonium iodide,refractivity_std,55.92
+organic,14-Benzene diammonium iodide,ringatomcount_std,6.0
+organic,14-Benzene diammonium iodide,rotatablebondcount_std,0.0
+organic,14-Benzene diammonium iodide,saltmolecularweight,363.969
+organic,14-Benzene diammonium iodide,smallestringsize_std,6.0
+organic,14-Benzene diammonium iodide,vanderwaalsvolume_std,110.43
+organic,14-Benzene diammonium iodide,wienerindex_std,62.0
+organic,14-Benzene diammonium iodide,wienerpolarity_std,7.0
+solvent,Dimethyl sulfoxide,asavdwp,133.65
+solvent,Dimethyl sulfoxide,avgpol,7.91
+solvent,Dimethyl sulfoxide,hacceptorcount,1.0
+solvent,Dimethyl sulfoxide,hansentriple_volume_amount,71.3
+solvent,Dimethyl sulfoxide,hansentriple_deltad_amount,18.4
+solvent,Dimethyl sulfoxide,hansentriple_deltah_amount,10.2
+solvent,Dimethyl sulfoxide,hansentriple_deltap_amount,16.4
+solvent,Dimethyl sulfoxide,hansentriple_deltat_amount,26.6
+solvent,Dimethyl sulfoxide,maximalprojectionsize,5.0
+solvent,Dimethyl sulfoxide,minimalprojectionsize,7.1
+solvent,Dimethyl sulfoxide,refractivity,20.73
+solvent,Dimethyl sulfoxide,solventmolecularweight,78.13
+solvent,Dimethyl sulfoxide,vanderwaalsvolume,72.67
+organic,4-Trifluoromethyl-Benzylammonium iodide,accsitecount_std,0.0
+organic,4-Trifluoromethyl-Benzylammonium iodide,aliphaticatomcount_std,6.0
+organic,4-Trifluoromethyl-Benzylammonium iodide,aliphaticringcount_std,0.0
+organic,4-Trifluoromethyl-Benzylammonium iodide,aromaticatomcount_std,6.0
+organic,4-Trifluoromethyl-Benzylammonium iodide,aromaticringcount_std,1.0
+organic,4-Trifluoromethyl-Benzylammonium iodide,asa+_std,177.72
+organic,4-Trifluoromethyl-Benzylammonium iodide,asa-_std,149.19
+organic,4-Trifluoromethyl-Benzylammonium iodide,asa_std,326.91
+organic,4-Trifluoromethyl-Benzylammonium iodide,asah_std,177.53
+organic,4-Trifluoromethyl-Benzylammonium iodide,asap_std,149.38
+organic,4-Trifluoromethyl-Benzylammonium iodide,asavdwp_std,236.68
+organic,4-Trifluoromethyl-Benzylammonium iodide,atomcount_c_std,8.0
+organic,4-Trifluoromethyl-Benzylammonium iodide,atomcount_n_std,1.0
+organic,4-Trifluoromethyl-Benzylammonium iodide,avgpol_std,15.12
+organic,4-Trifluoromethyl-Benzylammonium iodide,balabanindex_std,2.36
+organic,4-Trifluoromethyl-Benzylammonium iodide,bondcount_std,21.0
+organic,4-Trifluoromethyl-Benzylammonium iodide,carboaliphaticringcount_std,0.0
+organic,4-Trifluoromethyl-Benzylammonium iodide,carboaromaticringcount_std,1.0
+organic,4-Trifluoromethyl-Benzylammonium iodide,carboringcount_std,1.0
+organic,4-Trifluoromethyl-Benzylammonium iodide,chainatomcount_std,6.0
+organic,4-Trifluoromethyl-Benzylammonium iodide,cyclomaticnumber_std,1.0
+organic,4-Trifluoromethyl-Benzylammonium iodide,donsitecount_std,3.0
+organic,4-Trifluoromethyl-Benzylammonium iodide,fr_amidine,0.0
+organic,4-Trifluoromethyl-Benzylammonium iodide,fr_halogen,4.0
+organic,4-Trifluoromethyl-Benzylammonium iodide,fr_nh0,0.0
+organic,4-Trifluoromethyl-Benzylammonium iodide,fr_nh1,0.0
+organic,4-Trifluoromethyl-Benzylammonium iodide,fr_nh2,0.0
+organic,4-Trifluoromethyl-Benzylammonium iodide,fr_piperzine,0.0
+organic,4-Trifluoromethyl-Benzylammonium iodide,fr_pyridine,0.0
+organic,4-Trifluoromethyl-Benzylammonium iodide,fr_quatn,1.0
+organic,4-Trifluoromethyl-Benzylammonium iodide,hacceptorcount_std,0.0
+organic,4-Trifluoromethyl-Benzylammonium iodide,hdonorcount_std,1.0
+organic,4-Trifluoromethyl-Benzylammonium iodide,heteroaliphaticringcount_std,0.0
+organic,4-Trifluoromethyl-Benzylammonium iodide,heteroaromaticringcount_std,0.0
+organic,4-Trifluoromethyl-Benzylammonium iodide,hyperwienerindex_std,496.0
+organic,4-Trifluoromethyl-Benzylammonium iodide,largestringsize_std,6.0
+organic,4-Trifluoromethyl-Benzylammonium iodide,maximalprojectionarea_std,50.8
+organic,4-Trifluoromethyl-Benzylammonium iodide,maximalprojectionradius_std,5.39
+organic,4-Trifluoromethyl-Benzylammonium iodide,maximalprojectionsize_std,5.23
+organic,4-Trifluoromethyl-Benzylammonium iodide,minimalprojectionarea_std,27.16
+organic,4-Trifluoromethyl-Benzylammonium iodide,minimalprojectionradius_std,3.52
+organic,4-Trifluoromethyl-Benzylammonium iodide,minimalprojectionsize_std,10.59
+organic,4-Trifluoromethyl-Benzylammonium iodide,molpol_std,14.75
+organic,4-Trifluoromethyl-Benzylammonium iodide,organoammoniummolecularweight_std,176.162
+organic,4-Trifluoromethyl-Benzylammonium iodide,protpsa_std,27.64
+organic,4-Trifluoromethyl-Benzylammonium iodide,refractivity_std,51.8
+organic,4-Trifluoromethyl-Benzylammonium iodide,ringatomcount_std,6.0
+organic,4-Trifluoromethyl-Benzylammonium iodide,rotatablebondcount_std,2.0
+organic,4-Trifluoromethyl-Benzylammonium iodide,saltmolecularweight,303.067
+organic,4-Trifluoromethyl-Benzylammonium iodide,smallestringsize_std,6.0
+organic,4-Trifluoromethyl-Benzylammonium iodide,vanderwaalsvolume_std,145.09
+organic,4-Trifluoromethyl-Benzylammonium iodide,wienerindex_std,201.0
+organic,4-Trifluoromethyl-Benzylammonium iodide,wienerpolarity_std,15.0
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,accsitecount_std,0.0
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,aliphaticatomcount_std,8.0
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,aliphaticringcount_std,1.0
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,aromaticatomcount_std,0.0
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,aromaticringcount_std,0.0
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,asa+_std,258.43
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,asa-_std,22.98
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,asa_std,281.41
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,asah_std,226.65
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,asap_std,54.76
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,asavdwp_std,235.46
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,atomcount_c_std,6.0
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,atomcount_n_std,2.0
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,avgpol_std,14.6
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,balabanindex_std,2.06
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,bondcount_std,24.0
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,carboaliphaticringcount_std,0.0
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,carboaromaticringcount_std,0.0
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,carboringcount_std,0.0
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,chainatomcount_std,3.0
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,cyclomaticnumber_std,1.0
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,donsitecount_std,4.0
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,fr_amidine,0.0
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,fr_halogen,2.0
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,fr_nh0,0.0
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,fr_nh1,1.0
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,fr_nh2,0.0
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,fr_piperzine,0.0
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,fr_pyridine,0.0
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,fr_quatn,2.0
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,hacceptorcount_std,0.0
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,hdonorcount_std,2.0
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,heteroaliphaticringcount_std,1.0
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,heteroaromaticringcount_std,0.0
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,hyperwienerindex_std,135.0
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,largestringsize_std,5.0
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,maximalprojectionarea_std,44.29
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,maximalprojectionradius_std,5.03
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,maximalprojectionsize_std,6.39
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,minimalprojectionarea_std,25.85
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,minimalprojectionradius_std,3.23
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,minimalprojectionsize_std,10.25
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,molpol_std,13.98
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,organoammoniummolecularweight_std,116.207
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,protpsa_std,32.08
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,refractivity_std,57.79
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,ringatomcount_std,5.0
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,rotatablebondcount_std,2.0
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,saltmolecularweight,370.017
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,smallestringsize_std,5.0
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,vanderwaalsvolume_std,131.49
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,wienerindex_std,67.0
+organic,2-Pyrrolidin-1-ium-1-ylethylammonium iodide,wienerpolarity_std,5.0
+organic,NN-Dimethylethane-12-diammonium iodide,accsitecount_std,0.0
+organic,NN-Dimethylethane-12-diammonium iodide,aliphaticatomcount_std,6.0
+organic,NN-Dimethylethane-12-diammonium iodide,aliphaticringcount_std,0.0
+organic,NN-Dimethylethane-12-diammonium iodide,aromaticatomcount_std,0.0
+organic,NN-Dimethylethane-12-diammonium iodide,aromaticringcount_std,0.0
+organic,NN-Dimethylethane-12-diammonium iodide,asa+_std,229.29
+organic,NN-Dimethylethane-12-diammonium iodide,asa-_std,46.05
+organic,NN-Dimethylethane-12-diammonium iodide,asa_std,275.35
+organic,NN-Dimethylethane-12-diammonium iodide,asah_std,218.87
+organic,NN-Dimethylethane-12-diammonium iodide,asap_std,56.48
+organic,NN-Dimethylethane-12-diammonium iodide,asavdwp_std,202.37
+organic,NN-Dimethylethane-12-diammonium iodide,atomcount_c_std,4.0
+organic,NN-Dimethylethane-12-diammonium iodide,atomcount_n_std,2.0
+organic,NN-Dimethylethane-12-diammonium iodide,avgpol_std,11.57
+organic,NN-Dimethylethane-12-diammonium iodide,balabanindex_std,2.63
+organic,NN-Dimethylethane-12-diammonium iodide,bondcount_std,19.0
+organic,NN-Dimethylethane-12-diammonium iodide,carboaliphaticringcount_std,0.0
+organic,NN-Dimethylethane-12-diammonium iodide,carboaromaticringcount_std,0.0
+organic,NN-Dimethylethane-12-diammonium iodide,carboringcount_std,0.0
+organic,NN-Dimethylethane-12-diammonium iodide,chainatomcount_std,6.0
+organic,NN-Dimethylethane-12-diammonium iodide,cyclomaticnumber_std,0.0
+organic,NN-Dimethylethane-12-diammonium iodide,donsitecount_std,4.0
+organic,NN-Dimethylethane-12-diammonium iodide,fr_amidine,0.0
+organic,NN-Dimethylethane-12-diammonium iodide,fr_halogen,2.0
+organic,NN-Dimethylethane-12-diammonium iodide,fr_nh0,0.0
+organic,NN-Dimethylethane-12-diammonium iodide,fr_nh1,1.0
+organic,NN-Dimethylethane-12-diammonium iodide,fr_nh2,0.0
+organic,NN-Dimethylethane-12-diammonium iodide,fr_piperzine,0.0
+organic,NN-Dimethylethane-12-diammonium iodide,fr_pyridine,0.0
+organic,NN-Dimethylethane-12-diammonium iodide,fr_quatn,2.0
+organic,NN-Dimethylethane-12-diammonium iodide,hacceptorcount_std,0.0
+organic,NN-Dimethylethane-12-diammonium iodide,hdonorcount_std,2.0
+organic,NN-Dimethylethane-12-diammonium iodide,heteroaliphaticringcount_std,0.0
+organic,NN-Dimethylethane-12-diammonium iodide,heteroaromaticringcount_std,0.0
+organic,NN-Dimethylethane-12-diammonium iodide,hyperwienerindex_std,58.0
+organic,NN-Dimethylethane-12-diammonium iodide,largestringsize_std,0.0
+organic,NN-Dimethylethane-12-diammonium iodide,maximalprojectionarea_std,39.14
+organic,NN-Dimethylethane-12-diammonium iodide,maximalprojectionradius_std,4.55
+organic,NN-Dimethylethane-12-diammonium iodide,maximalprojectionsize_std,5.31
+organic,NN-Dimethylethane-12-diammonium iodide,minimalprojectionarea_std,22.95
+organic,NN-Dimethylethane-12-diammonium iodide,minimalprojectionradius_std,3.13
+organic,NN-Dimethylethane-12-diammonium iodide,minimalprojectionsize_std,9.08
+organic,NN-Dimethylethane-12-diammonium iodide,molpol_std,11.03
+organic,NN-Dimethylethane-12-diammonium iodide,organoammoniummolecularweight_std,90.169
+organic,NN-Dimethylethane-12-diammonium iodide,protpsa_std,32.08
+organic,NN-Dimethylethane-12-diammonium iodide,refractivity_std,50.25
+organic,NN-Dimethylethane-12-diammonium iodide,ringatomcount_std,0.0
+organic,NN-Dimethylethane-12-diammonium iodide,rotatablebondcount_std,2.0
+organic,NN-Dimethylethane-12-diammonium iodide,saltmolecularweight,343.97900000000004
+organic,NN-Dimethylethane-12-diammonium iodide,smallestringsize_std,0.0
+organic,NN-Dimethylethane-12-diammonium iodide,vanderwaalsvolume_std,109.27
+organic,NN-Dimethylethane-12-diammonium iodide,wienerindex_std,32.0
+organic,NN-Dimethylethane-12-diammonium iodide,wienerpolarity_std,3.0
+organic,Morpholinium Iodide,accsitecount_std,2.0
+organic,Morpholinium Iodide,aliphaticatomcount_std,6.0
+organic,Morpholinium Iodide,aliphaticringcount_std,1.0
+organic,Morpholinium Iodide,aromaticatomcount_std,0.0
+organic,Morpholinium Iodide,aromaticringcount_std,0.0
+organic,Morpholinium Iodide,asa+_std,215.5
+organic,Morpholinium Iodide,asa-_std,15.05
+organic,Morpholinium Iodide,asa_std,230.55
+organic,Morpholinium Iodide,asah_std,191.91
+organic,Morpholinium Iodide,asap_std,38.63
+organic,Morpholinium Iodide,asavdwp_std,163.85
+organic,Morpholinium Iodide,atomcount_c_std,4.0
+organic,Morpholinium Iodide,atomcount_n_std,1.0
+organic,Morpholinium Iodide,avgpol_std,9.76
+organic,Morpholinium Iodide,balabanindex_std,2.0
+organic,Morpholinium Iodide,bondcount_std,16.0
+organic,Morpholinium Iodide,carboaliphaticringcount_std,0.0
+organic,Morpholinium Iodide,carboaromaticringcount_std,0.0
+organic,Morpholinium Iodide,carboringcount_std,0.0
+organic,Morpholinium Iodide,chainatomcount_std,0.0
+organic,Morpholinium Iodide,cyclomaticnumber_std,1.0
+organic,Morpholinium Iodide,donsitecount_std,2.0
+organic,Morpholinium Iodide,fr_amidine,0.0
+organic,Morpholinium Iodide,fr_halogen,1.0
+organic,Morpholinium Iodide,fr_nh0,0.0
+organic,Morpholinium Iodide,fr_nh1,0.0
+organic,Morpholinium Iodide,fr_nh2,1.0
+organic,Morpholinium Iodide,fr_piperzine,0.0
+organic,Morpholinium Iodide,fr_pyridine,0.0
+organic,Morpholinium Iodide,fr_quatn,1.0
+organic,Morpholinium Iodide,hacceptorcount_std,1.0
+organic,Morpholinium Iodide,hdonorcount_std,1.0
+organic,Morpholinium Iodide,heteroaliphaticringcount_std,1.0
+organic,Morpholinium Iodide,heteroaromaticringcount_std,0.0
+organic,Morpholinium Iodide,hyperwienerindex_std,42.0
+organic,Morpholinium Iodide,largestringsize_std,6.0
+organic,Morpholinium Iodide,maximalprojectionarea_std,32.51
+organic,Morpholinium Iodide,maximalprojectionradius_std,3.64
+organic,Morpholinium Iodide,maximalprojectionsize_std,5.52
+organic,Morpholinium Iodide,minimalprojectionarea_std,23.07
+organic,Morpholinium Iodide,minimalprojectionradius_std,3.25
+organic,Morpholinium Iodide,minimalprojectionsize_std,6.7
+organic,Morpholinium Iodide,molpol_std,9.53
+organic,Morpholinium Iodide,organoammoniummolecularweight_std,88.12899999999999
+organic,Morpholinium Iodide,protpsa_std,25.84
+organic,Morpholinium Iodide,refractivity_std,35.18
+organic,Morpholinium Iodide,ringatomcount_std,6.0
+organic,Morpholinium Iodide,rotatablebondcount_std,0.0
+organic,Morpholinium Iodide,saltmolecularweight,215.034
+organic,Morpholinium Iodide,smallestringsize_std,6.0
+organic,Morpholinium Iodide,vanderwaalsvolume_std,92.0
+organic,Morpholinium Iodide,wienerindex_std,27.0
+organic,Morpholinium Iodide,wienerpolarity_std,3.0
+organic,Cyclohexylmethylammonium iodide,accsitecount_std,0.0
+organic,Cyclohexylmethylammonium iodide,aliphaticatomcount_std,8.0
+organic,Cyclohexylmethylammonium iodide,aliphaticringcount_std,1.0
+organic,Cyclohexylmethylammonium iodide,aromaticatomcount_std,0.0
+organic,Cyclohexylmethylammonium iodide,aromaticringcount_std,0.0
+organic,Cyclohexylmethylammonium iodide,asa+_std,213.57
+organic,Cyclohexylmethylammonium iodide,asa-_std,52.34
+organic,Cyclohexylmethylammonium iodide,asa_std,265.92
+organic,Cyclohexylmethylammonium iodide,asah_std,224.73
+organic,Cyclohexylmethylammonium iodide,asap_std,41.18
+organic,Cyclohexylmethylammonium iodide,asavdwp_std,233.86
+organic,Cyclohexylmethylammonium iodide,atomcount_c_std,7.0
+organic,Cyclohexylmethylammonium iodide,atomcount_n_std,1.0
+organic,Cyclohexylmethylammonium iodide,avgpol_std,14.74
+organic,Cyclohexylmethylammonium iodide,balabanindex_std,2.13
+organic,Cyclohexylmethylammonium iodide,bondcount_std,24.0
+organic,Cyclohexylmethylammonium iodide,carboaliphaticringcount_std,1.0
+organic,Cyclohexylmethylammonium iodide,carboaromaticringcount_std,0.0
+organic,Cyclohexylmethylammonium iodide,carboringcount_std,1.0
+organic,Cyclohexylmethylammonium iodide,chainatomcount_std,2.0
+organic,Cyclohexylmethylammonium iodide,cyclomaticnumber_std,1.0
+organic,Cyclohexylmethylammonium iodide,donsitecount_std,3.0
+organic,Cyclohexylmethylammonium iodide,fr_amidine,0.0
+organic,Cyclohexylmethylammonium iodide,fr_halogen,1.0
+organic,Cyclohexylmethylammonium iodide,fr_nh0,0.0
+organic,Cyclohexylmethylammonium iodide,fr_nh1,0.0
+organic,Cyclohexylmethylammonium iodide,fr_nh2,0.0
+organic,Cyclohexylmethylammonium iodide,fr_piperzine,0.0
+organic,Cyclohexylmethylammonium iodide,fr_pyridine,0.0
+organic,Cyclohexylmethylammonium iodide,fr_quatn,1.0
+organic,Cyclohexylmethylammonium iodide,hacceptorcount_std,0.0
+organic,Cyclohexylmethylammonium iodide,hdonorcount_std,1.0
+organic,Cyclohexylmethylammonium iodide,heteroaliphaticringcount_std,0.0
+organic,Cyclohexylmethylammonium iodide,heteroaromaticringcount_std,0.0
+organic,Cyclohexylmethylammonium iodide,hyperwienerindex_std,122.0
+organic,Cyclohexylmethylammonium iodide,largestringsize_std,6.0
+organic,Cyclohexylmethylammonium iodide,maximalprojectionarea_std,45.68
+organic,Cyclohexylmethylammonium iodide,maximalprojectionradius_std,4.78
+organic,Cyclohexylmethylammonium iodide,maximalprojectionsize_std,5.66
+organic,Cyclohexylmethylammonium iodide,minimalprojectionarea_std,28.32
+organic,Cyclohexylmethylammonium iodide,minimalprojectionradius_std,3.7
+organic,Cyclohexylmethylammonium iodide,minimalprojectionsize_std,9.33
+organic,Cyclohexylmethylammonium iodide,molpol_std,14.37
+organic,Cyclohexylmethylammonium iodide,organoammoniummolecularweight_std,114.211
+organic,Cyclohexylmethylammonium iodide,protpsa_std,27.64
+organic,Cyclohexylmethylammonium iodide,refractivity_std,46.96
+organic,Cyclohexylmethylammonium iodide,ringatomcount_std,6.0
+organic,Cyclohexylmethylammonium iodide,rotatablebondcount_std,1.0
+organic,Cyclohexylmethylammonium iodide,saltmolecularweight,241.116
+organic,Cyclohexylmethylammonium iodide,smallestringsize_std,6.0
+organic,Cyclohexylmethylammonium iodide,vanderwaalsvolume_std,133.35
+organic,Cyclohexylmethylammonium iodide,wienerindex_std,64.0
+organic,Cyclohexylmethylammonium iodide,wienerpolarity_std,7.0
+organic,Dimethylammonium iodide,accsitecount_std,0.0
+organic,Dimethylammonium iodide,aliphaticatomcount_std,3.0
+organic,Dimethylammonium iodide,aliphaticringcount_std,0.0
+organic,Dimethylammonium iodide,aromaticatomcount_std,0.0
+organic,Dimethylammonium iodide,aromaticringcount_std,0.0
+organic,Dimethylammonium iodide,asa+_std,159.01
+organic,Dimethylammonium iodide,asa-_std,69.52
+organic,Dimethylammonium iodide,asa_std,228.53
+organic,Dimethylammonium iodide,asah_std,197.63
+organic,Dimethylammonium iodide,asap_std,30.9
+organic,Dimethylammonium iodide,asavdwp_std,116.23
+organic,Dimethylammonium iodide,atomcount_c_std,2.0
+organic,Dimethylammonium iodide,atomcount_n_std,1.0
+organic,Dimethylammonium iodide,avgpol_std,6.09
+organic,Dimethylammonium iodide,balabanindex_std,1.63
+organic,Dimethylammonium iodide,bondcount_std,10.0
+organic,Dimethylammonium iodide,carboaliphaticringcount_std,0.0
+organic,Dimethylammonium iodide,carboaromaticringcount_std,0.0
+organic,Dimethylammonium iodide,carboringcount_std,0.0
+organic,Dimethylammonium iodide,chainatomcount_std,3.0
+organic,Dimethylammonium iodide,cyclomaticnumber_std,0.0
+organic,Dimethylammonium iodide,donsitecount_std,2.0
+organic,Dimethylammonium iodide,fr_amidine,0.0
+organic,Dimethylammonium iodide,fr_halogen,1.0
+organic,Dimethylammonium iodide,fr_nh0,0.0
+organic,Dimethylammonium iodide,fr_nh1,0.0
+organic,Dimethylammonium iodide,fr_nh2,1.0
+organic,Dimethylammonium iodide,fr_piperzine,0.0
+organic,Dimethylammonium iodide,fr_pyridine,0.0
+organic,Dimethylammonium iodide,fr_quatn,1.0
+organic,Dimethylammonium iodide,hacceptorcount_std,0.0
+organic,Dimethylammonium iodide,hdonorcount_std,1.0
+organic,Dimethylammonium iodide,heteroaliphaticringcount_std,0.0
+organic,Dimethylammonium iodide,heteroaromaticringcount_std,0.0
+organic,Dimethylammonium iodide,hyperwienerindex_std,5.0
+organic,Dimethylammonium iodide,largestringsize_std,0.0
+organic,Dimethylammonium iodide,maximalprojectionarea_std,22.94
+organic,Dimethylammonium iodide,maximalprojectionradius_std,3.3
+organic,Dimethylammonium iodide,maximalprojectionsize_std,5.05
+organic,Dimethylammonium iodide,minimalprojectionarea_std,16.67
+organic,Dimethylammonium iodide,minimalprojectionradius_std,2.61
+organic,Dimethylammonium iodide,minimalprojectionsize_std,6.54
+organic,Dimethylammonium iodide,molpol_std,5.88
+organic,Dimethylammonium iodide,organoammoniummolecularweight_std,46.092
+organic,Dimethylammonium iodide,protpsa_std,16.61
+organic,Dimethylammonium iodide,refractivity_std,26.11
+organic,Dimethylammonium iodide,ringatomcount_std,0.0
+organic,Dimethylammonium iodide,rotatablebondcount_std,0.0
+organic,Dimethylammonium iodide,saltmolecularweight,172.997
+organic,Dimethylammonium iodide,smallestringsize_std,0.0
+organic,Dimethylammonium iodide,vanderwaalsvolume_std,60.05
+organic,Dimethylammonium iodide,wienerindex_std,4.0
+organic,Dimethylammonium iodide,wienerpolarity_std,0.0
+organic,Diethylammonium iodide,accsitecount_std,0.0
+organic,Diethylammonium iodide,aliphaticatomcount_std,5.0
+organic,Diethylammonium iodide,aliphaticringcount_std,0.0
+organic,Diethylammonium iodide,aromaticatomcount_std,0.0
+organic,Diethylammonium iodide,aromaticringcount_std,0.0
+organic,Diethylammonium iodide,asa+_std,206.64
+organic,Diethylammonium iodide,asa-_std,80.53
+organic,Diethylammonium iodide,asa_std,287.17
+organic,Diethylammonium iodide,asah_std,267.53
+organic,Diethylammonium iodide,asap_std,19.64
+organic,Diethylammonium iodide,asavdwp_std,177.5
+organic,Diethylammonium iodide,atomcount_c_std,4.0
+organic,Diethylammonium iodide,atomcount_n_std,1.0
+organic,Diethylammonium iodide,avgpol_std,10.0
+organic,Diethylammonium iodide,balabanindex_std,2.19
+organic,Diethylammonium iodide,bondcount_std,16.0
+organic,Diethylammonium iodide,carboaliphaticringcount_std,0.0
+organic,Diethylammonium iodide,carboaromaticringcount_std,0.0
+organic,Diethylammonium iodide,carboringcount_std,0.0
+organic,Diethylammonium iodide,chainatomcount_std,5.0
+organic,Diethylammonium iodide,cyclomaticnumber_std,0.0
+organic,Diethylammonium iodide,donsitecount_std,2.0
+organic,Diethylammonium iodide,fr_amidine,0.0
+organic,Diethylammonium iodide,fr_halogen,1.0
+organic,Diethylammonium iodide,fr_nh0,0.0
+organic,Diethylammonium iodide,fr_nh1,0.0
+organic,Diethylammonium iodide,fr_nh2,1.0
+organic,Diethylammonium iodide,fr_piperzine,0.0
+organic,Diethylammonium iodide,fr_pyridine,0.0
+organic,Diethylammonium iodide,fr_quatn,1.0
+organic,Diethylammonium iodide,hacceptorcount_std,0.0
+organic,Diethylammonium iodide,hdonorcount_std,1.0
+organic,Diethylammonium iodide,heteroaliphaticringcount_std,0.0
+organic,Diethylammonium iodide,heteroaromaticringcount_std,0.0
+organic,Diethylammonium iodide,hyperwienerindex_std,35.0
+organic,Diethylammonium iodide,largestringsize_std,0.0
+organic,Diethylammonium iodide,maximalprojectionarea_std,34.28
+organic,Diethylammonium iodide,maximalprojectionradius_std,4.54
+organic,Diethylammonium iodide,maximalprojectionsize_std,5.73
+organic,Diethylammonium iodide,minimalprojectionarea_std,19.22
+organic,Diethylammonium iodide,minimalprojectionradius_std,2.8
+organic,Diethylammonium iodide,minimalprojectionsize_std,9.15
+organic,Diethylammonium iodide,molpol_std,9.57
+organic,Diethylammonium iodide,organoammoniummolecularweight_std,74.146
+organic,Diethylammonium iodide,protpsa_std,16.61
+organic,Diethylammonium iodide,refractivity_std,35.61
+organic,Diethylammonium iodide,ringatomcount_std,0.0
+organic,Diethylammonium iodide,rotatablebondcount_std,2.0
+organic,Diethylammonium iodide,saltmolecularweight,201.051
+organic,Diethylammonium iodide,smallestringsize_std,0.0
+organic,Diethylammonium iodide,vanderwaalsvolume_std,93.95
+organic,Diethylammonium iodide,wienerindex_std,20.0
+organic,Diethylammonium iodide,wienerpolarity_std,2.0
+organic,Di-isopropylammonium iodide,accsitecount_std,0.0
+organic,Di-isopropylammonium iodide,aliphaticatomcount_std,7.0
+organic,Di-isopropylammonium iodide,aliphaticringcount_std,0.0
+organic,Di-isopropylammonium iodide,aromaticatomcount_std,0.0
+organic,Di-isopropylammonium iodide,aromaticringcount_std,0.0
+organic,Di-isopropylammonium iodide,asa+_std,230.8
+organic,Di-isopropylammonium iodide,asa-_std,71.4
+organic,Di-isopropylammonium iodide,asa_std,302.2
+organic,Di-isopropylammonium iodide,asah_std,288.54
+organic,Di-isopropylammonium iodide,asap_std,13.65
+organic,Di-isopropylammonium iodide,asavdwp_std,236.93
+organic,Di-isopropylammonium iodide,atomcount_c_std,6.0
+organic,Di-isopropylammonium iodide,atomcount_n_std,1.0
+organic,Di-isopropylammonium iodide,avgpol_std,13.62
+organic,Di-isopropylammonium iodide,balabanindex_std,2.95
+organic,Di-isopropylammonium iodide,bondcount_std,22.0
+organic,Di-isopropylammonium iodide,carboaliphaticringcount_std,0.0
+organic,Di-isopropylammonium iodide,carboaromaticringcount_std,0.0
+organic,Di-isopropylammonium iodide,carboringcount_std,0.0
+organic,Di-isopropylammonium iodide,chainatomcount_std,7.0
+organic,Di-isopropylammonium iodide,cyclomaticnumber_std,0.0
+organic,Di-isopropylammonium iodide,donsitecount_std,2.0
+organic,Di-isopropylammonium iodide,fr_amidine,0.0
+organic,Di-isopropylammonium iodide,fr_halogen,1.0
+organic,Di-isopropylammonium iodide,fr_nh0,0.0
+organic,Di-isopropylammonium iodide,fr_nh1,0.0
+organic,Di-isopropylammonium iodide,fr_nh2,1.0
+organic,Di-isopropylammonium iodide,fr_piperzine,0.0
+organic,Di-isopropylammonium iodide,fr_pyridine,0.0
+organic,Di-isopropylammonium iodide,fr_quatn,1.0
+organic,Di-isopropylammonium iodide,hacceptorcount_std,0.0
+organic,Di-isopropylammonium iodide,hdonorcount_std,1.0
+organic,Di-isopropylammonium iodide,heteroaliphaticringcount_std,0.0
+organic,Di-isopropylammonium iodide,heteroaromaticringcount_std,0.0
+organic,Di-isopropylammonium iodide,hyperwienerindex_std,91.0
+organic,Di-isopropylammonium iodide,largestringsize_std,0.0
+organic,Di-isopropylammonium iodide,maximalprojectionarea_std,41.21
+organic,Di-isopropylammonium iodide,maximalprojectionradius_std,4.49
+organic,Di-isopropylammonium iodide,maximalprojectionsize_std,6.12
+organic,Di-isopropylammonium iodide,minimalprojectionarea_std,28.74
+organic,Di-isopropylammonium iodide,minimalprojectionradius_std,3.37
+organic,Di-isopropylammonium iodide,minimalprojectionsize_std,8.46
+organic,Di-isopropylammonium iodide,molpol_std,13.27
+organic,Di-isopropylammonium iodide,organoammoniummolecularweight_std,102.2
+organic,Di-isopropylammonium iodide,protpsa_std,16.61
+organic,Di-isopropylammonium iodide,refractivity_std,44.44
+organic,Di-isopropylammonium iodide,ringatomcount_std,0.0
+organic,Di-isopropylammonium iodide,rotatablebondcount_std,2.0
+organic,Di-isopropylammonium iodide,saltmolecularweight,229.105
+organic,Di-isopropylammonium iodide,smallestringsize_std,0.0
+organic,Di-isopropylammonium iodide,vanderwaalsvolume_std,128.14
+organic,Di-isopropylammonium iodide,wienerindex_std,48.0
+organic,Di-isopropylammonium iodide,wienerpolarity_std,4.0
+organic,4-methoxy-phenethylammonium-iodide,accsitecount_std,2.0
+organic,4-methoxy-phenethylammonium-iodide,aliphaticatomcount_std,5.0
+organic,4-methoxy-phenethylammonium-iodide,aliphaticringcount_std,0.0
+organic,4-methoxy-phenethylammonium-iodide,aromaticatomcount_std,6.0
+organic,4-methoxy-phenethylammonium-iodide,aromaticringcount_std,1.0
+organic,4-methoxy-phenethylammonium-iodide,asa+_std,293.82
+organic,4-methoxy-phenethylammonium-iodide,asa-_std,77.0
+organic,4-methoxy-phenethylammonium-iodide,asa_std,370.82
+organic,4-methoxy-phenethylammonium-iodide,asah_std,303.81
+organic,4-methoxy-phenethylammonium-iodide,asap_std,67.01
+organic,4-methoxy-phenethylammonium-iodide,asavdwp_std,265.89
+organic,4-methoxy-phenethylammonium-iodide,atomcount_c_std,9.0
+organic,4-methoxy-phenethylammonium-iodide,atomcount_n_std,1.0
+organic,4-methoxy-phenethylammonium-iodide,avgpol_std,17.7
+organic,4-methoxy-phenethylammonium-iodide,balabanindex_std,1.94
+organic,4-methoxy-phenethylammonium-iodide,bondcount_std,25.0
+organic,4-methoxy-phenethylammonium-iodide,carboaliphaticringcount_std,0.0
+organic,4-methoxy-phenethylammonium-iodide,carboaromaticringcount_std,1.0
+organic,4-methoxy-phenethylammonium-iodide,carboringcount_std,1.0
+organic,4-methoxy-phenethylammonium-iodide,chainatomcount_std,5.0
+organic,4-methoxy-phenethylammonium-iodide,cyclomaticnumber_std,1.0
+organic,4-methoxy-phenethylammonium-iodide,donsitecount_std,3.0
+organic,4-methoxy-phenethylammonium-iodide,fr_amidine,0.0
+organic,4-methoxy-phenethylammonium-iodide,fr_halogen,1.0
+organic,4-methoxy-phenethylammonium-iodide,fr_nh0,0.0
+organic,4-methoxy-phenethylammonium-iodide,fr_nh1,0.0
+organic,4-methoxy-phenethylammonium-iodide,fr_nh2,0.0
+organic,4-methoxy-phenethylammonium-iodide,fr_piperzine,0.0
+organic,4-methoxy-phenethylammonium-iodide,fr_pyridine,0.0
+organic,4-methoxy-phenethylammonium-iodide,fr_quatn,1.0
+organic,4-methoxy-phenethylammonium-iodide,hacceptorcount_std,1.0
+organic,4-methoxy-phenethylammonium-iodide,hdonorcount_std,1.0
+organic,4-methoxy-phenethylammonium-iodide,heteroaliphaticringcount_std,0.0
+organic,4-methoxy-phenethylammonium-iodide,heteroaromaticringcount_std,0.0
+organic,4-methoxy-phenethylammonium-iodide,hyperwienerindex_std,432.0
+organic,4-methoxy-phenethylammonium-iodide,largestringsize_std,6.0
+organic,4-methoxy-phenethylammonium-iodide,maximalprojectionarea_std,53.7
+organic,4-methoxy-phenethylammonium-iodide,maximalprojectionradius_std,6.03
+organic,4-methoxy-phenethylammonium-iodide,maximalprojectionsize_std,6.17
+organic,4-methoxy-phenethylammonium-iodide,minimalprojectionarea_std,28.03
+organic,4-methoxy-phenethylammonium-iodide,minimalprojectionradius_std,3.45
+organic,4-methoxy-phenethylammonium-iodide,minimalprojectionsize_std,12.05
+organic,4-methoxy-phenethylammonium-iodide,molpol_std,17.92
+organic,4-methoxy-phenethylammonium-iodide,organoammoniummolecularweight_std,152.216
+organic,4-methoxy-phenethylammonium-iodide,protpsa_std,36.87
+organic,4-methoxy-phenethylammonium-iodide,refractivity_std,57.04
+organic,4-methoxy-phenethylammonium-iodide,ringatomcount_std,6.0
+organic,4-methoxy-phenethylammonium-iodide,rotatablebondcount_std,3.0
+organic,4-methoxy-phenethylammonium-iodide,saltmolecularweight,279.121
+organic,4-methoxy-phenethylammonium-iodide,smallestringsize_std,6.0
+organic,4-methoxy-phenethylammonium-iodide,vanderwaalsvolume_std,156.29
+organic,4-methoxy-phenethylammonium-iodide,wienerindex_std,170.0
+organic,4-methoxy-phenethylammonium-iodide,wienerpolarity_std,12.0
+organic,22-dimethylpropane-13-diammonium iodide,accsitecount_std,0.0
+organic,22-dimethylpropane-13-diammonium iodide,aliphaticatomcount_std,7.0
+organic,22-dimethylpropane-13-diammonium iodide,aliphaticringcount_std,0.0
+organic,22-dimethylpropane-13-diammonium iodide,aromaticatomcount_std,0.0
+organic,22-dimethylpropane-13-diammonium iodide,aromaticringcount_std,0.0
+organic,22-dimethylpropane-13-diammonium iodide,asa+_std,195.66
+organic,22-dimethylpropane-13-diammonium iodide,asa-_std,48.15
+organic,22-dimethylpropane-13-diammonium iodide,asa_std,243.81
+organic,22-dimethylpropane-13-diammonium iodide,asah_std,172.12
+organic,22-dimethylpropane-13-diammonium iodide,asap_std,71.7
+organic,22-dimethylpropane-13-diammonium iodide,asavdwp_std,225.81
+organic,22-dimethylpropane-13-diammonium iodide,atomcount_c_std,5.0
+organic,22-dimethylpropane-13-diammonium iodide,atomcount_n_std,2.0
+organic,22-dimethylpropane-13-diammonium iodide,avgpol_std,13.22
+organic,22-dimethylpropane-13-diammonium iodide,balabanindex_std,3.36
+organic,22-dimethylpropane-13-diammonium iodide,bondcount_std,22.0
+organic,22-dimethylpropane-13-diammonium iodide,carboaliphaticringcount_std,0.0
+organic,22-dimethylpropane-13-diammonium iodide,carboaromaticringcount_std,0.0
+organic,22-dimethylpropane-13-diammonium iodide,carboringcount_std,0.0
+organic,22-dimethylpropane-13-diammonium iodide,chainatomcount_std,7.0
+organic,22-dimethylpropane-13-diammonium iodide,cyclomaticnumber_std,0.0
+organic,22-dimethylpropane-13-diammonium iodide,donsitecount_std,6.0
+organic,22-dimethylpropane-13-diammonium iodide,fr_amidine,0.0
+organic,22-dimethylpropane-13-diammonium iodide,fr_halogen,2.0
+organic,22-dimethylpropane-13-diammonium iodide,fr_nh0,0.0
+organic,22-dimethylpropane-13-diammonium iodide,fr_nh1,0.0
+organic,22-dimethylpropane-13-diammonium iodide,fr_nh2,0.0
+organic,22-dimethylpropane-13-diammonium iodide,fr_piperzine,0.0
+organic,22-dimethylpropane-13-diammonium iodide,fr_pyridine,0.0
+organic,22-dimethylpropane-13-diammonium iodide,fr_quatn,2.0
+organic,22-dimethylpropane-13-diammonium iodide,hacceptorcount_std,0.0
+organic,22-dimethylpropane-13-diammonium iodide,hdonorcount_std,2.0
+organic,22-dimethylpropane-13-diammonium iodide,heteroaliphaticringcount_std,0.0
+organic,22-dimethylpropane-13-diammonium iodide,heteroaromaticringcount_std,0.0
+organic,22-dimethylpropane-13-diammonium iodide,hyperwienerindex_std,76.0
+organic,22-dimethylpropane-13-diammonium iodide,largestringsize_std,0.0
+organic,22-dimethylpropane-13-diammonium iodide,maximalprojectionarea_std,38.91
+organic,22-dimethylpropane-13-diammonium iodide,maximalprojectionradius_std,4.17
+organic,22-dimethylpropane-13-diammonium iodide,maximalprojectionsize_std,6.21
+organic,22-dimethylpropane-13-diammonium iodide,minimalprojectionarea_std,29.74
+organic,22-dimethylpropane-13-diammonium iodide,minimalprojectionradius_std,3.48
+organic,22-dimethylpropane-13-diammonium iodide,minimalprojectionsize_std,8.29
+organic,22-dimethylpropane-13-diammonium iodide,molpol_std,12.87
+organic,22-dimethylpropane-13-diammonium iodide,organoammoniummolecularweight_std,104.196
+organic,22-dimethylpropane-13-diammonium iodide,protpsa_std,55.28
+organic,22-dimethylpropane-13-diammonium iodide,refractivity_std,54.08
+organic,22-dimethylpropane-13-diammonium iodide,ringatomcount_std,0.0
+organic,22-dimethylpropane-13-diammonium iodide,rotatablebondcount_std,2.0
+organic,22-dimethylpropane-13-diammonium iodide,saltmolecularweight,358.006
+organic,22-dimethylpropane-13-diammonium iodide,smallestringsize_std,0.0
+organic,22-dimethylpropane-13-diammonium iodide,vanderwaalsvolume_std,125.34
+organic,22-dimethylpropane-13-diammonium iodide,wienerindex_std,44.0
+organic,22-dimethylpropane-13-diammonium iodide,wienerpolarity_std,6.0
+organic,2-Thiophenemethylammonium iodide,accsitecount_std,0.0
+organic,2-Thiophenemethylammonium iodide,aliphaticatomcount_std,7.0
+organic,2-Thiophenemethylammonium iodide,aliphaticringcount_std,1.0
+organic,2-Thiophenemethylammonium iodide,aromaticatomcount_std,0.0
+organic,2-Thiophenemethylammonium iodide,aromaticringcount_std,0.0
+organic,2-Thiophenemethylammonium iodide,asa+_std,196.74
+organic,2-Thiophenemethylammonium iodide,asa-_std,41.26
+organic,2-Thiophenemethylammonium iodide,asa_std,238.0
+organic,2-Thiophenemethylammonium iodide,asah_std,192.03
+organic,2-Thiophenemethylammonium iodide,asap_std,45.97
+organic,2-Thiophenemethylammonium iodide,asavdwp_std,163.6
+organic,2-Thiophenemethylammonium iodide,atomcount_c_std,5.0
+organic,2-Thiophenemethylammonium iodide,atomcount_n_std,1.0
+organic,2-Thiophenemethylammonium iodide,avgpol_std,12.8
+organic,2-Thiophenemethylammonium iodide,balabanindex_std,1.83
+organic,2-Thiophenemethylammonium iodide,bondcount_std,17.0
+organic,2-Thiophenemethylammonium iodide,carboaliphaticringcount_std,0.0
+organic,2-Thiophenemethylammonium iodide,carboaromaticringcount_std,0.0
+organic,2-Thiophenemethylammonium iodide,carboringcount_std,0.0
+organic,2-Thiophenemethylammonium iodide,chainatomcount_std,2.0
+organic,2-Thiophenemethylammonium iodide,cyclomaticnumber_std,1.0
+organic,2-Thiophenemethylammonium iodide,donsitecount_std,4.0
+organic,2-Thiophenemethylammonium iodide,fr_amidine,0.0
+organic,2-Thiophenemethylammonium iodide,fr_halogen,1.0
+organic,2-Thiophenemethylammonium iodide,fr_nh0,0.0
+organic,2-Thiophenemethylammonium iodide,fr_nh1,0.0
+organic,2-Thiophenemethylammonium iodide,fr_nh2,0.0
+organic,2-Thiophenemethylammonium iodide,fr_piperzine,0.0
+organic,2-Thiophenemethylammonium iodide,fr_pyridine,0.0
+organic,2-Thiophenemethylammonium iodide,fr_quatn,1.0
+organic,2-Thiophenemethylammonium iodide,hacceptorcount_std,0.0
+organic,2-Thiophenemethylammonium iodide,hdonorcount_std,2.0
+organic,2-Thiophenemethylammonium iodide,heteroaliphaticringcount_std,1.0
+organic,2-Thiophenemethylammonium iodide,heteroaromaticringcount_std,0.0
+organic,2-Thiophenemethylammonium iodide,hyperwienerindex_std,75.0
+organic,2-Thiophenemethylammonium iodide,largestringsize_std,5.0
+organic,2-Thiophenemethylammonium iodide,maximalprojectionarea_std,38.83
+organic,2-Thiophenemethylammonium iodide,maximalprojectionradius_std,4.48
+organic,2-Thiophenemethylammonium iodide,maximalprojectionsize_std,5.25
+organic,2-Thiophenemethylammonium iodide,minimalprojectionarea_std,25.31
+organic,2-Thiophenemethylammonium iodide,minimalprojectionradius_std,3.29
+organic,2-Thiophenemethylammonium iodide,minimalprojectionsize_std,8.61
+organic,2-Thiophenemethylammonium iodide,molpol_std,13.74
+organic,2-Thiophenemethylammonium iodide,organoammoniummolecularweight_std,116.2
+organic,2-Thiophenemethylammonium iodide,protpsa_std,27.64
+organic,2-Thiophenemethylammonium iodide,refractivity_std,44.74
+organic,2-Thiophenemethylammonium iodide,ringatomcount_std,5.0
+organic,2-Thiophenemethylammonium iodide,rotatablebondcount_std,1.0
+organic,2-Thiophenemethylammonium iodide,saltmolecularweight,243.11
+organic,2-Thiophenemethylammonium iodide,smallestringsize_std,5.0
+organic,2-Thiophenemethylammonium iodide,vanderwaalsvolume_std,108.88
+organic,2-Thiophenemethylammonium iodide,wienerindex_std,43.0
+organic,2-Thiophenemethylammonium iodide,wienerpolarity_std,4.0
+organic,4-Methoxy-Phenylammonium iodide,accsitecount_std,2.0
+organic,4-Methoxy-Phenylammonium iodide,aliphaticatomcount_std,3.0
+organic,4-Methoxy-Phenylammonium iodide,aliphaticringcount_std,0.0
+organic,4-Methoxy-Phenylammonium iodide,aromaticatomcount_std,6.0
+organic,4-Methoxy-Phenylammonium iodide,aromaticringcount_std,1.0
+organic,4-Methoxy-Phenylammonium iodide,asa+_std,244.72
+organic,4-Methoxy-Phenylammonium iodide,asa-_std,68.26
+organic,4-Methoxy-Phenylammonium iodide,asa_std,312.97
+organic,4-Methoxy-Phenylammonium iodide,asah_std,242.32
+organic,4-Methoxy-Phenylammonium iodide,asap_std,70.65
+organic,4-Methoxy-Phenylammonium iodide,asavdwp_std,204.29
+organic,4-Methoxy-Phenylammonium iodide,atomcount_c_std,7.0
+organic,4-Methoxy-Phenylammonium iodide,atomcount_n_std,1.0
+organic,4-Methoxy-Phenylammonium iodide,avgpol_std,13.7
+organic,4-Methoxy-Phenylammonium iodide,balabanindex_std,1.94
+organic,4-Methoxy-Phenylammonium iodide,bondcount_std,19.0
+organic,4-Methoxy-Phenylammonium iodide,carboaliphaticringcount_std,0.0
+organic,4-Methoxy-Phenylammonium iodide,carboaromaticringcount_std,1.0
+organic,4-Methoxy-Phenylammonium iodide,carboringcount_std,1.0
+organic,4-Methoxy-Phenylammonium iodide,chainatomcount_std,3.0
+organic,4-Methoxy-Phenylammonium iodide,cyclomaticnumber_std,1.0
+organic,4-Methoxy-Phenylammonium iodide,donsitecount_std,3.0
+organic,4-Methoxy-Phenylammonium iodide,fr_amidine,0.0
+organic,4-Methoxy-Phenylammonium iodide,fr_halogen,1.0
+organic,4-Methoxy-Phenylammonium iodide,fr_nh0,0.0
+organic,4-Methoxy-Phenylammonium iodide,fr_nh1,0.0
+organic,4-Methoxy-Phenylammonium iodide,fr_nh2,0.0
+organic,4-Methoxy-Phenylammonium iodide,fr_piperzine,0.0
+organic,4-Methoxy-Phenylammonium iodide,fr_pyridine,0.0
+organic,4-Methoxy-Phenylammonium iodide,fr_quatn,1.0
+organic,4-Methoxy-Phenylammonium iodide,hacceptorcount_std,1.0
+organic,4-Methoxy-Phenylammonium iodide,hdonorcount_std,1.0
+organic,4-Methoxy-Phenylammonium iodide,heteroaliphaticringcount_std,0.0
+organic,4-Methoxy-Phenylammonium iodide,heteroaromaticringcount_std,0.0
+organic,4-Methoxy-Phenylammonium iodide,hyperwienerindex_std,187.0
+organic,4-Methoxy-Phenylammonium iodide,largestringsize_std,6.0
+organic,4-Methoxy-Phenylammonium iodide,maximalprojectionarea_std,45.96
+organic,4-Methoxy-Phenylammonium iodide,maximalprojectionradius_std,5.09
+organic,4-Methoxy-Phenylammonium iodide,maximalprojectionsize_std,5.59
+organic,4-Methoxy-Phenylammonium iodide,minimalprojectionarea_std,24.08
+organic,4-Methoxy-Phenylammonium iodide,minimalprojectionradius_std,3.45
+organic,4-Methoxy-Phenylammonium iodide,minimalprojectionsize_std,10.11
+organic,4-Methoxy-Phenylammonium iodide,molpol_std,14.28
+organic,4-Methoxy-Phenylammonium iodide,organoammoniummolecularweight_std,124.162
+organic,4-Methoxy-Phenylammonium iodide,protpsa_std,36.87
+organic,4-Methoxy-Phenylammonium iodide,refractivity_std,47.45
+organic,4-Methoxy-Phenylammonium iodide,ringatomcount_std,6.0
+organic,4-Methoxy-Phenylammonium iodide,rotatablebondcount_std,1.0
+organic,4-Methoxy-Phenylammonium iodide,saltmolecularweight,251.067
+organic,4-Methoxy-Phenylammonium iodide,smallestringsize_std,6.0
+organic,4-Methoxy-Phenylammonium iodide,vanderwaalsvolume_std,122.32
+organic,4-Methoxy-Phenylammonium iodide,wienerindex_std,90.0
+organic,4-Methoxy-Phenylammonium iodide,wienerpolarity_std,9.0

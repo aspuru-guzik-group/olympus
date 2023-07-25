@@ -1,19 +1,26 @@
 #!/usr/bin/env python
 
 import json
-from pandas import DataFrame, read_csv
-import numpy as np
-
-from olympus import Logger
-from olympus.campaigns import ParameterSpace
-from olympus.objects import Parameter
-
-import os
+import os, sys
 from glob import glob
 
-#To silence VisibleDeprecationWarning we use 'ignore'. We can use 'error' instead of 'ignore' to get a traceback and resolve the issue. 
-np.warnings.filterwarnings('ignore', category=np.VisibleDeprecationWarning)
+import numpy as np
+import pandas as pd
+from pandas import DataFrame, read_csv
 
+from olympus import __home__, Logger
+from olympus.campaigns.param_space import ParameterSpace
+from olympus.noises import GaussianNoise
+from olympus.objects import (
+    Parameter,
+    ParameterCategorical,
+    ParameterContinuous,
+    ParameterDiscrete,
+    ParameterVector,
+)
+
+# To silence VisibleDeprecationWarning we use 'ignore'. We can use 'error' to get a traceback and resolve the issue.
+np.warnings.filterwarnings("ignore", category=np.VisibleDeprecationWarning)
 
 # =========================
 # Main Class of This Module
@@ -74,14 +81,82 @@ class Dataset:
         # Case 2: Olympus dataset loaded
         # ------------------------------
         elif kind is not None:
-            _data, _config, self._description = load_dataset(kind)
+            _data, _config, self._description, _descriptors, self.known_constraints = load_dataset(
+                kind
+            )
             self._targets = [t["name"] for t in _config["measurements"]]
-            columns = [f["name"] for f in _config["parameters"]] + self._targets
+            columns = [
+                f["name"] for f in _config["parameters"]
+            ] + self._targets
+            # descriptors are stored in the descriptors attribute
+            desc_columns = ["param", "option", "name", "value"]
+            self.descriptors = DataFrame(
+                data=_descriptors, index=None, columns=desc_columns
+            )
             # create param_space from config file
             self._create_param_space(_config)
             self._create_value_space(_config)
+
+            # TODO: add full discrete to these types. Do we need mixed_cat_discrete, mixed_cont_cat etc..
+            # level of specificity for the dataset types??
+            # store the dataset type in an attribute ('full_cont', 'full_cat', 'mixed')
+            # TODO: for now, full_cont could include continous or discrete parameters, should we change this?
+            self.scales = None
+            if np.all(
+                [
+                    param["type"] in ["categorical", "discrete"]
+                    for param in self.param_space
+                ]
+            ):
+                self.dataset_type = "full_cat"
+                # load scales
+                datasets_path = os.path.dirname(os.path.abspath(__file__))
+                csv_file = "".join(f"{datasets_path}/dataset_{kind}/scales.csv")
+                try:
+                    self.scales = read_csv(csv_file, header=None, names=[f'scales_{i}' for i in range(len(self.value_space))]) #.to_numpy()
+                except FileNotFoundError:
+                    Logger.log(f"Could not find scales.csv for dataset {kind}, resorting to noiseless measurements", "WARNING")
+
+            elif np.all(
+                [param["type"] in ["continuous"] for param in self.param_space]
+            ):
+                self.dataset_type = "full_cont"
+            else:
+                self.dataset_type = "mixed"
+
+            # param_type attribute stores unique parameter types for the dataset
+            self.param_types = list(
+                set([param["type"] for param in self.param_space])
+            )
+
+            # check the type of predictive task associated with the dataset
+            if np.all([v.type=='continuous' for v in self.value_space]):
+                # if continuous-valued targets, do regression
+                self.task = 'regression'
+                self.metric_names = ['r2', 'rmsd']
+            elif np.all([v.type=='ordinal' for v in self.value_space]):
+                # if ordinal-valued targets, do ordinal regression like https://arxiv.org/pdf/0704.1028.pdf
+                self.task = 'ordinal'
+                self.metric_names = ['acc', 'rmsd']
+            else:
+                # if mixed-valued targets, complain --> we dont support this yet
+                message = 'We currently do not support emulation of mixed continuous-ordinal objective spaces'
+                Logger.log(messgae, 'FATAL')
+
+
             # define attributes of interest - done here so to avoid calling load_dataset again
             self.constraints = _config["constraints"]
+
+            # meta information for the evaluator
+            self.parameter_constriants = self.constraints["parameters"]
+
+            # if we have a "simplex" constrained parameter space, create an auxillary
+            # parameter space of dimensions n-1 (n is the original feature dimension)
+            if self.parameter_constriants == "simplex":
+                self._create_aux_param_space(len(self.param_space))
+            else:
+                self.aux_param_space = ParameterSpace()
+
             self._goal = _config["default_goal"]
 
         # the numeric data is stored here, wrapping a DataFrame
@@ -94,17 +169,19 @@ class Dataset:
         # create dataset splits
         self.create_train_validate_test_splits()
 
+
+
     @property
     def goal(self):
         if not "_goal" in self.__dict__:
-            _data, _config, _description = load_dataset(self.kind)
+            _data, _config, _description, _, __ = load_dataset(self.kind)
             self._goal = _config["default_goal"]
         return self._goal
 
     @property
     def measurement_name(self):
         if not "_measurement_name" in self.__dict__:
-            _data, _config, _description = load_dataset(self.kind)
+            _data, _config, _description, _, __ = load_dataset(self.kind)
             self._measurement_name = _config["measurements"][0]["name"]
         return self._measurement_name
 
@@ -121,7 +198,7 @@ class Dataset:
             val = getattr(self, "name")
             setattr(self, attr, val)
             return val
-        print('ATTR', attr)
+        print("ATTR", attr)
         return getattr(self, attr)
 
     def __str__(self):
@@ -139,8 +216,7 @@ class Dataset:
 
     # we could also overwrite the DataFrame.info method
     def dataset_info(self):
-        """Provide summary info about dataset.
-        """
+        """Provide summary info about dataset."""
         Logger.log(self._description, "INFO")
 
     def set_param_space(self, param_space):
@@ -150,20 +226,28 @@ class Dataset:
             param_space (ParameterSpace): ParameterSpace object with information about all variables in the dataset.
 
         """
-
         # validate first...
         for i, param in enumerate(param_space.parameters):
+
             # check names are matching
             if self.feature_names[i] != param.name:
                 message = f"Parameter name `{self.feature_names[i]}` does not match name `{param.name}` found in dataset!"
                 Logger.log(message, "WARNING")
-            # check data provided is within param_space bounds
-            if param.low > np.min(self.data.iloc[:, i]):
-                message = f"Lower bound of {param.low} provided for parameter `{param.name}` is higher than minimum found in the data!"
-                Logger.log(message, "ERROR")
-            if param.high < np.min(self.data.iloc[:, i]):
-                message = f"Upper bound of {param.high} provided for parameter `{param.name}` is lower than maximum found in the data!"
-                Logger.log(message, "ERROR")
+
+            if param.type in ["discrete", "continuous"]:
+                # check data provided is within param_space bounds
+                if param.low > np.min(self.data.iloc[:, i]):
+                    message = f"Lower bound of {param.low} provided for parameter `{param.name}` is higher than minimum found in the data!"
+                    Logger.log(message, "ERROR")
+                if param.high < np.min(self.data.iloc[:, i]):
+                    message = f"Upper bound of {param.high} provided for parameter `{param.name}` is lower than maximum found in the data!"
+                    Logger.log(message, "ERROR")
+            elif param.type == "categorical":
+                # check to see if all the provided options are inlcuded in the param_space options
+                provided_options = self.data.iloc[:, i].unique().tolist()
+                if not set(provided_options).issubset(param.options):
+                    message = f"Set of options for categorcial value {param.name} does not match the set of options found in the data!"
+                    Logger.log(message, "ERROR")
 
         # ...then assign
         self.param_space = param_space
@@ -185,7 +269,7 @@ class Dataset:
         # set the param space
         self.set_param_space(param_space)
 
-    def to_disk(self, folder='custom_dataset'):
+    def to_disk(self, folder="custom_dataset"):
         """Save the dataset to disk in the format expected by Olympus for its own datasets. This can be useful if you
         plan to upload the dataset to the community datasets available online.
 
@@ -197,50 +281,164 @@ class Dataset:
         os.mkdir(folder)
 
         # save the numeric data
-        self.data.to_csv(f'{folder}/data.csv', header=False, index=False)
+        self.data.to_csv(f"{folder}/data.csv", header=False, index=False)
 
         # save the description
         self._generate_description()
-        with open(f'{folder}/description.txt', 'w') as f:
+        with open(f"{folder}/description.txt", "w") as f:
             f.write(self._description)
 
         # save the config file
         _config = {}
-        _config['constraints'] = {'parameters': 'none', 'measurements': 'none'}
+        _config["constraints"] = {"parameters": "none", "measurements": "none"}
 
-        _config['parameters'] = []
+        _config["parameters"] = []
         for param in self.param_space.parameters:
-            d = {'name': param.name, 'type': param.kind, 'lower': param.low, 'upper':param.high}
-            _config['parameters'].append(d)
+            d = {
+                "name": param.name,
+                "type": param.kind,
+                "lower": param.low,
+                "upper": param.high,
+            }
+            _config["parameters"].append(d)
 
-        _config['measurements'] = []
+        _config["measurements"] = []
         for target in self._targets:
-            t = {'name': target, 'type': 'continuous'}
-            _config['measurements'].append(t)
+            t = {"name": target, "type": "continuous"}
+            _config["measurements"].append(t)
 
-        with open(f'{folder}/config.json', 'w') as f:
+        with open(f"{folder}/config.json", "w") as f:
             f.write(json.dumps(_config, indent=4, sort_keys=True))
 
     def _generate_description(self):
         _description = []
         if self.kind is None:
-            _description.append('Custom Dataset\n')
+            _description.append("Custom Dataset\n")
         else:
-            _description.append(f'{self.kind}\n')
+            _description.append(f"{self.kind}\n")
 
-        _description.append('=========================================')
-        _description.append('                Summary')
-        _description.append('-----------------------------------------')
-        _description.append(f'    Number of Samples       {self.size:>10}')
-        _description.append(f'    Dimensionality          {len(self.feature_names):>10}')
-        _description.append(f'    Features:')
+        _description.append("=========================================")
+        _description.append("                Summary")
+        _description.append("-----------------------------------------")
+        _description.append(f"    Number of Samples       {self.size:>10}")
+        _description.append(
+            f"    Dimensionality          {len(self.feature_names):>10}"
+        )
+        _description.append(f"    Features:")
         for param in self.param_space.parameters:
-            _description.append(f'        {param.name:<10}          {param.kind:>10}')
-        _description.append(f'    Targets:')
+            _description.append(
+                f"        {param.name:<10}          {param.kind:>10}"
+            )
+        _description.append(f"    Targets:")
         for target in self._targets:
-            _description.append(f'        {target:<10}          continuous')
+            _description.append(f"        {target:<10}          continuous")
 
         self._description = "\n".join(_description)
+
+
+    def run(self, params, return_paramvector=False, noiseless=False):
+        """run method to allow lookup of target values for fully categorical
+        parameter spaces. This method is named run to make it interchangable with
+        the emulator and surface objects within Olympus, such that it can be used in the
+        higher level Evaluator class for optimization runs and larger benchmarks
+
+        Args:
+            params (ndarray): 2d array which contains the input parameters
+            return_paramvector (bool): return an Olympus ParameterVector object
+                or a list of lists. Default is False
+
+        Returns:
+            values (ParamVector): output value referenced from the lookup table. Returns
+                a list of num samples elements.
+        """
+        if self.dataset_type != "full_cat":
+            message = f"Value lookup only supported for fully categorical/discrete parameter spaces"
+            Logger.log(message, "FATAL")
+
+        # check the type of params that have been passed, convert to list of
+        # arrays to be processed in the lookup step
+        if isinstance(params, np.ndarray):
+            if len(params.shape) == 2:
+                params = list(params)  # multiple observations
+            elif len(params.shape) == 1:
+                params = [params]  # assuming a single observation
+            else:
+                message = f"You can pass either a 1d or 2d np.ndarray for argument params. You have passed a {len(params.shape)}d np.ndarray."
+                Logger.log(message, "ERROR")
+
+        elif isinstance(params, list):
+            if type(params[0]) in [str, int, float]:
+                # assume we have a single value passed
+                params = [params]
+            elif type(params[0]) in [list, np.ndarray]:
+                # assume multiple parameters are passed already in array form
+                pass
+            elif type(params[0]) == ParameterVector:
+                # list of ParamVectors, convert to list of arrays
+                params = [param.to_array() for param in params]
+
+        elif isinstance(params, ParameterVector):
+            # assuming single ParameterVector object, convert to array
+            params = [params.to_array()]
+        else:
+            Logger.log(
+                "Params type not understood. Accepted types are: np.ndarray, list, and ParameterVector",
+                "FATAL",
+            )
+
+        # assert that have the correct number of parameters for each sample
+        assert np.all(
+            [len(param) == len(self.feature_names) for param in params]
+        )
+
+        values = []
+        for param in params:
+            # join scales and dataset
+            sub_df = pd.concat((self.data, self.scales), axis=1)
+
+            for name, space, val in zip(
+                self.feature_names, self.param_space, param
+            ):
+                if space.type in ["continuous", "discrete"]:
+                    val = round(
+                        val, 5
+                    )  # five should be max precision, but this may cause errors
+                sub_df = sub_df.loc[(sub_df[name] == val), :]
+            if not sub_df.shape[0] == 1:
+                message = f"Could not find lookup value for parameter setting {param}"
+                Logger.log(message, "FATAL")
+
+            value_objs = []
+            # iterate over all objectives/targets
+            for target_ix, target_name in enumerate(self.target_names):
+                mu = sub_df[target_name].tolist()[0]
+
+                scale = sub_df[f'scales_{target_ix}'].tolist()[0]
+                if not noiseless:
+                    # sample measurement from distribution
+                    _noise = GaussianNoise(scale=scale)
+                    val = _noise._add_noise(value=mu)
+
+                else:
+                    # return the mean value
+                    val = mu
+                # if return_paramvector:
+                #     value_obj = ParameterVector().from_dict({target_name: val})
+                # else:
+                #     value_obj = val
+                value_objs.append(val)
+            if return_paramvector:
+                value_objs = ParameterVector().from_dict(
+                    {
+                        target_name: val
+                        for target_name, val in zip(
+                            self.target_names, value_objs
+                        )
+                    }
+                )
+            values.append(value_objs)
+
+        return values
 
     # ----------------------------------
     # Methods about features and targets
@@ -271,6 +469,20 @@ class Dataset:
     @property
     def features_dim(self):
         return len(self.feature_names)
+
+    @property
+    def features_dim_ohe(self):
+        dim = 0
+        for param in self.param_space:
+            if param.type in ["continuous", "discrete"]:
+                dim += 1
+            elif param.type == "categorical":
+                if np.all([d==None for d in param.descriptors]):
+                    dim += len(param.options)
+                else:
+                    # should have same num descriptors for each option
+                    dim += len(param.descriptors[0])
+        return dim
 
     @property
     def targets_dim(self):
@@ -403,17 +615,57 @@ class Dataset:
     # ---------------
     # Private Methods
     # ---------------
+    def _get_descriptors(self, param):
+        """if categorical parameter options have descriptors have desc,
+        list of lists containing descriptors
+        """
+        if not param["descriptors"]:
+            # no descriptors, return None for each option
+            desc = [None for _ in param["options"]]
+        else:
+            # we have some descritptors
+            desc = []
+            assert not type(self.descriptors) == type(None)
+            param_desc = self.descriptors[
+                self.descriptors["param"] == param["name"]
+            ]
+            for option in param["options"]:
+                d = param_desc[param_desc["option"] == option][
+                    "value"
+                ].tolist()
+                desc.append(d)
+        return desc
+
     def _create_param_space(self, config):
         self.param_space = ParameterSpace()
-        self.param_space.add(
-            [Parameter().from_dict(feature) for feature in config["parameters"]]
-        )
+        for param in config["parameters"]:
+            if param["type"] == "categorical":
+                desc_ = self._get_descriptors(param)
+                self.param_space.add(
+                    ParameterCategorical(
+                        name=param["name"],
+                        options=param["options"],
+                        descriptors=desc_,
+                    )
+                )
+            # continuous or categorical
+            else:
+                self.param_space.add([Parameter().from_dict(param)])
+
+    def _create_aux_param_space(self, param_dim):
+        self.aux_param_space = ParameterSpace()
+        for i in range(param_dim - 1):
+            self.aux_param_space.add(
+                ParameterContinuous(name=f"param_{i}", low=0.0, high=1.0)
+            )
 
     def _create_value_space(self, config):
         self.value_space = ParameterSpace()
-        self.value_space.add(
-            [Parameter().from_dict(feature) for feature in config["measurements"]]
-        )
+        for feature in config["measurements"]:
+            kind = feature["type"]
+            self.value_space.add(
+                    Parameter(kind=kind).from_dict(feature)
+            )
 
 
 # ===============
@@ -433,15 +685,21 @@ def load_dataset(kind):
             description (str): string describing the dataset.
     """
 
-    _validate_dataset_args(kind=kind, data=None, columns=None, target_names=None)
+    _validate_dataset_args(
+        kind=kind, data=None, columns=None, target_names=None
+    )
     datasets_path = os.path.dirname(os.path.abspath(__file__))
 
     # load description
-    with open("".join(f"{datasets_path}/dataset_{kind}/description.txt")) as txtfile:
+    with open(
+        "".join(f"{datasets_path}/dataset_{kind}/description.txt")
+    ) as txtfile:
         description = txtfile.read()
 
     # load info on features/targets
-    with open("".join(f"{datasets_path}/dataset_{kind}/config.json"), "r") as content:
+    with open(
+        "".join(f"{datasets_path}/dataset_{kind}/config.json"), "r"
+    ) as content:
         config = json.loads(content.read())
 
     # load data
@@ -451,7 +709,35 @@ def load_dataset(kind):
     except FileNotFoundError:
         Logger.log(f"Could not find data.csv for dataset {kind}", "FATAL")
 
-    return data, config, description
+    # load descriptors
+    csv_file = "".join(f"{datasets_path}/dataset_{kind}/descriptors.csv")
+    # try:
+    #     descriptors = read_csv(csv_file, header=None).to_numpy()
+    # except FileNotFoundError:
+    #     Logger.log(f'No descriptors found for dataset {kind}', 'WARNING')
+    #     descriptors = None
+    if os.path.isfile(csv_file):
+        descriptors = read_csv(csv_file, header=None).to_numpy()
+    else:
+        descriptors = None
+
+    # load constraints
+    if config['constraints']['known'] == 'yes':
+        # we should have some known constraints defined in a file called constraints.py
+        sys.path.insert(0, f'{__home__}/datasets/dataset_{kind}/')
+        try:
+            constraints_module = __import__('constraints')
+            if not 'known_constraints' in dir(constraints_module):
+                msg = f'Known constraints module must include function "known_constraints"'
+                Logger.log(msg, 'FATAL')
+            else:
+                known_constraints = constraints_module.known_constraints
+        except ModuleNotFoundError:
+            Logger.log(f'No constraints module found for dataset {kind}', 'FATAL')
+    else:
+        known_constraints = None
+
+    return data, config, description, descriptors, known_constraints
 
 
 def _validate_dataset_args(kind, data, columns, target_names):
@@ -463,12 +749,19 @@ def _validate_dataset_args(kind, data, columns, target_names):
         module_path = os.path.dirname(os.path.abspath(__file__))
         olympus_datasets = []
         for dir_name in glob(f"{module_path}/dataset_*"):
-            dir_name = dir_name.split("/")[-1][8:]
+
+            if "/" in dir_name:
+                dir_name = dir_name.split("/")[-1][8:]
+            elif "\\" in dir_name:
+                dir_name = dir_name.split("\\")[-1][8:]
+
             olympus_datasets.append(dir_name)
         if kind not in olympus_datasets:
             message = (
                 "Could not find dataset `{0}`. Please choose from one of the available "
-                "datasets: {1}.".format(kind, ", ".join(list(olympus_datasets)))
+                "datasets: {1}.".format(
+                    kind, ", ".join(list(olympus_datasets))
+                )
             )
             Logger.log(message, "FATAL")
         # --------------------------------------------------------------

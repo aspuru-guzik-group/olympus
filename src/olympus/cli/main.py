@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 
 # simple interface to the available scripts
-from argparse import ArgumentParser, RawTextHelpFormatter, SUPPRESS
-from olympus import __version__
 import sys
+from argparse import SUPPRESS, ArgumentParser, RawTextHelpFormatter
+
+from olympus import __version__
 
 
 class OlympusCli:
@@ -60,8 +61,8 @@ class OlympusCli:
 
 def check_unknown_cmd(unknowns):
     """Checks unknown command line arguments are raises a warning if unexpected
-	commands are found.
-	"""
+    commands are found.
+    """
     expected = ["olympus", "get"]
 
     for cmd in unknowns:

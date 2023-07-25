@@ -6,10 +6,13 @@ from olympus.utils.misc import check_planner_module
 # Import planner
 # ----------------
 
-planner = 'DifferentialEvoluation'
-module  = 'scipy'
-link    = 'https://www.scipy.org/'
+planner = "DifferentialEvoluation"
+module = "scipy"
+link = "https://www.scipy.org/"
 check_planner_module(planner, module, link)
+
+
+param_types = ["continuous"]
 
 # ------------------------
 # Import Planner Wrapper

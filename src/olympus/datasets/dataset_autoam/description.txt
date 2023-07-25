@@ -1,0 +1,20 @@
+3d printing for materials manufacturing dataset.
+Objective is the shape score. Reference:  James R Deneault,
+Jorge Chang, Jay Myung, Daylond Hooper, Andrew Armstrong,
+ Mark Pitt, and Benji Maruyama. Toward autonomous additive
+manufacturing: Bayesian optimization on a 3d printer.
+MRS Bulletin, pages 1–10, 2021
+
+=========================================
+                Summary
+-----------------------------------------
+    Number of Samples             100
+    Dimensionality                 4
+    Features:
+        prime_delay          continuous
+        print_speed          continuous
+        x_offset_correction  continuous
+        y_offset_correction  continuous
+    Targets:
+        toughness            continuous
+=========================================

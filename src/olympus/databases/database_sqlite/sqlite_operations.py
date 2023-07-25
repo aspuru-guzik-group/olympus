@@ -1,18 +1,19 @@
 #!/usr/bin/env python
 
-#===============================================================================
+# ===============================================================================
 
 import time
+
 import sqlalchemy as sql
 
 from olympus.utils import thread
 
-#===============================================================================
+# ===============================================================================
+
 
 class AddEntry:
-
     def __init__(self, db, table, entry):
-        self.db    = db
+        self.db = db
         self.table = table
         self.entry = entry
 
@@ -21,26 +22,27 @@ class AddEntry:
             conn.execute(self.table.insert(), self.entry)
             conn.close()
 
-#===============================================================================
+
+# ===============================================================================
+
 
 class FetchEntries:
-
-    def __init__(self, db, table, select, name = 'name'):
-        self.db     = db
-        self.table  = table
+    def __init__(self, db, table, select, name="name"):
+        self.db = db
+        self.table = table
         self.select = select
-        self.name   = name
+        self.name = name
 
-        self.entries         = None
-        self.executed        = False
+        self.entries = None
+        self.executed = False
         self.entries_fetched = False
 
     def execute(self):
         with self.db.connect() as conn:
             selected = conn.execute(self.select)
-            entries  = selected.fetchall()
+            entries = selected.fetchall()
             conn.close()
-        self.entries  = entries
+        self.entries = entries
         self.executed = True
 
     def get_entries(self):
@@ -50,13 +52,14 @@ class FetchEntries:
         self.entries_fetched = True
         return self.entries
 
-#===============================================================================
+
+# ===============================================================================
+
 
 class UpdateEntries:
-
     def __init__(self, db, table, updates):
-        self.db      = db
-        self.table   = table
+        self.db = db
+        self.table = table
         self.updates = updates
 
     def execute(self):

@@ -9,7 +9,7 @@ from olympus.utils import generate_id
 
 
 class Database:
-    """ generic database collector - can connect to multiple databases
+    """generic database collector - can connect to multiple databases
 
     This class is intended to provide the interface to other modules within
     olympus.
@@ -67,7 +67,7 @@ class Database:
         return db_kind
 
     def from_file(self, file_name, kind=None):
-        """ connects to a database stored on disk
+        """connects to a database stored on disk
 
         Args:
             file_name (str): path and name of the database file
@@ -79,7 +79,8 @@ class Database:
             kind = self._guess_db_kind(file_name)
         if kind is None:
             Logger.log(
-                "Please provide database format (automatic guessing failed)", "ERROR"
+                "Please provide database format (automatic guessing failed)",
+                "ERROR",
             )
             return None
         db_name = file_name.split("/")[-1].split(".")[0]
@@ -97,13 +98,17 @@ class Database:
     def add_db(self, kind, *args, **kwargs):
         try:
             database = __import__(
-                f"olympus.databases.database_{kind}", fromlist=[f"Wrapper_{kind}"]
+                f"olympus.databases.database_{kind}",
+                fromlist=[f"Wrapper_{kind}"],
             )
         except ModuleNotFoundError:
-            Logger.log(" ... proceeding with pickle database", "INFO", only_once=True)
+            Logger.log(
+                " ... proceeding with pickle database", "INFO", only_once=True
+            )
             kind = "pickle"
             database = __import__(
-                f"olympus.databases.database_{kind}", fromlist=[f"Wrapper_{kind}"]
+                f"olympus.databases.database_{kind}",
+                fromlist=[f"Wrapper_{kind}"],
             )
 
         database = getattr(database, f"Wrapper_{kind}")

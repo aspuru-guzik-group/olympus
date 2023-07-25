@@ -1,15 +1,24 @@
 #!/usr/bin/env python
 
 import numpy as np
-from olympus.surfaces import AbstractSurface
 from scipy.stats import multivariate_normal
+
 from olympus import Logger
+from olympus.surfaces import AbstractSurface
 
 
 class GaussianMixture(AbstractSurface):
-
-    def __init__(self, param_dim=2, num_gauss=2, cov_scale=0.5, diagonal_cov=False, means=None, covariances=None,
-                 noise=None, random_seed=None):
+    def __init__(
+        self,
+        param_dim=2,
+        num_gauss=2,
+        cov_scale=0.5,
+        diagonal_cov=False,
+        means=None,
+        covariances=None,
+        noise=None,
+        random_seed=None,
+    ):
         """Random Gaussian Mixture surface. Given the number of dimensions and Gaussian distributions provided,
         the surface is the sum of probability densities. Unless a set of means and covariances are provided,
         a set of random means and covariances are generated.
@@ -32,13 +41,19 @@ class GaussianMixture(AbstractSurface):
             noise (Noise): Noise object that injects noise into the evaluations of the surface. Default is None.
             random_seed (int): Fix the random seed for reproducible surfaces. Default is None, i.e. random.
         """
-        param_dim, _num_gauss = self._determine_param_dim_and_num_gauss(param_dim, num_gauss, means, covariances)
+        param_dim, _num_gauss = self._determine_param_dim_and_num_gauss(
+            param_dim, num_gauss, means, covariances
+        )
+        value_dim = 1
+        task = 'regression'
         AbstractSurface.__init__(**locals())
         np.random.seed(self.random_seed)  # set random seed
         self._create_gaussian_mixture()
 
     @staticmethod
-    def _determine_param_dim_and_num_gauss(param_dim, num_gauss, means, covariances):
+    def _determine_param_dim_and_num_gauss(
+        param_dim, num_gauss, means, covariances
+    ):
 
         # no means and covs provided
         if means is None and covariances is None:
@@ -64,19 +79,19 @@ class GaussianMixture(AbstractSurface):
     @property
     def minima(self):
         # needs to be found by optimization
-        message = 'Unknown minima: these need to be found numerically'
-        Logger.log(message, 'WARNING')
+        message = "Unknown minima: these need to be found numerically"
+        Logger.log(message, "WARNING")
         return None
 
     @property
     def maxima(self):
         # needs to be found by optimization
-        message = 'Unknown maxima: these need to be found numerically'
-        Logger.log(message, 'WARNING')
+        message = "Unknown maxima: these need to be found numerically"
+        Logger.log(message, "WARNING")
         return None
 
     def _run(self, params):
-        value = - np.sum([g.pdf(params) for g in self.gaussians], axis=0)
+        value = -np.sum([g.pdf(params) for g in self.gaussians], axis=0)
         if self.noise is None:
             return value
         else:
@@ -130,13 +145,21 @@ class GaussianMixture(AbstractSurface):
         if self.diagonal_cov is False:
             for i in range(self._num_gauss):
                 # generate random positive semi-definite matrix, scale by sigma_scale
-                A = np.random.rand(len(self.param_space), len(self.param_space))
+                A = np.random.rand(
+                    len(self.param_space), len(self.param_space)
+                )
                 alpha = 0.01
-                cov = np.dot(A, A.transpose()) + alpha * np.diag(np.ones(len(self.param_space)))
+                cov = np.dot(A, A.transpose()) + alpha * np.diag(
+                    np.ones(len(self.param_space))
+                )
                 self._covs.append(cov * self.cov_scale)
         elif self.diagonal_cov is True:
             for i in range(self._num_gauss):
-                diag = np.random.uniform(low=0, high=1, size=len(self.param_space)) * self.cov_scale
+                diag = (
+                    np.random.uniform(
+                        low=0, high=1, size=len(self.param_space)
+                    )
+                    * self.cov_scale
+                )
                 cov = np.diag(np.array(diag))
                 self._covs.append(cov)
-

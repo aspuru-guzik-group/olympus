@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 
 import numpy as np
+
 from olympus.noises import AbstractNoise
 
 
 class UniformNoise(AbstractNoise):
-
     def __init__(self, scale=1):
         """Gaussian noise.
 

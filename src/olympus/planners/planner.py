@@ -2,9 +2,7 @@
 
 from olympus import Logger
 
-from . import get_planners_list
-from . import import_planner
-from . import AbstractPlanner
+from . import AbstractPlanner, get_planners_list, import_planner
 
 
 # NOTE: This goes against the python convention of having function names being

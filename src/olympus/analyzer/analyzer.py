@@ -2,7 +2,7 @@
 
 import numpy as np
 
-from olympus import Object
+from olympus.objects import Object
 
 # ==============================================================================
 
@@ -22,8 +22,10 @@ class Analyzer(Object):
     def set_campaigns(self, campaigns):
         self.campaigns = campaigns
 
-    def _get_best_reduction(self, operator, campaigns=None, locs=None, ci_method=None, ci_size=100):
-        ''' computes statistics on the provided campaigns
+    def _get_best_reduction(
+        self, operator, campaigns=None, locs=None, ci_method=None, ci_size=100
+    ):
+        """computes statistics on the provided campaigns
 
         Statistics are computed following the specific reduction operation. Uncertainty
         estimates can be requested by choosing a method to determine confidence
@@ -38,7 +40,7 @@ class Analyzer(Object):
 
         Returns:
             array: computed statistics
-        '''
+        """
         if campaigns is None:
             campaigns = self.campaigns
         best_vals = self._get_best_vals(campaigns)
@@ -52,16 +54,23 @@ class Analyzer(Object):
         if ci_method is None:
             return best_vals_red
 
-        if ci_method == 'bootstrap':
+        if ci_method == "bootstrap":
 
             # implementing bootstrapping
             NUM_BOOTS = 100
 
             # samples = (# num_boot, # campaigns, length of trace)
-            idxs    = np.random.randint(low=0, high=best_vals.shape[0], size=(NUM_BOOTS, best_vals.shape[0], best_vals.shape[1]))
+            idxs = np.random.randint(
+                low=0,
+                high=best_vals.shape[0],
+                size=(NUM_BOOTS, best_vals.shape[0], best_vals.shape[1]),
+            )
             samples = []
             for _ in range(NUM_BOOTS):
-                sample = [best_vals[idxs[_, :, __], __] for __ in range(best_vals.shape[1])]
+                sample = [
+                    best_vals[idxs[_, :, __], __]
+                    for __ in range(best_vals.shape[1])
+                ]
                 samples.append(sample)
             samples = np.array(samples)
             reductions = operator(samples, axis=2)
@@ -71,17 +80,29 @@ class Analyzer(Object):
 
             for _ in range(best_vals.shape[1]):
                 sorted_reductions = np.sort(reductions[:, _])
-                lower_reductions[_] = sorted_reductions[int( (100 - ci_size) / 2 * (NUM_BOOTS-1) / 100)]
-                upper_reductions[_] = sorted_reductions[int( (ci_size - (100 - ci_size) / 2) * (NUM_BOOTS-1) /  100)]
+                lower_reductions[_] = sorted_reductions[
+                    int((100 - ci_size) / 2 * (NUM_BOOTS - 1) / 100)
+                ]
+                upper_reductions[_] = sorted_reductions[
+                    int(
+                        (ci_size - (100 - ci_size) / 2) * (NUM_BOOTS - 1) / 100
+                    )
+                ]
 
-            return best_vals_red, {'lower': lower_reductions, 'upper': upper_reductions}
+            return best_vals_red, {
+                "lower": lower_reductions,
+                "upper": upper_reductions,
+            }
 
         else:
             raise NotImplementedError
 
-
-    def get_best_mean(self, campaigns=None, locs=None, ci_method=None, ci_size=100):
-        return self._get_best_reduction(np.nanmean, campaigns, locs, ci_method=ci_method, ci_size=ci_size)
+    def get_best_mean(
+        self, campaigns=None, locs=None, ci_method=None, ci_size=100
+    ):
+        return self._get_best_reduction(
+            np.nanmean, campaigns, locs, ci_method=ci_method, ci_size=ci_size
+        )
 
     def get_best_median(self, campaigns=None, locs=None):
         return self._get_best_reduction(np.nanmedian, campaigns, locs)

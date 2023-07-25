@@ -1,14 +1,20 @@
 #!/usr/bin/env python
 
-import numpy as np
-from olympus import Logger
 from abc import abstractmethod
-from olympus.objects import Object, abstract_attribute, ABCMeta, ParameterVector
-from olympus.campaigns.param_space import ParameterSpace, ParameterContinuous
+
+import numpy as np
+
+from olympus import Logger
+from olympus.campaigns.param_space import ParameterContinuous, ParameterSpace
+from olympus.objects import (
+    ABCMeta,
+    Object,
+    ParameterVector,
+    abstract_attribute,
+)
 
 
 class AbstractNoise(Object, metaclass=ABCMeta):
-
     def __init__(self, *args, **kwargs):
         Object.__init__(self, *args, **kwargs)
 
@@ -36,4 +42,3 @@ class AbstractNoise(Object, metaclass=ABCMeta):
             noisy_values (array): Noisy measurement.
         """
         return self._add_noise(value)
-

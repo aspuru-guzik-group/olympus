@@ -2,14 +2,23 @@
 
 import numpy as np
 
-from olympus.planners              import AbstractPlanner
-from olympus.objects               import ParameterVector
+from olympus.objects import ParameterVector
 from olympus.objects.object_config import Config
+from olympus.planners import AbstractPlanner
 
 
 class Phoenics(AbstractPlanner):
 
-    def __init__(self, goal='minimize', batches=1, boosted=True, parallel=True, sampling_strategies=2):
+    PARAM_TYPES = ["continuous"]
+
+    def __init__(
+        self,
+        goal="minimize",
+        batches=1,
+        boosted=True,
+        parallel=True,
+        sampling_strategies=2,
+    ):
         """
         A Bayesian optimization algorithm based on Bayesian Kernel Density estimation.
 
@@ -33,35 +42,47 @@ class Phoenics(AbstractPlanner):
     def _set_param_space(self, param_space):
         self._param_space = []
         for param in param_space:
-            if param.type == 'continuous':
-                param_dict = {'name': param.name, 'type': param.type, 'size': 1, 'low': param.low, 'high': param.high}
+            if param.type == "continuous":
+                param_dict = {
+                    "name": param.name,
+                    "type": param.type,
+                    "size": 1,
+                    "low": param.low,
+                    "high": param.high,
+                }
             else:
                 raise NotImplementedError
             self._param_space.append(param_dict)
 
     def _tell(self, observations):
-        self._params       = observations.get_params()
-        self._values       = observations.get_values(as_array=True, opposite=self.flip_measurements)
+        self._params = observations.get_params()
+        self._values = observations.get_values(
+            as_array=True, opposite=self.flip_measurements
+        )
         self._observations = []
         for _, param in enumerate(self._params):
-            obs = ParameterVector().from_array(param, self.param_space).to_dict()
+            obs = (
+                ParameterVector().from_array(param, self.param_space).to_dict()
+            )
             for key, value in obs.items():
                 obs[key] = np.array([value])
-            obs['obj'] = self._values[_]
+            obs["obj"] = self._values[_]
             # WARNING: THIS IS JUST A HACK
             # NOTE: we should make sure we are not adding unnecessary dimensions to this array
-            obs['obj'] = np.squeeze(obs['obj'])
+            obs["obj"] = np.squeeze(obs["obj"])
             self._observations.append(obs)
 
     def _get_phoenics_instance(self):
         from phoenics import Phoenics as ActualPhoenics
+
         params = self.param_space.item()
         for param in params:
-            param['size'] = 1
+            param["size"] = 1
         config_dict = {
-            'general': self.config.to_dict(),
-            'parameters': params,
-            'objectives': [{'name': 'obj', 'goal': 'minimize'}]}
+            "general": self.config.to_dict(),
+            "parameters": params,
+            "objectives": [{"name": "obj", "goal": "minimize"}],
+        }
         self.phoenics = ActualPhoenics(config_dict=config_dict)
 
     def _ask(self):

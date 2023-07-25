@@ -1,0 +1,19 @@
+Dataset of OER catalysts. The fractional
+compositions must add to 1. Goal is minimization
+of the overpotential.
+
+=========================================
+                Summary
+-----------------------------------------
+    Number of Samples             2121
+    Dimensionality                 6
+    Features:
+        ni_load              discrete
+        fe_load              discrete
+        co_load              discrete
+        mn_load              discrete
+        ce_load              discrete
+        la_load              discrete
+    Targets:
+        overpotential        continuous
+=========================================

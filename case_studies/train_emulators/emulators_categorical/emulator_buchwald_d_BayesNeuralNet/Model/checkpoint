@@ -1,0 +1,2 @@
+model_checkpoint_path: "/home/riley/Research_Local/olympus/src/olympus/.scratch/emulator_e6fy5w9c/Model/model.ckpt"
+all_model_checkpoint_paths: "/home/riley/Research_Local/olympus/src/olympus/.scratch/emulator_e6fy5w9c/Model/model.ckpt"

@@ -3,10 +3,10 @@
 import os
 import subprocess
 
+from olympus import Logger, __home__
+
 # ===============================================================================
 
-from olympus import __home__
-from olympus import Logger
 
 # ===============================================================================
 

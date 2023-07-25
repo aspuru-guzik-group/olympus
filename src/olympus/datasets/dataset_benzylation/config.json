@@ -1,16 +1,17 @@
 {
 	"constraints":    {
 			"parameters":  "none",
-			"measurements": "positive"
+			"measurements": "positive",
+			"known": "no"
 		},
 	"parameters": [
-			{"name": "flow_rate",   "low": 0.2,   "high": 0.4},
-			{"name": "ratio",       "low": 1.0,   "high": 5.0},
-			{"name": "solvent",     "low": 0.5,   "high": 1.0},
-			{"name": "temperature", "low": 110.0, "high": 150.0}
+			{"name": "flow_rate", "type": "continuous", "low": 0.2,   "high": 0.4},
+			{"name": "ratio", "type": "continuous",  "low": 1.0,   "high": 5.0},
+			{"name": "solvent", "type": "continuous",  "low": 0.5,   "high": 1.0},
+			{"name": "temperature", "type": "continuous", "low": 110.0, "high": 150.0}
 		],
 	"measurements": [
-		{"name": "impurity", "goal": "minimize"}
+		{"name": "impurity", "goal": "minimize", "type": "continuous"}
 	],
     "default_goal": "minimize"
 }

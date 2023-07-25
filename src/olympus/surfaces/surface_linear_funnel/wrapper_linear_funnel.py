@@ -1,13 +1,14 @@
 #!/usr/bin/env python
 
-import numpy as np
-from olympus.surfaces import AbstractSurface
 from itertools import product
+
+import numpy as np
+
 from olympus import Logger
+from olympus.surfaces import AbstractSurface
 
 
 class LinearFunnel(AbstractSurface):
-
     def __init__(self, param_dim=2, noise=None):
         """Linear funnel function.
 
@@ -15,28 +16,30 @@ class LinearFunnel(AbstractSurface):
             param_dim (int): Number of input dimensions. Default is 2.
             noise (Noise): Noise object that injects noise into the evaluations of the surface. Default is None.
         """
+        value_dim = 1
+        task = 'regression'
         AbstractSurface.__init__(**locals())
 
     @property
     def minima(self):
-        message = 'LinearFunnel has an infinite number of minima at 0.45 < x_i < 0.55, for each x_i in x'
-        Logger.log(message, 'INFO')
+        message = "LinearFunnel has an infinite number of minima at 0.45 < x_i < 0.55, for each x_i in x"
+        Logger.log(message, "INFO")
         # minimum at the centre
         params = [0.5] * self.param_dim
         value = self._run(params)
-        return [{'params': params, 'value': value}]
+        return [{"params": params, "value": value}]
 
     @property
     def maxima(self):
-        message = 'LinearFunnel has an infinite number of maxima'
-        Logger.log(message, 'INFO')
+        message = "LinearFunnel has an infinite number of maxima"
+        Logger.log(message, "INFO")
         # some maxima
         maxima = []
         params = product([0, 1], repeat=self.param_dim)
         for param in params:
             param = list(param)
             value = self._run(param)
-            maxima.append({'params': param, 'value': value})
+            maxima.append({"params": param, "value": value})
         return maxima
 
     def _run(self, params):

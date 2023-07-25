@@ -4,9 +4,8 @@
 # Define Olympus colors
 # =====================
 
-import numpy as np
 import matplotlib.pyplot as plt
-
+import numpy as np
 from matplotlib.colors import LinearSegmentedColormap
 
 _olympus_reference_colors = [
@@ -18,7 +17,9 @@ _olympus_reference_colors = [
     "#F75BB6",
     "#EB0789",
 ]
-_olympus_cmap = LinearSegmentedColormap.from_list("olympus", _olympus_reference_colors)
+_olympus_cmap = LinearSegmentedColormap.from_list(
+    "olympus", _olympus_reference_colors
+)
 _olympus_cmap_r = LinearSegmentedColormap.from_list(
     "olympus_r", _olympus_reference_colors[::-1]
 )

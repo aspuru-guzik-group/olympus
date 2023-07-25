@@ -1,0 +1,21 @@
+Thin film perovskite optimization from
+spin coating. Objective is the stability
+score. Reference: Shijing Sun, Armi Tiihonen,
+Felipe Oviedo, Zhe Liu, Janak Thapa,
+Yicheng Zhao, Noor Titan P Hartono, Anuj
+Goyal, Thomas Heumueller, Clio Batali, et al.
+A data fusion approach to optimize compositional
+stability ofhalide perovskites. Matter, 4(4):1305–1322, 2021
+
+=========================================
+                Summary
+-----------------------------------------
+    Number of Samples             94
+    Dimensionality                 3
+    Features:
+        CsPbI                continuous
+        FAPbI                continuous
+        MAPbI                continuous
+    Targets:
+        instability_index    continuous
+=========================================
