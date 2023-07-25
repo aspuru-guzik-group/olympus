@@ -89,6 +89,7 @@ The following projects have used ``Olympus`` to streamline the benchmarking of o
 	year = {2023},
 }
 ```
+The preprint is also available at https://arxiv.org/abs/2010.04153.
 
 ###  License
 ``Olympus`` is distributed under an MIT License.
