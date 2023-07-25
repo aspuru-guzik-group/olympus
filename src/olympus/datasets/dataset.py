@@ -20,7 +20,7 @@ from olympus.objects import (
 )
 
 # To silence VisibleDeprecationWarning we use 'ignore'. We can use 'error' to get a traceback and resolve the issue.
-np.warnings.filterwarnings("ignore", category=np.VisibleDeprecationWarning)
+# np.warnings.filterwarnings("ignore", category=np.VisibleDeprecationWarning)
 
 # =========================
 # Main Class of This Module
