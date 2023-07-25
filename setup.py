@@ -3,7 +3,7 @@
 Some description here...
 """
 
-from setuptools import setup
+from setuptools import find_packages, setup
 
 import versioneer
 
@@ -57,7 +57,7 @@ setup(
     author="Florian Hase",
     author_email="",
     # license='XXX',
-    packages=["olympus"],
+    packages=find_packages(where="src", include=["olympus*"]),
     package_dir={"": "src"},
     zip_safe=False,
     tests_require=["pytest"],
