@@ -215,7 +215,7 @@ class AbstractPlanner(Object, metaclass=ABCMeta):
         for key, value in param_vector.to_dict().items():
             param = self.param_space.get_param(name=key)
             if param["type"] in ("continuous", "discrete"):
-                if not param["low"] <= np.float(value) <= param["high"]:
+                if not param["low"] <= float(value) <= param["high"]:
                     message = "Proposed parameter {0} not within defined bounds ({1},{2})".format(
                         value, param["low"], param["high"]
                     )

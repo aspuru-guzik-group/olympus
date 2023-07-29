@@ -99,7 +99,7 @@ class Gryffin(AbstractPlanner):
                 if space_true.type == "categorical":
                     obs[space_true.name] = param_val
                 else:
-                    obs[space_true.name] = np.float(param_val)
+                    obs[space_true.name] = float(param_val)
             obs["obj"] = self._values[obs_ix]
             obs["obj"] = np.squeeze(obs["obj"])
 
