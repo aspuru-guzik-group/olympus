@@ -68,6 +68,10 @@ class Campaign(Object):
         return self.observations.get_values(*args, **kwargs)
 
     @property
+    def num_obs(self, *args, **kwargs):
+        return len(self.observations.get_values(*args, **kwargs))
+
+    @property
     def scalarized_values(self, *args, **kwargs):
         return self.scalarized_observations.get_values(*args, **kwargs)
 
