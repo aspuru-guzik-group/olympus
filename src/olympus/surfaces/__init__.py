@@ -65,8 +65,8 @@ class SurfaceLoader:
         self.surface_files = []
         self.surface_names = []
         self.surfaces_map = {}
-        for dir_name in glob.glob(f"{__home__}/surface_*"):
-            surface_name = dir_name.split("/")[-1][8:]
+        for dir_name in glob.glob(os.path.join(__home__, "surface_*")):
+            surface_name = os.path.basename(dir_name)[8:]
             self.surface_files.append(surface_name)
             self.surface_names.append(
                 SurfaceLoader.file_to_class(surface_name)

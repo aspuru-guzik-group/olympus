@@ -33,8 +33,8 @@ finally:
 import glob
 
 datasets_list = []
-for dir_name in glob.glob(f"{__home__}/dataset_*"):
-    dir_name = dir_name.split("/")[-1][8:]
+for dir_name in glob.glob(os.path.join(__home__, "dataset_*")):
+    dir_name = os.path.basename(dir_name)[8:]
     datasets_list.append(dir_name)
 
 
