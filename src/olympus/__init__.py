@@ -35,9 +35,9 @@ Logger = MessageLogger()
 
 # ===============================================================================
 
+from .campaigns import Campaign, Observations, ParameterSpace
 from .analyzer import Analyzer
 from .baseline import Baseline
-from .campaigns import Campaign, Observations, ParameterSpace
 from .databases import Database
 from .datasets import Dataset, list_datasets
 from .emulators import Emulator, list_trained_emulators
