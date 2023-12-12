@@ -63,8 +63,8 @@ class ModelLoader:
         self.model_files = []
         self.model_names = []
         self.model_map = {}
-        for dir_name in glob.glob(f"{__home__}/model_*"):
-            model_name = dir_name.split("/")[-1][6:]
+        for dir_name in glob.glob(os.path.join(__home__, "model_*")):
+            model_name = os.path.basename(dir_name)[6:]
             self.model_files.append(model_name)
             self.model_names.append(ModelLoader.file_to_class(model_name))
 
