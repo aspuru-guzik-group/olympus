@@ -65,8 +65,8 @@ class ScalarizerLoader:
         self.scalarizer_files = []
         self.scalarizer_names = []
         self.scalarizer_map = {}
-        for dir_name in glob.glob(f"{__home__}/scalarizer_*"):
-            scalarizer_name = dir_name.split("/")[-1][11:]
+        for dir_name in glob.glob(os.path.join(__home__, "scalarizer_*")):
+            scalarizer_name = os.path.basename(dir_name)[11:]
             self.scalarizer_files.append(scalarizer_name)
             self.scalarizer_names.append(
                 ScalarizerLoader.file_to_class(scalarizer_name)

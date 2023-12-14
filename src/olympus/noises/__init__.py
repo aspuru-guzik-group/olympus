@@ -63,8 +63,8 @@ class NoiseLoader:
         self.noise_files = []
         self.noise_names = []
         self.noise_map = {}
-        for dir_name in glob.glob(f"{__home__}/noise_*"):
-            noise_name = dir_name.split("/")[-1][6:]
+        for dir_name in glob.glob(os.path.join(__home__, "noise_*")):
+            noise_name = os.path.basename(dir_name)[6:]
             self.noise_files.append(noise_name)
             self.noise_names.append(NoiseLoader.file_to_class(noise_name))
 
