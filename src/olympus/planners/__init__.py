@@ -77,7 +77,7 @@ class PlannerLoader:
         self.planner_param_types = []
         self.planners_map = {}
         for dir_name in glob.glob(os.path.join(__home__, "planner_*")):
-            planner_name = os.path.basename(planner_name)[8:]
+            planner_name = os.path.basename(dir_name)[8:]
             self.planner_files.append(planner_name)
             self.planner_names.append(
                 PlannerLoader.file_to_class(planner_name)
