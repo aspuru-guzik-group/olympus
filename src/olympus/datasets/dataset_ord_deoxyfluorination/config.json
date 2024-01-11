@@ -1,0 +1,66 @@
+{
+  "constraints": {
+    "parameters": "none",
+    "measurements": "positive",
+    "known": "no"
+  },
+  "parameters": [
+    {
+      "name": "inputs[\"Stock_Solution_of_Ligand,_Pd,_Aryl_bromide,_internal_standard,_and_imidazole_in_solvent_-_see_SI_for_details\"].components[1].amount.volume.value",
+      "type": "continuous",
+      "low": 98.03921508789062,
+      "high": 263.15789794921875
+    },
+    {
+      "name": "conditions.temperature.setpoint.value",
+      "type": "continuous",
+      "low": 90.0,
+      "high": 120.0
+    },
+    {
+      "name": "inputs[\"Base\"].components[0].identifiers[0].value",
+      "type": "categorical",
+      "options": [
+        "O=C([O-])C(C)(C)C.[Cs+]",
+        "O=C([O-])C(C)(C)C.[K+]",
+        "O=C([O-])C.[Cs+]",
+        "O=C([O-])C.[K+]"
+      ]
+    },
+    {
+      "name": "inputs[\"Stock_Solution_of_Ligand,_Pd,_Aryl_bromide,_internal_standard,_and_imidazole_in_solvent_-_see_SI_for_details\"].components[0].identifiers[0].value",
+      "type": "categorical",
+      "options": [
+        "CC(C)(C)P(C1=CC=CC=C1)C(C)(C)C",
+        "CC(C)C1=CC(C(C)C)=C(C(C(C)C)=C1)C2=C(P(C3CCCCC3)C4CCCCC4)C(OC)=CC=C2OC",
+        "CC(C1=C(C2=CC=CC=C2P(C3CCCCC3)C4CCCCC4)C(C(C)C)=CC(C(C)C)=C1)C",
+        "CC(OC1=C(P(C2CCCCC2)C3CCCCC3)C(OC(C)C)=CC=C1)C",
+        "CN(C)C1=CC=CC(N(C)C)=C1C2=CC=CC=C2P(C(C)(C)C)C3=CC=CC=C3",
+        "CP(C)C1=CC=CC=C1",
+        "CP(C1=CC=CC=C1)C2=CC=CC=C2",
+        "C[C@]1(O2)O[C@](C[C@]2(C)P3C4=CC=CC=C4)(C)O[C@]3(C)C1",
+        "FC(F)(F)C1=CC(P(C2=C(C3=C(C(C)C)C=C(C(C)C)C=C3C(C)C)C(OC)=CC=C2OC)C4=CC(C(F)(F)F)=CC(C(F)(F)F)=C4)=CC(C(F)(F)F)=C1",
+        "P(C1=CC=CC=C1)(C2=CC=CC=C2)C3=CC=CC=C3",
+        "P(C1=CC=CO1)(C2=CC=CO2)C3=CC=CO3",
+        "P(C1CCCCC1)(C2CCCCC2)C3CCCCC3"
+      ]
+    },
+    {
+      "name": "inputs[\"Stock_Solution_of_Ligand,_Pd,_Aryl_bromide,_internal_standard,_and_imidazole_in_solvent_-_see_SI_for_details\"].components[1].identifiers[0].value",
+      "type": "categorical",
+      "options": [
+        "CC(N(C)C)=O",
+        "CC1=CC=C(C)C=C1",
+        "CCCC#N",
+        "CCCCOC(C)=O"
+      ]
+    }
+  ],
+  "measurements": [
+    {
+      "name": "outcomes[0].products[0].measurements[0].percentage.value",
+      "type": "continuous"
+    }
+  ],
+  "default_goal": "maximize"
+}

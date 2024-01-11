@@ -1,0 +1,16 @@
+Exported from https://github.com/open-reaction-database/ord-data/blob/main/data/d2/ord_dataset-d26118acda314269becc35db5c22dc59.pb.gz?raw=true
+
+=========================================
+                Summary
+-----------------------------------------
+    Number of Samples             1728
+    Dimensionality                 5
+    Features:
+		inputs["Stock_Solution_of_Ligand,_Pd,_Aryl_bromide,_internal_standard,_and_imidazole_in_solvent_-_see_SI_for_details"].components[1].amount.volume.value	continuous
+		conditions.temperature.setpoint.value	continuous
+		inputs["Base"].components[0].identifiers[0].value	categorical
+		inputs["Stock_Solution_of_Ligand,_Pd,_Aryl_bromide,_internal_standard,_and_imidazole_in_solvent_-_see_SI_for_details"].components[0].identifiers[0].value	categorical
+		inputs["Stock_Solution_of_Ligand,_Pd,_Aryl_bromide,_internal_standard,_and_imidazole_in_solvent_-_see_SI_for_details"].components[1].identifiers[0].value	categorical
+    Targets:
+        outcomes[0].products[0].measurements[0].percentage.value         continuous
+=========================================
