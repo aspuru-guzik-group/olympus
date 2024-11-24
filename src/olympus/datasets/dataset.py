@@ -534,7 +534,7 @@ class Dataset:
         self.cross_val_indices = []
         for i in range(self.num_folds):
             fold_train = np.concatenate(
-                np.delete(self.cv_fold_indices, i, axis=0), axis=0
+                np.delete(np.array(self.cv_fold_indices, dtype=object), i, axis=0), axis=0
             )
             fold_valid = self.cv_fold_indices[i]
             self.cross_val_indices.append([fold_train, fold_valid])

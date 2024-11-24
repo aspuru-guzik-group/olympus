@@ -62,8 +62,8 @@ setup(
     zip_safe=False,
     tests_require=["pytest"],
     install_requires=["numpy", "pandas", "scikit-learn",
-                      "matplotlib", "seaborn", "SQLAlchemy==1.4.45"],
-    python_requires=">=3.6",
+                      "matplotlib<=3.7.3", "seaborn", "SQLAlchemy==1.4.45"],
+    python_requires=">=3.7",
     extras_require=get_extra_requires("extra_requirements.txt"),
     entry_points={
         "console_scripts": ["olympus = olympus.cli.main:entry_point"]
